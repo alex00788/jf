@@ -5,13 +5,29 @@
   height: 990px;
   background: url('app/img/2.jpeg');
   background-size: cover;
-
 }
 
 .container {
   display: flex;
   justify-content: space-between;
  }
+
+
+.btn {
+  position: static;
+  border-radius: 5px;
+  cursor: pointer;
+  color: blue;
+  font-size: 15px;
+  border: none;
+}
+
+
+
+
+
+
+
 
 
 @media (max-width: 1140px) {

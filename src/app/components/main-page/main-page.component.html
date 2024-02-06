@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="mainPage">
+    <div class="title" (click)="openModal()">
+      {{title}}
+    </div>
+      <span *ngIf="modalService.hideTitle$ | async"   class="enter" (click)="openModal()">ВОЙТИ В ЛИЧНЫЙ КАБИНЕТ</span>
+    <app-modal-page *ngIf="modalService.isVisible$ | async"></app-modal-page>
+  </div>
+</div>
+
+

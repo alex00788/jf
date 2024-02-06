@@ -1,0 +1,48 @@
+.mainPage {
+  position: relative;
+  color: white;
+}
+
+
+.title {
+  text-align: center;
+  width: 355px;
+  margin-top: 20px;
+  margin-left: 600px;
+  font-size: 50px;
+  word-spacing: 100vw;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.enter {
+  cursor: pointer;
+  font-size: 35px;
+  font-weight: bold;
+  position: absolute;
+  top: 400px;
+  left: 500px;
+  width: 650px;
+}
+
+.enter:hover {
+  color: #aefaae;
+}
+
+
+
+@media (max-width: 576px) {
+
+  .mainPage {
+    width: 550px;
+    height: 800px;
+  }
+
+  .title {
+    position: static;
+    word-spacing: 200vw;
+    height: 100px;
+    width: 550px;
+    margin-left: 1px;
+  }
+}
