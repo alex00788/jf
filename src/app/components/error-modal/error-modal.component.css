@@ -1,0 +1,20 @@
+
+.modalErrorClass {
+  margin: 10px;
+}
+
+.titleErrModal {
+  display: flex;
+  justify-content: center;
+}
+
+.errMessage {
+  margin: 10px;
+  white-space: nowrap;
+}
+
+.btnErrModal {
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}

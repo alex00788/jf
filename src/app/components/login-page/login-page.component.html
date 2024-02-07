@@ -1,0 +1,28 @@
+<form [formGroup]="form" (submit)="submit()">
+  <span class="titleModal">  {{title}}  </span>
+  <div class="form">
+    <div class="inputForm">
+      <div>
+        <label for="email"> Email </label>
+        <input id="email" type="text" formControlName="email">
+      </div>
+      <div>
+        <label for="password"> Пароль </label>
+        <div class="password">
+              <span class="icon-pass" id="icon-pass" (click)="showOrHidePassword()">
+                <span *ngIf="changeIcon; else changeIconBlock">👁</span>
+                <ng-template #changeIconBlock> 🤫 </ng-template>
+              </span>
+          <input id="password" type="password" formControlName="password">
+        </div>
+      </div>
+    </div>
+    <div class="fut">
+      <button class="btn" type="submit" [disabled]="form.invalid || form.disabled"
+      >
+        войти
+      </button>
+      <span class="register"> Зарегистрироваться </span>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,151 @@
+.form {
+  position: relative;
+  margin: 20px;
+  width: 450px;
+  height: 250px;
+  background: #aefaae;
+  border-radius: 20px;
+}
+
+.iconsClass {
+  font-weight: bold;
+}
+
+.titleModal {
+  color: blue;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  background: #aefaae;
+  color: white;
+}
+
+.btn:disabled {
+  color: red;
+}
+
+
+.inputForm {
+  margin: 5px;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+label {
+  display: block;
+  height: 40px;
+  width: 100px;
+  padding-top: 5px;
+  padding-left: 15px;
+  font-size: 30px;
+}
+
+input {
+  display: block;
+  font-size: 30px;
+  border-radius: 10px;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.fut {
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+  position: absolute;
+  top: 200px;
+  left: 20px;
+}
+
+.register {
+  position: static;
+  margin: 15px;
+  display: flex;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+}
+
+
+.password {
+  position: relative;
+}
+
+.icon-pass {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+
+@media (max-width: 1140px) {
+  .title {
+  }
+}
+
+
+@media (max-width: 960px) {
+  .title {
+    left: 400px;
+    font-size: 30px;
+    word-spacing: 150vw;
+  }
+}
+
+@media (max-width: 720px) {
+  .title {
+    left: 200px;
+    font-weight: normal;
+    word-spacing: normal;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .loginPage {
+    width: 550px;
+    height: 800px;
+  }
+
+  .title {
+    position: static;
+    word-spacing: 200vw;
+    height: 100px;
+    width: 550px;
+    margin-left: 1px;
+  }
+
+  .form {
+    display: block;
+    background: yellow;
+    width: 250px;
+    margin-top: 450px;
+    margin-left: 20px;
+    padding: 10px;
+    word-spacing: 200vw;
+  }
+
+  .fut {
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  .register {
+    width: 140px;
+    height: 20px;
+    margin-top: 15px;
+  }
+
+  input {
+    width: 230px;
+  }
+
+}

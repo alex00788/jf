@@ -1,0 +1,9 @@
+<div class="modalErrorClass" *ngIf="errorResponseService.error$ | async as error">
+  <div class="titleErrModal"> {{errMessage}} </div>
+  <div class="errMessage">
+    <span>{{error}}</span>
+  </div>
+  <div class="btnErrModal">
+    <button type="button"  class="btnErrModal" (click)="closeErr()">ok</button>
+  </div>
+</div>

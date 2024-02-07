@@ -1,0 +1,22 @@
+.modalPage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1200px;
+  background: black;
+  opacity: 50%;
+}
+
+.modalContent {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 300px;
+  left: 55%;
+  padding: 6px;
+  background: white;
+  border-radius: 10px;
+}
+
+
