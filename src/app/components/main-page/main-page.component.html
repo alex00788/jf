@@ -1,10 +1,21 @@
 <div class="container">
   <div class="mainPage">
+
     <div class="title" (click)="openModal()">
-      {{title}}
+      {{mainTitle}}
     </div>
-      <span *ngIf="modalService.hideTitle$ | async"   class="enter" (click)="openModal()">ВОЙТИ В ЛИЧНЫЙ КАБИНЕТ</span>
-    <app-modal-page *ngIf="modalService.isVisible$ | async"></app-modal-page>
+
+    <div class="errorModal">
+      <app-error-modal></app-error-modal>
+    </div>
+
+    <span *ngIf="modalService.hideTitle$ | async" class="enter" (click)="openModal()">{{modalTitle}}</span>
+
+    <div class="modal" *ngIf="modalService.isVisible$ | async">
+<!--    <div class="modal" >-->
+      <app-modal-page></app-modal-page>
+    </div>
+
   </div>
 </div>
 
