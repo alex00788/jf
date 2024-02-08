@@ -85,11 +85,11 @@ input {
 }
 
 
-@media (max-width: 1140px) {
-  .title {
+@media (max-width: 1300px) {
+  .titleModal {
+    color: white;
   }
 }
-
 
 @media (max-width: 960px) {
   .title {
@@ -107,12 +107,7 @@ input {
   }
 }
 
-@media (max-width: 576px) {
-
-  .loginPage {
-    width: 550px;
-    height: 800px;
-  }
+@media (max-width: 600px) {
 
   .title {
     position: static;
@@ -123,12 +118,6 @@ input {
   }
 
   .form {
-    display: block;
-    background: yellow;
-    width: 250px;
-    margin-top: 450px;
-    margin-left: 20px;
-    padding: 10px;
     word-spacing: 200vw;
   }
 
@@ -145,7 +134,7 @@ input {
   }
 
   input {
-    width: 230px;
+
   }
 
 }

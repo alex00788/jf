@@ -12,7 +12,6 @@
     <span *ngIf="modalService.hideTitle$ | async" class="enter" (click)="openModal()">{{modalTitle}}</span>
 
     <div class="modal" *ngIf="modalService.isVisible$ | async">
-<!--    <div class="modal" >-->
       <app-modal-page></app-modal-page>
     </div>
 

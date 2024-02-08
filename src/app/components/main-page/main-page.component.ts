@@ -5,7 +5,7 @@ import {ModalService} from "../../shared/services/modal.service";
 import {ErrorModalComponent} from "../error-modal/error-modal.component";
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'main-page',
   standalone: true,
   imports: [
     ModalPageComponent,

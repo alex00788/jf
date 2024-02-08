@@ -40,6 +40,22 @@
 
 
 
+/*оптимизация под мобильные устройства*/
+@media (max-width: 1600px) {
+  .errorModal {
+    top: 680px;
+    left: 525px;
+  }
+}
+
+
+@media (max-width: 1300px) {
+  .errorModal {
+    top: 680px;
+    left: 325px;
+  }
+}
+
 
 @media (max-width: 1140px) {
   .wrapper{
@@ -50,23 +66,34 @@
 
 @media (max-width: 960px) {
   .wrapper{
-    width: 550px;
+    width: 959px;
     height: 750px;
   }
+
+  .errorModal {
+    top: 550px;
+    left: 150px;
+  }
+
 }
 
 @media (max-width: 720px) {
   .wrapper{
-    width: 578px;
+    width: 719px;
     height: 750px;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 600px) {
   .wrapper{
     background: url('app/shared/img/1.jpg');
     background-size: cover;
     width: 550px;
     height: 800px;
+  }
+
+  .errorModal {
+    top: 550px;
+    left: 20px;
   }
 }
