@@ -19,8 +19,11 @@ export class ApiService {
     return throwError(() => err.error.message)
   }
 
-  registration() {
-
+  registration(user: any): Observable<any> {
+    return this.http.post<any>('/api/user/registration', user)
+      .pipe(
+        catchError(this.errHandler.bind(this)),
+      )
   }
 
   login(user: any): Observable<any> {

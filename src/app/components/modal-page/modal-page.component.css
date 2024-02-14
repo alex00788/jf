@@ -12,7 +12,7 @@
   width: auto;
   height: auto;
   position: absolute;
-  top: 300px;
+  top: 220px;
   left: 55%;
   padding: 6px;
   background: white;
@@ -29,13 +29,13 @@
 @media (max-width: 960px) {
   .modalContent {
     left: 28%;
-    top: 170px;
+    top: 150px;
   }
 }
 
 @media (max-width: 600px) {
   .modalContent {
     left: 5%;
-    top: 170px;
+    top: 150px;
   }
 }

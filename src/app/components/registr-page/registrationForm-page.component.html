@@ -1,0 +1,72 @@
+<div class="registrationForm">
+  <form [formGroup]="form" (submit)="submit()">
+    <span class="titleModal">  {{title}}  </span>
+    <span class="loginBtn" (click)="openLoginPage()"> Войти </span>
+    <div class="formReg">
+      <div class="inputForm">
+        <div>
+          <label for="email">Ваш Email </label>
+          <input id="email" type="text" formControlName="email">
+        </div>
+        <div class="errorInputMessage" *ngIf="email.errors && email.touched">
+          <small *ngIf="email.errors?.['required']"> необходимо заполнить email</small>
+          <small *ngIf="email.errors?.['email']"> email некорректный </small>
+        </div>
+
+        <label for="password"> Придумайте пароль</label>
+        <div class="password">
+              <span class="icon-pass" id="icon-pass" (click)="showOrHidePassword()">
+                <span *ngIf="changeIcon; else changeIconBlock">👁</span>
+                <ng-template #changeIconBlock> 🤫 </ng-template>
+              </span>
+          <input id="password" type="password" formControlName="password" maxlength="6">
+        </div>
+        <div class="errorInputMessage" *ngIf="password.errors && password.touched">
+          <small *ngIf="password.errors?.['required']"> придумайте пароль от 4 до 6 символов</small>
+          <small *ngIf="password.errors?.['minlength']"> минимально 4 символа сейчас {{password.value.length}}</small>
+        </div>
+
+        <div>
+          <label for="nameUser"> Ваше имя </label>
+          <input id="nameUser" type="text" formControlName="nameUser">
+        </div>
+        <div class="errorInputMessage" *ngIf="nameUser.errors?.['required'] && nameUser.touched">
+          <small> напишите ваше имя</small>
+        </div>
+
+        <div>
+          <label for="surnameUser"> Ваша фамилия </label>
+          <input id="surnameUser" type="text" formControlName="surnameUser">
+        </div>
+        <div class="errorInputMessage" *ngIf="surnameUser.errors?.['required'] && surnameUser.touched">
+          <small> напишите вашу фамилию </small>
+        </div>
+        <div>
+          <label for="phoneNumber"> Ваш телефон </label>
+          <input id="phoneNumber" type="text" formControlName="phoneNumber"
+                 maxlength="12" (input)="phoneValidation($event)" (focus)="phoneValidation($event)">
+        </div>
+        <div class="errorInputMessage" *ngIf="phoneNumber.errors?.['required'] && phoneNumber.touched">
+          <small> напишите ваш телефон</small>
+        </div>
+
+        <div>
+          <label for="sectionOrOrganization"> Секция или организация </label>
+          <select class="inputClass" id="sectionOrOrganization" formControlName="sectionOrOrganization">
+            <option class="inputClass" *ngFor="let i of dataAr" >{{i.name}}</option>
+          </select>
+        </div>
+        <div class="errorInputMessage"
+             *ngIf="sectionOrOrganization.errors?.['required'] && sectionOrOrganization.touched">
+          <small> Выберите из списка</small>
+        </div>
+        <button class="registrationBtn" type="submit" [disabled]="form.invalid || form.disabled"
+        >
+          Зарегистрироваться
+        </button>
+      </div>
+
+    </div>
+  </form>
+
+</div>

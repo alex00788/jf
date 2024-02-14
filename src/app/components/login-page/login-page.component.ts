@@ -6,6 +6,7 @@ import {ApiService} from "../../shared/services/api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ErrorResponseService} from "../../shared/services/error.response.service";
 import {Subject, takeUntil} from "rxjs";
+import {ModalService} from "../../shared/services/modal.service";
 
 @Component({
   selector: 'app-login-page',
@@ -35,6 +36,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private router: Router,
     private activateRouter: ActivatedRoute,
+    private modalService: ModalService,
     public errorResponseService: ErrorResponseService
   ) {
   }
@@ -97,4 +99,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  openRegistrationPage() {
+    this.modalService.openRegistrationForm$();
+  }
 }

@@ -5,6 +5,8 @@ import {BehaviorSubject} from "rxjs";
 export class ModalService {
   isVisible$ = new BehaviorSubject<boolean>(false)
   hideTitle$ = new BehaviorSubject<boolean>(true)
+  registrationForm$ = new BehaviorSubject<boolean>(false)
+  loginForm$ = new BehaviorSubject<boolean>(false)
 
   open() {
     this.isVisible$.next(true)
@@ -22,4 +24,15 @@ export class ModalService {
   showTitle() {
     this.hideTitle$.next(true)
   }
+
+  openRegistrationForm$ () {
+    this.registrationForm$.next(true)
+    this.loginForm$.next(false)
+  }
+
+  openLoginForm$ () {
+    this.registrationForm$.next(false)
+    this.loginForm$.next(true)
+  }
+
 }

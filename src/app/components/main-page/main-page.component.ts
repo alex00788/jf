@@ -3,6 +3,8 @@ import {AsyncPipe, CommonModule, NgIf} from "@angular/common";
 import {ModalPageComponent} from "../modal-page/modal-page.component";
 import {ModalService} from "../../shared/services/modal.service";
 import {ErrorModalComponent} from "../error-modal/error-modal.component";
+import {LoginPageComponent} from "../login-page/login-page.component";
+import {RegistrationFormPageComponent} from "../registr-page/registrationForm-page.component";
 
 @Component({
   selector: 'main-page',
@@ -12,7 +14,9 @@ import {ErrorModalComponent} from "../error-modal/error-modal.component";
     NgIf,
     AsyncPipe,
     CommonModule,
-    ErrorModalComponent
+    ErrorModalComponent,
+    LoginPageComponent,
+    RegistrationFormPageComponent
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
@@ -34,5 +38,6 @@ export class MainPageComponent implements OnInit{
   openModal() {
     this.modalService.open()
     this.modalService.hideTitle()
+    this.modalService.openLoginForm$()
   }
 }
