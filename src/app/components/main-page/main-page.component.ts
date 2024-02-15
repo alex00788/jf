@@ -5,6 +5,7 @@ import {ModalService} from "../../shared/services/modal.service";
 import {ErrorModalComponent} from "../error-modal/error-modal.component";
 import {LoginPageComponent} from "../login-page/login-page.component";
 import {RegistrationFormPageComponent} from "../registr-page/registrationForm-page.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'main-page',
@@ -16,7 +17,8 @@ import {RegistrationFormPageComponent} from "../registr-page/registrationForm-pa
     CommonModule,
     ErrorModalComponent,
     LoginPageComponent,
-    RegistrationFormPageComponent
+    RegistrationFormPageComponent,
+    RouterLink
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'

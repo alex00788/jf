@@ -73,7 +73,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       return;
     }
     this.loginSub = this.apiService.login(this.form.value).subscribe(userData => {
-      console.log('71', userData)
       if (userData) {
         this.form.reset()
         this.router.navigate(['personal-page'])
