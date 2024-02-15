@@ -15,8 +15,8 @@ export class ApiService {
 
   //перехват и показ ошибки
   public errHandler(err: HttpErrorResponse) {
-    this.errorResponseService.handler(err.error.message)
-    return throwError(() => err.error.message)
+    this.errorResponseService.handler(err.error?.message)
+    return throwError(() => err.error?.message)
   }
 
   //хранение токена в локал стораж
