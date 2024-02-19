@@ -1,1 +1,29 @@
-<button>переход на главную </button>
+<div class="personalPageStyle">
+
+  <div class="logoutSystems">
+    <button (click)="logout()"> Выйти</button>
+    <button (click)="logoutSystems()"> Выйти из системы</button>
+  </div>
+
+
+  <div class="calendar">
+    <div class="headerCalendar">
+      <app-header-calendar></app-header-calendar>
+    </div>
+
+
+    <div class="bodyCalendar">
+      <app-body-calendar></app-body-calendar>
+    </div>
+
+    <div class="dataCalendar">
+      <app-data-calendar></app-data-calendar>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+

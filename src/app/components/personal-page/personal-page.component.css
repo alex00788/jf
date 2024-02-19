@@ -1,0 +1,16 @@
+.personalPageStyle {
+  height: 990px;
+  background: white;
+  opacity: 95%;
+}
+
+.logoutSystems {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bodyCalendar {
+  display: flex;
+  justify-content: center;
+}
