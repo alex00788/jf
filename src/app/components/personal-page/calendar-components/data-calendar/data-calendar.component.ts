@@ -68,7 +68,6 @@ export class DataCalendarComponent implements OnInit, OnDestroy {
       .subscribe(allEntry => {
         if (allEntry) {
           this.formattingEntry(allEntry)
-          console.log(`берем данные из базы за ${this.dateService.date.value.format('DD.MM.YYYY')}`, allEntry)
         }
       });
   }
