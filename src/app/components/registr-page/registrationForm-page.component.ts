@@ -7,6 +7,7 @@ import {ApiService} from "../../shared/services/api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ModalService} from "../../shared/services/modal.service";
 import {ErrorResponseService} from "../../shared/services/error.response.service";
+import {DateService} from "../personal-page/calendar-components/date.service";
 
 @Component({
   selector: 'app-registrationForm-page',
@@ -22,11 +23,11 @@ import {ErrorResponseService} from "../../shared/services/error.response.service
 })
 export class RegistrationFormPageComponent implements OnInit {
 
-  // @ViewChild('phoneNumbers') phoneInput: ElementRef;
   constructor(private apiService: ApiService,
               private router: Router,
               private activateRouter: ActivatedRoute,
               private modalService: ModalService,
+              private dateService: DateService,
               public errorResponseService: ErrorResponseService) {
   }
 
@@ -98,12 +99,12 @@ export class RegistrationFormPageComponent implements OnInit {
       return;
     }
 
-    console.log('59', this.form.value)
     this.loginSub = this.apiService.registration(this.form.value).subscribe(userData => {
-      console.log('93', userData)
       if (userData) {
         this.form.reset()
         this.router.navigate(['personal-page'])
+        this.modalService.close()
+        this.dateService.setUser(userData)
       }
     })
   }

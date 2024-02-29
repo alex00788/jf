@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {catchError, Observable, tap, throwError} from "rxjs";
 import {ErrorResponseService} from "./error.response.service";
+import {DateService} from "../../components/personal-page/calendar-components/date.service";
 
 @Injectable({providedIn: "root",})
 
@@ -10,6 +11,7 @@ export class ApiService {
   // token:UserData;
   constructor(
     private http: HttpClient,
+    private date: DateService,
     private errorResponseService: ErrorResponseService
   ) {}
 
@@ -21,39 +23,33 @@ export class ApiService {
 
   //хранение токена в локал стораж
   //достаем токен из ответа сервера и сохраняем в локалстораж + время жизни токена
-  private setToken(response: any)  {
+  private setToken(response: any) {
     if (response) {
       const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000).getTime()
       localStorage.setItem('accessToken', response.accessToken)
       localStorage.setItem('tokenExp', expDate.toString())
+      localStorage.setItem('userData', JSON.stringify(response.user))
     } else {
       localStorage.clear();
     }
-
-    // this.token = {...token}
   }
 
-                                                // проверка что время жизни токена не истекло
+  // проверка что время жизни токена не истекло
   get token(): any {
     const expDate = localStorage.getItem('tokenExp')
     if (expDate) {
       if (new Date().getTime() > +expDate) {
-        this.logout();                                          //если время истекло выходим из системы чистим стораж
-        return  null;
+        this.logout();                                          //если время истекло, выходим из системы, чистим localStorage
+        return null;
       }
     }
-    return localStorage.getItem('accessToken');           // если все ок  возвращаем токен
+    return localStorage.getItem('accessToken');           // если все ок, возвращаем токен
   }
-
-  // getToken(): UserData {
-  //   return this.token
-  // }
-
 
   registration(user: any): Observable<any> {
     return this.http.post<any>('/api/user/registration', user)
       .pipe(
-        tap(this.setToken),                                              // устанавливае токен в локал стораж
+        tap(this.setToken),                                              // устанавливает токен в localStorage
         catchError(this.errHandler.bind(this)),
       )
   }
@@ -74,4 +70,21 @@ export class ApiService {
     // если есть токен то return true
     return !!this.token
   }
+
+  getAllEntry(date: any): Observable<any> {
+    return this.http.get<any>('/api/user/getAllEntry', {
+      params: new HttpParams().append('date', date)
+    })
+  }
+
+  addEntry(newUserAccount: any): Observable<any> {
+    return this.http.post<any>('/api/user/addEntry', newUserAccount)
+    // .pipe(map((res)=>  res))
+  }
+
+  deleteEntry(id: any): Observable<any> {
+    return this.http.delete<any>('/api/user/deleteEntry/' + id)
+  }
+
+
 }

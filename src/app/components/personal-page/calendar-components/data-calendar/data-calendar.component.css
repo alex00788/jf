@@ -1,0 +1,73 @@
+.now {
+  position: absolute;
+  top: 50px;
+  left: 100px;
+  border-radius: 10px;
+  background: #f15cc7;
+}
+
+.currentUser {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.title {
+  text-align: center;
+  margin: 5px;
+}
+
+span{
+  margin-right: 15px;
+  margin-left: 15px;
+}
+strong {
+  margin: 10px;
+}
+
+.currentDate {
+  margin: 10px;
+}
+
+.currentTime {
+  margin: 10px;
+}
+
+.currentHours {
+  margin: 5px;
+  width: 180px;
+}
+
+
+.currentHour {
+  margin-top: 5px;
+  margin-left: 50px;
+  width: 80px;
+  text-align: center;
+  background: #aefaae;
+  border-radius: 10px;
+}
+
+.dataList {
+  width: 180px;
+  margin: 5px;
+}
+
+.futFormBtn {
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnDisable:disabled{
+color: red}
+
+.btnDelete {
+  border: none;
+  border-radius: 10px;
+}
+
+.inline {
+  display: flex;
+  justify-content: space-between;
+}

@@ -24,7 +24,6 @@ export class BodyCalendarComponent implements OnInit {
   ngOnInit(): void {
     //подписываемся на нажатие в верхнем компоненте при переключении месяца
     this.dateService.date.subscribe(this.generate.bind(this))
-    console.log('27', this)
   }
 
   //функция создающая календарь
@@ -35,7 +34,7 @@ export class BodyCalendarComponent implements OnInit {
     const endDay = now.clone().endOf('month').endOf('week')
 
     // переменная чтоб трекать цикл
-    const date = startDay.clone().subtract(0, 'day')  // subtract - вычет 1 дня
+    const date = startDay.clone()  // .subtract(1, 'day')  - вычет 1 дня  начнет неделю с воскресения
     // const date = startDay.clone()
 
     const calendar = []   //  привяжем к переменной созданной вначале чтобы не перерисовывать компонент много раз

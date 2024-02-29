@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ErrorResponseService} from "../../shared/services/error.response.service";
 import {Subject, takeUntil} from "rxjs";
 import {ModalService} from "../../shared/services/modal.service";
+import {DateService} from "../personal-page/calendar-components/date.service";
 
 @Component({
   selector: 'app-login-page',
@@ -37,6 +38,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private activateRouter: ActivatedRoute,
     private modalService: ModalService,
+    private dateService: DateService,
+
     public errorResponseService: ErrorResponseService
   ) {
   }
@@ -76,6 +79,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       if (userData) {
         this.form.reset()
         this.router.navigate(['personal-page'])
+        this.modalService.close()
+        this.dateService.setUser(userData)
       }
     })
   }

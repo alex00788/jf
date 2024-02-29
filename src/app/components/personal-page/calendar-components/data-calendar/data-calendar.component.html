@@ -1,1 +1,65 @@
-<p>data-calendar works!</p>
+<div class="now">
+  <div class="title">
+    <strong> Мои данные </strong>
+  </div>
+  <div class="currentUser">
+    <div>
+      <strong> Имя: </strong>
+    </div>
+    <span> {{dateService.currentUser | async}} </span>
+  </div>
+  <div class="currentUser">
+    <div>
+      <strong> Роль:  </strong>
+    </div>
+    <span> {{dateService.currentUserRole | async}} </span>
+  </div>
+  <div class="currentUser">
+    <div>
+      <strong> Остаток:  </strong>
+    </div>
+    <span> {{dateService.remainingFunds | async}} </span>
+  </div>
+  <hr>
+  <div class="currentDate">
+    Выбрано: <strong>  {{dateService.date | async | momentTransformDate: 'DD.MM.YYYY'}} </strong>
+  </div>
+  <div class="currentTime">
+    Сейчас: <strong> {{hours}} : {{min}} : {{sec}} </strong>
+  </div>
+</div>
+<hr>
+<section class="sectionClass">
+  <div class="currentHours" *ngFor="let currentHour of currentDay">
+    <div class="currentHour">
+      {{currentHour.time}} : 00
+    </div>
+    <div class="dataList" *ngFor="let person of currentHour.users; index as i">
+      <div class="inline">
+        {{i + 1}} {{person.nameUser}}
+        <button class="btnDelete" (click)="deletePerson(person.id)">&times;</button>
+      </div>
+    </div>
+
+
+    <div *ngIf="currentHour.time === newEntryHasBeenOpened">
+      <input #inputElement type="text">
+      <div class="futFormBtn">
+        <button class="btn btnDisable" type="button"
+                (click)="getInputElementVal(inputElement.value, currentHour.time)"
+                [disabled]="!inputElement.value"
+        > записать
+        </button>
+        <button class="btn" type="button" (click)="cancel()"> отменить</button>
+      </div>
+    </div>
+
+
+    <button *ngIf="currentHour.time !== newEntryHasBeenOpened"
+            class="dataList"
+            (click)="currentHourTime(currentHour.time)"
+    >
+      +
+    </button>
+  </div>
+</section>
