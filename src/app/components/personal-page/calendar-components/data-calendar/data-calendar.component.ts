@@ -1,4 +1,4 @@
-import {Component, ContentChildren, ElementRef, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AsyncPipe, CommonModule, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {DateService} from "../date.service";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
@@ -21,7 +21,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
   styleUrl: './data-calendar.component.css'
 })
 export class DataCalendarComponent implements OnInit, OnDestroy {
-  @ContentChildren('formNewEntry', {read: ElementRef})
+  @ViewChild('inputElement') inputElementRef: ElementRef;
   form = new FormGroup({
     newEntry: new FormControl(null, Validators.required),
   })
@@ -154,6 +154,10 @@ export class DataCalendarComponent implements OnInit, OnDestroy {
   }
 
   currentHourTime(time: any) {
+    setTimeout(()=>{
+     this.inputElementRef.nativeElement.focus()
+    },100)
+
     this.newEntryHasBeenOpened = time;
   }
 
