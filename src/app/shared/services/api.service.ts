@@ -77,13 +77,24 @@ export class ApiService {
     })
   }
 
-  addEntry(newUserAccount: any): Observable<any> {
-    return this.http.post<any>('/api/user/addEntry', newUserAccount)
-    // .pipe(map((res)=>  res))
+
+  getAllUsers(): Observable<any> {
+    return this.http.get<any>('/api/user/getAllUsers')
   }
 
-  deleteEntry(id: any): Observable<any> {
-    return this.http.delete<any>('/api/user/deleteEntry/' + id)
+  getAllUsersCurrentOrganization (organization: any): Observable<any> {
+    return this.http.get<any>('/api/user/getAllUsersCurrentOrganization', {
+      params: new HttpParams().append('organization', organization)
+    })
+  }
+
+  addEntry(newUserAccount: any): Observable<any> {
+    return this.http.post<any>('/api/user/addEntry', newUserAccount)
+    .pipe(catchError(this.errHandler.bind(this)))
+  }
+
+  deleteEntry(id: any, userId: any): Observable<any> {
+    return this.http.delete<any>('/api/user/deleteEntry/' + id + '/' + userId)
   }
 
 

@@ -10,13 +10,13 @@
   </div>
   <div class="currentUser">
     <div>
-      <strong> Роль:  </strong>
+      <strong> Роль: </strong>
     </div>
     <span> {{dateService.currentUserRole | async}} </span>
   </div>
   <div class="currentUser">
     <div>
-      <strong> Остаток:  </strong>
+      <strong> Остаток: </strong>
     </div>
     <span> {{dateService.remainingFunds | async}} </span>
   </div>
@@ -37,22 +37,26 @@
     <div class="dataList" *ngFor="let person of currentHour.users; index as i">
       <div class="inline">
         {{i + 1}} {{person.nameUser}}
-        <button class="btnDelete" (click)="deletePerson(person.id)">&times;</button>
+        <button class="btnDelete" (click)="deletePerson(person.id, person.userId)">&times;</button>
       </div>
     </div>
 
+    <form [formGroup]="form" (submit)="submit()">
+      <div *ngIf="currentHour.time === newEntryHasBeenOpened">
+        <select #inputElement formControlName="newEntry"  (click)="setValueForRec(inputElement.value)">
+          <option class="inputClass" *ngFor="let i of allUsers" [value]="[i.id, currentHour.time]">
+            {{i.surnameUser}} {{i.nameUser}}
+          </option>
 
-    <div *ngIf="currentHour.time === newEntryHasBeenOpened">
-      <input #inputElement type="text">
-      <div class="futFormBtn">
-        <button class="btn btnDisable" type="button"
-                (click)="getInputElementVal(inputElement.value, currentHour.time)"
-                [disabled]="!inputElement.value"
-        > записать
-        </button>
-        <button class="btn" type="button" (click)="cancel()"> отменить</button>
+        </select>
+        <div class="futFormBtn">
+          <button class="btn btnDisable" type="submit" [disabled]="form.invalid || disabledBtnRecord"
+          > записать
+          </button>
+          <button class="btn" type="button" (click)="cancel()"> отменить</button>
+        </div>
       </div>
-    </div>
+    </form>
 
 
     <button *ngIf="currentHour.time !== newEntryHasBeenOpened"

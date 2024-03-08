@@ -34,6 +34,8 @@ export class DataCalendarComponent implements OnInit, OnDestroy {
   currentDay: any = [];
   recordsCurrentDay: any = [];
   timeStartRecord: any = 12;
+  disabledBtnRecord: boolean = false;
+  allUsers: any = [];
 
   constructor(public dateService: DateService,
               public apiService: ApiService,
@@ -47,6 +49,13 @@ export class DataCalendarComponent implements OnInit, OnDestroy {
     this.dateService.date.subscribe(() => {
       this.getAllEntry()
     })
+
+    if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'MAIN_ADMIN') {
+      this.getAllUsers()
+    }
+    if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'ADMIN') {
+      this.getAllUsersCurrentOrganization()
+    }
   }
 
 
@@ -60,6 +69,23 @@ export class DataCalendarComponent implements OnInit, OnDestroy {
       this.min = this.min > 9 ? this.min : "0" + this.min;
       this.sec = this.sec > 9 ? this.sec : "0" + this.sec;
     }, 1000);
+  }
+
+  //функция, возьмет всех пользователей которые зарегистрированы
+  getAllUsers() {
+    this.apiService.getAllUsers()
+      .subscribe(allUsers => {
+        this.allUsers = allUsers
+      });
+  }
+
+  //функция, возьмет пользователей конкретной организации
+  getAllUsersCurrentOrganization() {
+    console.log('конкретная организация')
+    this.apiService.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization)
+      .subscribe(allUsersOrganization => {
+        console.log(allUsersOrganization)
+      });
   }
 
 //берем все записи из базы за текущую дату
@@ -128,23 +154,26 @@ export class DataCalendarComponent implements OnInit, OnDestroy {
 
 
   //функция добавления новой записи
-  addEntry(inputVal: any, currentHourTime: any) {
+  addEntry(user: any, currentHourTime: any) {
     const newUserAccount = {
       date: this.dateService.date.value.format('DD.MM.YYYY'),
       time: currentHourTime,
-      user: inputVal,
-      remainingFunds: this.dateService.remainingFunds.value
+      user: user.surnameUser + ' ' + user.nameUser,
+      userId: user.id,
+      remainingFunds: JSON.stringify(+user.remainingFunds - 1)
     }
     this.apiService.addEntry(newUserAccount)
       .subscribe(() => {
         this.getAllEntry();
+        this.getAllUsers();
       })
   }
 
-  deletePerson(id: any) {
-    this.apiService.deleteEntry(id)
+  deletePerson(id: any, userId: any) {
+    this.apiService.deleteEntry(id, userId)
       .subscribe(() => {
         this.getAllEntry();
+        this.getAllUsers();
       })
   }
 
@@ -153,16 +182,27 @@ export class DataCalendarComponent implements OnInit, OnDestroy {
     this.newEntryHasBeenOpened = '';
   }
 
+  setValueForRec(inputValue: any) {
+    if (inputValue) {
+      this.disabledBtnRecord = false;
+    }
+  }
   currentHourTime(time: any) {
-    setTimeout(()=>{
-     this.inputElementRef.nativeElement.focus()
-    },100)
-
+      setTimeout(()=>{
+        this.inputElementRef.nativeElement.focus();
+        this.disabledBtnRecord = !this.inputElementRef.nativeElement.value
+      },100)
     this.newEntryHasBeenOpened = time;
   }
 
-  getInputElementVal(value: any, currentHourTime: any) {
-    this.addEntry(value, currentHourTime);
+  submit() {
+    let dataInput = this.form.value.newEntry  as any
+    let id = dataInput.split(',')[0];
+    let time =dataInput.split(',')[1];
+    let user = this.allUsers.find((el: any)=> {
+      return el.id === +id
+    })
+    this.addEntry(user, time);
     this.cancel();
   }
 

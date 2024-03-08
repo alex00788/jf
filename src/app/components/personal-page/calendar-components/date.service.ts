@@ -9,7 +9,9 @@ export class DateService {                                            //moment()
   public date: BehaviorSubject<any> = new BehaviorSubject(moment())        //начальное значение
   public currentUser: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserRole: BehaviorSubject<any> = new BehaviorSubject('')
+  public roleToGetTheDesiredListOfUsers: BehaviorSubject<any> = new BehaviorSubject('')
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
+  public sectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('')
 
   constructor() {
   }
@@ -30,10 +32,15 @@ export class DateService {                                            //moment()
 
   getCurrentUser() {
     const currentUser = JSON.parse(localStorage.getItem('userData') as string)
-    const currentUserRole = currentUser.user.role === 'MAIN_ADMIN' ? 'Администратор' : 'Пользователь'
+    let currentUserRole = currentUser.user.role === 'MAIN_ADMIN' ? 'Администратор' : 'Пользователь'
+    if (currentUser.user.role === 'ADMIN') {
+      currentUserRole = 'Админ группы'
+    }
     this.currentUser.next(currentUser.user.nameUser + ' ' + currentUser.user.surnameUser)
     this.currentUserRole.next(currentUserRole)
     this.remainingFunds.next(currentUser.user.remainingFunds)
+    this.sectionOrOrganization.next(currentUser.user.sectionOrOrganization)
+    this.roleToGetTheDesiredListOfUsers.next(currentUser.user.role)
   }
 
   // метод выбирающий тот день по которому кликнули

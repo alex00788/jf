@@ -5,12 +5,14 @@
     <button (click)="logoutSystems()"> Выйти из системы</button>
   </div>
 
+  <div class="errorModal insideClass">
+    <app-error-modal></app-error-modal>
+  </div>
 
   <div class="calendar">
     <div class="headerCalendar">
       <app-header-calendar></app-header-calendar>
     </div>
-
 
     <div class="bodyCalendar">
       <app-body-calendar></app-body-calendar>
