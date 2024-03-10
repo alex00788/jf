@@ -1,10 +1,34 @@
 .now {
-  position: absolute;
-  top: 50px;
-  left: 100px;
+  max-width: 300px;
+  padding: 5px;
   border-radius: 10px;
-  background: #f15cc7;
+  background: #c6faeb;
 }
+
+.personalDataClass {
+  /*position: absolute;*/
+  /*top: 80px;*/
+  /*left: 20px;*/
+}
+
+
+.btnSettingsRecords {
+  margin: 5px;
+  background: none;
+  border-radius: 10px;
+  border: solid 1px #f6dbff;
+  display: block;
+  cursor: pointer;
+}
+
+.btnClosePersonalData {
+  position: absolute;
+  right: 1px;
+  border: none 1px #f6dbff;
+  cursor: pointer;
+  background: none;
+}
+
 
 .currentUser {
   display: flex;
@@ -13,6 +37,7 @@
 }
 
 .title {
+  position: relative;
   text-align: center;
   margin: 5px;
 }
@@ -25,19 +50,28 @@ strong {
   margin: 10px;
 }
 
-.currentDate {
-  margin: 10px;
-}
 
 .currentTime {
   margin: 10px;
 }
 
 .currentHours {
-  margin: 5px;
+  margin-top: 20px;
   width: 180px;
 }
 
+.sectionClass {
+  display: block;
+  border: solid 3px red;
+  max-width: 200px;
+}
+
+.selectedDate {
+  color: blue;
+  max-width: 100px;
+  margin-left: 45px;
+  padding-top: 5px;
+}
 
 .currentHour {
   margin-top: 5px;

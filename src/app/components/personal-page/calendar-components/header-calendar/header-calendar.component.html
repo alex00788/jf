@@ -1,8 +1,32 @@
+<div class="currentTime">
+  <span class="todayClass">
+    Сегодня :
+  </span>
+  <span class="todayClass">
+    {{currentTime}}
+  </span>
+</div>
+
+<div class="selectedTime">
+  <span class="todayClass">
+    Выбрано :
+  </span>
+  <span class="todayClass">
+    {{dateService.date | async | momentTransformDate :  'DD.MM.YYYY'}}
+  </span>
+</div>
+
+<div class="watchClass">
+  <strong class="todayClass">
+    {{hours}} : {{min}} : {{sec}}
+  </strong>
+</div>
+
 <p>
-  <i (click)="go(-1)">  <--  </i>
+  <i (click)="go(-1)"> < </i>
 
   <span>  {{dateService.date | async | momentTransformDate}} </span>
 
-  <i (click)="go(1)">  -->  </i>
+  <i (click)="go(1)"> > </i>
 
 </p>

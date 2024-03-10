@@ -10,4 +10,45 @@ span {
 
 i {
   cursor: pointer;
+  border: solid 1px #f15cc7;
+  border-radius: 10px;
+  width: 30px;
+  text-align: center;
+  padding: 3px;
+}
+
+.currentTime {
+  position: absolute;
+  right: 30px;
+  top: 70px;
+  text-align: center;
+  font-weight: bold;
+  background: #f6f34c;
+  border-radius: 10px;
+}
+
+
+.selectedTime {
+  position: absolute;
+  right: 30px;
+  top: 120px;
+  text-align: center;
+  font-weight: bold;
+  background: #bfefe4;
+  border-radius: 10px;
+}
+
+.watchClass {
+  position: absolute;
+  right: 50px;
+  padding: 5px;
+  top: 170px;
+  text-align: center;
+  font-weight: bold;
+  border: solid 1px yellow;
+  border-radius: 10px;
+}
+
+.todayClass {
+  display: block;
 }

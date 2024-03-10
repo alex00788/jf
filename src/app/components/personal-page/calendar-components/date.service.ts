@@ -8,6 +8,7 @@ import moment from "moment";
 export class DateService {                                            //moment() это текущая дата
   public date: BehaviorSubject<any> = new BehaviorSubject(moment())        //начальное значение
   public currentUser: BehaviorSubject<any> = new BehaviorSubject('')
+  public currentUserId: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserRole: BehaviorSubject<any> = new BehaviorSubject('')
   public roleToGetTheDesiredListOfUsers: BehaviorSubject<any> = new BehaviorSubject('')
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
@@ -37,6 +38,7 @@ export class DateService {                                            //moment()
       currentUserRole = 'Админ группы'
     }
     this.currentUser.next(currentUser.user.nameUser + ' ' + currentUser.user.surnameUser)
+    this.currentUserId.next(currentUser.user.id)
     this.currentUserRole.next(currentUserRole)
     this.remainingFunds.next(currentUser.user.remainingFunds)
     this.sectionOrOrganization.next(currentUser.user.sectionOrOrganization)

@@ -34,7 +34,7 @@ td:hover:not(.disabled) {
 
 .selected {
   border-radius: 10px;
-  background: #f15cc7;
+  background: #bfefe4;
 }
 
 td:focus {
