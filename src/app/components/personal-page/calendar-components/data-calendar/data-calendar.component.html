@@ -1,58 +1,4 @@
-<div class="personalDataClass">
-  <button class="btnSettingsRecords" (click)="switchData()" *ngIf="!personalData"> Мои данные</button>
-  <div *ngIf="personalData">
-    <div class="now">
-      <div class="title">
-        <strong> Мои данные </strong>
-        <button class="btnClosePersonalData" (click)="switchData()">&times;</button>
-      </div>
-      <div class="currentUser">
-        <div>
-          <strong> Имя: </strong>
-        </div>
-        <span> {{dateService.currentUser | async}} </span>
-      </div>
-      <div class="currentUser">
-        <div>
-          <strong> Роль: </strong>
-        </div>
-        <span> {{dateService.currentUserRole | async}} </span>
-      </div>
-      <div class="currentUser">
-        <div>
-          <strong> Остаток: </strong>
-        </div>
-        <span> {{dateService.remainingFunds | async}} </span>
-      </div>
-      <button class="btnSettingsRecords" (click)="switchSittingsData()">
-        <strong > Настройки </strong>
-      </button>
-    </div>
-
-    <div class="settingsRecordsClass" *ngIf="settingsRecords">
-      <button class="btnSettingsRecords">
-        максимальное кол-во мест в записи
-      </button>
-      <button class="btnSettingsRecords">
-        настроить время начала и окончания записи
-      </button>
-      <button class="btnSettingsRecords">
-        показать данные за выбранную неделю / за 1 день
-      </button>
-      <button class="btnSettingsRecords">
-        показать дни когда я записан
-      </button>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
 <section class="sectionClass">
-
 
   <div class="selectedDate">
     <strong>
@@ -60,8 +6,6 @@
     </strong>
     <hr>
   </div>
-
-
 
   <div class="currentHours" *ngFor="let currentHour of currentDay">
     <div class="currentHour">

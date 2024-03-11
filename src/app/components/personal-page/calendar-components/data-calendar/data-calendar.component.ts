@@ -4,6 +4,7 @@ import {DateService} from "../date.service";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
 import {ApiService} from "../../../../shared/services/api.service";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-data-calendar',
@@ -32,9 +33,8 @@ export class DataCalendarComponent implements OnInit {
   timeStartRecord: any = 18;
   timeFinishRecord: any = 20;
   disabledBtnRecord: boolean = false;
-  personalData: boolean = true;
-  settingsRecords: boolean = false;
   allUsers: any = [];
+  private destroyed$: Subject<void> = new Subject();
 
   constructor(public dateService: DateService,
               public apiService: ApiService,
@@ -42,8 +42,9 @@ export class DataCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dateService.getCurrentUser();
-    this.dateService.date.subscribe(() => {
+   this.dateService.date
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
       this.getAllEntry()
     })
 
@@ -57,9 +58,10 @@ export class DataCalendarComponent implements OnInit {
 
 
 
-  //функция, возьмет всех пользователей которые зарегистрированы
+  //функция, возьмет всех пользователей которые зарегистрированы (для записи клиентов тока из предложенных)
   getAllUsers() {
     this.apiService.getAllUsers()
+      .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsers => {
         const user = allUsers.find((el: any)=> {
           return el.id === this.dateService.currentUserId.value
@@ -73,6 +75,7 @@ export class DataCalendarComponent implements OnInit {
   getAllUsersCurrentOrganization() {
     console.log('конкретная организация')
     this.apiService.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization)
+      .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsersOrganization => {
         console.log(allUsersOrganization)
       });
@@ -81,6 +84,7 @@ export class DataCalendarComponent implements OnInit {
 //берем все записи из базы за текущую дату
   getAllEntry() {
     this.apiService.getAllEntry(this.dateService.date.value.format('DD.MM.YYYY'))
+      .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntry => {
         if (allEntry) {
           this.formattingEntry(allEntry)
@@ -153,6 +157,7 @@ export class DataCalendarComponent implements OnInit {
       remainingFunds: JSON.stringify(+user.remainingFunds - 1)
     }
     this.apiService.addEntry(newUserAccount)
+      .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.getAllEntry();
         this.getAllUsers();
@@ -161,6 +166,7 @@ export class DataCalendarComponent implements OnInit {
 
   deletePerson(id: any, userId: any) {
     this.apiService.deleteEntry(id, userId)
+      .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.getAllEntry();
         this.getAllUsers();
@@ -196,15 +202,4 @@ export class DataCalendarComponent implements OnInit {
     this.cancel();
   }
 
-
-  switchData() {
-    this.personalData = !this.personalData;
-    if (this.settingsRecords) {
-      this.switchSittingsData();
-    }
-  }
-
-  switchSittingsData() {
-    this.settingsRecords = !this.settingsRecords;
-  }
 }

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DateService} from "../date.service";
-import {AsyncPipe, DatePipe} from "@angular/common";
+import {AsyncPipe, DatePipe, NgIf} from "@angular/common";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
 
 @Component({
@@ -9,7 +9,8 @@ import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-
   imports: [
     AsyncPipe,
     MomentTransformDatePipe,
-    DatePipe
+    DatePipe,
+    NgIf
   ],
   templateUrl: './header-calendar.component.html',
   styleUrl: './header-calendar.component.css'
@@ -18,12 +19,13 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
   constructor(public dateService: DateService) {
   }
-
   subInterval: any;
   hours: any = new Date().getHours();
   min: any = new Date().getMinutes();
   sec: any = new Date().getSeconds();
   currentTime =  '' ;
+  personalData: boolean = false;
+  settingsRecords: boolean = false;
 
   ngOnInit(): void {
     const d = new Date();
@@ -51,5 +53,20 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     clearInterval(this.subInterval);
   }
+
+
+  switchData() {
+    this.personalData = !this.personalData;
+    if (this.settingsRecords) {
+      this.switchSittingsData();
+    }
+  }
+
+  switchSittingsData() {
+    this.settingsRecords = !this.settingsRecords;
+  }
+
+
+
 
 }

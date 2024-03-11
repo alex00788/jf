@@ -4,6 +4,7 @@ import {DateService} from "../date.service";
 import moment from "moment";
 import {NgForOf} from "@angular/common";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-body-calendar',
@@ -18,12 +19,14 @@ import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-
 export class BodyCalendarComponent implements OnInit {
   constructor(private dateService: DateService) {
   }
-
+  private destroyed$: Subject<void> = new Subject();
   calendar: Week[] = []
 
   ngOnInit(): void {
     //подписываемся на нажатие в верхнем компоненте при переключении месяца
-    this.dateService.date.subscribe(this.generate.bind(this))
+    this.dateService.date
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(this.generate.bind(this))
   }
 
   //функция создающая календарь

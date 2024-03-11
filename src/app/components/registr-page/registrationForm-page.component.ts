@@ -99,7 +99,9 @@ export class RegistrationFormPageComponent implements OnInit {
       return;
     }
 
-    this.loginSub = this.apiService.registration(this.form.value).subscribe(userData => {
+    this.loginSub = this.apiService.registration(this.form.value)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(userData => {
       if (userData) {
         this.form.reset()
         this.router.navigate(['personal-page'])

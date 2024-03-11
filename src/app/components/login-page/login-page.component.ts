@@ -75,7 +75,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
-    this.loginSub = this.apiService.login(this.form.value).subscribe(userData => {
+    this.loginSub = this.apiService.login(this.form.value)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(userData => {
       if (userData) {
         this.form.reset()
         this.router.navigate(['personal-page'])
