@@ -1,5 +1,8 @@
 strong {
   margin: 10px;
+  border-bottom: solid 1px red;
+  padding: 3px;
+
 }
 
 .currentHours {
@@ -8,9 +11,9 @@ strong {
 }
 
 .sectionClass {
-  display: block;
-  border: solid 3px red;
-  max-width: 200px;
+  border: solid 1px red;
+  border-radius: 10px;
+  width: 200px;
 }
 
 .selectedDate {

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {AsyncPipe, CommonModule, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {DateService} from "../date.service";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
@@ -23,6 +23,7 @@ import {Subject, takeUntil} from "rxjs";
 })
 export class DataCalendarComponent implements OnInit {
   @ViewChild('inputElement') inputElementRef: ElementRef;
+  @Input() dayOfWeek: any;
   form = new FormGroup({
     newEntry: new FormControl(null, Validators.required),
   })
@@ -45,7 +46,7 @@ export class DataCalendarComponent implements OnInit {
    this.dateService.date
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-      this.getAllEntry()
+      this.getAllEntry(this.dayOfWeek)
     })
 
     if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'MAIN_ADMIN') {
@@ -63,6 +64,7 @@ export class DataCalendarComponent implements OnInit {
     this.apiService.getAllUsers()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsers => {
+        console.log('67', allUsers)
         const user = allUsers.find((el: any)=> {
           return el.id === this.dateService.currentUserId.value
         })
@@ -82,8 +84,9 @@ export class DataCalendarComponent implements OnInit {
   }
 
 //берем все записи из базы за текущую дату
-  getAllEntry() {
-    this.apiService.getAllEntry(this.dateService.date.value.format('DD.MM.YYYY'))
+  getAllEntry(date: any) {
+    // this.apiService.getAllEntry(this.dateService.date.value.format('DD.MM.YYYY'))
+    this.apiService.getAllEntry(date)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntry => {
         if (allEntry) {
@@ -150,7 +153,8 @@ export class DataCalendarComponent implements OnInit {
   //функция добавления новой записи
   addEntry(user: any, currentHourTime: any) {
     const newUserAccount = {
-      date: this.dateService.date.value.format('DD.MM.YYYY'),
+      // date: this.dateService.date.value.format('DD.MM.YYYY'),
+      date: this.dayOfWeek,
       time: currentHourTime,
       user: user.surnameUser + ' ' + user.nameUser,
       userId: user.id,
@@ -159,8 +163,10 @@ export class DataCalendarComponent implements OnInit {
     this.apiService.addEntry(newUserAccount)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        this.getAllEntry();
-        this.getAllUsers();
+        this.getAllEntry(this.dayOfWeek);
+        // console.log('167', this.allUsers)
+        // this.getAllUsers();
+        // console.log('168', this.allUsers)
       })
   }
 
@@ -168,7 +174,7 @@ export class DataCalendarComponent implements OnInit {
     this.apiService.deleteEntry(id, userId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        this.getAllEntry();
+        this.getAllEntry(this.dayOfWeek);
         this.getAllUsers();
       })
   }
@@ -192,9 +198,11 @@ export class DataCalendarComponent implements OnInit {
   }
 
   submit() {
+    this.getAllUsers();
     let dataInput = this.form.value.newEntry as any
     let id = dataInput.split(',')[0];
     let time = dataInput.split(',')[1];
+    console.log('202', this.allUsers)
     let user = this.allUsers.find((el: any) => {
       return el.id === +id
     })

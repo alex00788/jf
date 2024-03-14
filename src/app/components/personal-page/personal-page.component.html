@@ -19,9 +19,28 @@
     </div>
 
     <hr>
-
-    <div class="dataCalendar">
-      <app-data-calendar></app-data-calendar>
+    <div class="calendarDisplayMode">
+      <span class="btnCalendarDisplayMode">показывать: </span>
+      <button
+        [class]="{
+        btnCalendarDisplayModeSelected : showCurrentDay,
+        btnCalendarDisplayMode: !showCurrentDay}"
+        (click)="showDay()"
+      > день
+      </button>
+      <button
+        [class]="{
+        btnCalendarDisplayModeSelected : showCurrentWeek,
+        btnCalendarDisplayMode: !showCurrentWeek}"
+        (click)="showWeek()"
+      > неделя
+      </button>
+      <button class="btnCalendarDisplayMode" disabled="true"> месяц</button>
+    </div>
+    <div class="dCalendar">
+      <div class="dataCalendar" *ngFor=" let day of weekSelectedDate">
+        <app-data-calendar [dayOfWeek]="day"></app-data-calendar>
+      </div>
     </div>
   </div>
 

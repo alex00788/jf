@@ -24,7 +24,7 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   min: any = new Date().getMinutes();
   sec: any = new Date().getSeconds();
   currentTime =  '' ;
-  personalData: boolean = false;
+  personalData: boolean = true;
   settingsRecords: boolean = false;
 
   ngOnInit(): void {

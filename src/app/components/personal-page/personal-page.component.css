@@ -21,10 +21,28 @@
   left: 550px;
 }
 
+.dCalendar {
+  display: flex;
+  justify-content: center;
+}
+
+.dataCalendar {
+  margin: 10px;
+}
 
 
-.tess {
-  position: absolute;
-  top: 350px;
-  left: 250px;
+.calendarDisplayMode{
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.btnCalendarDisplayMode {
+  margin: 5px;
+  background: none;
+}
+
+.btnCalendarDisplayModeSelected{
+  margin: 5px;
+  background: #aefaae;
 }

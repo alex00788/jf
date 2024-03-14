@@ -2,9 +2,8 @@
 
   <div class="selectedDate">
     <strong>
-      {{dateService.date | async | momentTransformDate: 'DD.MM.YYYY'}}
+      {{dayOfWeek}}
     </strong>
-    <hr>
   </div>
 
   <div class="currentHours" *ngFor="let currentHour of currentDay">

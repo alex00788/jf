@@ -33,12 +33,12 @@ export class BodyCalendarComponent implements OnInit {
   private generate(now: moment.Moment) {
     // границы календаря
     const startDay = now.clone().startOf('month').startOf('week')
-                              //  startOf чтобы момент переключился на старт месяца...  тоже для недели
+                              //  startOf чтобы момент переключился на старт месяца... тоже для недели
     const endDay = now.clone().endOf('month').endOf('week')
 
     // переменная чтоб трекать цикл
-    const date = startDay.clone()  // .subtract(1, 'day')  - вычет 1 дня  начнет неделю с воскресения
-    // const date = startDay.clone()
+    const date = startDay.clone()  // .subtract(1, 'day')  - вычет 1 дня ... начнет неделю с воскресения
+
 
     const calendar = []   //  привяжем к переменной созданной вначале чтобы не перерисовывать компонент много раз
 
@@ -49,7 +49,7 @@ export class BodyCalendarComponent implements OnInit {
           .map(() => {                                                    //и далее приводим к нужному формату
             const value = date.add(1, 'day').clone()
             const active = moment().isSame(value, 'date')  //moment текущ дата ... isSame сравниваем занчение value  по date
-            const disabled = !now.isSame(value, 'month')   // now  - это текущий месяц  если он не совпадает со значением value  то его блокируем
+            const disabled = !now.isSame(value, 'month')   // now- это текущий месяц, если он не совпадает со значением value  то его блокируем
             const selected = now.isSame(value, 'date')
             return {
               value, active, disabled, selected
