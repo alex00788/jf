@@ -12,6 +12,7 @@ export class DateService {                                            //moment()
   public currentUserRole: BehaviorSubject<any> = new BehaviorSubject('')
   public roleToGetTheDesiredListOfUsers: BehaviorSubject<any> = new BehaviorSubject('')
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
+  public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
   public sectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('')
 
   constructor() {

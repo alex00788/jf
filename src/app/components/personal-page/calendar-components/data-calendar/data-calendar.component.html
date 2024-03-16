@@ -20,7 +20,7 @@
     <form [formGroup]="form" (submit)="submit()">
       <div *ngIf="currentHour.time === newEntryHasBeenOpened">
         <select #inputElement formControlName="newEntry" (click)="setValueForRec(inputElement.value)">
-          <option class="inputClass" *ngFor="let i of allUsers" [value]="[i.id, currentHour.time]">
+          <option class="inputClass" *ngFor="let i of dateService.allUsers | async" [value]="[i.id, currentHour.time]">
             {{i.surnameUser}} {{i.nameUser}}
           </option>
 

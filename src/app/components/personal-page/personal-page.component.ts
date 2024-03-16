@@ -39,6 +39,12 @@ export class PersonalPageComponent implements OnInit {
   ngOnInit(): void {
     this.calculatingCurrentWeek();
     this.dateService.getCurrentUser();
+    if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'MAIN_ADMIN') {
+      this.getAllUsers()
+    }
+    if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'ADMIN') {
+      this.getAllUsersCurrentOrganization()
+    }
   }
 
   calculatingCurrentWeek () {
@@ -82,4 +88,32 @@ export class PersonalPageComponent implements OnInit {
     this.showCurrentDay = true;
     this.calculatingCurrentWeek();
   }
+
+  // функция, возьмет всех пользователей которые зарегистрированы (для записи клиентов тока из предложенных)
+  getAllUsers() {
+    this.api.getAllUsers()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(allUsers => {
+        const user = allUsers.find((el: any)=> {
+          return el.id === this.dateService.currentUserId.value
+        })
+        this.dateService.remainingFunds.next(user.remainingFunds)
+        this.dateService.allUsers.next(allUsers)
+        console.log('104', this.dateService.allUsers.value)
+      });
+  }
+
+
+  // //функция, возьмет пользователей конкретной организации
+  getAllUsersCurrentOrganization() {
+    console.log('конкретная организация')
+  //   this.apiService.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization)
+  //     .pipe(takeUntil(this.destroyed$))
+  //     .subscribe(allUsersOrganization => {
+  //       console.log(allUsersOrganization)
+  //     });
+  }
+
+
+
 }

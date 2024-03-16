@@ -43,45 +43,13 @@ export class DataCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.dateService.date
+    this.dateService.date
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-      this.getAllEntry(this.dayOfWeek)
-    })
-
-    if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'MAIN_ADMIN') {
-      this.getAllUsers()
-    }
-    if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'ADMIN') {
-      this.getAllUsersCurrentOrganization()
-    }
+        this.getAllEntry(this.dayOfWeek)
+      })
   }
 
-
-
-  //функция, возьмет всех пользователей которые зарегистрированы (для записи клиентов тока из предложенных)
-  getAllUsers() {
-    this.apiService.getAllUsers()
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(allUsers => {
-        console.log('67', allUsers)
-        const user = allUsers.find((el: any)=> {
-          return el.id === this.dateService.currentUserId.value
-        })
-        this.dateService.remainingFunds.next(user.remainingFunds)
-        this.allUsers = allUsers
-      });
-  }
-
-  //функция, возьмет пользователей конкретной организации
-  getAllUsersCurrentOrganization() {
-    console.log('конкретная организация')
-    this.apiService.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(allUsersOrganization => {
-        console.log(allUsersOrganization)
-      });
-  }
 
 //берем все записи из базы за текущую дату
   getAllEntry(date: any) {
@@ -158,15 +126,12 @@ export class DataCalendarComponent implements OnInit {
       time: currentHourTime,
       user: user.surnameUser + ' ' + user.nameUser,
       userId: user.id,
-      remainingFunds: JSON.stringify(+user.remainingFunds - 1)
+      remainingFunds: user.remainingFunds
     }
     this.apiService.addEntry(newUserAccount)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.getAllEntry(this.dayOfWeek);
-        // console.log('167', this.allUsers)
-        // this.getAllUsers();
-        // console.log('168', this.allUsers)
       })
   }
 
@@ -175,7 +140,7 @@ export class DataCalendarComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.getAllEntry(this.dayOfWeek);
-        this.getAllUsers();
+        this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1));
       })
   }
 
@@ -189,6 +154,7 @@ export class DataCalendarComponent implements OnInit {
       this.disabledBtnRecord = false;
     }
   }
+
   currentHourTime(time: any) {
     setTimeout(() => {
       this.inputElementRef.nativeElement.focus();
@@ -198,14 +164,14 @@ export class DataCalendarComponent implements OnInit {
   }
 
   submit() {
-    this.getAllUsers();
     let dataInput = this.form.value.newEntry as any
     let id = dataInput.split(',')[0];
     let time = dataInput.split(',')[1];
-    console.log('202', this.allUsers)
-    let user = this.allUsers.find((el: any) => {
+    let user = this.dateService.allUsers.value.find((el: any) => {
       return el.id === +id
     })
+    user.remainingFunds = JSON.stringify(+user.remainingFunds - 1);
+    this.dateService.remainingFunds.next(user.remainingFunds);
     this.addEntry(user, time);
     this.cancel();
   }
