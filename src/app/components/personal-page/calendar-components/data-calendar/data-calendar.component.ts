@@ -140,6 +140,10 @@ export class DataCalendarComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.getAllEntry(this.dayOfWeek);
+        let user = this.dateService.allUsers.value.find((el: any) => {
+          return el.id === +userId
+        })
+        user.remainingFunds = JSON.stringify(+user.remainingFunds + 1);
         this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1));
       })
   }
