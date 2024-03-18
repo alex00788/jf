@@ -77,6 +77,11 @@ export class ApiService {
     })
   }
 
+  getAllEntryInCurrentTimes(dateAndTimeRec: any): Observable<any> {
+    return this.http.get<any>('/api/user/getAllEntryInCurrentTimes', {
+      params: new HttpParams().append('dateRec', dateAndTimeRec.dateRec).append('timeRec', dateAndTimeRec.timeRec)
+    })
+  }
 
   getAllUsers(): Observable<any> {
     return this.http.get<any>('/api/user/getAllUsers')

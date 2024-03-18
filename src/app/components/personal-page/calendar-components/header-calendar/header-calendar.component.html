@@ -42,7 +42,7 @@
           <label>
             время начала записи
           </label>
-          <select  class="sittingsInputClass" formControlName="timeStartRec">
+          <select class="sittingsInputClass" formControlName="timeStartRec">
             <option *ngFor="let chSt of timesForRec"> {{chSt}}</option>
           </select>
         </div>
@@ -52,13 +52,16 @@
             время окончания записи
           </label>
           <select class="sittingsInputClass" formControlName="timeFinishRec">
-          <option *ngFor="let chEnd of timesForRec"> {{chEnd}}</option>
+            <option *ngFor="let chEnd of timesForRec"> {{chEnd}}</option>
           </select>
         </div>
         <div class="btnSetClass">
-        <button class="btnSettingsRecords" type="submit">
-          Применить
-        </button>
+          <button class="btnSettingsRecords" (click)="closeSettings()">
+            Отменить
+          </button>
+          <button class="btnSettingsRecords" type="submit">
+            Применить
+          </button>
         </div>
       </form>
     </div>

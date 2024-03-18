@@ -15,7 +15,7 @@ export class DateService {                                            //moment()
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
   public sectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('')
   public timeStartRecord: BehaviorSubject<any> = new BehaviorSubject(18)
-  public timeFinishRecord: BehaviorSubject<any> = new BehaviorSubject(18)
+  public timeFinishRecord: BehaviorSubject<any> = new BehaviorSubject(20)
   constructor() {
   }
 

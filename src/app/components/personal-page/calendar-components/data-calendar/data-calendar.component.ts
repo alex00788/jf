@@ -58,6 +58,25 @@ export class DataCalendarComponent implements OnInit {
   }
 
 
+  //берем все записи из базы за текущую дату и выбранное время
+  getAllEntryInCurrentTimes(dateAndTimeRec: any) {
+    this.apiService.getAllEntryInCurrentTimes(dateAndTimeRec)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(allEntryCurTime => {
+        console.log('66', allEntryCurTime)
+        if (allEntryCurTime.length) {
+          console.log('блокировать запись   добавить в проверку нужное ' +
+            'число и сообщение показать что возможно записать толко стока человек+  заблокировать + ')
+          this.cancel();
+          return
+        }
+        // if (allEntryCurTime) {
+        //   this.formattingEntry(allEntryCurTime)
+        // }
+      });
+  }
+
+
 //берем все записи из базы за текущую дату
   getAllEntry(date: any) {
     // this.apiService.getAllEntry(this.dateService.date.value.format('DD.MM.YYYY'))
@@ -151,7 +170,9 @@ export class DataCalendarComponent implements OnInit {
           return el.id === +userId
         })
         user.remainingFunds = JSON.stringify(+user.remainingFunds + 1);
-        this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1));
+        if (user.id ===  this.dateService.currentUserId.value) {
+          this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1));
+        }
       })
   }
 
@@ -166,10 +187,20 @@ export class DataCalendarComponent implements OnInit {
     }
   }
 
+  checkingTheNumberOfRecorded(timeRec: any) {
+    const dateRec = this.dayOfWeek;
+    const dateAndTimeRec = {
+      timeRec: timeRec,
+      dateRec: dateRec
+    }
+    this.getAllEntryInCurrentTimes(dateAndTimeRec);
+  }
+
   currentHourTime(time: any) {
+    this.checkingTheNumberOfRecorded(time);
     setTimeout(() => {
-      this.inputElementRef.nativeElement.focus();
-      this.disabledBtnRecord = !this.inputElementRef.nativeElement.value
+      this.inputElementRef?.nativeElement?.focus();
+      this.disabledBtnRecord = !this.inputElementRef?.nativeElement?.value
     }, 100)
     this.newEntryHasBeenOpened = time;
   }
@@ -182,7 +213,9 @@ export class DataCalendarComponent implements OnInit {
       return el.id === +id
     })
     user.remainingFunds = JSON.stringify(+user.remainingFunds - 1);
-    this.dateService.remainingFunds.next(user.remainingFunds);
+    if (user.id ===  this.dateService.currentUserId.value) {
+      this.dateService.remainingFunds.next(user.remainingFunds);
+    }
     this.addEntry(user, time);
     this.cancel();
   }

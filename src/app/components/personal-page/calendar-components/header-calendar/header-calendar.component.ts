@@ -84,4 +84,8 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
     this.settingsRecords = false;
     this.dateService.changeTimeInterval(this.form.value)
   }
+
+  closeSettings() {
+    this.settingsRecords = false;
+  }
 }
