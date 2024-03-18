@@ -25,27 +25,45 @@
         <span> {{dateService.remainingFunds | async}} </span>
       </div>
       <button class="btnSettingsRecords" (click)="switchSittingsData()">
-        <strong > Настройки </strong>
+        <strong> Настройки </strong>
       </button>
     </div>
 
     <div class="settingsRecordsClass" *ngIf="settingsRecords">
-      <button class="btnSettingsRecords">
-        максимальное кол-во мест в записи
-      </button>
-      <button class="btnSettingsRecords">
-        настроить время начала и окончания записи
-      </button>
+      <form [formGroup]="form" (submit)="submit()">
+        <div class="oneSitting">
+          <label>
+            max человек в записи
+          </label>
+          <input type="number" maxlength="2" max="20" class="sittingsInputClass" formControlName="maxiPeople">
+        </div>
+
+        <div class="oneSitting">
+          <label>
+            время начала записи
+          </label>
+          <select  class="sittingsInputClass" formControlName="timeStartRec">
+            <option *ngFor="let chSt of timesForRec"> {{chSt}}</option>
+          </select>
+        </div>
+
+        <div class="oneSitting">
+          <label>
+            время окончания записи
+          </label>
+          <select class="sittingsInputClass" formControlName="timeFinishRec">
+          <option *ngFor="let chEnd of timesForRec"> {{chEnd}}</option>
+          </select>
+        </div>
+        <div class="btnSetClass">
+        <button class="btnSettingsRecords" type="submit">
+          Применить
+        </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
 
 
 <div class="currentTime">
@@ -71,7 +89,6 @@
     {{dateService.date | async | momentTransformDate :  'DD.MM.YYYY'}}
   </span>
 </div>
-
 
 
 <p>

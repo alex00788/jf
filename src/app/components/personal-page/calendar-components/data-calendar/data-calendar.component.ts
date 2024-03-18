@@ -31,10 +31,7 @@ export class DataCalendarComponent implements OnInit {
   newEntryHasBeenOpened: any;
   currentDay: any = [];
   recordsCurrentDay: any = [];
-  timeStartRecord: any = 18;
-  timeFinishRecord: any = 20;
   disabledBtnRecord: boolean = false;
-  allUsers: any = [];
   private destroyed$: Subject<void> = new Subject();
 
   constructor(public dateService: DateService,
@@ -47,6 +44,16 @@ export class DataCalendarComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.getAllEntry(this.dayOfWeek)
+      })
+    this.dateService.timeStartRecord
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(()=>{
+      this.getAllEntry(this.dayOfWeek);
+    })
+    this.dateService.timeFinishRecord
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(()=>{
+        this.getAllEntry(this.dayOfWeek);
       })
   }
 
@@ -72,7 +79,7 @@ export class DataCalendarComponent implements OnInit {
       // время первой записи
       let time = sortEntry[0].time;
       //пустые данные до времени где есть хоть одна запись
-      for (let i = this.timeStartRecord; i < time; i++) {
+      for (let i = this.dateService.timeStartRecord.value; i < time; i++) {
         resArrayCurrentDay.push(this.filteringRecordsAtDifferentTimes([], JSON.stringify(i)));
       }
       //собираем результирующий массив
@@ -86,7 +93,7 @@ export class DataCalendarComponent implements OnInit {
       this.recordsCurrentDay = Array.from(new Set(allEntryRecord));
 
       //цикл проверяется каждый час и если в нем есть записи то фильтрует его
-      for (let i = time; i < this.timeFinishRecord; i++) {
+      for (let i = time; i < this.dateService.timeFinishRecord.value; i++) {
         let timeInFor = JSON.stringify(+i + 1)
         if (this.recordsCurrentDay.includes(timeInFor)) {   //...чтоб проверять в каждом след часе есть запись или нет
           this.filteringRecordsAtDifferentTimes(sortEntry, timeInFor)
@@ -99,7 +106,7 @@ export class DataCalendarComponent implements OnInit {
     } else {
       //если нет записей просто проставляем часы
       this.currentDay = []           //<-- чтоб пустое время не дублировалось обнуляем массив
-      for (let i = this.timeStartRecord; i <= this.timeFinishRecord; i++) {
+      for (let i = this.dateService.timeStartRecord.value; i <= this.dateService.timeFinishRecord.value; i++) {
         this.currentDay.push(this.filteringRecordsAtDifferentTimes([], JSON.stringify(i)))
       }
     }

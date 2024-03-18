@@ -14,7 +14,8 @@ export class DateService {                                            //moment()
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
   public sectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('')
-
+  public timeStartRecord: BehaviorSubject<any> = new BehaviorSubject(18)
+  public timeFinishRecord: BehaviorSubject<any> = new BehaviorSubject(18)
   constructor() {
   }
 
@@ -53,6 +54,11 @@ export class DateService {                                            //moment()
       month: day.month()
     })
     this.date.next(value)
+  }
+
+  changeTimeInterval(timeVal: any) {
+    this.timeStartRecord.next(+timeVal.timeStartRec)
+    this.timeFinishRecord.next(+timeVal.timeFinishRec)
   }
 
 }

@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DateService} from "../date.service";
-import {AsyncPipe, DatePipe, NgIf} from "@angular/common";
+import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-header-calendar',
@@ -10,7 +11,9 @@ import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-
     AsyncPipe,
     MomentTransformDatePipe,
     DatePipe,
-    NgIf
+    NgIf,
+    ReactiveFormsModule,
+    NgForOf
   ],
   templateUrl: './header-calendar.component.html',
   styleUrl: './header-calendar.component.css'
@@ -19,6 +22,12 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
   constructor(public dateService: DateService) {
   }
+  form = new FormGroup({
+    maxiPeople: new FormControl(4, Validators.required),
+    timeStartRec: new FormControl(18, Validators.required),
+    timeFinishRec: new FormControl(18, Validators.required),
+  })
+
   subInterval: any;
   hours: any = new Date().getHours();
   min: any = new Date().getMinutes();
@@ -26,11 +35,15 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   currentTime =  '' ;
   personalData: boolean = true;
   settingsRecords: boolean = false;
+  timesForRec : any = [];
 
   ngOnInit(): void {
     const d = new Date();
     this.currentTime = ('0' + d.getDate()).slice(-2) + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + d.getFullYear()
     this.watchOnPage();
+    for (let i = 0 ; i <= 23; i++) {
+      this.timesForRec.push(i)
+    }
   }
 
   go(direction: number) {
@@ -67,6 +80,8 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   }
 
 
-
-
+  submit() {
+    this.settingsRecords = false;
+    this.dateService.changeTimeInterval(this.form.value)
+  }
 }
