@@ -38,6 +38,7 @@
     <button *ngIf="currentHour.time !== newEntryHasBeenOpened"
             class="dataList"
             (click)="currentHourTime(currentHour.time)"
+            [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck"
     >
       +
     </button>

@@ -6,6 +6,7 @@ import {ApiService} from "../../../../shared/services/api.service";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Subject, takeUntil, throwError} from "rxjs";
 import {ErrorResponseService} from "../../../../shared/services/error.response.service";
+import moment from "moment";
 
 @Component({
   selector: 'app-data-calendar',
@@ -31,9 +32,13 @@ export class DataCalendarComponent implements OnInit {
 
   newEntryHasBeenOpened: any;
   currentDay: any = [];
+  currentHourF: any  = new Date().getHours();
+  currentDate: any;
+  currentDayCheck: boolean = false;
   recordsCurrentDay: any = [];
   disabledBtnRecord: boolean = false;
   private destroyed$: Subject<void> = new Subject();
+  pastDateIsBlocked: boolean = false;
 
   constructor(public dateService: DateService,
               public apiService: ApiService,
@@ -42,6 +47,10 @@ export class DataCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentDate = moment().format('DD.MM.YYYY');
+    this.pastDateIsBlocked = this.currentDate > this.dayOfWeek;
+    this.currentDayCheck = this.currentDate === this.dayOfWeek;
+
     this.dateService.date
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
