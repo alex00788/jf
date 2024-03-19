@@ -10,7 +10,8 @@
 
 .errMessage {
   margin: 10px;
-  white-space: nowrap;
+  max-width: 550px;
+  /*white-space: nowrap;*/
 }
 
 .btnErrModal {

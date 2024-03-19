@@ -99,7 +99,6 @@ export class PersonalPageComponent implements OnInit {
         })
         this.dateService.remainingFunds.next(user.remainingFunds)
         this.dateService.allUsers.next(allUsers)
-        console.log('104', this.dateService.allUsers.value)
       });
   }
 

@@ -12,6 +12,11 @@ export class ErrorResponseService {
     return this.error$.next(message)
   }
 
+  localHandler(err: string) {
+    return this.error$.next(err)
+  }
+
+
   clear() {
     this.disableLoginForm.next(false)
     this.error$.next('')

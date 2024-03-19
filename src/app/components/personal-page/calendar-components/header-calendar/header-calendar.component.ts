@@ -23,7 +23,7 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   constructor(public dateService: DateService) {
   }
   form = new FormGroup({
-    maxiPeople: new FormControl(4, Validators.required),
+    maxiPeople: new FormControl(6, Validators.required),
     timeStartRec: new FormControl(18, Validators.required),
     timeFinishRec: new FormControl(18, Validators.required),
   })

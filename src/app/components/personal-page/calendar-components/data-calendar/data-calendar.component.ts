@@ -4,7 +4,8 @@ import {DateService} from "../date.service";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
 import {ApiService} from "../../../../shared/services/api.service";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Subject, takeUntil} from "rxjs";
+import {Subject, takeUntil, throwError} from "rxjs";
+import {ErrorResponseService} from "../../../../shared/services/error.response.service";
 
 @Component({
   selector: 'app-data-calendar',
@@ -36,6 +37,7 @@ export class DataCalendarComponent implements OnInit {
 
   constructor(public dateService: DateService,
               public apiService: ApiService,
+              private errorResponseService: ErrorResponseService
   ) {
   }
 
@@ -47,14 +49,20 @@ export class DataCalendarComponent implements OnInit {
       })
     this.dateService.timeStartRecord
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(()=>{
-      this.getAllEntry(this.dayOfWeek);
-    })
-    this.dateService.timeFinishRecord
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(()=>{
+      .subscribe(() => {
         this.getAllEntry(this.dayOfWeek);
       })
+    this.dateService.timeFinishRecord
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.getAllEntry(this.dayOfWeek);
+      })
+  }
+
+
+  public localErrHandler(err: string) {
+    this.errorResponseService.localHandler(err)
+    return throwError(() => err)
   }
 
 
@@ -63,16 +71,13 @@ export class DataCalendarComponent implements OnInit {
     this.apiService.getAllEntryInCurrentTimes(dateAndTimeRec)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntryCurTime => {
-        console.log('66', allEntryCurTime)
-        if (allEntryCurTime.length) {
-          console.log('блокировать запись   добавить в проверку нужное ' +
-            'число и сообщение показать что возможно записать толко стока человек+  заблокировать + ')
+        //ограничиваем запись если записано указанное кол-во человек
+        if (allEntryCurTime.length >= this.dateService.maxPossibleEntries.value) {
           this.cancel();
-          return
+          this.localErrHandler('На выбранное время запись завершена!' +
+            ' Запишитесь пожалуйста на другое время или день!');
+          return;
         }
-        // if (allEntryCurTime) {
-        //   this.formattingEntry(allEntryCurTime)
-        // }
       });
   }
 
@@ -170,7 +175,7 @@ export class DataCalendarComponent implements OnInit {
           return el.id === +userId
         })
         user.remainingFunds = JSON.stringify(+user.remainingFunds + 1);
-        if (user.id ===  this.dateService.currentUserId.value) {
+        if (user.id === this.dateService.currentUserId.value) {
           this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1));
         }
       })
@@ -213,7 +218,7 @@ export class DataCalendarComponent implements OnInit {
       return el.id === +id
     })
     user.remainingFunds = JSON.stringify(+user.remainingFunds - 1);
-    if (user.id ===  this.dateService.currentUserId.value) {
+    if (user.id === this.dateService.currentUserId.value) {
       this.dateService.remainingFunds.next(user.remainingFunds);
     }
     this.addEntry(user, time);
