@@ -15,14 +15,14 @@ export class DateService {                                            //moment()
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
   public sectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('')
   public timeStartRecord: BehaviorSubject<any> = new BehaviorSubject(18)
-  public timeFinishRecord: BehaviorSubject<any> = new BehaviorSubject(20)
-  public maxPossibleEntries: BehaviorSubject<any> = new BehaviorSubject(6)
+  public timeFinishRecord: BehaviorSubject<any> = new BehaviorSubject(19)
+  public maxPossibleEntries: BehaviorSubject<any> = new BehaviorSubject(3)
   constructor() {
   }
 
   // метод меняющий месяц на 1 вперед или назад в компоненте header
   changeMonth(dir: number) {
-    const value = this.date.value.add(dir, 'month')    //  1й парметр будет число а второй что меняем
+    const value = this.date.value.add(dir, 'month')    //  1й парметр будет число, а второй, что меняем
     this.date.next(value)
   }
 

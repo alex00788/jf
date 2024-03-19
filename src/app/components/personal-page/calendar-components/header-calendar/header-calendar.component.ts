@@ -23,9 +23,9 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   constructor(public dateService: DateService) {
   }
   form = new FormGroup({
-    maxiPeople: new FormControl(6, Validators.required),
-    timeStartRec: new FormControl(18, Validators.required),
-    timeFinishRec: new FormControl(18, Validators.required),
+    maxiPeople: new FormControl(this.dateService.maxPossibleEntries.value, Validators.required),
+    timeStartRec: new FormControl(this.dateService.timeStartRecord.value, Validators.required),
+    timeFinishRec: new FormControl(this.dateService.timeFinishRecord.value, Validators.required),
   })
 
   subInterval: any;
@@ -33,11 +33,19 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   min: any = new Date().getMinutes();
   sec: any = new Date().getSeconds();
   currentTime =  '' ;
+  dataSettings:  any;
   personalData: boolean = true;
   settingsRecords: boolean = false;
   timesForRec : any = [];
 
   ngOnInit(): void {
+    const dataSettings = localStorage.getItem('dataSettings')
+    if (dataSettings) {
+      this.dataSettings = JSON.parse(dataSettings);
+      this.dateService.timeStartRecord.next(+this.dataSettings.dataSettings.timeStartRec);
+      this.dateService.timeFinishRecord.next(+this.dataSettings.dataSettings.timeFinishRec);
+      this.dateService.maxPossibleEntries.next(+this.dataSettings.dataSettings.maxiPeople);
+    }
     const d = new Date();
     this.currentTime = ('0' + d.getDate()).slice(-2) + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + d.getFullYear()
     this.watchOnPage();
@@ -83,6 +91,8 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   submit() {
     this.settingsRecords = false;
     this.dateService.changeTimeInterval(this.form.value)
+    this.dataSettings = JSON.stringify( {dataSettings: this.form.value})
+    localStorage.setItem('dataSettings', this.dataSettings);
   }
 
   closeSettings() {
