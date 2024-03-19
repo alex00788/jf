@@ -190,6 +190,15 @@ export class DataCalendarComponent implements OnInit {
       })
   }
 
+  //функция записывающая пользователя на выбранное время по нажатию enter
+  savingByPressingEnter (e: any, val: any) {
+    if (val && e.code === 'Enter'){
+      this.submit();
+    }
+    if (e.code === 'Escape') {
+      this.cancel()
+    }
+  }
 
   cancel() {
     this.newEntryHasBeenOpened = '';
