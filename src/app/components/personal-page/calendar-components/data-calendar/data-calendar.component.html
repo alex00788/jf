@@ -11,8 +11,8 @@
       {{currentHour.time}} : 00
     </div>
     <div class="dataList" *ngFor="let person of currentHour.users; index as i">
-      <div class="inline">
-        {{i + 1}} {{person.nameUser}}
+      <div class="inline" >
+        <span  (click)="openDataPerson(person)"> {{i + 1}} {{person.nameUser}} </span>
         <button class="btnDelete" (click)="deletePerson(person.id, person.userId)">&times;</button>
       </div>
     </div>

@@ -17,6 +17,9 @@ export class DateService {                                            //moment()
   public timeStartRecord: BehaviorSubject<any> = new BehaviorSubject(18)
   public timeFinishRecord: BehaviorSubject<any> = new BehaviorSubject(19)
   public maxPossibleEntries: BehaviorSubject<any> = new BehaviorSubject(3)
+
+  public dataSelectedUser: BehaviorSubject<any> = new BehaviorSubject({})
+
   constructor() {
   }
 

@@ -1,0 +1,28 @@
+.selectedUserClass {
+  background: #f8eeee;
+}
+
+
+.selectedUserClass {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+span{
+  margin-left: 3px;
+}
+
+.personalDataTitle{
+  text-align: center;
+  margin: 5px 30px 20px 30px;
+}
+
+.btnClosePersonalData{
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  border: none 1px #f6dbff;
+  cursor: pointer;
+  background: none;
+}

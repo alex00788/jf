@@ -7,6 +7,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Subject, takeUntil, throwError} from "rxjs";
 import {ErrorResponseService} from "../../../../shared/services/error.response.service";
 import moment from "moment";
+import {ModalService} from "../../../../shared/services/modal.service";
 
 @Component({
   selector: 'app-data-calendar',
@@ -42,6 +43,8 @@ export class DataCalendarComponent implements OnInit {
 
   constructor(public dateService: DateService,
               public apiService: ApiService,
+              public modalService : ModalService,
+
               private errorResponseService: ErrorResponseService
   ) {
   }
@@ -243,4 +246,8 @@ export class DataCalendarComponent implements OnInit {
     this.cancel();
   }
 
+  openDataPerson(person: any) {
+    this.modalService.open();
+    this.dateService.dataSelectedUser.next(person);
+  }
 }

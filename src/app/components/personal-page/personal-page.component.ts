@@ -9,18 +9,23 @@ import {DateService} from "./calendar-components/date.service";
 import {CommonModule, NgForOf} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 import moment from "moment";
+import {DataPersonModalComponent} from "./data-person-modal/data-person-modal.component";
+import {ModalService} from "../../shared/services/modal.service";
+import {ModalWindowForPersonPageComponent} from "./modal-window-for-person-page/modal-window-for-person-page.component";
 
 @Component({
   selector: 'app-personal-page',
   standalone: true,
-  imports: [
-    BodyCalendarComponent,
-    DataCalendarComponent,
-    HeaderCalendarComponent,
-    ErrorModalComponent,
-    CommonModule,
-    NgForOf
-  ],
+    imports: [
+        BodyCalendarComponent,
+        DataCalendarComponent,
+        HeaderCalendarComponent,
+        ErrorModalComponent,
+        CommonModule,
+        NgForOf,
+        DataPersonModalComponent,
+        ModalWindowForPersonPageComponent
+    ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'
 })
@@ -29,6 +34,7 @@ export class PersonalPageComponent implements OnInit {
     private router: Router,
     private api: ApiService,
     public dateService: DateService,
+    public modalService : ModalService,
   ) {
   }
   private destroyed$: Subject<void> = new Subject();

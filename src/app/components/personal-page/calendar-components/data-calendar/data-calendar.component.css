@@ -52,6 +52,7 @@ color: red}
 }
 
 .inline {
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
 }
