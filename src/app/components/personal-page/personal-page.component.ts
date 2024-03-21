@@ -43,6 +43,7 @@ export class PersonalPageComponent implements OnInit {
   showCurrentDay: boolean = true;
 
   ngOnInit(): void {
+    this.showTheSelectedSettings();
     this.calculatingCurrentWeek();
     this.dateService.getCurrentUser();
     if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'MAIN_ADMIN') {
@@ -87,12 +88,31 @@ export class PersonalPageComponent implements OnInit {
     this.showCurrentWeek = true;
     this.showCurrentDay = false;
     this.calculatingCurrentWeek();
+    this.memorableChoice();
   }
 
   showDay() {
     this.showCurrentWeek = false;
     this.showCurrentDay = true;
     this.calculatingCurrentWeek();
+    this.memorableChoice();
+  }
+
+
+  //функция запоминает выбор настройки, что показывать пользователю день, неделю, месяц
+  memorableChoice () {
+    const choiceUserSettings = {
+      month: this.showCurrentWeek,
+      day: this.showCurrentDay
+    }
+    localStorage.setItem('choiceUserSet', JSON.stringify(choiceUserSettings));
+  }
+
+  //функция покажет день неделю или мес ...то что выбрал юзер
+  showTheSelectedSettings () {
+      const choiceUserSettings = JSON.parse(localStorage.getItem('choiceUserSet') || '{}')
+      this.showCurrentWeek = choiceUserSettings.month;
+      this.showCurrentDay = choiceUserSettings.day;
   }
 
   // функция, возьмет всех пользователей которые зарегистрированы (для записи клиентов тока из предложенных)
