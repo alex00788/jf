@@ -39,9 +39,9 @@ export class DateService {                                            //moment()
 
   getCurrentUser() {
     const currentUser = JSON.parse(localStorage.getItem('userData') as string)
-    let currentUserRole = currentUser.user.role === 'MAIN_ADMIN' ? 'Администратор' : 'Пользователь'
+    let currentUserRole = currentUser.user.role === 'MAIN_ADMIN' ? 'Админ' : 'user'
     if (currentUser.user.role === 'ADMIN') {
-      currentUserRole = 'Админ группы'
+      currentUserRole = 'Админ'
     }
     this.currentUser.next(currentUser.user.nameUser + ' ' + currentUser.user.surnameUser)
     this.currentUserId.next(currentUser.user.id)

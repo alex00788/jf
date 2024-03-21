@@ -103,4 +103,8 @@ export class ApiService {
   }
 
 
+  changeRoleSelectedUser(userId: any) : Observable<any> {
+    return this.http.put<any>('/api/user/changeRole/' + userId, userId)
+      .pipe(catchError(this.errHandler.bind(this)))
+  }
 }

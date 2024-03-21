@@ -2,7 +2,7 @@
   <div>
     <div class="personalDataTitle">
       <strong> Данные о пользователе </strong>
-      <button class="btnClosePersonalData" >&times;</button>
+      <button class="btnClosePersonalData">&times;</button>
     </div>
     <div class="selectedUserClass">
       <div>
@@ -14,7 +14,7 @@
       <div>
         <strong> Роль: </strong>
       </div>
-      <span> {{roleUser}} </span>
+      <span> {{roleUser}}  {{sectionOrOrganization}} </span>
     </div>
     <div class="selectedUserClass">
       <div>
@@ -22,11 +22,15 @@
       </div>
       <span> {{remainingFunds}} </span>
     </div>
-    <div class="selectedUserClass">
+    <div class="selectedUserClass" *ngIf="!showBtnAdminAndUser">
       <div>
-        <strong> Сделать пользователя: </strong>
+        <strong> Назначить: </strong>
       </div>
-      <button>админом/пользователем</button>
+      <button class="btnChangeRoleClass" (click)="changeRole()"
+      >
+        <span *ngIf="showBtnUser" >Пользователем</span>
+        <span *ngIf="showBtnAdmin">Администратором</span>
+      </button>
     </div>
     <div class="selectedUserClass">
       <div>
