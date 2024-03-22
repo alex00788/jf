@@ -33,18 +33,18 @@ export class DataCalendarComponent implements OnInit {
 
   newEntryHasBeenOpened: any;
   currentDay: any = [];
-  currentHourF: any  = new Date().getHours();
+  currentHourF: any = new Date().getHours();
   currentDate: any;
   currentDayCheck: boolean = false;
   recordsCurrentDay: any = [];
   disabledBtnRecord: boolean = false;
   private destroyed$: Subject<void> = new Subject();
   pastDateIsBlocked: boolean = false;
+  filterAllUserForCurrentOrg: any[] = [];
 
   constructor(public dateService: DateService,
               public apiService: ApiService,
-              public modalService : ModalService,
-
+              public modalService: ModalService,
               private errorResponseService: ErrorResponseService
   ) {
   }
@@ -101,8 +101,17 @@ export class DataCalendarComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntry => {
         if (allEntry) {
-          this.formattingEntry(allEntry)
+          if (this.dateService.currentUserRole.value !== 'main-admin') {
+            this.filterAllUserForCurrentOrg = allEntry.filter((el: any) => {
+               return  el.sectionOrOrganization === this.dateService.sectionOrOrganization.value
+              }
+            )
+          } else {
+//добавить сюда функционал  который будет при выборе мной организации фильтровать данные и показывать только ее пользователей
+            this.filterAllUserForCurrentOrg = allEntry;
+          }
         }
+        this.formattingEntry(this.filterAllUserForCurrentOrg)
       });
   }
 
@@ -169,7 +178,8 @@ export class DataCalendarComponent implements OnInit {
       time: currentHourTime,
       user: user.surnameUser + ' ' + user.nameUser,
       userId: user.id,
-      remainingFunds: user.remainingFunds
+      remainingFunds: user.remainingFunds,
+      sectionOrOrganization: user.sectionOrOrganization
     }
     this.apiService.addEntry(newUserAccount)
       .pipe(takeUntil(this.destroyed$))
@@ -194,8 +204,8 @@ export class DataCalendarComponent implements OnInit {
   }
 
   //функция записывающая пользователя на выбранное время по нажатию enter
-  savingByPressingEnter (e: any, val: any) {
-    if (val && e.code === 'Enter'){
+  savingByPressingEnter(e: any, val: any) {
+    if (val && e.code === 'Enter') {
       this.submit();
     }
     if (e.code === 'Escape') {

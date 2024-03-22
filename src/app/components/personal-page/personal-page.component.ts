@@ -129,14 +129,18 @@ export class PersonalPageComponent implements OnInit {
   }
 
 
-  // //функция, возьмет пользователей конкретной организации
+   //функция, возьмет пользователей конкретной организации
   getAllUsersCurrentOrganization() {
-    console.log('конкретная организация')
-  //   this.apiService.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization)
-  //     .pipe(takeUntil(this.destroyed$))
-  //     .subscribe(allUsersOrganization => {
-  //       console.log(allUsersOrganization)
-  //     });
+    console.log('конкретная организация', this.dateService.sectionOrOrganization.value)
+    this.api.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization.value)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(allUsersOrganization => {
+        const user = allUsersOrganization.find((el: any)=> {
+          return el.id === this.dateService.currentUserId.value
+        })
+        this.dateService.remainingFunds.next(user.remainingFunds)
+        this.dateService.allUsers.next(allUsersOrganization)
+      });
   }
 
 
