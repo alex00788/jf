@@ -41,6 +41,7 @@ export class PersonalPageComponent implements OnInit {
   weekSelectedDate: any[] = [];
   showCurrentWeek: boolean = false;
   showCurrentDay: boolean = true;
+  inputValue = 'Acro'
 
   ngOnInit(): void {
     this.showTheSelectedSettings();
@@ -120,6 +121,8 @@ export class PersonalPageComponent implements OnInit {
     this.api.getAllUsers()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsers => {
+        const getAllOrganization = new Set(allUsers.map((el: any) => el.sectionOrOrganization));
+        this.dateService.allOrganization.next([...getAllOrganization]);
         const user = allUsers.find((el: any)=> {
           return el.id === this.dateService.currentUserId.value
         })
@@ -144,5 +147,11 @@ export class PersonalPageComponent implements OnInit {
   }
 
 
-
+  choosingOrganization(event: any) {
+    const filterOrg = this.dateService.allOrganization.value.filter((el:any)=> {
+      return el.toLowerCase().includes(event?.target.value.toLowerCase())
+    })
+    this.inputValue = filterOrg;
+    this.dateService.selectedSectionOrOrganization.next(filterOrg[0])
+  }
 }

@@ -41,7 +41,10 @@
       <button class="btnCalendarDisplayMode" disabled="true"
       > дни когда я записан
       </button>
-      <input class="btnCalendarDisplayMode" type="text" placeholder="записи конкретной организации">
+      <input class="btnCalendarDisplayMode" type="text" placeholder="записи конкретной организации"
+             (input)="choosingOrganization($event)"
+             [value]="[inputValue]"
+      >
     </div>
     <div class="dCalendar">
       <div class="dataCalendar" *ngFor=" let day of weekSelectedDate">

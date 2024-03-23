@@ -94,21 +94,36 @@ export class DataCalendarComponent implements OnInit {
   }
 
 
-//берем все записи из базы за текущую дату
+//берем все записи из базы за текущую дату и фильтруем в зависимости от выбранной организации
   getAllEntry(date: any) {
-    // this.apiService.getAllEntry(this.dateService.date.value.format('DD.MM.YYYY'))
     this.apiService.getAllEntry(date)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntry => {
         if (allEntry) {
+          //если пользователь не главный админ то фильтруем по организации к которой относиться юзер
           if (this.dateService.currentUserRole.value !== 'main-admin') {
             this.filterAllUserForCurrentOrg = allEntry.filter((el: any) => {
-               return  el.sectionOrOrganization === this.dateService.sectionOrOrganization.value
+                return el.sectionOrOrganization === this.dateService.sectionOrOrganization.value
               }
             )
           } else {
-//добавить сюда функционал  который будет при выборе мной организации фильтровать данные и показывать только ее пользователей
-            this.filterAllUserForCurrentOrg = allEntry;
+            //если главный админ  то фильтруем в зависимости от выбранной организации
+            this.dateService.selectedSectionOrOrganization     //подписываемся на смену организации
+              .pipe(takeUntil(this.destroyed$))
+              .subscribe(() => {
+                //фильтрация, чтоб записывать можно было тока пользователей выбранной организации
+                const filterUsersOnSelectedOrg = this.dateService.allUsers.value
+                  .filter((el:any) =>
+                  el.sectionOrOrganization === this.dateService.selectedSectionOrOrganization.value
+                  )
+                this.dateService.allUsersSelectedOrg.next(filterUsersOnSelectedOrg)
+
+                //фильтрация для показа записаных выбранной орг в календаре
+                this.filterAllUserForCurrentOrg = allEntry.filter((el: any) => {
+                    return el.sectionOrOrganization === this.dateService.selectedSectionOrOrganization.value
+                  })
+                this.formattingEntry(this.filterAllUserForCurrentOrg)
+              })
           }
         }
         this.formattingEntry(this.filterAllUserForCurrentOrg)

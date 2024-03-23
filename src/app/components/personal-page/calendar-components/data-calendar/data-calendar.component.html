@@ -13,7 +13,11 @@
     <div class="dataList" *ngFor="let person of currentHour.users; index as i">
       <div class="inline" >
         <span  (click)="openDataPerson(person)"> {{i + 1}} {{person.nameUser}} </span>
-        <button class="btnDelete" (click)="deletePerson(person.id, person.userId)">&times;</button>
+        <button class="btnDelete" (click)="deletePerson(person.id, person.userId)"
+        [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck"
+        >
+          &times;
+        </button>
       </div>
     </div>
 
@@ -23,7 +27,7 @@
                 (click)="setValueForRec(inputElement.value)"
                 (keydown)="savingByPressingEnter($event, inputElement.value)"
         >
-          <option class="inputClass" *ngFor="let i of dateService.allUsers | async" [value]="[i.id, currentHour.time]">
+          <option class="inputClass" *ngFor="let i of dateService.allUsersSelectedOrg | async" [value]="[i.id, currentHour.time]">
             {{i.surnameUser}} {{i.nameUser}}
           </option>
 
