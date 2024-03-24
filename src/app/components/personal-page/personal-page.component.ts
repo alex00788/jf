@@ -67,6 +67,9 @@ export class PersonalPageComponent implements OnInit {
         for (let i = 1; i<=7 ; i++) {
           currentWeek.push(m.clone().startOf('w').add(i,'d').format('DD.MM.YYYY'))
         }
+        // console.log( currentWeek)
+        console.log('71', m.format('DD.MM.YYYY'))
+        // console.log(endSelectedWeek , 'при нажатии на последний день недели показывает след неделя')
         if (this.showCurrentWeek) {
           this.weekSelectedDate = currentWeek
         } else {

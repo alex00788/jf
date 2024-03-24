@@ -42,6 +42,7 @@
       > дни когда я записан
       </button>
       <input class="btnCalendarDisplayMode" type="text" placeholder="записи конкретной организации"
+             *ngIf="dateService.currentUserIsTheMainAdmin | async"
              (input)="choosingOrganization($event)"
              [value]="[inputValue]"
       >

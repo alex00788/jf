@@ -10,6 +10,9 @@ export class DateService {                                            //moment()
   public currentUser: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserId: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserRole: BehaviorSubject<any> = new BehaviorSubject('')
+  public currentUserIsTheMainAdmin: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public currentUserIsTheAdminOrg: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public currentUserSimpleUser: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public roleToGetTheDesiredListOfUsers: BehaviorSubject<any> = new BehaviorSubject('')
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
@@ -42,16 +45,16 @@ export class DateService {                                            //moment()
 
   getCurrentUser() {
     const currentUser = JSON.parse(localStorage.getItem('userData') as string)
-    let currentUserRole = currentUser.user.role === 'MAIN_ADMIN' ? 'main-admin' : 'user'
-    if (currentUser.user.role === 'ADMIN') {
-      currentUserRole = 'Админ'
-    }
-    this.currentUser.next(currentUser.user.nameUser + ' ' + currentUser.user.surnameUser)
-    this.currentUserId.next(currentUser.user.id)
-    this.currentUserRole.next(currentUserRole)
-    this.remainingFunds.next(currentUser.user.remainingFunds)
-    this.sectionOrOrganization.next(currentUser.user.sectionOrOrganization)
-    this.roleToGetTheDesiredListOfUsers.next(currentUser.user.role)
+    const currentUserRole = currentUser.user.role.toLowerCase()
+    this.currentUserSimpleUser.next(currentUser.user.role !== 'ADMIN' && currentUser.user.role !== 'MAIN_ADMIN');
+    this.currentUserIsTheAdminOrg.next(currentUser.user.role === 'ADMIN');
+    this.currentUserIsTheMainAdmin.next(currentUser.user.role === 'MAIN_ADMIN');
+    this.currentUser.next(currentUser.user.nameUser + ' ' + currentUser.user.surnameUser);
+    this.currentUserId.next(currentUser.user.id);
+    this.currentUserRole.next(currentUserRole);
+    this.remainingFunds.next(currentUser.user.remainingFunds);
+    this.sectionOrOrganization.next(currentUser.user.sectionOrOrganization);
+    this.roleToGetTheDesiredListOfUsers.next(currentUser.user.role);
   }
 
   // метод выбирающий тот день по которому кликнули

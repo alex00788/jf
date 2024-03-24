@@ -26,6 +26,7 @@
         <select #inputElement formControlName="newEntry"
                 (click)="setValueForRec(inputElement.value)"
                 (keydown)="savingByPressingEnter($event, inputElement.value)"
+                (blur)="lostFocus()"
         >
           <option class="inputClass" *ngFor="let i of dateService.allUsersSelectedOrg | async" [value]="[i.id, currentHour.time]">
             {{i.surnameUser}} {{i.nameUser}}

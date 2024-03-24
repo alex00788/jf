@@ -24,9 +24,48 @@
         </div>
         <span> {{dateService.remainingFunds | async}} </span>
       </div>
-      <button class="btnSettingsRecords" (click)="switchSittingsData()">
-        <strong> Настройки </strong>
-      </button>
+      <div class="futSettingClass" *ngIf="showSettings">
+        <button class="btnSettingsRecords" (click)="switchSittingsData()">
+          <strong> Настройки </strong>
+        </button>
+        <button class="btnSettingsRecords"  (click)="addNewOrgSettings()"
+                *ngIf="dateService.currentUserIsTheMainAdmin | async">
+          <strong> Добавить ORG </strong>
+        </button>
+      </div>
+    </div>
+
+    <div class="settingsRecordsClass" *ngIf="windowAddingNewOrgIsOpen">
+      <form [formGroup]="formAddOrg" (submit)="addNewOrg()">
+        <div class="oneSitting">
+          <label>
+            название организации
+          </label>
+          <input class="sittingsInputClass" formControlName="nameOrg">
+        </div>
+
+        <div class="oneSitting">
+          <label>
+            имя руководителя
+          </label>
+          <input class="sittingsInputClass" formControlName="supervisorName">
+        </div>
+
+        <div class="oneSitting">
+          <label>
+            телефон руководителя
+          </label>
+          <input class="sittingsInputClass" formControlName="poneSupervisor">
+        </div>
+        <div class="btnSetClass">
+          <button class="btnSettingsRecords" (click)="closeWindowAddedNewOrg()">
+            Отменить
+          </button>
+          <button class="btnSettingsRecords" type="submit">
+            Добавить
+          </button>
+        </div>
+      </form>
     </div>
 
     <div class="settingsRecordsClass" *ngIf="settingsRecords">

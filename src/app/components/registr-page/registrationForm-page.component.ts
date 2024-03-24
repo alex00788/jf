@@ -33,7 +33,7 @@ export class RegistrationFormPageComponent implements OnInit {
 
   private destroyed$: Subject<void> = new Subject();
   title = 'Регистрация';
-  dataAr : any[] =[];
+  allOrg : any[] =[];
   inputPass: any;
   changeIcon = true;
   loginSub: any;
@@ -53,17 +53,13 @@ export class RegistrationFormPageComponent implements OnInit {
         res ? this.form.disable() : this.form.enable()
       )
 
-   this.dataAr = [
+   this.allOrg = [
      {name: ''},
-     {name: 'акробатика'},
-     {name: 'lDance'},
+     {name: 'Другая...'},
+     {name: 'Trampoline-Acro'},
+     {name: 'LDans'},
      {name: 'Перевозки'}
    ]
-    // this.activateRouter.queryParams
-    //   .pipe(takeUntil(this.destroyed$))
-    //   .subscribe(params => {
-    //     console.log('40 queryparams', params)
-    //   })
   }
 
 

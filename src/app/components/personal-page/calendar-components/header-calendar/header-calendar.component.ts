@@ -28,6 +28,12 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
     timeFinishRec: new FormControl(this.dateService.timeFinishRecord.value, Validators.required),
   })
 
+  formAddOrg = new FormGroup({
+    nameOrg: new FormControl(null, Validators.required),
+    supervisorName: new FormControl(null, Validators.required),
+    poneSupervisor: new FormControl(null, Validators.required),
+  })
+
   subInterval: any;
   hours: any = new Date().getHours();
   min: any = new Date().getMinutes();
@@ -36,9 +42,12 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   dataSettings:  any;
   personalData: boolean = true;
   settingsRecords: boolean = false;
+  windowAddingNewOrgIsOpen: boolean = false;
+  showSettings: boolean;
   timesForRec : any = [];
 
   ngOnInit(): void {
+    this.showSettings = !this.dateService.currentUserSimpleUser.value;
     const dataSettings = localStorage.getItem('dataSettings')
     if (dataSettings) {
       this.dataSettings = JSON.parse(dataSettings);
@@ -84,11 +93,18 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   }
 
   switchSittingsData() {
+    this.windowAddingNewOrgIsOpen = false;
     this.settingsRecords = !this.settingsRecords;
   }
 
 
+  addNewOrgSettings () {
+    this.settingsRecords = false;
+    this.windowAddingNewOrgIsOpen = !this.windowAddingNewOrgIsOpen;
+  }
+
   submit() {
+    console.log('104')
     this.settingsRecords = false;
     this.dateService.changeTimeInterval(this.form.value)
     this.dataSettings = JSON.stringify( {dataSettings: this.form.value})
@@ -97,5 +113,13 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
   closeSettings() {
     this.settingsRecords = false;
+  }
+
+  closeWindowAddedNewOrg() {
+    this.windowAddingNewOrgIsOpen = false;
+  }
+
+  addNewOrg() {
+    console.log('120', this.formAddOrg.value)
   }
 }

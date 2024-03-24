@@ -83,8 +83,13 @@ export class DataCalendarComponent implements OnInit {
     this.apiService.getAllEntryInCurrentTimes(dateAndTimeRec)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntryCurTime => {
-        //ограничиваем запись если записано указанное кол-во человек
-        if (allEntryCurTime.length >= this.dateService.maxPossibleEntries.value) {
+        const currentOrg = this.dateService.currentUserIsTheMainAdmin.value?
+          this.dateService.selectedSectionOrOrganization.value : this.dateService.sectionOrOrganization.value;
+        const filterOnSelectOrg = allEntryCurTime.filter((el:any) => {
+          return el.sectionOrOrganization === currentOrg
+        })
+        //ограничиваем запись если записано указанное кол-во человек  this.dateService.maxPossibleEntries.value
+        if (filterOnSelectOrg.length >= this.dateService.maxPossibleEntries.value) {
           this.cancel();
           this.localErrHandler('На выбранное время запись завершена!' +
             ' Запишитесь пожалуйста на другое время или день!');
@@ -101,7 +106,7 @@ export class DataCalendarComponent implements OnInit {
       .subscribe(allEntry => {
         if (allEntry) {
           //если пользователь не главный админ то фильтруем по организации к которой относиться юзер
-          if (this.dateService.currentUserRole.value !== 'main-admin') {
+          if (!this.dateService.currentUserIsTheMainAdmin.value) {
             this.filterAllUserForCurrentOrg = allEntry.filter((el: any) => {
                 return el.sectionOrOrganization === this.dateService.sectionOrOrganization.value
               }
@@ -274,5 +279,11 @@ export class DataCalendarComponent implements OnInit {
   openDataPerson(person: any) {
     this.modalService.open();
     this.dateService.dataSelectedUser.next(person);
+  }
+
+  lostFocus() {
+    setTimeout(()=>{
+      this.cancel();
+    },300)
   }
 }

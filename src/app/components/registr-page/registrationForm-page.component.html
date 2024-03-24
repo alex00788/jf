@@ -53,7 +53,7 @@
         <div>
           <label for="sectionOrOrganization"> Секция или организация </label>
           <select class="inputClass" id="sectionOrOrganization" formControlName="sectionOrOrganization">
-            <option class="inputClass" *ngFor="let i of dataAr" >{{i.name}}</option>
+            <option class="inputClass" *ngFor="let i of allOrg" >{{i.name}}</option>
           </select>
         </div>
         <div class="errorInputMessage"
