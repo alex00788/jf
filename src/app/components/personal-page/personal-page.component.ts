@@ -48,10 +48,11 @@ export class PersonalPageComponent implements OnInit {
     this.showTheSelectedSettings();
     this.calculatingCurrentWeek();
     this.dateService.getCurrentUser();
-    if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'MAIN_ADMIN') {
+    console.log('51что делать если обычный пользователь ')
+    if (this.dateService.currentUserIsTheMainAdmin.value) {
       this.getAllUsers()
     }
-    if (this.dateService.roleToGetTheDesiredListOfUsers.value === 'ADMIN') {
+    if (this.dateService.currentUserIsTheAdminOrg.value) {
       this.getAllUsersCurrentOrganization()
     }
   }

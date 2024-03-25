@@ -13,7 +13,7 @@ export class DateService {                                            //moment()
   public currentUserIsTheMainAdmin: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public currentUserIsTheAdminOrg: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public currentUserSimpleUser: BehaviorSubject<boolean> = new BehaviorSubject(false)
-  public roleToGetTheDesiredListOfUsers: BehaviorSubject<any> = new BehaviorSubject('')
+  // public roleToGetTheDesiredListOfUsers: BehaviorSubject<any> = new BehaviorSubject('')
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
   public allUsersSelectedOrg: BehaviorSubject<any> = new BehaviorSubject([])
@@ -54,7 +54,7 @@ export class DateService {                                            //moment()
     this.currentUserRole.next(currentUserRole);
     this.remainingFunds.next(currentUser.user.remainingFunds);
     this.sectionOrOrganization.next(currentUser.user.sectionOrOrganization);
-    this.roleToGetTheDesiredListOfUsers.next(currentUser.user.role);
+    // this.roleToGetTheDesiredListOfUsers.next(currentUser.user.role);
   }
 
   // метод выбирающий тот день по которому кликнули

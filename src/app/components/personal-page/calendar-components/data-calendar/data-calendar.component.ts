@@ -98,6 +98,24 @@ export class DataCalendarComponent implements OnInit {
       });
   }
 
+  filteringDependingOnTheSelectedOrganization (allEntry: any) {
+    this.dateService.selectedSectionOrOrganization     //подписываемся на смену организации
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        //фильтрация, чтоб записывать можно было тока пользователей выбранной организации
+        const filterUsersOnSelectedOrg = this.dateService.allUsers.value
+          .filter((el: any) =>
+            el.sectionOrOrganization === this.dateService.selectedSectionOrOrganization.value
+          )
+        this.dateService.allUsersSelectedOrg.next(filterUsersOnSelectedOrg)
+
+        //фильтрация для показа записаных выбранной орг в календаре
+        this.filterAllUserForCurrentOrg = allEntry.filter((el: any) => {
+          return el.sectionOrOrganization === this.dateService.selectedSectionOrOrganization.value
+        })
+        this.formattingEntry(this.filterAllUserForCurrentOrg)
+      })
+  }
 
 //берем все записи из базы за текущую дату и фильтруем в зависимости от выбранной организации
   getAllEntry(date: any) {
@@ -105,33 +123,18 @@ export class DataCalendarComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntry => {
         if (allEntry) {
-          //если пользователь не главный админ то фильтруем по организации к которой относиться юзер
-          if (!this.dateService.currentUserIsTheMainAdmin.value) {
-            this.filterAllUserForCurrentOrg = allEntry.filter((el: any) => {
-                return el.sectionOrOrganization === this.dateService.sectionOrOrganization.value
-              }
-            )
+          if (this.dateService.currentUserIsTheMainAdmin.value) {
+            //если главный админ, то фильтруем в зависимости от выбранной организации
+           this.filteringDependingOnTheSelectedOrganization(allEntry);
           } else {
-            //если главный админ  то фильтруем в зависимости от выбранной организации
-            this.dateService.selectedSectionOrOrganization     //подписываемся на смену организации
-              .pipe(takeUntil(this.destroyed$))
-              .subscribe(() => {
-                //фильтрация, чтоб записывать можно было тока пользователей выбранной организации
-                const filterUsersOnSelectedOrg = this.dateService.allUsers.value
-                  .filter((el:any) =>
-                  el.sectionOrOrganization === this.dateService.selectedSectionOrOrganization.value
-                  )
-                this.dateService.allUsersSelectedOrg.next(filterUsersOnSelectedOrg)
+            this.dateService.allUsersSelectedOrg.next(this.dateService.allUsers.value)
 
-                //фильтрация для показа записаных выбранной орг в календаре
-                this.filterAllUserForCurrentOrg = allEntry.filter((el: any) => {
-                    return el.sectionOrOrganization === this.dateService.selectedSectionOrOrganization.value
-                  })
-                this.formattingEntry(this.filterAllUserForCurrentOrg)
-              })
+            this.filterAllUserForCurrentOrg = allEntry.filter((el: any) => {
+              return el.sectionOrOrganization === this.dateService.sectionOrOrganization.value
+            })
+            this.formattingEntry(this.filterAllUserForCurrentOrg)
           }
         }
-        this.formattingEntry(this.filterAllUserForCurrentOrg)
       });
   }
 
@@ -282,8 +285,8 @@ export class DataCalendarComponent implements OnInit {
   }
 
   lostFocus() {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.cancel();
-    },300)
+    }, 300)
   }
 }
