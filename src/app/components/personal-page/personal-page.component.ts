@@ -16,16 +16,16 @@ import {ModalWindowForPersonPageComponent} from "./modal-window-for-person-page/
 @Component({
   selector: 'app-personal-page',
   standalone: true,
-    imports: [
-        BodyCalendarComponent,
-        DataCalendarComponent,
-        HeaderCalendarComponent,
-        ErrorModalComponent,
-        CommonModule,
-        NgForOf,
-        DataPersonModalComponent,
-        ModalWindowForPersonPageComponent
-    ],
+  imports: [
+    BodyCalendarComponent,
+    DataCalendarComponent,
+    HeaderCalendarComponent,
+    ErrorModalComponent,
+    CommonModule,
+    NgForOf,
+    DataPersonModalComponent,
+    ModalWindowForPersonPageComponent
+  ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'
 })
@@ -34,14 +34,15 @@ export class PersonalPageComponent implements OnInit {
     private router: Router,
     private api: ApiService,
     public dateService: DateService,
-    public modalService : ModalService,
+    public modalService: ModalService,
   ) {
   }
+
   private destroyed$: Subject<void> = new Subject();
   weekSelectedDate: any[] = [];
   showCurrentWeek: boolean = false;
   showCurrentDay: boolean = true;
-  inputValue = 'Acro'
+  inputValue = '';
 
   ngOnInit(): void {
     this.showTheSelectedSettings();
@@ -55,7 +56,7 @@ export class PersonalPageComponent implements OnInit {
     }
   }
 
-  calculatingCurrentWeek () {
+  calculatingCurrentWeek() {
     this.dateService.date
       .pipe(takeUntil(this.destroyed$))
       .subscribe(currentDate => {
@@ -64,8 +65,8 @@ export class PersonalPageComponent implements OnInit {
         // const startSelectedWeek = m.clone().startOf('w').add(1,'d').format('DD.MM.YYYY');
         // const endSelectedWeek = m.clone().endOf('w').add(1, 'd').format('DD.MM.YYYY');
         const currentWeek = []
-        for (let i = 1; i<=7 ; i++) {
-          currentWeek.push(m.clone().startOf('w').add(i,'d').format('DD.MM.YYYY'))
+        for (let i = 1; i <= 7; i++) {
+          currentWeek.push(m.clone().startOf('w').add(i, 'd').format('DD.MM.YYYY'))
         }
         // console.log( currentWeek)
         console.log('71', m.format('DD.MM.YYYY'))
@@ -104,7 +105,7 @@ export class PersonalPageComponent implements OnInit {
 
 
   //функция запоминает выбор настройки, что показывать пользователю день, неделю, месяц
-  memorableChoice () {
+  memorableChoice() {
     const choiceUserSettings = {
       month: this.showCurrentWeek,
       day: this.showCurrentDay
@@ -113,10 +114,10 @@ export class PersonalPageComponent implements OnInit {
   }
 
   //функция покажет день неделю или мес ...то что выбрал юзер
-  showTheSelectedSettings () {
-      const choiceUserSettings = JSON.parse(localStorage.getItem('choiceUserSet') || '{}')
-      this.showCurrentWeek = choiceUserSettings.month;
-      this.showCurrentDay = choiceUserSettings.day;
+  showTheSelectedSettings() {
+    const choiceUserSettings = JSON.parse(localStorage.getItem('choiceUserSet') || '{}')
+    this.showCurrentWeek = choiceUserSettings.month;
+    this.showCurrentDay = choiceUserSettings.day;
   }
 
   // функция, возьмет всех пользователей которые зарегистрированы (для записи клиентов тока из предложенных)
@@ -126,7 +127,7 @@ export class PersonalPageComponent implements OnInit {
       .subscribe(allUsers => {
         const getAllOrganization = new Set(allUsers.map((el: any) => el.sectionOrOrganization));
         this.dateService.allOrganization.next([...getAllOrganization]);
-        const user = allUsers.find((el: any)=> {
+        const user = allUsers.find((el: any) => {
           return el.id === this.dateService.currentUserId.value
         })
         this.dateService.remainingFunds.next(user.remainingFunds)
@@ -135,13 +136,13 @@ export class PersonalPageComponent implements OnInit {
   }
 
 
-   //функция, возьмет пользователей конкретной организации
+  //функция, возьмет пользователей конкретной организации
   getAllUsersCurrentOrganization() {
     console.log('конкретная организация', this.dateService.sectionOrOrganization.value)
     this.api.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsersOrganization => {
-        const user = allUsersOrganization.find((el: any)=> {
+        const user = allUsersOrganization.find((el: any) => {
           return el.id === this.dateService.currentUserId.value
         })
         this.dateService.remainingFunds.next(user.remainingFunds)
@@ -151,10 +152,14 @@ export class PersonalPageComponent implements OnInit {
 
 
   choosingOrganization(event: any) {
-    const filterOrg = this.dateService.allOrganization.value.filter((el:any)=> {
-      return el.toLowerCase().includes(event?.target.value.toLowerCase())
-    })
-    this.inputValue = filterOrg;
-    this.dateService.selectedSectionOrOrganization.next(filterOrg[0])
+    const filterOrg = this.dateService.allOrganization.value
+      .filter((el: any) => el.toLowerCase().includes(event?.target.value.toLowerCase())
+    )
+      if (filterOrg.length === 1) {
+        this.inputValue = filterOrg;
+        this.dateService.selectedSectionOrOrganization.next(filterOrg[0])
+      } else {
+        this.dateService.selectedSectionOrOrganization.next([])
+      }
   }
 }

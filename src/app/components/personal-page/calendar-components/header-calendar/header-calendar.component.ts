@@ -3,6 +3,8 @@ import {DateService} from "../date.service";
 import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {ApiService} from "../../../../shared/services/api.service";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-header-calendar',
@@ -20,7 +22,10 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 })
 export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
-  constructor(public dateService: DateService) {
+  constructor(
+    public dateService: DateService,
+    public apiService: ApiService,
+              ) {
   }
   form = new FormGroup({
     maxiPeople: new FormControl(this.dateService.maxPossibleEntries.value, Validators.required),
@@ -45,6 +50,7 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   windowAddingNewOrgIsOpen: boolean = false;
   showSettings: boolean;
   timesForRec : any = [];
+  private destroyed$: Subject<void> = new Subject();
 
   ngOnInit(): void {
     this.showSettings = !this.dateService.currentUserSimpleUser.value;
@@ -104,7 +110,6 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    console.log('104')
     this.settingsRecords = false;
     this.dateService.changeTimeInterval(this.form.value)
     this.dataSettings = JSON.stringify( {dataSettings: this.form.value})
@@ -120,6 +125,11 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   }
 
   addNewOrg() {
-    console.log('120', this.formAddOrg.value)
+    this.apiService.addNewOrganization(this.formAddOrg.value)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.windowAddingNewOrgIsOpen = false;
+        this.formAddOrg.reset();
+      })
   }
 }

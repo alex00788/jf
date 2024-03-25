@@ -47,21 +47,28 @@ export class RegistrationFormPageComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.getAllOrganizationFromTheDatabase();
     this.errorResponseService.disableLoginForm
       .pipe(takeUntil(this.destroyed$))
       .subscribe(res =>
         res ? this.form.disable() : this.form.enable()
       )
-
-   this.allOrg = [
-     {name: ''},
-     {name: 'Другая...'},
-     {name: 'Trampoline-Acro'},
-     {name: 'LDans'},
-     {name: 'Перевозки'}
-   ]
   }
 
+
+  getAllOrganizationFromTheDatabase() {
+    this.apiService.getAllOrgFromDb()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(allOrg=> {
+        const resAr: any[] = []
+        allOrg.allOrg.forEach((el:any)=> {
+          resAr.push({name: el})
+        })
+        this.allOrg = resAr;
+        this.allOrg.unshift({name: 'Другая...'});
+        this.allOrg.unshift({name: ''});
+      })
+  }
 
   get email() {
     return this.form.controls.email as FormControl

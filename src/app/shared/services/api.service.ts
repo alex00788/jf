@@ -17,8 +17,13 @@ export class ApiService {
 
   //перехват и показ ошибки
   public errHandler(err: HttpErrorResponse) {
-    this.errorResponseService.handler(err.error?.message)
-    return throwError(() => err.error?.message)
+    if (!err.error?.message) {
+      this.errorResponseService.localHandler('ошибка при запросе на серв')
+      return throwError(() => err)
+    } else {
+      this.errorResponseService.handler(err.error?.message)
+      return throwError(() => err.error?.message)
+    }
   }
 
   //хранение токена в локал стораж
@@ -75,22 +80,32 @@ export class ApiService {
     return this.http.get<any>('/api/user/getAllEntry', {
       params: new HttpParams().append('date', date)
     })
+      .pipe(catchError(this.errHandler.bind(this)))
   }
+
+  getAllOrgFromDb(): Observable<any> {
+    return this.http.get<any>('/api/user/getAllOrg')
+      .pipe(catchError(this.errHandler.bind(this)))
+  }
+
 
   getAllEntryInCurrentTimes(dateAndTimeRec: any): Observable<any> {
     return this.http.get<any>('/api/user/getAllEntryInCurrentTimes', {
       params: new HttpParams().append('dateRec', dateAndTimeRec.dateRec).append('timeRec', dateAndTimeRec.timeRec)
     })
+      .pipe(catchError(this.errHandler.bind(this)))
   }
 
   getAllUsers(): Observable<any> {
     return this.http.get<any>('/api/user/getAllUsers')
+      .pipe(catchError(this.errHandler.bind(this)))
   }
 
   getAllUsersCurrentOrganization (organization: any): Observable<any> {
     return this.http.get<any>('/api/user/getAllUsersCurrentOrganization', {
       params: new HttpParams().append('organization', organization)
     })
+      .pipe(catchError(this.errHandler.bind(this)))
   }
 
   addEntry(newUserAccount: any): Observable<any> {
@@ -98,8 +113,15 @@ export class ApiService {
     .pipe(catchError(this.errHandler.bind(this)))
   }
 
+  addNewOrganization(newOrgData: any): Observable<any> {
+    return this.http.post<any>('/api/user/addOrg', newOrgData)
+      .pipe(catchError(this.errHandler.bind(this)))
+  }
+
+
   deleteEntry(id: any, userId: any): Observable<any> {
     return this.http.delete<any>('/api/user/deleteEntry/' + id + '/' + userId)
+      .pipe(catchError(this.errHandler.bind(this)))
   }
 
 
