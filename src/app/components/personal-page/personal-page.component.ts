@@ -12,6 +12,7 @@ import moment from "moment";
 import {DataPersonModalComponent} from "./data-person-modal/data-person-modal.component";
 import {ModalService} from "../../shared/services/modal.service";
 import {ModalWindowForPersonPageComponent} from "./modal-window-for-person-page/modal-window-for-person-page.component";
+import {CurrentUserDataComponent} from "./calendar-components/current-user-data/current-user-data.component";
 
 @Component({
   selector: 'app-personal-page',
@@ -24,7 +25,8 @@ import {ModalWindowForPersonPageComponent} from "./modal-window-for-person-page/
     CommonModule,
     NgForOf,
     DataPersonModalComponent,
-    ModalWindowForPersonPageComponent
+    ModalWindowForPersonPageComponent,
+    CurrentUserDataComponent
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'

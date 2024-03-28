@@ -57,18 +57,7 @@ i {
 }
 
 
-.personalDataClass {
-  position: absolute;
-  top: 50px;
-  left: 20px;
-}
 
-.settingsRecordsClass {
-  display: block;
-  border-radius: 10px;
-  margin: 3px;
-  border: solid 1px red;
-}
 
 input {
   margin: 5px;
@@ -78,30 +67,12 @@ label {
   margin: 5px;
 }
 
-.oneSitting {
-  display: flex;
-  justify-content: space-between;
-}
 
-.sittingsInputClass {
-  margin: 5px;
-  display: inline;
-  width: 45px;
-}
 
-.btnSetClass {
-  display: flex;
-  justify-content: space-between;
-}
 
-.btnSettingsRecords {
-  margin: 5px;
-  background: none;
-  border-radius: 10px;
-  border: solid 1px #f6dbff;
-  display: block;
-  cursor: pointer;
-}
+
+
+
 
 .btnClosePersonalData {
   position: absolute;
@@ -111,12 +82,7 @@ label {
   background: none;
 }
 
-.now {
-  max-width: 400px;
-  padding: 5px;
-  border-radius: 10px;
-  background: #c6faeb;
-}
+
 
 .title {
   position: relative;
@@ -124,13 +90,4 @@ label {
   margin: 5px;
 }
 
-.currentUser {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px;
-}
 
-.futSettingClass {
-  display: flex;
-  justify-content: space-between;
-}

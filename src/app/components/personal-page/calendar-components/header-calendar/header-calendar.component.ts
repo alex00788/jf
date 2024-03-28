@@ -2,9 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DateService} from "../date.service";
 import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {ReactiveFormsModule,} from "@angular/forms";
 import {ApiService} from "../../../../shared/services/api.service";
-import {Subject, takeUntil} from "rxjs";
 import {Router} from "@angular/router";
 
 @Component({
@@ -29,17 +28,6 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
     public apiService: ApiService,
               ) {
   }
-  form = new FormGroup({
-    maxiPeople: new FormControl(this.dateService.maxPossibleEntries.value, Validators.required),
-    timeStartRec: new FormControl(this.dateService.timeStartRecord.value, Validators.required),
-    timeFinishRec: new FormControl(this.dateService.timeFinishRecord.value, Validators.required),
-  })
-
-  formAddOrg = new FormGroup({
-    nameOrg: new FormControl(null, Validators.required),
-    supervisorName: new FormControl(null, Validators.required),
-    poneSupervisor: new FormControl(null, Validators.required),
-  })
 
   subInterval: any;
   hours: any = new Date().getHours();
@@ -47,15 +35,9 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   sec: any = new Date().getSeconds();
   currentTime =  '' ;
   dataSettings:  any;
-  personalData: boolean = true;
-  settingsRecords: boolean = false;
-  windowAddingNewOrgIsOpen: boolean = false;
-  showSettings: boolean;
-  timesForRec : any = [];
-  private destroyed$: Subject<void> = new Subject();
 
   ngOnInit(): void {
-    this.showSettings = !this.dateService.currentUserSimpleUser.value;
+    // this.showSettings = !this.dateService.currentUserSimpleUser.value;
     const dataSettings = localStorage.getItem('dataSettings')
     if (dataSettings) {
       this.dataSettings = JSON.parse(dataSettings);
@@ -66,11 +48,6 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
     const d = new Date();   // показывает сегодняшнюю дату
     this.currentTime = ('0' + d.getDate()).slice(-2) + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + d.getFullYear()
     // this.watchOnPage();   //показ и запуск часов
-
-    //  для настройки интервала времени в которое можно записаться
-    for (let i = 0 ; i <= 23; i++) {
-      this.timesForRec.push(i)
-    }
   }
 
   go(direction: number) {
@@ -92,49 +69,6 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     clearInterval(this.subInterval);
-  }
-
-
-  switchData() {
-    this.personalData = !this.personalData;
-    if (this.settingsRecords) {
-      this.switchSittingsData();
-    }
-  }
-
-  switchSittingsData() {
-    this.windowAddingNewOrgIsOpen = false;
-    this.settingsRecords = !this.settingsRecords;
-  }
-
-
-  addNewOrgSettings () {
-    this.settingsRecords = false;
-    this.windowAddingNewOrgIsOpen = !this.windowAddingNewOrgIsOpen;
-  }
-
-  submit() {
-    this.settingsRecords = false;
-    this.dateService.changeTimeInterval(this.form.value)
-    this.dataSettings = JSON.stringify( {dataSettings: this.form.value})
-    localStorage.setItem('dataSettings', this.dataSettings);
-  }
-
-  closeSettings() {
-    this.settingsRecords = false;
-  }
-
-  closeWindowAddedNewOrg() {
-    this.windowAddingNewOrgIsOpen = false;
-  }
-
-  addNewOrg() {
-    this.apiService.addNewOrganization(this.formAddOrg.value)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => {
-        this.windowAddingNewOrgIsOpen = false;
-        this.formAddOrg.reset();
-      })
   }
 
   logoutSystems() {

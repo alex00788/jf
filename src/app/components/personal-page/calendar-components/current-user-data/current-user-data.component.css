@@ -1,0 +1,79 @@
+.personalDataClass {
+
+}
+
+.btnSettingsRecords {
+  margin: 5px;
+  background: none;
+  border-radius: 10px;
+  border: solid 1px #f6dbff;
+  display: block;
+  cursor: pointer;
+}
+
+.now {
+  max-width: 400px;
+  padding: 5px;
+  border-radius: 10px;
+  background: #c6faeb;
+}
+
+.titleNow {
+  position: relative;
+  text-align: center;
+  margin: 5px;
+}
+
+
+.btnClosePersonalDataComponent {
+  position: absolute;
+  right: 1px;
+  border: none 1px #f6dbff;
+  cursor: pointer;
+  background: none;
+}
+
+.currentUser {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+
+input {
+  margin: 5px;
+}
+
+label {
+  margin: 5px;
+}
+
+.settingsRecordsClass {
+  display: block;
+  border-radius: 10px;
+  margin: 3px;
+  border: solid 1px red;
+}
+
+.futSettingClass {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.oneSitting {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sittingsInputClass {
+  margin: 5px;
+  display: inline;
+  width: 45px;
+}
+
+
+.btnSetClass {
+  display: flex;
+  justify-content: space-between;
+}
