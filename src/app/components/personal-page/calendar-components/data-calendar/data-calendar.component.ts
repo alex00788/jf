@@ -41,7 +41,8 @@ export class DataCalendarComponent implements OnInit {
   private destroyed$: Subject<void> = new Subject();
   pastDateIsBlocked: boolean = false;
   filterAllUserForCurrentOrg: any[] = [];
-
+  clickCount = 0;
+  blockIfRecorded: boolean = false;
   constructor(public dateService: DateService,
               public apiService: ApiService,
               public modalService: ModalService,
@@ -83,9 +84,9 @@ export class DataCalendarComponent implements OnInit {
     this.apiService.getAllEntryInCurrentTimes(dateAndTimeRec)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntryCurTime => {
-        const currentOrg = this.dateService.currentUserIsTheMainAdmin.value?
+        const currentOrg = this.dateService.currentUserIsTheMainAdmin.value ?
           this.dateService.selectedSectionOrOrganization.value : this.dateService.sectionOrOrganization.value;
-        const filterOnSelectOrg = allEntryCurTime.filter((el:any) => {
+        const filterOnSelectOrg = allEntryCurTime.filter((el: any) => {
           return el.sectionOrOrganization === currentOrg
         })
         //ограничиваем запись если записано указанное кол-во человек  this.dateService.maxPossibleEntries.value
@@ -98,7 +99,7 @@ export class DataCalendarComponent implements OnInit {
       });
   }
 
-  filteringDependingOnTheSelectedOrganization (allEntry: any) {
+  filteringDependingOnTheSelectedOrganization(allEntry: any) {
     this.dateService.selectedSectionOrOrganization     //подписываемся на смену организации
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
@@ -125,7 +126,7 @@ export class DataCalendarComponent implements OnInit {
         if (allEntry) {
           if (this.dateService.currentUserIsTheMainAdmin.value) {
             //если главный админ, то фильтруем в зависимости от выбранной организации
-           this.filteringDependingOnTheSelectedOrganization(allEntry);
+            this.filteringDependingOnTheSelectedOrganization(allEntry);
           } else {
             this.dateService.allUsersSelectedOrg.next(this.dateService.allUsers.value)
 
@@ -195,8 +196,8 @@ export class DataCalendarComponent implements OnInit {
 
   //функция добавления новой записи
   addEntry(user: any, currentHourTime: any) {
+    this.dateService.dataSelectedUser.next(user);
     const newUserAccount = {
-      // date: this.dateService.date.value.format('DD.MM.YYYY'),
       date: this.dayOfWeek,
       time: currentHourTime,
       user: user.surnameUser + ' ' + user.nameUser,
@@ -212,6 +213,9 @@ export class DataCalendarComponent implements OnInit {
   }
 
   deletePerson(id: any, userId: any) {
+    if (this.dateService.currentUserSimpleUser.value) {
+      this.blockIfRecorded = false;
+    }
     this.apiService.deleteEntry(id, userId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
@@ -253,6 +257,24 @@ export class DataCalendarComponent implements OnInit {
       dateRec: dateRec
     }
     this.getAllEntryInCurrentTimes(dateAndTimeRec);
+  }
+
+  //определение кликнули один или два раза чтоб обычн пользователь не кликнул дважды
+  currentUserRec(time: any) {
+    this.blockIfRecorded = true;
+    this.clickCount++;
+    setTimeout(() => {
+      if (this.clickCount === 1) {
+        const currentUser = this.dateService.allUsers.value.find((el: any) => el.id === this.dateService.currentUserId.value)
+        currentUser.remainingFunds = JSON.stringify(+currentUser.remainingFunds - 1)
+        this.dateService.remainingFunds.next(currentUser.remainingFunds);
+        this.addEntry(currentUser, time);
+      } else if (this.clickCount === 2) {
+        return
+      }
+      this.clickCount = 0;
+    }, 250)
+
   }
 
   currentHourTime(time: any) {

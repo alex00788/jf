@@ -14,9 +14,11 @@
       </div>
       <div class="currentUser">
         <div>
-          <strong> Роль: </strong>
+          <strong *ngIf="dateService.currentUserIsTheMainAdmin | async"> {{dateService.currentUserRole | async}}: </strong>
+          <strong *ngIf="dateService.currentUserSimpleUser | async"> {{dateService.currentUserRole | async }}: </strong>
+          <strong *ngIf="dateService.currentUserIsTheAdminOrg | async"> {{dateService.currentUserRole | async}}: </strong>
         </div>
-        <span> {{dateService.currentUserRole | async}} {{dateService.sectionOrOrganization | async}} </span>
+        <span>  {{dateService.sectionOrOrganization | async}} </span>
       </div>
       <div class="currentUser">
         <div>

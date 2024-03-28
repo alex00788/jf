@@ -48,11 +48,9 @@ export class PersonalPageComponent implements OnInit {
     this.showTheSelectedSettings();
     this.calculatingCurrentWeek();
     this.dateService.getCurrentUser();
-    console.log('51что делать если обычный пользователь ')
     if (this.dateService.currentUserIsTheMainAdmin.value) {
       this.getAllUsers()
-    }
-    if (this.dateService.currentUserIsTheAdminOrg.value) {
+    } else {
       this.getAllUsersCurrentOrganization()
     }
   }
@@ -139,7 +137,6 @@ export class PersonalPageComponent implements OnInit {
 
   //функция, возьмет пользователей конкретной организации
   getAllUsersCurrentOrganization() {
-    console.log('конкретная организация', this.dateService.sectionOrOrganization.value)
     this.api.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsersOrganization => {

@@ -17,6 +17,10 @@ export class ApiService {
 
   //перехват и показ ошибки
   public errHandler(err: HttpErrorResponse) {
+
+    if (err.error.message.includes('уже записан')) {
+      this.correctionOfTheRemainderIfErrorRec()
+    }
     if (!err.error?.message) {
       this.errorResponseService.localHandler('ошибка при запросе на серв')
       return throwError(() => err)
@@ -25,6 +29,20 @@ export class ApiService {
       return throwError(() => err.error?.message)
     }
   }
+
+  //функция корректирует остаток средств если пользователь уже записан и админ записал его еще раз
+  correctionOfTheRemainderIfErrorRec () {
+    const result: any[] = []
+    this.date.allUsers.value.forEach((user: any)=> {
+      if (user.id === this.date.dataSelectedUser.value.id){
+        user.remainingFunds = JSON.stringify(+user.remainingFunds + 1)
+      }
+      result.push(user)
+    })
+    this.date.allUsers.next(result)
+    this.date.remainingFunds.next(JSON.stringify(+this.date.remainingFunds.value + 1))
+  }
+
 
   //хранение токена в локал стораж
   //достаем токен из ответа сервера и сохраняем в локалстораж + время жизни токена

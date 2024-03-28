@@ -11,44 +11,87 @@
       {{currentHour.time}} : 00
     </div>
     <div class="dataList" *ngFor="let person of currentHour.users; index as i">
-      <div class="inline" >
-        <span  (click)="openDataPerson(person)"> {{i + 1}} {{person.nameUser}} </span>
-        <button class="btnDelete" (click)="deletePerson(person.id, person.userId)"
-        [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck"
-        >
-          &times;
-        </button>
-      </div>
+
+      <ng-container *ngIf="dateService.currentUserSimpleUser | async;  else adminBlockBtn">
+        <div class="inline">
+          <span class="currentPersonClass"
+          [class]="{
+          currentPersonClass : person.userId == dateService.currentUserId.value
+          }"
+          >
+            {{i + 1}} {{person.nameUser}}
+          </span>
+          <button
+            *ngIf="person.userId == dateService.currentUserId.value"
+            class="btnDelete" (click)="deletePerson(person.id, person.userId)"
+            [disabled]="
+              pastDateIsBlocked ||
+              currentHour.time < currentHourF && currentDayCheck ||
+              person.userId != dateService.currentUserId.value"
+          >
+            &times;
+          </button>
+        </div>
+      </ng-container>
+      <ng-template #adminBlockBtn>
+        <div class="inline">
+          <span
+            [class]="{
+          currentPersonClass : person.userId == dateService.currentUserId.value
+          }"
+            (click)="openDataPerson(person)"
+          >
+            {{i + 1}} {{person.nameUser}}
+          </span>
+          <button class="btnDelete" (click)="deletePerson(person.id, person.userId)"
+                  [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck"
+          >
+            &times;
+          </button>
+        </div>
+      </ng-template>
+
     </div>
 
-    <form [formGroup]="form" (submit)="submit()">
-      <div *ngIf="currentHour.time === newEntryHasBeenOpened">
-        <select #inputElement formControlName="newEntry"
-                (click)="setValueForRec(inputElement.value)"
-                (keydown)="savingByPressingEnter($event, inputElement.value)"
-                (blur)="lostFocus()"
-        >
-          <option class="inputClass" *ngFor="let i of dateService.allUsersSelectedOrg | async" [value]="[i.id, currentHour.time]">
-            {{i.surnameUser}} {{i.nameUser}}
-          </option>
+    <ng-container *ngIf="dateService.currentUserSimpleUser | async;  else adminBlock">
+      <button *ngIf="currentHour.time !== newEntryHasBeenOpened"
+              class="dataList"
+              (click)="currentUserRec(currentHour.time)"
+              [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck || blockIfRecorded"
+      >
+        +
+      </button>
+    </ng-container>
 
-        </select>
-        <div class="futFormBtn">
-          <button class="btn btnDisable" type="submit" [disabled]="form.invalid || disabledBtnRecord"
-          > записать
-          </button>
-          <button class="btn" type="button" (click)="cancel()"> отменить</button>
+    <ng-template #adminBlock>
+      <form [formGroup]="form" (submit)="submit()">
+        <div *ngIf="currentHour.time === newEntryHasBeenOpened">
+          <select #inputElement formControlName="newEntry"
+                  (click)="setValueForRec(inputElement.value)"
+                  (keydown)="savingByPressingEnter($event, inputElement.value)"
+                  (blur)="lostFocus()"
+          >
+            <option class="inputClass" *ngFor="let i of dateService.allUsersSelectedOrg | async"
+                    [value]="[i.id, currentHour.time]">
+              {{i.surnameUser}} {{i.nameUser}}
+            </option>
+
+          </select>
+          <div class="futFormBtn">
+            <button class="btn btnDisable" type="submit" [disabled]="form.invalid || disabledBtnRecord"
+            > записать
+            </button>
+            <button class="btn" type="button" (click)="cancel()"> отменить</button>
+          </div>
         </div>
-      </div>
-    </form>
-
-
-    <button *ngIf="currentHour.time !== newEntryHasBeenOpened"
-            class="dataList"
-            (click)="currentHourTime(currentHour.time)"
-            [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck"
-    >
-      +
-    </button>
+      </form>
+      <button *ngIf="currentHour.time !== newEntryHasBeenOpened"
+              class="dataList"
+              (click)="currentHourTime(currentHour.time)"
+              [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck"
+      >
+        +
+      </button>
+    </ng-template>
   </div>
 </section>

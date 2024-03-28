@@ -43,10 +43,12 @@ strong {
   justify-content: space-between;
 }
 
-.btnDisable:disabled{
-color: red}
+.btnDisable:disabled {
+  color: red
+}
 
 .btnDelete {
+  cursor: pointer;
   border: none;
   border-radius: 10px;
 }
@@ -55,4 +57,9 @@ color: red}
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+}
+
+.currentPersonClass {
+  color: #2630f1;
+  font-weight: bold;
 }
