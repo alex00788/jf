@@ -5,6 +5,7 @@ import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ApiService} from "../../../../shared/services/api.service";
 import {Subject, takeUntil} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header-calendar',
@@ -24,6 +25,7 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
   constructor(
     public dateService: DateService,
+    private router: Router,
     public apiService: ApiService,
               ) {
   }
@@ -61,9 +63,11 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
       this.dateService.timeFinishRecord.next(+this.dataSettings.dataSettings.timeFinishRec);
       this.dateService.maxPossibleEntries.next(+this.dataSettings.dataSettings.maxiPeople);
     }
-    const d = new Date();
+    const d = new Date();   // показывает сегодняшнюю дату
     this.currentTime = ('0' + d.getDate()).slice(-2) + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + d.getFullYear()
-    this.watchOnPage();
+    // this.watchOnPage();   //показ и запуск часов
+
+    //  для настройки интервала времени в которое можно записаться
     for (let i = 0 ; i <= 23; i++) {
       this.timesForRec.push(i)
     }
@@ -131,5 +135,10 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
         this.windowAddingNewOrgIsOpen = false;
         this.formAddOrg.reset();
       })
+  }
+
+  logoutSystems() {
+    this.router.navigate(['/'])
+    this.apiService.logout()
   }
 }

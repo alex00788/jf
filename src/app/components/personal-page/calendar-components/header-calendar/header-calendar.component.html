@@ -109,20 +109,14 @@
   </div>
 </div>
 
-
 <div class="currentTime">
+  <button (click)="logoutSystems()"> Выйти из системы</button>
   <span class="todayClass">
     Сегодня :
   </span>
   <span class="todayClass">
     {{currentTime}}
   </span>
-</div>
-
-<div class="watchClass">
-  <strong class="todayClass">
-    {{hours}} : {{min}} : {{sec}}
-  </strong>
 </div>
 
 <div class="selectedTime">

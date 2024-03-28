@@ -79,14 +79,10 @@ export class PersonalPageComponent implements OnInit {
       })
   }
 
-  logout() {
+  mainePage() {
     this.router.navigate(['/'])
   }
 
-  logoutSystems() {
-    this.router.navigate(['/'])
-    this.api.logout()
-  }
 
   showWeek() {
     this.showCurrentWeek = true;

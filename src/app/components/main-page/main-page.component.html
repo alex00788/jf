@@ -10,6 +10,8 @@
     </div>
 
     <button (click)="openModal()">войти заново</button>
+    <span>приложение для тех кому нужен администратор</span>
+
     <span *ngIf="modalService.hideTitle$ | async" class="enter" routerLink="/personal-page">{{modalTitle}}</span>
 
     <div class="modal" *ngIf="modalService.isVisible$ | async">
@@ -18,7 +20,6 @@
         <app-registrationForm-page *ngIf="modalService.registrationForm$ |async"></app-registrationForm-page>
       </app-modal-page>
     </div>
-
   </div>
 </div>
 

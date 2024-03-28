@@ -4,10 +4,12 @@
   opacity: 95%;
 }
 
-.logoutSystems {
+.mainePageClass {
   margin: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  color: #2630f1;
+  cursor: pointer;
 }
 
 .bodyCalendar {
@@ -26,6 +28,7 @@
 .dCalendar {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .dataCalendar {
