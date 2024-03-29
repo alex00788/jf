@@ -13,6 +13,7 @@ import {DataPersonModalComponent} from "./data-person-modal/data-person-modal.co
 import {ModalService} from "../../shared/services/modal.service";
 import {ModalWindowForPersonPageComponent} from "./modal-window-for-person-page/modal-window-for-person-page.component";
 import {CurrentUserDataComponent} from "./calendar-components/current-user-data/current-user-data.component";
+import {InfoBlockComponent} from "./calendar-components/info-block/info-block.component";
 
 @Component({
   selector: 'app-personal-page',
@@ -26,7 +27,8 @@ import {CurrentUserDataComponent} from "./calendar-components/current-user-data/
     NgForOf,
     DataPersonModalComponent,
     ModalWindowForPersonPageComponent,
-    CurrentUserDataComponent
+    CurrentUserDataComponent,
+    InfoBlockComponent
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'
@@ -34,9 +36,10 @@ import {CurrentUserDataComponent} from "./calendar-components/current-user-data/
 export class PersonalPageComponent implements OnInit {
   constructor(
     private router: Router,
-    private api: ApiService,
+    private apiService: ApiService,
     public dateService: DateService,
     public modalService: ModalService,
+
   ) {
   }
 
@@ -119,7 +122,7 @@ export class PersonalPageComponent implements OnInit {
 
   // функция, возьмет всех пользователей которые зарегистрированы (для записи клиентов тока из предложенных)
   getAllUsers() {
-    this.api.getAllUsers()
+    this.apiService.getAllUsers()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsers => {
         const getAllOrganization = new Set(allUsers.map((el: any) => el.sectionOrOrganization));
@@ -135,7 +138,7 @@ export class PersonalPageComponent implements OnInit {
 
   //функция, возьмет пользователей конкретной организации
   getAllUsersCurrentOrganization() {
-    this.api.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization.value)
+    this.apiService.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsersOrganization => {
         const user = allUsersOrganization.find((el: any) => {
@@ -157,5 +160,10 @@ export class PersonalPageComponent implements OnInit {
       } else {
         this.dateService.selectedSectionOrOrganization.next([])
       }
+  }
+
+  logoutSystems() {
+    this.router.navigate(['/'])
+    this.apiService.logout()
   }
 }

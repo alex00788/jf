@@ -1,9 +1,11 @@
 <div class="personalDataClass">
-  <button class="btnSettingsRecords" (click)="switchData()" *ngIf="!personalData"> Мои данные</button>
+  <div class="coverBtnSettingsRec" *ngIf="!personalData">
+  <button class="btnSettingsRecords" (click)="switchData()"> Мои данные</button>
+  </div>
   <div *ngIf="personalData">
     <div class="now">
-      <div class="titleNow">
-        <strong> Мои данные </strong>
+      <div class="titleNow" (click)="switchData()">
+        <strong class="clickBtn"> Мои данные </strong>
         <button class="btnClosePersonalDataComponent" (click)="switchData()">&times;</button>
       </div>
       <div class="currentUser">

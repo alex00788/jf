@@ -1,0 +1,29 @@
+.infoBlockClass {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 0 25px;
+}
+
+
+.currentTime {
+  text-align: center;
+  font-weight: bold;
+  background: #f6f34c;
+  border-radius: 10px;
+  max-width: 95px;
+  margin: 5px;
+}
+
+.todayClass {
+  /*display: block;*/
+}
+
+.selectedTime {
+  margin: 5px;
+  text-align: center;
+  font-weight: bold;
+  background: #bfefe4;
+  border-radius: 10px;
+  max-width: 95px;
+}

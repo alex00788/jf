@@ -15,8 +15,6 @@
 .bodyCalendar {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
-  margin-top: 20px;
 }
 
 .insideClass {
@@ -50,4 +48,25 @@
 .btnCalendarDisplayModeSelected{
   margin: 5px;
   background: #aefaae;
+}
+
+
+.bodyCalendarElementClass {
+  width: 360px;
+  height: 280px;
+  margin: 5px;
+  padding: 15px;
+  padding-top: 5px;
+}
+
+
+.btnLogoutSystemsClass {
+  position: absolute;
+  top: 35px;
+  right: 180px;
+  background: none;
+  border: solid 0.1rem #c8caf8;
+  border-radius: 10px;
+  color: #2630f1;
+  cursor: pointer;
 }

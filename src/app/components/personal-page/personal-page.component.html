@@ -1,7 +1,7 @@
 <div class="personalPageStyle">
-
   <div class="mainePageClass">
     <h2 (click)="mainePage()">ADMIN4you</h2>
+    <button class="btnLogoutSystemsClass" (click)="logoutSystems()"> Выйти из системы</button>
   </div>
 
   <div class="errorModal insideClass">
@@ -14,8 +14,16 @@
     </div>
 
     <div class="bodyCalendar">
-      <app-current-user-data></app-current-user-data>
-      <app-body-calendar></app-body-calendar>
+      <div class="bodyCalendarElementClass">
+        <app-current-user-data></app-current-user-data>
+      </div>
+      <div class="bodyCalendarElementClass">
+        <app-info-block></app-info-block>
+        <app-body-calendar></app-body-calendar>
+      </div>
+      <div class="bodyCalendarElementClass">
+сюда можно список компонент со списком клиентов
+      </div>
     </div>
 
     <hr>

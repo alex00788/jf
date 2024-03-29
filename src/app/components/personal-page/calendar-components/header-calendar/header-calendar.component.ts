@@ -3,8 +3,6 @@ import {DateService} from "../date.service";
 import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
 import {ReactiveFormsModule,} from "@angular/forms";
-import {ApiService} from "../../../../shared/services/api.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header-calendar',
@@ -24,10 +22,7 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
   constructor(
     public dateService: DateService,
-    private router: Router,
-    public apiService: ApiService,
-              ) {
-  }
+              ) {}
 
   subInterval: any;
   hours: any = new Date().getHours();
@@ -45,8 +40,6 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
       this.dateService.timeFinishRecord.next(+this.dataSettings.dataSettings.timeFinishRec);
       this.dateService.maxPossibleEntries.next(+this.dataSettings.dataSettings.maxiPeople);
     }
-    const d = new Date();   // показывает сегодняшнюю дату
-    this.currentTime = ('0' + d.getDate()).slice(-2) + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + d.getFullYear()
     // this.watchOnPage();   //показ и запуск часов
   }
 
@@ -69,10 +62,5 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     clearInterval(this.subInterval);
-  }
-
-  logoutSystems() {
-    this.router.navigate(['/'])
-    this.apiService.logout()
   }
 }

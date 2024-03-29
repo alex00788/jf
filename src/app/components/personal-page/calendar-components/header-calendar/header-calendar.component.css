@@ -17,28 +17,7 @@ i {
   padding: 3px;
 }
 
-.currentTime {
-  position: absolute;
-  right: 30px;
-  top: 50px;
-  text-align: center;
-  font-weight: bold;
-  background: #f6f34c;
-  border-radius: 10px;
-  width: 120px;
-}
 
-
-.selectedTime {
-  position: absolute;
-  right: 30px;
-  top: 150px;
-  text-align: center;
-  font-weight: bold;
-  background: #bfefe4;
-  border-radius: 10px;
-  max-width: 120px;
-}
 
 .watchClass {
   position: absolute;
@@ -52,13 +31,6 @@ i {
   max-width: 120px;
 }
 
-.todayClass {
-  display: block;
-}
-
-
-
-
 input {
   margin: 5px;
 }
@@ -66,12 +38,6 @@ input {
 label {
   margin: 5px;
 }
-
-
-
-
-
-
 
 
 .btnClosePersonalData {

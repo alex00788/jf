@@ -1,24 +1,3 @@
-
-<div class="currentTime">
-  <button (click)="logoutSystems()"> Выйти из системы</button>
-  <span class="todayClass">
-    Сегодня :
-  </span>
-  <span class="todayClass">
-    {{currentTime}}
-  </span>
-</div>
-
-<div class="selectedTime">
-  <span class="todayClass">
-    Выбрано :
-  </span>
-  <span class="todayClass">
-    {{dateService.date | async | momentTransformDate :  'DD.MM.YYYY'}}
-  </span>
-</div>
-
-
 <p>
   <i (click)="go(-1)"> < </i>
 

@@ -26,7 +26,7 @@ export class CurrentUserDataComponent implements OnInit {
   }
   private destroyed$: Subject<void> = new Subject();
 
-  personalData: boolean = true;
+  personalData: boolean = false;
   settingsRecords: boolean = false;
   windowAddingNewOrgIsOpen: boolean = false;
   showSettings: boolean;
