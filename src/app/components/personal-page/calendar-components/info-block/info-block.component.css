@@ -1,4 +1,5 @@
 .infoBlockClass {
+  position: relative;
   display: flex;
   justify-content: space-between;
   margin: 5px;
@@ -26,4 +27,11 @@
   background: #bfefe4;
   border-radius: 10px;
   max-width: 95px;
+}
+
+.btnCloseInfoBlock {
+  position: absolute;
+  right: 1px;
+  background: none;
+  border: none;
 }

@@ -7,6 +7,7 @@ export class ModalService {
   hideTitle$ = new BehaviorSubject<boolean>(true)
   registrationForm$ = new BehaviorSubject<boolean>(false)
   loginForm$ = new BehaviorSubject<boolean>(false)
+  appDescription$ = new BehaviorSubject<boolean>(false)
 
   open() {
     this.isVisible$.next(true)
@@ -26,13 +27,28 @@ export class ModalService {
   }
 
   openRegistrationForm$ () {
-    this.registrationForm$.next(true)
-    this.loginForm$.next(false)
+    this.registrationForm$.next(true);
+    this.loginForm$.next(false);
+    this.appDescription$.next(false);
   }
 
   openLoginForm$ () {
-    this.registrationForm$.next(false)
-    this.loginForm$.next(true)
+    this.registrationForm$.next(false);
+    this.loginForm$.next(true);
+    this.appDescription$.next(false);
+  }
+
+
+  openAppDescription$ () {
+    this.open();
+    this.appDescription$.next(true);
+    this.registrationForm$.next(false);
+    this.loginForm$.next(false);
+    this.hideTitle$.next(false)
+  }
+
+  closeAppDescription$() {
+    this.appDescription$.next(false);
   }
 
 }

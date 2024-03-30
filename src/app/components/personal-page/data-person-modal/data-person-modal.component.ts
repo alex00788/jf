@@ -3,6 +3,7 @@ import {DateService} from "../calendar-components/date.service";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 import {ApiService} from "../../../shared/services/api.service";
+import {ModalService} from "../../../shared/services/modal.service";
 
 @Component({
   selector: 'app-data-person-modal',
@@ -17,6 +18,7 @@ import {ApiService} from "../../../shared/services/api.service";
 export class DataPersonModalComponent implements OnInit {
   constructor(
     public dateService: DateService,
+    public modalService: ModalService,
     public apiService: ApiService,
   ) {
   }

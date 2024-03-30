@@ -36,7 +36,7 @@
 }
 
 
-.calendarDisplayMode{
+.calendarDisplayMode {
   display: flex;
   justify-content: center;
   margin: 10px;
@@ -47,18 +47,26 @@
   background: none;
 }
 
-.btnCalendarDisplayModeSelected{
+.btnCalendarDisplayModeSelected {
   margin: 5px;
   background: #aefaae;
 }
 
+.btnBodyCalendarElement {
+  background: none;
+  border-radius: 10px;
+  border: solid 1px #f6dbff;
+  display: block;
+  cursor: pointer;
+  height: 20px;
+  margin: 5px;
+}
 
 .bodyCalendarElementClass {
   width: 360px;
-  height: 280px;
+  /*height: 280px;*/
   margin: 5px;
   padding: 5px 15px 15px 5px;
-
   /*background: #c6faeb;*/
 }
 
@@ -76,4 +84,13 @@
   border-radius: 10px;
   color: #2630f1;
   cursor: pointer;
+}
+
+
+@media (max-width: 1100px) {
+  .btnLogoutSystemsClass {
+    position: static;
+    height: 20px;
+    margin: 25px;
+  }
 }

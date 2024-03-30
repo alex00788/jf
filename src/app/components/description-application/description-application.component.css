@@ -1,0 +1,45 @@
+.descriptionPageClass {
+
+  width: 500px;
+}
+
+.btnDescriptionPage {
+  margin: 10px 25%;
+  font-size: 15px;
+  background: none;
+  color: #f50622;
+  border: none;
+  cursor: pointer;
+}
+
+.btnDescriptionPage:hover {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 10px 20%;
+}
+
+.howItWorkClass {
+  color: #2630f1;
+  margin: 0 10px;
+}
+
+li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+li:hover{
+  font-size: 20px;
+}
+
+@media (max-width: 1300px) {
+  .btnDescriptionPage {
+    color: white;
+    font-size: 20px;
+    margin: 10px 17%;
+  }
+
+  .howItWorkClass {
+    color: white;
+  }
+}

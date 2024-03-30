@@ -13,6 +13,7 @@ export class DateService {                                            //moment()
   public currentUserIsTheMainAdmin: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public currentUserIsTheAdminOrg: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public currentUserSimpleUser: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public calendarBodyOpen: BehaviorSubject<boolean> = new BehaviorSubject(false)
   // public roleToGetTheDesiredListOfUsers: BehaviorSubject<any> = new BehaviorSubject('')
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
@@ -72,4 +73,11 @@ export class DateService {                                            //moment()
     this.maxPossibleEntries.next(timeVal.maxiPeople)
   }
 
+  openCalendar() {
+    this.calendarBodyOpen.next(!this.calendarBodyOpen.value)
+  }
+
+  closeCalendar() {
+
+  }
 }

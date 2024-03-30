@@ -18,7 +18,11 @@
 }
 
 .btnMyClientList {
+  background: none;
   border-radius: 10px;
+  border: solid 1px #f6dbff;
+  display: block;
+  cursor: pointer;
 }
 
 .btnCloseClientList {

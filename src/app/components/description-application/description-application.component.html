@@ -1,0 +1,57 @@
+<div class="descriptionPageClass">
+
+  <button class="btnDescriptionPage" (click)="switchForWhomBlock()"> Для кого это приложение...</button>
+  <div class="howItWorkClass"  *ngIf="forWhomBlock">
+    <ul>
+      <li>
+        Для любого бизнеса где есть поток клиентов ...
+      </li>
+      <li>
+        Где есть постоянные клиенты ...
+      </li>
+      <li>
+        И есть поток новых пользователей ...
+      </li>
+    </ul>
+  </div>
+
+  <button class="btnDescriptionPage" (click)="switchHowItWorkBlock()"> Что делает это приложение...</button>
+  <div class="howItWorkClass" *ngIf="howItWorkBlock">
+    <ul>
+      <li>
+        Автоматизирует административную работу ...
+      </li>
+      <li>
+        Автоматизирует запись клиентов и ведение отчетов ...
+      </li>
+      <li>
+        Облегчает сбор данных и регистрацию новых пользователей ...
+      </li>
+      <li>
+        Автоматизирует рекламные предложения и акции ...
+        <br>
+        (для зарегистрированных пользователей в зависимости от настроенных условий)
+      </li>
+    </ul>
+  </div>
+
+  <button class="btnDescriptionPage" (click)="switchWhyDoYouNeedThis()"> Зачем вам это приложение ...</button>
+  <div class="howItWorkClass" *ngIf="whyDoYouNeedThis">
+    <ul>
+      <li>
+        Экономит время!
+      </li>
+      <li>
+        Экономит деньги на рекламу!
+      </li>
+      <li>
+        Экономит деньги на администратора!
+      </li>
+      <li>
+        Даёт возможность расширить бизнес и увеличить доход!
+      </li>
+    </ul>
+  </div>
+
+
+</div>

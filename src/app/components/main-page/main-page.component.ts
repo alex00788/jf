@@ -6,6 +6,7 @@ import {ErrorModalComponent} from "../error-modal/error-modal.component";
 import {LoginPageComponent} from "../login-page/login-page.component";
 import {RegistrationFormPageComponent} from "../registr-page/registrationForm-page.component";
 import {RouterLink} from "@angular/router";
+import {DescriptionApplicationComponent} from "../description-application/description-application.component";
 
 @Component({
   selector: 'main-page',
@@ -18,14 +19,15 @@ import {RouterLink} from "@angular/router";
     ErrorModalComponent,
     LoginPageComponent,
     RegistrationFormPageComponent,
-    RouterLink
+    RouterLink,
+    DescriptionApplicationComponent
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
 
 export class MainPageComponent implements OnInit{
-  mainTitle = 'Твой Личный Администратор'
+  mainTitle = 'Admin4you'
   modalTitle = 'ВОЙТИ В ЛИЧНЫЙ КАБИНЕТ'
 
 
