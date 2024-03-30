@@ -1,0 +1,40 @@
+.clientsListClass {
+  background: #c6faeb;;
+  margin-top: 1px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.coverBtnMyClientList {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.clientsListBody {
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btnMyClientList {
+  border-radius: 10px;
+}
+
+.btnCloseClientList {
+  position: absolute;
+  right: 1px;
+  border: none 1px #f6dbff;
+  cursor: pointer;
+  background: none;
+}
+
+.inputSearchClass {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+li {
+ margin-left: 70px;
+}

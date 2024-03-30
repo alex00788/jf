@@ -1,0 +1,35 @@
+<div class="coverBtnMyClientList" *ngIf="!clientListBlock">
+  <button class="btnMyClientList"
+          (click)="showClientList()"
+  > Список клиентов
+  </button>
+</div>
+
+
+<div class="clientsListClass" *ngIf="clientListBlock">
+  <div class="clientsListBody" (click)="closeList()">
+    <strong> Список клиентов </strong>
+    <button class="btnCloseClientList">&times;</button>
+  </div>
+
+  <div class="inputSearchClass">
+    <input type="text" placeholder="найти клиента" [(ngModel)] ="clientList">
+  </div>
+
+
+
+    <ol>
+      <div *ngIf="dateService.allUsers | async as allUsers">
+      <li *ngFor="let person of allUsers | filterClientList: clientList">
+        <span (click)="openPerson(person)">
+          {{person.surnameUser}} {{person.nameUser}}
+        </span>
+      </li>
+      </div>
+    </ol>
+
+
+
+</div>
+
+

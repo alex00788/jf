@@ -15,6 +15,8 @@
 .bodyCalendar {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 .insideClass {
@@ -55,10 +57,15 @@
   width: 360px;
   height: 280px;
   margin: 5px;
-  padding: 15px;
-  padding-top: 5px;
+  padding: 5px 15px 15px 5px;
+
+  /*background: #c6faeb;*/
 }
 
+.calendarNum {
+  border: solid 1px #f50622;
+  border-radius: 10px;
+}
 
 .btnLogoutSystemsClass {
   position: absolute;

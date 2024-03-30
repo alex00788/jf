@@ -110,7 +110,7 @@ export class DataCalendarComponent implements OnInit {
           )
         this.dateService.allUsersSelectedOrg.next(filterUsersOnSelectedOrg)
 
-        //фильтрация для показа записаных выбранной орг в календаре
+        //фильтрация для показа записанных выбранной орг в календаре
         this.filterAllUserForCurrentOrg = allEntry.filter((el: any) => {
           return el.sectionOrOrganization === this.dateService.selectedSectionOrOrganization.value
         })

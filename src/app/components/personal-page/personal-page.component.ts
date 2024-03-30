@@ -14,6 +14,7 @@ import {ModalService} from "../../shared/services/modal.service";
 import {ModalWindowForPersonPageComponent} from "./modal-window-for-person-page/modal-window-for-person-page.component";
 import {CurrentUserDataComponent} from "./calendar-components/current-user-data/current-user-data.component";
 import {InfoBlockComponent} from "./calendar-components/info-block/info-block.component";
+import {ClientsListComponent} from "./calendar-components/clients-list/clients-list.component";
 
 @Component({
   selector: 'app-personal-page',
@@ -28,7 +29,8 @@ import {InfoBlockComponent} from "./calendar-components/info-block/info-block.co
     DataPersonModalComponent,
     ModalWindowForPersonPageComponent,
     CurrentUserDataComponent,
-    InfoBlockComponent
+    InfoBlockComponent,
+    ClientsListComponent
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'
@@ -121,7 +123,7 @@ export class PersonalPageComponent implements OnInit {
   }
 
   // функция, возьмет всех пользователей которые зарегистрированы (для записи клиентов тока из предложенных)
-  getAllUsers() {
+  getAllUsers() {                              // функция должна срабатывать только для главного админа
     this.apiService.getAllUsers()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsers => {
