@@ -1,0 +1,19 @@
+<div class="regFormAddNewOrgClass">
+  <span> Новая организация </span>
+
+  <form class="formAddNewOrg" [formGroup]="form" (submit)="submit()">
+    <label for="nameSupervisor"> Имя руководителя </label>
+    <input id="nameSupervisor" type="text" formControlName="nameSupervisor">
+    <label for="phoneNumber"> Телефон </label>
+    <input id="phoneNumber" type="text" formControlName="phoneNumber">
+    <label for="nameSectionOrOrganization"> Название организации </label>
+    <input id="nameSectionOrOrganization" type="text" formControlName="nameSectionOrOrganization">
+
+  <div class="futRegFormAddNewOrg">
+    <button class="btnFutAddNewOrg" (click)="modalService.openRegFormChoiceOrganisation()"> назад </button>
+    <button class="btnFutAddNewOrg" type="submit" [disabled]="form.invalid || form.disabled"> Отправить </button>
+  </div>
+  </form>
+</div>
+
+

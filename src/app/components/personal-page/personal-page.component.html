@@ -1,6 +1,6 @@
 <div class="personalPageStyle">
   <div class="mainePageClass">
-    <h2 (click)="mainePage()">Твой личный администратор</h2>
+    <h3 class="titleMainePage" (click)="mainePage()">Твой личный администратор</h3>
     <button class="btnLogoutSystemsClass" (click)="logoutSystems()"> Выйти из системы</button>
   </div>
 
@@ -35,7 +35,6 @@
 
     <hr>
     <div class="calendarDisplayMode">
-      <span class="btnCalendarDisplayMode">показывать: </span>
       <button
         [class]="{
         btnCalendarDisplayModeSelected : showCurrentDay,

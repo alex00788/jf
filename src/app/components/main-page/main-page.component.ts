@@ -7,21 +7,27 @@ import {LoginPageComponent} from "../login-page/login-page.component";
 import {RegistrationFormPageComponent} from "../registr-page/registrationForm-page.component";
 import {RouterLink} from "@angular/router";
 import {DescriptionApplicationComponent} from "../description-application/description-application.component";
+import {
+    RegFormChoiceOrganizationComponent
+} from "../reg-form-choice-organization/reg-form-choice-organization.component";
+import {RegFormNewOrgComponent} from "../reg-form-new-org/reg-form-new-org.component";
 
 @Component({
   selector: 'main-page',
   standalone: true,
-  imports: [
-    ModalPageComponent,
-    NgIf,
-    AsyncPipe,
-    CommonModule,
-    ErrorModalComponent,
-    LoginPageComponent,
-    RegistrationFormPageComponent,
-    RouterLink,
-    DescriptionApplicationComponent
-  ],
+    imports: [
+        ModalPageComponent,
+        NgIf,
+        AsyncPipe,
+        CommonModule,
+        ErrorModalComponent,
+        LoginPageComponent,
+        RegistrationFormPageComponent,
+        RouterLink,
+        DescriptionApplicationComponent,
+        RegFormChoiceOrganizationComponent,
+        RegFormNewOrgComponent
+    ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })

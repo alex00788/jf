@@ -6,17 +6,29 @@ p {
 
 span {
   margin: 0 20px;
+  color: #5238fd;
+  font-weight: bold;
+}
+
+span:hover {
+  color: #0221c0;
 }
 
 i {
   cursor: pointer;
-  border: solid 1px #f15cc7;
+  border: solid 1px #0221c0;
   border-radius: 10px;
   width: 30px;
   text-align: center;
-  padding: 3px;
+  padding: 1px;
+  font-weight: bold;
+  color: #5238fd;
 }
 
+i:hover {
+  color: #0221c0;
+  background: #03f303;
+}
 
 
 .watchClass {

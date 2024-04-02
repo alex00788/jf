@@ -2,6 +2,7 @@
   <form [formGroup]="form" (submit)="submit()">
     <span class="titleModal">  {{title}}  </span>
     <span class="loginBtn" (click)="openLoginPage()"> Войти </span>
+    <span class="regFormBtn" (click)="openRegFormChoiceOrg()"> Назад </span>
     <div class="formReg">
       <div class="inputForm">
         <div>
@@ -50,12 +51,6 @@
           <small> напишите ваш телефон</small>
         </div>
 
-        <div>
-          <label for="sectionOrOrganization"> Секция или организация </label>
-          <select class="inputClass" id="sectionOrOrganization" formControlName="sectionOrOrganization">
-            <option class="inputClass" *ngFor="let i of allOrg" >{{i.name}}</option>
-          </select>
-        </div>
         <div class="errorInputMessage"
              *ngIf="sectionOrOrganization.errors?.['required'] && sectionOrOrganization.touched">
           <small> Выберите из списка</small>

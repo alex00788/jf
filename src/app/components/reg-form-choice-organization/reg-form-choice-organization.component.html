@@ -1,0 +1,37 @@
+<div class="regFormClass">
+    <label for="inputRegFormChoice"> Выберите вашу организацию </label>
+    <input id="inputRegFormChoice" type="text" placeholder="поиск..."
+           [disabled]="dateService.allOrgForReg.value.length === 1" [(ngModel)]="searchOrg">
+
+    <div class="orgClass"
+        *ngIf="dateService.allOrgForReg | async as allOrg">
+      <div
+         *ngFor="let org of allOrg | filterOrg: searchOrg; index as i">
+         <span class="ownOrg"  (click)="choiceOrg(org)">
+          {{i +1 }}. {{org}}
+         </span>
+      </div>
+    </div>
+  <button class="btnReset" *ngIf="dateService.allOrgForReg.value.length === 1"
+    (click)="resetOrg()"
+  >
+    &times;
+  </button>
+
+
+  <div class="futRegForm">
+    <button class="btnFutRegForm" (click)="openLoginPage()"> назад </button>
+    <button  class="btnFutRegForm" (click)="openRegistrationPage()"
+             [disabled]="dateService.allOrgForReg.value.length != 1"> далее ...</button>
+  </div>
+
+  <hr>
+
+  <span> Если организации нет, вы можете </span>
+  <button class="btnFutRegForm btnNewOrg"
+          (click)="addNewOrg()"
+          [disabled]="dateService.allOrgForReg.value.length === 1"> добавить новую</button>
+
+</div>
+
+

@@ -23,7 +23,8 @@ import {DateService} from "../personal-page/calendar-components/date.service";
 })
 export class RegistrationFormPageComponent implements OnInit {
 
-  constructor(private apiService: ApiService,
+  constructor(
+              private apiService: ApiService,
               private router: Router,
               private activateRouter: ActivatedRoute,
               private modalService: ModalService,
@@ -33,7 +34,6 @@ export class RegistrationFormPageComponent implements OnInit {
 
   private destroyed$: Subject<void> = new Subject();
   title = 'Регистрация';
-  allOrg : any[] =[];
   inputPass: any;
   changeIcon = true;
   loginSub: any;
@@ -43,11 +43,10 @@ export class RegistrationFormPageComponent implements OnInit {
     nameUser: new FormControl(null, Validators.required),
     surnameUser: new FormControl(null, Validators.required),
     phoneNumber: new FormControl(null, Validators.required),
-    sectionOrOrganization: new FormControl('', Validators.required),
+    sectionOrOrganization: new FormControl(),
   })
 
   ngOnInit(): void {
-    this.getAllOrganizationFromTheDatabase();
     this.errorResponseService.disableLoginForm
       .pipe(takeUntil(this.destroyed$))
       .subscribe(res =>
@@ -55,20 +54,6 @@ export class RegistrationFormPageComponent implements OnInit {
       )
   }
 
-
-  getAllOrganizationFromTheDatabase() {
-    this.apiService.getAllOrgFromDb()
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(allOrg=> {
-        const resAr: any[] = []
-        allOrg.allOrg.forEach((el:any)=> {
-          resAr.push({name: el})
-        })
-        this.allOrg = resAr;
-        this.allOrg.unshift({name: 'Другая...'});
-        this.allOrg.unshift({name: ''});
-      })
-  }
 
   get email() {
     return this.form.controls.email as FormControl
@@ -101,7 +86,7 @@ export class RegistrationFormPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
+    this.form.value.sectionOrOrganization = this.dateService.selectOrgForReg.value[0]
     this.loginSub = this.apiService.registration(this.form.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(userData => {
@@ -143,5 +128,10 @@ export class RegistrationFormPageComponent implements OnInit {
 
   openLoginPage() {
     this.modalService.openLoginForm$();
+  }
+
+
+  openRegFormChoiceOrg() {
+    this.modalService.openRegFormChoiceOrganisation();
   }
 }

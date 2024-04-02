@@ -3,6 +3,7 @@
 }
 
 .btnSettingsRecords {
+  color: #5238fd;
   background: none;
   border-radius: 10px;
   border: solid 1px #f6dbff;
@@ -10,8 +11,14 @@
   cursor: pointer;
 }
 
+.btnSettingsRecords:hover {
+  color: #0221c0;
+  background: #03f303;
+}
+
 .now {
   max-width: 400px;
+  width: 360px;
   margin: 5px;
   padding: 5px;
   border-radius: 10px;

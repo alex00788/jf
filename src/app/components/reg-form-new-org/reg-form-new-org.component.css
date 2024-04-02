@@ -1,0 +1,46 @@
+.regFormAddNewOrgClass {
+  background: #aefaae;
+  width: 450px;
+  height: 300px;
+  margin: 15px;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding-top: 10px;
+  font-size: 25px;
+  color: #5238fd;
+}
+
+.formAddNewOrg {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: #5238fd;
+  margin: 25px 30px 25px 70px;
+}
+
+.futRegFormAddNewOrg {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 50px 10px 10px;
+}
+
+.btnFutAddNewOrg {
+  background: white;
+  border: none;
+  border-radius: 10px;
+}
+
+label{
+  margin: 5px;
+}
+
+input{
+  border-radius: 10px;
+  width: 300px;
+  padding: 5px;
+  border: none;
+}

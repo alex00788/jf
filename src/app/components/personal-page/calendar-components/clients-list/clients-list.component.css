@@ -1,5 +1,6 @@
 .clientsListClass {
-  background: #c6faeb;;
+  background: #c6faeb;
+  width: 360px;
   margin-top: 1px;
   border-radius: 10px;
   padding: 10px;
@@ -23,7 +24,14 @@
   border: solid 1px #f6dbff;
   display: block;
   cursor: pointer;
+  color: #5238fd;
 }
+
+.btnMyClientList:hover {
+  color: #0221c0;
+  background: #03f303;
+}
+
 
 .btnCloseClientList {
   position: absolute;

@@ -105,7 +105,12 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  openRegistrationPage() {
+  openRegistrationPage() { //  откроет форму регистрации
     this.modalService.openRegistrationForm$();
   }
+
+  openRegFormChoiceOrg() {
+    this.modalService.openRegFormChoiceOrganisation();
+  }
+
 }

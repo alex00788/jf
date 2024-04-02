@@ -4,11 +4,19 @@
   opacity: 95%;
 }
 
+.titleMainePage {
+  margin: 15px;
+}
+
+.titleMainePage:hover {
+  color: #0221c0;
+}
+
 .mainePageClass {
-  margin: 10px;
+  margin: 10px 10px 30px 10px;
   display: flex;
   justify-content: center;
-  color: #2630f1;
+  color: #5238fd;
   cursor: pointer;
 }
 
@@ -49,7 +57,7 @@
 
 .btnCalendarDisplayModeSelected {
   margin: 5px;
-  background: #aefaae;
+  background: #a3f6a3;
 }
 
 .btnBodyCalendarElement {
@@ -59,38 +67,54 @@
   display: block;
   cursor: pointer;
   height: 20px;
-  margin: 5px;
+  width: 120px;
+  margin: 10px auto;
+  color: #7eec7e;
+}
+.btnBodyCalendarElement:hover {
+  color: #0221c0;
+  background: #03f303;
 }
 
+
 .bodyCalendarElementClass {
-  width: 360px;
+  /*width: 360px;*/
   /*height: 280px;*/
-  margin: 5px;
-  padding: 5px 15px 15px 5px;
+  margin: 0 auto;
+  padding: 5px 15px 5px 5px;
   /*background: #c6faeb;*/
 }
 
 .calendarNum {
   border: solid 1px #f50622;
   border-radius: 10px;
+  width: 360px;
 }
 
 .btnLogoutSystemsClass {
   position: absolute;
-  top: 35px;
-  right: 180px;
+  top: 60px;
+  right: 200px;
   background: none;
   border: solid 0.1rem #c8caf8;
   border-radius: 10px;
-  color: #2630f1;
+  color: #5238fd;
   cursor: pointer;
 }
 
+.btnLogoutSystemsClass:hover {
+  color: #f50622;
+}
 
-@media (max-width: 1100px) {
+
+@media (max-width: 1243px) {
+  .bodyCalendar {
+    flex-direction: column;
+  }
+
   .btnLogoutSystemsClass {
-    position: static;
-    height: 20px;
-    margin: 25px;
+    margin: 0 auto;
+    right: inherit;
   }
 }
+

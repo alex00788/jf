@@ -136,6 +136,12 @@ export class ApiService {
       .pipe(catchError(this.errHandler.bind(this)))
   }
 
+  addNewOrgSend(newOrgData: any): Observable<any> {
+    return this.http.post<any>('/api/user/addNewOrg', newOrgData)
+      .pipe(catchError(this.errHandler.bind(this)))
+  }
+
+
 
   deleteEntry(id: any, userId: any): Observable<any> {
     return this.http.delete<any>('/api/user/deleteEntry/' + id + '/' + userId)

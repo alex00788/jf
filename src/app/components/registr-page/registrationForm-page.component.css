@@ -32,6 +32,7 @@
   height: 25px;
   background: #518af3;
   color: white;
+  margin-bottom: 20px;
 }
 
 .registrationBtn:disabled {
@@ -96,6 +97,17 @@ input {
   font-size: 15px;
 }
 
+.regFormBtn {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+  margin: 15px;
+  display: flex;
+  cursor: pointer;
+  color: blue;
+  font-size: 15px;
+}
+
 .loginBtn:hover {
   font-weight: bold;
 }
@@ -116,6 +128,10 @@ input {
 
 @media (max-width: 1300px) {
   .titleModal {
+    color: white;
+  }
+
+  .regFormBtn {
     color: white;
   }
 
@@ -154,6 +170,10 @@ input {
   .futRegistration {
     top: 440px;
     width: 350px;
+  }
+
+  .icon-pass {
+    right: 10px;
   }
 
 }
