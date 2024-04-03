@@ -8,6 +8,7 @@ import {ErrorResponseService} from "../../shared/services/error.response.service
 import {Subject, takeUntil} from "rxjs";
 import {ModalService} from "../../shared/services/modal.service";
 import {DateService} from "../personal-page/calendar-components/date.service";
+import {SuccessService} from "../../shared/services/success.service";
 
 @Component({
   selector: 'app-login-page',
@@ -24,6 +25,7 @@ import {DateService} from "../personal-page/calendar-components/date.service";
 export class LoginPageComponent implements OnInit, OnDestroy {
   title = 'вход в личный кабинет';
   inputPass: any;
+  accountNotConfirmed: boolean = false;
   changeIcon = true;
   loginSub: any;
   private destroyed$: Subject<void> = new Subject();
@@ -39,6 +41,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private activateRouter: ActivatedRoute,
     private modalService: ModalService,
     private dateService: DateService,
+    public successService: SuccessService,
 
     public errorResponseService: ErrorResponseService
   ) {
@@ -78,12 +81,18 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.loginSub = this.apiService.login(this.form.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(userData => {
-      if (userData) {
+        if (userData?.user.isActivated) {
         this.form.reset()
         this.router.navigate(['personal-page'])
         this.modalService.close()
         this.dateService.setUser(userData)
-      }
+        this.accountNotConfirmed = true;
+      } else {
+          this.errorResponseService.localHandler('активируйте аккаунт, пройдите по ссылке в почте...')
+          this.accountNotConfirmed = true;
+          this.router.navigate(['/'])
+          this.apiService.logout()
+        }
     })
   }
 
@@ -113,4 +122,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.modalService.openRegFormChoiceOrganisation();
   }
 
+  resendLink() {
+    this.apiService.resendLink({email: this.form.value.email})
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((mes:any) => {
+        this.errorResponseService.clear();
+        this.modalService.close();
+        this.successService.localHandler(mes.message)
+        this.accountNotConfirmed = false;
+      })
+  }
 }

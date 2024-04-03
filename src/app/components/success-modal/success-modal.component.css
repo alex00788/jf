@@ -1,0 +1,21 @@
+.modalSuccessClass {
+  background: #aefaae;
+  margin: 15px;
+  color: #5238fd;
+}
+
+.titleSuccessModal {
+  text-align: center;
+  margin: 15px;
+  padding-top: 10px;
+}
+
+.successMessage {
+  margin: 15px;
+}
+
+.btnSuccessModal {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}

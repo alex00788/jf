@@ -1,3 +1,9 @@
+<button type="button"
+        class="btnResend"
+        *ngIf="accountNotConfirmed"
+        (click)="resendLink()"
+> отправить ссылку повторно
+</button>
 <form [formGroup]="form" (submit)="submit()">
   <span class="titleModal">  {{title}}  </span>
   <div class="form">

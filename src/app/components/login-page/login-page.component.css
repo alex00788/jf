@@ -7,6 +7,20 @@
   border-radius: 20px;
 }
 
+.btnResend {
+  cursor: pointer;
+  position: absolute;
+  top: 400px;
+  border: none;
+  border-radius: 5px;
+  background: #93b9fd;
+  color: white;
+  z-index: 11;
+  font-size: 35px;
+  width: 500px;
+}
+
+
 .iconsClass {
   font-weight: bold;
 }
@@ -107,6 +121,13 @@ input {
     font-size: 30px;
     word-spacing: 150vw;
   }
+
+
+  .btnResend {
+    top: 350px;
+  }
+
+
 }
 
 @media (max-width: 720px) {

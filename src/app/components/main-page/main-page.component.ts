@@ -11,6 +11,7 @@ import {
     RegFormChoiceOrganizationComponent
 } from "../reg-form-choice-organization/reg-form-choice-organization.component";
 import {RegFormNewOrgComponent} from "../reg-form-new-org/reg-form-new-org.component";
+import {SuccessModalComponent} from "../success-modal/success-modal.component";
 
 @Component({
   selector: 'main-page',
@@ -26,7 +27,8 @@ import {RegFormNewOrgComponent} from "../reg-form-new-org/reg-form-new-org.compo
         RouterLink,
         DescriptionApplicationComponent,
         RegFormChoiceOrganizationComponent,
-        RegFormNewOrgComponent
+        RegFormNewOrgComponent,
+        SuccessModalComponent
     ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'

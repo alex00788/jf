@@ -1,0 +1,11 @@
+<div class="modalSuccessClass" *ngIf="successService.success$ | async as mesSuccess">
+  <div class="titleSuccessModal">
+    Операция выполнена!
+  </div>
+  <div class="successMessage">
+    <span>{{mesSuccess}}</span>
+  </div>
+  <div class="btnSuccessModal">
+    <button type="button"  class="btnSuccessModal" (click)="closeSuccess()"> ok </button>
+  </div>
+</div>

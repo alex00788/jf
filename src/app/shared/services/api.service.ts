@@ -153,4 +153,9 @@ export class ApiService {
     return this.http.put<any>('/api/user/changeRole/' + userId, userId)
       .pipe(catchError(this.errHandler.bind(this)))
   }
+
+  resendLink(email: any) : Observable<any> {
+    return this.http.post<any>('/api/user/resendLink', email )
+      .pipe(catchError(this.errHandler.bind(this)))
+  }
 }

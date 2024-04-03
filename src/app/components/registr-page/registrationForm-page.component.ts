@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ModalService} from "../../shared/services/modal.service";
 import {ErrorResponseService} from "../../shared/services/error.response.service";
 import {DateService} from "../personal-page/calendar-components/date.service";
+import {SuccessService} from "../../shared/services/success.service";
 
 @Component({
   selector: 'app-registrationForm-page',
@@ -29,7 +30,9 @@ export class RegistrationFormPageComponent implements OnInit {
               private activateRouter: ActivatedRoute,
               private modalService: ModalService,
               private dateService: DateService,
-              public errorResponseService: ErrorResponseService) {
+              public errorResponseService: ErrorResponseService,
+              public successService: SuccessService
+  ) {
   }
 
   private destroyed$: Subject<void> = new Subject();
@@ -90,12 +93,17 @@ export class RegistrationFormPageComponent implements OnInit {
     this.loginSub = this.apiService.registration(this.form.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(userData => {
-      if (userData) {
-        this.form.reset()
-        this.router.navigate(['personal-page'])
-        this.modalService.close()
-        this.dateService.setUser(userData)
-      }
+        if (userData?.user.isActivated) {
+          this.form.reset()
+          this.router.navigate(['personal-page'])
+          this.modalService.close()
+          this.dateService.setUser(userData)
+        } else {
+          this.modalService.close()
+          this.successService.localHandler('Вы зарегистрированы! Осталось подтвердить почту!');
+          this.router.navigate(['/'])
+          this.apiService.logout()
+        }
     })
   }
 
