@@ -49,11 +49,8 @@
         (click)="showWeek()"
       > неделя
       </button>
-      <button class="btnCalendarDisplayMode" disabled="true"
+      <button class="btnCalendarDisplayMode" disabled
       > месяц
-      </button>
-      <button class="btnCalendarDisplayMode" disabled="true"
-      > дни когда я записан
       </button>
       <input class="btnCalendarDisplayMode" type="text" placeholder="записи конкретной организации"
              *ngIf="dateService.currentUserIsTheMainAdmin | async"

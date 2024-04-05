@@ -4,6 +4,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
 import {ApiService} from "../../../../shared/services/api.service";
+import {TranslateMonthPipe} from "../../../../shared/pipe/translate-month.pipe";
 
 @Component({
   selector: 'app-current-user-data',
@@ -12,7 +13,8 @@ import {ApiService} from "../../../../shared/services/api.service";
     AsyncPipe,
     ReactiveFormsModule,
     NgForOf,
-    NgIf
+    NgIf,
+    TranslateMonthPipe
   ],
   templateUrl: './current-user-data.component.html',
   styleUrl: './current-user-data.component.css'
@@ -28,6 +30,7 @@ export class CurrentUserDataComponent implements OnInit {
 
   personalData: boolean = false;
   settingsRecords: boolean = false;
+  recordsBlock: boolean = false;
   windowAddingNewOrgIsOpen: boolean = false;
   showSettings: boolean;
   timesForRec : any = [];
@@ -46,8 +49,9 @@ export class CurrentUserDataComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.recordingDaysChanged();
     this.showSettings = !this.dateService.currentUserSimpleUser.value;
-
+    this.recordsBlock = false;
     //  для настройки интервала времени в которое можно записаться
     for (let i = 0 ; i <= 23; i++) {
       this.timesForRec.push(i)
@@ -99,5 +103,57 @@ export class CurrentUserDataComponent implements OnInit {
   }
 
 
+  //при смене записи обновляет дни когда я записан
+  recordingDaysChanged() {
+    this.dateService.recordingDaysChanged
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(()=>{
+        this.openRecordsBlock();
+      })
+  }
+
+  closeRecordsBlock() {
+    this.recordsBlock = false;
+  }
+
+  //открывает блок с датами в месяце, когда записан пользователь
+  openRecordsBlock() {
+    this.recordsBlock = true;
+    const dataForGetAllEntrySelectedMonth = {
+      org: this.dateService.sectionOrOrganization.value,
+      month: this.dateService.date.value.format('MM'),
+      year: this.dateService.date.value.format('YYYY'),
+      userId: this.dateService.currentUserId.value
+    }
+    this.getAllEntryCurrentUserInSelectedMonth(dataForGetAllEntrySelectedMonth);
+  }
+
+  //Возмет с бека все записи текущей пользователя за выбранный месяц
+  getAllEntryCurrentUserInSelectedMonth(dataForGetAllEntry:any) {
+    this.apiService.getAllEntryCurrentUserInMonth(dataForGetAllEntry)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(allEntryInMonth => {
+        this.dateService.allEntryCurUserInSelectMonth.next(allEntryInMonth)
+      });
+  }
+
+  //удаление записи в блоке всех записей пользователя
+  deleteSelectedRec(selectedRec: any) {
+    this.apiService.deleteEntry(selectedRec.id, selectedRec.userId)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1))
+        this.dateService.recordingDaysChanged.next(true);
+        const newAllUsers: any[] = []
+        this.dateService.allUsers.value.forEach((el: any) => {
+          if ((el: any) => el.id === this.dateService.currentUserId.value) {
+            el.remainingFunds = this.dateService.remainingFunds.value
+          }
+          newAllUsers.push(el)
+        })
+        this.dateService.allUsers.next(newAllUsers)
+        this.dateService.blockRecIfRecorded.next(false);
+      })
+  }
 
 }

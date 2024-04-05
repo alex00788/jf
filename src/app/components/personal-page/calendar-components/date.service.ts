@@ -14,9 +14,11 @@ export class DateService {                                            //moment()
   public currentUserIsTheAdminOrg: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public currentUserSimpleUser: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public calendarBodyOpen: BehaviorSubject<boolean> = new BehaviorSubject(false)
-  // public roleToGetTheDesiredListOfUsers: BehaviorSubject<any> = new BehaviorSubject('')
+  public recordingDaysChanged: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public blockRecIfRecorded: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
+  public allEntryCurUserInSelectMonth: BehaviorSubject<any> = new BehaviorSubject([])
   public allUsersSelectedOrg: BehaviorSubject<any> = new BehaviorSubject([])
   public allOrganization: BehaviorSubject<any> = new BehaviorSubject([])
   public allOrgForReg: BehaviorSubject<any> = new BehaviorSubject([])
@@ -36,6 +38,7 @@ export class DateService {                                            //moment()
   changeMonth(dir: number) {
     const value = this.date.value.add(dir, 'month')    //  1й парметр будет число, а второй, что меняем
     this.date.next(value)
+    this.recordingDaysChanged.next(true);
   }
 
   // функция устанавливающая пользователя

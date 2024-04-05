@@ -1,5 +1,5 @@
 <div class="selectedUserClass">
-  <div>
+  <div class="coverPersonalData">
     <div class="personalDataTitle">
       <strong> Данные о пользователе </strong>
       <button class="btnClosePersonalData" (click)="modalService.close()">&times;</button>
@@ -12,9 +12,9 @@
     </div>
     <div class="selectedUserClass">
       <div>
-        <strong> Роль: </strong>
+        <strong> {{roleUser}}:  </strong>
       </div>
-      <span> {{roleUser}}  {{sectionOrOrganization}} </span>
+      <span>  {{sectionOrOrganization}} </span>
     </div>
     <div class="selectedUserClass">
       <div>

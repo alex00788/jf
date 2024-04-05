@@ -9,12 +9,35 @@
 }
 
 .modalContentForPerson {
-  width: auto;
-  height: auto;
+  width: 500px;
   position: absolute;
-  top: 220px;
-  left: 45%;
+  top: 550px;
+  left: 33%;
   padding: 6px;
   background: white;
   border-radius: 10px;
+}
+
+@media (max-width: 1300px) {
+  .modalContentForPerson{
+    left: 28%;
+  }
+}
+
+@media (max-width: 960px) {
+  .modalContentForPerson{
+    left: 25%;
+  }
+}
+
+@media (max-width: 720px){
+  .modalContentForPerson{
+    left: 15%;
+  }
+}
+
+@media (max-width: 600px) {
+  .modalContentForPerson{
+    left: 7%;
+  }
 }

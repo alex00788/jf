@@ -61,7 +61,7 @@
 }
 
 .btnBodyCalendarElement {
-  background: none;
+  background: yellow;
   border-radius: 10px;
   border: solid 1px #f6dbff;
   display: block;
@@ -69,7 +69,7 @@
   height: 20px;
   width: 120px;
   margin: 10px auto;
-  color: #7eec7e;
+  color: #5238fd;
 }
 .btnBodyCalendarElement:hover {
   color: #0221c0;
@@ -81,7 +81,7 @@
   /*width: 360px;*/
   /*height: 280px;*/
   margin: 0 auto;
-  padding: 5px 15px 5px 5px;
+  padding: 10px;
   /*background: #c6faeb;*/
 }
 

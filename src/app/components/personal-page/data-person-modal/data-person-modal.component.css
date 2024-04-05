@@ -1,7 +1,9 @@
 .selectedUserClass {
   background: #f8eeee;
 }
-
+.coverPersonalData {
+  width: 500px;
+}
 
 .selectedUserClass {
   display: flex;

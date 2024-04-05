@@ -47,6 +47,7 @@ input {
 
 .ownOrg {
   margin: 10px;
+  width: 300px;
   display: block;
   text-align: start;
   cursor: pointer;

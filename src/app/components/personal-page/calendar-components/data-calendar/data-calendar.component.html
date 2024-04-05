@@ -57,7 +57,7 @@
       <button *ngIf="currentHour.time !== newEntryHasBeenOpened"
               class="dataList"
               (click)="currentUserRec(currentHour.time)"
-              [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck || blockIfRecorded"
+              [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck || dateService.blockRecIfRecorded.value"
       >
         +
       </button>

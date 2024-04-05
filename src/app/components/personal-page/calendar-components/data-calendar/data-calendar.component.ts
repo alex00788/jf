@@ -42,7 +42,6 @@ export class DataCalendarComponent implements OnInit {
   pastDateIsBlocked: boolean = false;
   filterAllUserForCurrentOrg: any[] = [];
   clickCount = 0;
-  blockIfRecorded: boolean = false;
   constructor(public dateService: DateService,
               public apiService: ApiService,
               public modalService: ModalService,
@@ -54,6 +53,12 @@ export class DataCalendarComponent implements OnInit {
     this.currentDate = moment().format('DD.MM.YYYY');
     this.pastDateIsBlocked = this.currentDate > this.dayOfWeek;
     this.currentDayCheck = this.currentDate === this.dayOfWeek;
+
+    this.dateService.recordingDaysChanged
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.getAllEntry(this.dayOfWeek);
+    })
 
     this.dateService.date
       .pipe(takeUntil(this.destroyed$))
@@ -120,6 +125,7 @@ export class DataCalendarComponent implements OnInit {
 
 //берем все записи из базы за текущую дату и фильтруем в зависимости от выбранной организации
   getAllEntry(date: any) {
+    console.log('как тут оптимизировать повторение запросо при выборе недели 130!!!')
     this.apiService.getAllEntry(date)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntry => {
@@ -196,9 +202,13 @@ export class DataCalendarComponent implements OnInit {
 
   //функция добавления новой записи
   addEntry(user: any, currentHourTime: any) {
+    const year = this.dayOfWeek.substring(this.dayOfWeek.length - 4);
+    const month = this.dayOfWeek.substring(3,5);
     this.dateService.dataSelectedUser.next(user);
     const newUserAccount = {
       date: this.dayOfWeek,
+      dateYear: year,
+      dateMonth: month,
       time: currentHourTime,
       user: user.surnameUser + ' ' + user.nameUser,
       userId: user.id,
@@ -209,12 +219,13 @@ export class DataCalendarComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.getAllEntry(this.dayOfWeek);
+        this.dateService.recordingDaysChanged.next(true);
       })
   }
 
   deletePerson(id: any, userId: any) {
     if (this.dateService.currentUserSimpleUser.value) {
-      this.blockIfRecorded = false;
+      this.dateService.blockRecIfRecorded.next(false);
     }
     this.apiService.deleteEntry(id, userId)
       .pipe(takeUntil(this.destroyed$))
@@ -227,6 +238,7 @@ export class DataCalendarComponent implements OnInit {
         if (user.id === this.dateService.currentUserId.value) {
           this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1));
         }
+        this.dateService.recordingDaysChanged.next(true);
       })
   }
 
@@ -261,7 +273,7 @@ export class DataCalendarComponent implements OnInit {
 
   //определение кликнули один или два раза чтоб обычн пользователь не кликнул дважды
   currentUserRec(time: any) {
-    this.blockIfRecorded = true;
+    this.dateService.blockRecIfRecorded.next(true);
     this.clickCount++;
     setTimeout(() => {
       if (this.clickCount === 1) {

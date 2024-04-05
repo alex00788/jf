@@ -22,12 +22,21 @@
         </div>
         <span>  {{dateService.sectionOrOrganization | async}} </span>
       </div>
-      <div class="currentUser">
+      <div class="currentUser" *ngIf="dateService.currentUserSimpleUser.value">
         <div>
           <strong> Остаток: </strong>
         </div>
         <span> {{dateService.remainingFunds | async}} </span>
       </div>
+
+      <div class="futSettingSimpleUserClass" *ngIf="dateService.currentUserSimpleUser.value">
+        <button class="btnSettingsRecords"
+                *ngIf="!recordsBlock"
+                (click)="openRecordsBlock()">
+          <strong> Когда я записан </strong>
+        </button>
+      </div>
+
       <div class="futSettingClass" *ngIf="showSettings">
         <button class="btnSettingsRecords" (click)="switchSittingsData()">
           <strong> Настройки </strong>
@@ -38,6 +47,43 @@
         </button>
       </div>
     </div>
+
+    <ng-container *ngIf="dateService.currentUserSimpleUser.value">
+      <div class="recordsBlockClass" *ngIf="recordsBlock">
+        <div class="recordsBlockTitle" (click)="closeRecordsBlock()">
+          <strong
+          >
+            Дни когда я записан
+            <span style="color: #5238fd">
+              в {{dateService.date.value.format('M') | translateMonth}}
+            </span>
+          </strong>
+          <button class="btnRecordsBlockClose">&times;</button>
+        </div>
+        <div class="dataRecordsBlock"  *ngIf="dateService.allEntryCurUserInSelectMonth.value.length;  else notContentBlock">
+          <div class="dataRecords">
+            <div class="strSRecords" *ngFor="let entry of dateService.allEntryCurUserInSelectMonth | async">
+            <span class="strRecords">
+              дата: {{entry.date}}
+            </span>
+              <span class="strRecords">
+              время: {{entry.time}}:00
+            </span>
+              <span class="strRecords" (click)="deleteSelectedRec(entry)">
+              &times;
+            </span>
+            </div>
+            <button class="btnCancelAllRec" disabled> отменить все записи !</button>
+          </div>
+        </div>
+
+        <ng-template #notContentBlock>
+          <span class="notContentClass">в {{dateService.date.value.format('M') | translateMonth}} записей нет!</span>
+        </ng-template>
+
+
+      </div>
+    </ng-container>
 
     <div class="settingsRecordsClass" *ngIf="windowAddingNewOrgIsOpen">
       <form [formGroup]="formAddOrg" (submit)="addNewOrg()">
