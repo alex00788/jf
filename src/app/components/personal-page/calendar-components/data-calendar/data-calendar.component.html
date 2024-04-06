@@ -15,19 +15,17 @@
       <ng-container *ngIf="dateService.currentUserSimpleUser | async;  else adminBlockBtn">
         <div class="inline">
           <span class="currentPersonClass"
-          [class]="{
-          currentPersonClass : person.userId == dateService.currentUserId.value
-          }"
+                [class]="{currentPersonClass : person.userId == dateService.currentUserId.value}"
           >
             {{i + 1}} {{person.nameUser}}
           </span>
           <button
-            *ngIf="person.userId == dateService.currentUserId.value"
-            class="btnDelete" (click)="deletePerson(person.id, person.userId)"
-            [disabled]="
-              pastDateIsBlocked ||
-              currentHour.time < currentHourF && currentDayCheck ||
-              person.userId != dateService.currentUserId.value"
+                  *ngIf="person.userId == dateService.currentUserId.value"
+                  class="btnDelete" (click)="deletePerson(person.id, person.userId)"
+                  [disabled]="
+                              pastDateIsBlocked ||
+                              currentHour.time < currentHourF && currentDayCheck ||
+                              person.userId != dateService.currentUserId.value"
           >
             &times;
           </button>
@@ -36,9 +34,7 @@
       <ng-template #adminBlockBtn>
         <div class="inline">
           <span
-            [class]="{
-          currentPersonClass : person.userId == dateService.currentUserId.value
-          }"
+            [class]="{currentPersonClass : person.userId == dateService.currentUserId.value}"
             (click)="openDataPerson(person)"
           >
             {{i + 1}} {{person.nameUser}}
@@ -57,7 +53,7 @@
       <button *ngIf="currentHour.time !== newEntryHasBeenOpened"
               class="dataList"
               (click)="currentUserRec(currentHour.time)"
-              [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck || dateService.blockRecIfRecorded.value"
+              [disabled]="pastDateIsBlocked || currentHour.time < currentHourF && currentDayCheck || this.blockIfRecorded"
       >
         +
       </button>

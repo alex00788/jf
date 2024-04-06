@@ -37,6 +37,7 @@ export class DataCalendarComponent implements OnInit {
   currentDate: any;
   currentDayCheck: boolean = false;
   recordsCurrentDay: any = [];
+  blockIfRecorded = false;
   disabledBtnRecord: boolean = false;
   private destroyed$: Subject<void> = new Subject();
   pastDateIsBlocked: boolean = false;
@@ -54,25 +55,35 @@ export class DataCalendarComponent implements OnInit {
     this.pastDateIsBlocked = this.currentDate > this.dayOfWeek;
     this.currentDayCheck = this.currentDate === this.dayOfWeek;
 
+    this.dateService.blockRecIfRecorded
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.blockIfRecorded = false;
+      })
+
     this.dateService.recordingDaysChanged
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
+        console.log('60')
         this.getAllEntry(this.dayOfWeek);
     })
 
     this.dateService.date
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
+        console.log('68')
         this.getAllEntry(this.dayOfWeek)
       })
     this.dateService.timeStartRecord
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
+        console.log('75')
         this.getAllEntry(this.dayOfWeek);
       })
     this.dateService.timeFinishRecord
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
+        console.log('82')
         this.getAllEntry(this.dayOfWeek);
       })
   }
@@ -225,7 +236,8 @@ export class DataCalendarComponent implements OnInit {
 
   deletePerson(id: any, userId: any) {
     if (this.dateService.currentUserSimpleUser.value) {
-      this.dateService.blockRecIfRecorded.next(false);
+      // this.dateService.blockRecIfRecorded.next(false);
+      this.blockIfRecorded = false;
     }
     this.apiService.deleteEntry(id, userId)
       .pipe(takeUntil(this.destroyed$))
@@ -273,7 +285,8 @@ export class DataCalendarComponent implements OnInit {
 
   //определение кликнули один или два раза чтоб обычн пользователь не кликнул дважды
   currentUserRec(time: any) {
-    this.dateService.blockRecIfRecorded.next(true);
+    // this.dateService.blockRecIfRecorded.next(true);
+    this.blockIfRecorded = true;
     this.clickCount++;
     setTimeout(() => {
       if (this.clickCount === 1) {

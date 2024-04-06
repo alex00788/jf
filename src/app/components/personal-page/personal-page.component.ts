@@ -30,7 +30,7 @@ import {ClientsListComponent} from "./calendar-components/clients-list/clients-l
     ModalWindowForPersonPageComponent,
     CurrentUserDataComponent,
     InfoBlockComponent,
-    ClientsListComponent
+    ClientsListComponent,
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'
@@ -48,6 +48,7 @@ export class PersonalPageComponent implements OnInit {
   private destroyed$: Subject<void> = new Subject();
   weekSelectedDate: any[] = [];
   showCurrentWeek: boolean = false;
+  showCurrentMonth: boolean = false;
   showCurrentDay: boolean = true;
   inputValue = '';
 
@@ -62,27 +63,52 @@ export class PersonalPageComponent implements OnInit {
     }
   }
 
+  //функция формирующая показ недели
+  formativeShowWeek(currentDate: any) {
+    //moment() - текущая дата ... внутрь передаем дату по которой кликнули...
+    const m = moment(currentDate);   // получаем, текущей датой ту, по которой кликнули
+    const currentWeek = []
+    for (let i = 1; i <= 7; i++) {
+      const day = m.format('dd');             // 'dd' покажет название дня... а так -> 'DD' покажет число
+      if ( day === 'Su' && this.showCurrentWeek) {     //если кликнули по вс
+        const newM = m.subtract(1,'d')       // то убираем 1 день чтоб неделя не перескакивала
+        currentWeek.push(newM.clone().startOf('w').add(i, 'd').format('DD.MM.YYYY'))
+      } else {
+        currentWeek.push(m.clone().startOf('w').add(i, 'd').format('DD.MM.YYYY'))
+      }
+    }
+    return currentWeek;
+  }
+
+
+  //функция формирующая показ месяца
+  formativeShowMonth(currentDate: any) {
+    const m = moment(currentDate);
+    const currentMonth: any[] = [];
+    // let firstDay = m.clone().startOf('month').format('DD-MM-YYYY'); // Отмечаем начало месяца!
+    let lastDay = m.clone().endOf('month').format('DD-MM-YYYY'); // Установим конец месяца!
+    const quantityDays = lastDay.substring(0, 2);
+    for(let i = 0 ; i < +quantityDays; i++) {
+      currentMonth.push(m.clone().startOf('month').add(i, 'd').format('DD.MM.YYYY'))
+    }
+    return currentMonth;
+  }
+
+
+//функция определяет по какой кнопке нажали и показывает день, неделю или месяц
   calculatingCurrentWeek() {
     this.dateService.date
       .pipe(takeUntil(this.destroyed$))
       .subscribe(currentDate => {
-        const m = moment(currentDate);      //текущая дата ... внутрь передаем дату по которой кликнули..
-        //определяем границы недели выбранной даты
-        // const startSelectedWeek = m.clone().startOf('w').add(1,'d').format('DD.MM.YYYY');
-        // const endSelectedWeek = m.clone().endOf('w').add(1, 'd').format('DD.MM.YYYY');
-        const currentWeek = []
-        for (let i = 1; i <= 7; i++) {
-          currentWeek.push(m.clone().startOf('w').add(i, 'd').format('DD.MM.YYYY'))
+        if (this.showCurrentMonth) {
+          this.weekSelectedDate = this.formativeShowMonth(currentDate);
         }
-        // console.log( currentWeek)
-        console.log('71', m.format('DD.MM.YYYY'))
-        // console.log(endSelectedWeek , 'при нажатии на последний день недели показывает след неделя')
         if (this.showCurrentWeek) {
-          this.weekSelectedDate = currentWeek
-        } else {
+          this.weekSelectedDate = this.formativeShowWeek(currentDate);
+        }
+        if (this.showCurrentDay) {
           this.weekSelectedDate = [this.dateService.date.value.format('DD.MM.YYYY')];
         }
-
       })
   }
 
@@ -94,13 +120,22 @@ export class PersonalPageComponent implements OnInit {
   showWeek() {
     this.showCurrentWeek = true;
     this.showCurrentDay = false;
+    this.showCurrentMonth = false;
     this.calculatingCurrentWeek();
     this.memorableChoice();
+  }
+
+  showMonth() {
+    this.showCurrentWeek = false;
+    this.showCurrentDay = false;
+    this.showCurrentMonth = true;
+    this.calculatingCurrentWeek();
   }
 
   showDay() {
     this.showCurrentWeek = false;
     this.showCurrentDay = true;
+    this.showCurrentMonth = false;
     this.calculatingCurrentWeek();
     this.memorableChoice();
   }

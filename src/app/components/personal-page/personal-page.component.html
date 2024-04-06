@@ -43,13 +43,17 @@
       > день
       </button>
       <button
-        [class]="{
-        btnCalendarDisplayModeSelected : showCurrentWeek,
-        btnCalendarDisplayMode: !showCurrentWeek}"
-        (click)="showWeek()"
+              [class]="{
+              btnCalendarDisplayModeSelected : showCurrentWeek,
+              btnCalendarDisplayMode: !showCurrentWeek}"
+              (click)="showWeek()"
       > неделя
       </button>
-      <button class="btnCalendarDisplayMode" disabled
+      <button
+              [class]="{
+              btnCalendarDisplayModeSelected : showCurrentMonth,
+              btnCalendarDisplayMode: !showCurrentMonth}"
+              (click)="showMonth()"
       > месяц
       </button>
       <input class="btnCalendarDisplayMode" type="text" placeholder="записи конкретной организации"

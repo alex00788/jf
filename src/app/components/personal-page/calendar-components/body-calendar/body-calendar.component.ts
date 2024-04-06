@@ -44,9 +44,9 @@ export class BodyCalendarComponent implements OnInit {
 
     while (date.isBefore(endDay, 'day')) {          // будет идти до последнего дня
       calendar.push({
-        days: Array(7)                          // генерим пустой массив   из 7 дней тк неделя
-          .fill(0)                                           //  заполняем его 0
-          .map(() => {                                                    //и далее приводим к нужному формату
+        days: Array(7)                                     //  генерим пустой массив из 7 дней тк неделя
+          .fill(0)                                              //  заполняем его 0
+          .map(() => {                                                //  и далее приводим к нужному формату
             const value = date.add(1, 'day').clone()
             const active = moment().isSame(value, 'date')  //moment текущ дата ... isSame сравниваем занчение value  по date
             const disabled = !now.isSame(value, 'month')   // now- это текущий месяц, если он не совпадает со значением value  то его блокируем
