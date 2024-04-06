@@ -1,0 +1,36 @@
+<div class="settingsRecordsClass" *ngIf="personalBlockService.settingsRecords">
+  <form [formGroup]="form" (submit)="submit()">
+    <div class="oneSitting">
+      <label>
+        max человек в записи
+      </label>
+      <input type="number" maxlength="2" max="20" class="sittingsInputClass" formControlName="maxiPeople">
+    </div>
+
+    <div class="oneSitting">
+      <label>
+        время начала записи
+      </label>
+      <select class="sittingsInputClass" formControlName="timeStartRec">
+        <option *ngFor="let chSt of timesForRec"> {{chSt}}</option>
+      </select>
+    </div>
+
+    <div class="oneSitting">
+      <label>
+        время окончания записи
+      </label>
+      <select class="sittingsInputClass" formControlName="timeFinishRec">
+        <option *ngFor="let chEnd of timesForRec"> {{chEnd}}</option>
+      </select>
+    </div>
+    <div class="btnSetClass">
+      <button class="btnSettingsRecords" (click)="personalBlockService.closeSettings()">
+        Отменить
+      </button>
+      <button class="btnSettingsRecords" type="submit">
+        Применить
+      </button>
+    </div>
+  </form>
+</div>

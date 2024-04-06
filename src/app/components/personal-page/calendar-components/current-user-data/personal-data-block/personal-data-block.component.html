@@ -1,0 +1,48 @@
+<div class="now">
+  <div class="titleNow" (click)="personalBlockService.switchData()">
+    <strong class="clickBtn"> Мои данные </strong>
+    <button class="btnClosePersonalDataComponent" (click)="personalBlockService.switchData()">&times;</button>
+  </div>
+  <div class="currentUser">
+    <div>
+      <strong> Имя: </strong>
+    </div>
+    <span> {{dateService.currentUser | async}} </span>
+  </div>
+  <div class="currentUser">
+    <div>
+      <strong *ngIf="dateService.currentUserIsTheMainAdmin | async"> {{dateService.currentUserRole | async}}: </strong>
+      <strong *ngIf="dateService.currentUserSimpleUser | async"> {{dateService.currentUserRole | async }}: </strong>
+      <strong *ngIf="dateService.currentUserIsTheAdminOrg | async"> {{dateService.currentUserRole | async}}: </strong>
+    </div>
+    <span>  {{dateService.sectionOrOrganization | async}} </span>
+  </div>
+  <div class="currentUser" *ngIf="dateService.currentUserSimpleUser.value">
+    <div>
+      <strong> Остаток: </strong>
+    </div>
+    <span> {{dateService.remainingFunds | async}} </span>
+  </div>
+
+  <div class="futSettingSimpleUserClass" *ngIf="dateService.currentUserSimpleUser.value">
+    <button class="btnSettingsRecords"
+            *ngIf="!personalBlockService.recordsBlock"
+            (click)="personalBlockService.openRecordsBlock()">
+      <strong> Когда я записан </strong>
+    </button>
+  </div>
+
+  <div class="futSettingClass" *ngIf="showSettings">
+  <button class="btnSettingsRecords" (click)="personalBlockService.switchSittingsData()">
+    <strong> Настройки </strong>
+  </button>
+  <ng-container *ngIf="dateService.currentUserIsTheMainAdmin | async">
+    <button class="btnSettingsRecords" (click)="personalBlockService.switchSittingsData()">
+    <strong> Задать ORG </strong>
+    </button>
+    <button class="btnSettingsRecords"  (click)="personalBlockService.addNewOrgSettings()">
+      <strong> Добавить ORG </strong>
+    </button>
+  </ng-container>
+  </div>
+</div>

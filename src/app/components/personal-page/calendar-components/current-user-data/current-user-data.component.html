@@ -1,158 +1,17 @@
 <div class="personalDataClass">
-  <div class="coverBtnSettingsRec" *ngIf="!personalData">
-  <button class="btnSettingsRecords" (click)="switchData()"> Мои данные</button>
+  <div class="coverBtnSettingsRec" *ngIf="!personalBlockService.personalData">
+  <button class="btnSettingsRecords" (click)="personalBlockService.switchData()"> Мои данные</button>
   </div>
-  <div *ngIf="personalData">
-    <div class="now">
-      <div class="titleNow" (click)="switchData()">
-        <strong class="clickBtn"> Мои данные </strong>
-        <button class="btnClosePersonalDataComponent" (click)="switchData()">&times;</button>
-      </div>
-      <div class="currentUser">
-        <div>
-          <strong> Имя: </strong>
-        </div>
-        <span> {{dateService.currentUser | async}} </span>
-      </div>
-      <div class="currentUser">
-        <div>
-          <strong *ngIf="dateService.currentUserIsTheMainAdmin | async"> {{dateService.currentUserRole | async}}: </strong>
-          <strong *ngIf="dateService.currentUserSimpleUser | async"> {{dateService.currentUserRole | async }}: </strong>
-          <strong *ngIf="dateService.currentUserIsTheAdminOrg | async"> {{dateService.currentUserRole | async}}: </strong>
-        </div>
-        <span>  {{dateService.sectionOrOrganization | async}} </span>
-      </div>
-      <div class="currentUser" *ngIf="dateService.currentUserSimpleUser.value">
-        <div>
-          <strong> Остаток: </strong>
-        </div>
-        <span> {{dateService.remainingFunds | async}} </span>
-      </div>
+  <div *ngIf="personalBlockService.personalData">
 
-      <div class="futSettingSimpleUserClass" *ngIf="dateService.currentUserSimpleUser.value">
-        <button class="btnSettingsRecords"
-                *ngIf="!recordsBlock"
-                (click)="openRecordsBlock()">
-          <strong> Когда я записан </strong>
-        </button>
-      </div>
+    <app-personal-data-block></app-personal-data-block>
 
-      <div class="futSettingClass" *ngIf="showSettings">
-        <button class="btnSettingsRecords" (click)="switchSittingsData()">
-          <strong> Настройки </strong>
-        </button>
-        <button class="btnSettingsRecords"  (click)="addNewOrgSettings()"
-                *ngIf="dateService.currentUserIsTheMainAdmin | async">
-          <strong> Добавить ORG </strong>
-        </button>
-      </div>
-    </div>
+    <app-records-block></app-records-block>
 
-    <ng-container *ngIf="dateService.currentUserSimpleUser.value">
-      <div class="recordsBlockClass" *ngIf="recordsBlock">
-        <div class="recordsBlockTitle" (click)="closeRecordsBlock()">
-          <strong
-          >
-            Дни когда я записан
-            <span style="color: #5238fd">
-              в {{dateService.date.value.format('M') | translateMonth}}
-            </span>
-          </strong>
-          <button class="btnRecordsBlockClose">&times;</button>
-        </div>
-        <div class="dataRecordsBlock"  *ngIf="dateService.allEntryCurUserInSelectMonth.value.length;  else notContentBlock">
-          <div class="dataRecords">
-            <div class="strSRecords" *ngFor="let entry of dateService.allEntryCurUserInSelectMonth | async">
-            <span class="strRecords">
-              дата: {{entry.date}}
-            </span>
-              <span class="strRecords">
-              время: {{entry.time}}:00
-            </span>
-              <span class="strRecords" (click)="deleteSelectedRec(entry)">
-              &times;
-            </span>
-            </div>
-            <button class="btnCancelAllRec" disabled> отменить все записи !</button>
-          </div>
-        </div>
+    <app-add-new-org></app-add-new-org>
 
-        <ng-template #notContentBlock>
-          <span class="notContentClass">в {{dateService.date.value.format('M') | translateMonth}} записей нет!</span>
-        </ng-template>
+    <app-settings-block></app-settings-block>
 
-
-      </div>
-    </ng-container>
-
-    <div class="settingsRecordsClass" *ngIf="windowAddingNewOrgIsOpen">
-      <form [formGroup]="formAddOrg" (submit)="addNewOrg()">
-        <div class="oneSitting">
-          <label>
-            название организации
-          </label>
-          <input class="sittingsInputClass" formControlName="nameOrg">
-        </div>
-
-        <div class="oneSitting">
-          <label>
-            имя руководителя
-          </label>
-          <input class="sittingsInputClass" formControlName="supervisorName">
-        </div>
-
-        <div class="oneSitting">
-          <label>
-            телефон руководителя
-          </label>
-          <input class="sittingsInputClass" formControlName="poneSupervisor">
-        </div>
-        <div class="btnSetClass">
-          <button class="btnSettingsRecords" (click)="closeWindowAddedNewOrg()">
-            Отменить
-          </button>
-          <button class="btnSettingsRecords" type="submit">
-            Добавить
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <div class="settingsRecordsClass" *ngIf="settingsRecords">
-      <form [formGroup]="form" (submit)="submit()">
-        <div class="oneSitting">
-          <label>
-            max человек в записи
-          </label>
-          <input type="number" maxlength="2" max="20" class="sittingsInputClass" formControlName="maxiPeople">
-        </div>
-
-        <div class="oneSitting">
-          <label>
-            время начала записи
-          </label>
-          <select class="sittingsInputClass" formControlName="timeStartRec">
-            <option *ngFor="let chSt of timesForRec"> {{chSt}}</option>
-          </select>
-        </div>
-
-        <div class="oneSitting">
-          <label>
-            время окончания записи
-          </label>
-          <select class="sittingsInputClass" formControlName="timeFinishRec">
-            <option *ngFor="let chEnd of timesForRec"> {{chEnd}}</option>
-          </select>
-        </div>
-        <div class="btnSetClass">
-          <button class="btnSettingsRecords" (click)="closeSettings()">
-            Отменить
-          </button>
-          <button class="btnSettingsRecords" type="submit">
-            Применить
-          </button>
-        </div>
-      </form>
-    </div>
+    <app-select-org-to-display *ngIf="dateService.currentUserIsTheMainAdmin.value"></app-select-org-to-display>
   </div>
 </div>

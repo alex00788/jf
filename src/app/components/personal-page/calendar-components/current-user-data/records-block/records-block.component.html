@@ -1,0 +1,36 @@
+ <ng-container *ngIf="dateService.currentUserSimpleUser.value">
+   <div class="recordsBlockClass" *ngIf="personalBlockService.recordsBlock">
+     <div class="recordsBlockTitle" (click)="personalBlockService.closeRecordsBlock()">
+       <strong
+       >
+         Дни когда я записан
+         <span style="color: #5238fd">
+           в {{dateService.date.value.format('M') | translateMonth}}
+         </span>
+       </strong>
+       <button class="btnRecordsBlockClose">&times;</button>
+     </div>
+     <div class="dataRecordsBlock"  *ngIf="dateService.allEntryCurUserInSelectMonth.value.length;  else notContentBlock">
+       <div class="dataRecords">
+         <div class="strSRecords" *ngFor="let entry of dateService.allEntryCurUserInSelectMonth | async">
+         <span class="strRecords">
+           дата: {{entry.date}}
+         </span>
+           <span class="strRecords">
+           время: {{entry.time}}:00
+         </span>
+           <span class="strRecords" (click)="deleteSelectedRec(entry)">
+           &times;
+         </span>
+         </div>
+         <button class="btnCancelAllRec" disabled> отменить все записи !</button>
+       </div>
+     </div>
+
+     <ng-template #notContentBlock>
+       <span class="notContentClass">в {{dateService.date.value.format('M') | translateMonth}} записей нет!</span>
+     </ng-template>
+
+
+   </div>
+ </ng-container>

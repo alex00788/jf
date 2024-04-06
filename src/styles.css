@@ -12,6 +12,20 @@
   justify-content: space-between;
  }
 
+.btnSettingsRecords {
+  color: #5238fd;
+  background: none;
+  border-radius: 10px;
+  border: solid 1px #f6dbff;
+  display: block;
+  cursor: pointer;
+}
+.btnSettingsRecords:hover {
+  color: #0221c0;
+  background: #03f303;
+}
+
+
 
 .btn {
   position: static;

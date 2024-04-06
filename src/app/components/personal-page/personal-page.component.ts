@@ -50,22 +50,17 @@ export class PersonalPageComponent implements OnInit {
   inputValue = '';
 
   ngOnInit(): void {
-    this.dateService.getCurrentUser();
-    if (this.dateService.currentUserIsTheMainAdmin.value) {
-      this.getAllUsers()
+    this.dateService.getCurrentUser();                          // заполняет блок мои данные
+    if (this.dateService.currentUserIsTheMainAdmin.value) {     // определяем кто зашел
+      this.getAllUsers()                                        // для главного возвращаем всех юзеров
     } else {
-      this.getAllUsersCurrentOrganization()
+      this.getAllUsersCurrentOrganization()                     // для остальных только по организации
     }
   }
 
 
-  mainePage() {
-    this.router.navigate(['/'])
-  }
-
-
-  // функция, возьмет всех пользователей которые зарегистрированы (для записи клиентов тока из предложенных)
-  getAllUsers() {                              // функция должна срабатывать только для главного админа
+  //(для записи клиентов из предложенных)
+  getAllUsers() {
     this.apiService.getAllUsers()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsers => {
@@ -106,6 +101,11 @@ export class PersonalPageComponent implements OnInit {
       }
   }
 
+
+
+  mainePage() {
+    this.router.navigate(['/'])
+  }
   logoutSystems() {
     this.router.navigate(['/'])
     this.apiService.logout()

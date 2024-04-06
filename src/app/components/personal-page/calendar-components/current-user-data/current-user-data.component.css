@@ -1,115 +1,14 @@
 .personalDataClass {
-
 }
 
-.btnSettingsRecords {
-  color: #5238fd;
-  background: none;
-  border-radius: 10px;
-  border: solid 1px #f6dbff;
-  display: block;
-  cursor: pointer;
-}
-
-.btnSettingsRecords:hover {
-  color: #0221c0;
-  background: #03f303;
-}
-
-.now {
-  max-width: 400px;
-  width: 360px;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 10px;
-  background: #c6faeb;
-}
-
-.titleNow {
-  position: relative;
-  text-align: center;
-  margin: 5px;
-  cursor: pointer;
-}
 
 .coverBtnSettingsRec {
   display: flex;
   justify-content: center;
 }
 
-.clickBtn {
-  border: solid 1px #f6dbff;
-  border-radius: 10px;
-  padding: 5px;
-}
 
 .futSettingSimpleUserClass {
-}
-
-
-.recordsBlockClass {
-  width: 360px;
-  margin: 5px;
-  padding: 5px;
-  background: #c6faeb;
-  border-radius: 5px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.recordsBlockTitle {
-  display: flex;
-  justify-content: center;
-  margin: 5px;
-}
-
-.btnRecordsBlockClose {
-  margin-left: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.dataRecordsBlock {
-  display: flex;
-  justify-content: center;
-}
-
-.notContentClass {
-  margin: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.dataRecords {
-  margin: 5px;
-}
-
-.strSRecords {
-  margin: 5px;
-  background: yellow;
-  width: 250px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.btnCancelAllRec {
-  margin-top: 10px;
-  border-radius: 10px;
-}
-
-.btnClosePersonalDataComponent {
-  position: absolute;
-  right: 1px;
-  border: none 1px #f6dbff;
-  cursor: pointer;
-  background: none;
-}
-
-.currentUser {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px;
 }
 
 
@@ -119,30 +18,6 @@ input {
 
 label {
   margin: 5px;
-}
-
-.settingsRecordsClass {
-  display: block;
-  border-radius: 10px;
-  margin: 3px;
-  border: solid 1px red;
-}
-
-.futSettingClass {
-  display: flex;
-  justify-content: space-between;
-}
-
-
-.oneSitting {
-  display: flex;
-  justify-content: space-between;
-}
-
-.sittingsInputClass {
-  margin: 5px;
-  display: inline;
-  width: 45px;
 }
 
 

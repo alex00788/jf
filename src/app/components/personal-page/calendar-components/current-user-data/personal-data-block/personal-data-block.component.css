@@ -1,0 +1,40 @@
+.now {
+  max-width: 400px;
+  width: 360px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  background: #c6faeb;
+}
+
+.titleNow {
+  position: relative;
+  text-align: center;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.clickBtn {
+  border: solid 1px #f6dbff;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.btnClosePersonalDataComponent {
+  position: absolute;
+  right: 1px;
+  border: none 1px #f6dbff;
+  cursor: pointer;
+  background: none;
+}
+
+.currentUser {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.futSettingClass {
+  display: flex;
+  justify-content: space-between;
+}

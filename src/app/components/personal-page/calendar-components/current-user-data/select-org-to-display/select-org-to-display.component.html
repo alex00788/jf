@@ -1,0 +1,19 @@
+<div class="selectOrgToDisplayClass">
+  <div class="titleSelectOrg">
+    <strong> Выбрать организацию </strong>
+  </div>
+
+  <div class="searchOrg">
+    <input type="text" placeholder="поиск организации" [(ngModel)]="searchOrgForRec">
+  </div>
+  <div class="listOrg"
+    *ngIf="dateService.allOrganization | async as allOrgForWork">
+    <div
+      *ngFor="let org of allOrgForWork | filterOrg: searchOrgForRec; index as i">
+         <span class="ownOrg" (click)="choiceOrgForRec(org)">
+          {{i + 1}}. {{org}}
+         </span>
+    </div>
+
+  </div>
+</div>

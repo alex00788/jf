@@ -1,0 +1,32 @@
+<div class="settingsRecordsClass" *ngIf="personalBlockService.windowAddingNewOrgIsOpen">
+  <form [formGroup]="formAddOrg" (submit)="addNewOrg()">
+    <div class="oneSitting">
+      <label>
+        название организации
+      </label>
+      <input class="sittingsInputClass" formControlName="nameOrg">
+    </div>
+
+    <div class="oneSitting">
+      <label>
+        имя руководителя
+      </label>
+      <input class="sittingsInputClass" formControlName="supervisorName">
+    </div>
+
+    <div class="oneSitting">
+      <label>
+        телефон руководителя
+      </label>
+      <input class="sittingsInputClass" formControlName="poneSupervisor">
+    </div>
+    <div class="btnSetClass">
+      <button class="btnSettingsRecords" (click)="personalBlockService.closeWindowAddedNewOrg()">
+        Отменить
+      </button>
+      <button class="btnSettingsRecords" type="submit">
+        Добавить
+      </button>
+    </div>
+  </form>
+</div>

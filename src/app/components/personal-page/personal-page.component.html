@@ -35,14 +35,10 @@
 
     <hr>
 
-
-
-
-
     <div class="calendarDisplayMode">
       <button
         [class]="{
-        btnCalendarDisplayModeSelected : recordingService.showCurrentDay | async,
+        btnCalendarDisplayModeSelected : recordingService.showCurrentDay.value,
         btnCalendarDisplayMode: !recordingService.showCurrentDay.value}"
         (click)="recordingService.showDay(dateService.date)"
       > день
@@ -61,12 +57,11 @@
               (click)="recordingService.showMonth(dateService.date)"
       > месяц
       </button>
-      <input class="btnCalendarDisplayMode" type="text" placeholder="записи конкретной организации"
-             *ngIf="dateService.currentUserIsTheMainAdmin | async"
-             (input)="choosingOrganization($event)"
-             [value]="[inputValue]"
-      >
     </div>
+
+
+
+
     <div class="dCalendar">
       <div class="dataCalendar" *ngFor=" let day of recordingService.weekOrMonthSelectedDate | async">
         <app-data-calendar [dayOfWeek]="day"></app-data-calendar>

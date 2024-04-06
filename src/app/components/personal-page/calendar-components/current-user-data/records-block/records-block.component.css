@@ -1,0 +1,42 @@
+.recordsBlockClass {
+  width: 360px;
+  margin: 5px;
+  padding: 5px;
+  background: #c6faeb;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.recordsBlockTitle {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.btnRecordsBlockClose {
+  margin-left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dataRecordsBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.dataRecords {
+  margin: 5px;
+}
+
+.btnCancelAllRec {
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.notContentClass {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
