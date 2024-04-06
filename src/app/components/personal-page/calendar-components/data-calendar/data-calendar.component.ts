@@ -77,13 +77,13 @@ export class DataCalendarComponent implements OnInit {
     this.dateService.timeStartRecord
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        console.log('75')
+        // console.log('75')
         this.getAllEntry(this.dayOfWeek);
       })
     this.dateService.timeFinishRecord
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        console.log('82')
+        // console.log('82')
         this.getAllEntry(this.dayOfWeek);
       })
   }
@@ -136,7 +136,7 @@ export class DataCalendarComponent implements OnInit {
 
 //берем все записи из базы за текущую дату и фильтруем в зависимости от выбранной организации
   getAllEntry(date: any) {
-    console.log('как тут оптимизировать повторение запросо при выборе недели 130!!!')
+    // console.log('как тут оптимизировать повторение запросо при выборе недели 130!!!')
     this.apiService.getAllEntry(date)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntry => {

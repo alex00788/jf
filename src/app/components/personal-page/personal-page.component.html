@@ -34,26 +34,31 @@
     </div>
 
     <hr>
+
+
+
+
+
     <div class="calendarDisplayMode">
       <button
         [class]="{
-        btnCalendarDisplayModeSelected : showCurrentDay,
-        btnCalendarDisplayMode: !showCurrentDay}"
-        (click)="showDay()"
+        btnCalendarDisplayModeSelected : recordingService.showCurrentDay | async,
+        btnCalendarDisplayMode: !recordingService.showCurrentDay.value}"
+        (click)="recordingService.showDay(dateService.date)"
       > день
       </button>
       <button
               [class]="{
-              btnCalendarDisplayModeSelected : showCurrentWeek,
-              btnCalendarDisplayMode: !showCurrentWeek}"
-              (click)="showWeek()"
+              btnCalendarDisplayModeSelected : recordingService.showCurrentWeek.value,
+              btnCalendarDisplayMode: !recordingService.showCurrentWeek.value}"
+              (click)="recordingService.showWeek(dateService.date)"
       > неделя
       </button>
       <button
               [class]="{
-              btnCalendarDisplayModeSelected : showCurrentMonth,
-              btnCalendarDisplayMode: !showCurrentMonth}"
-              (click)="showMonth()"
+              btnCalendarDisplayModeSelected : recordingService.showCurrentMonth.value,
+              btnCalendarDisplayMode: !recordingService.showCurrentMonth.value}"
+              (click)="recordingService.showMonth(dateService.date)"
       > месяц
       </button>
       <input class="btnCalendarDisplayMode" type="text" placeholder="записи конкретной организации"
@@ -63,7 +68,7 @@
       >
     </div>
     <div class="dCalendar">
-      <div class="dataCalendar" *ngFor=" let day of weekSelectedDate">
+      <div class="dataCalendar" *ngFor=" let day of recordingService.weekOrMonthSelectedDate | async">
         <app-data-calendar [dayOfWeek]="day"></app-data-calendar>
       </div>
     </div>
