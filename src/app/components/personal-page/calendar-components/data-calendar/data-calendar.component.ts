@@ -51,6 +51,7 @@ export class DataCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('1init')
     this.currentDate = moment().format('DD.MM.YYYY');
     this.pastDateIsBlocked = this.currentDate > this.dayOfWeek;
     this.currentDayCheck = this.currentDate === this.dayOfWeek;
@@ -64,26 +65,22 @@ export class DataCalendarComponent implements OnInit {
     this.dateService.recordingDaysChanged
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        console.log('60')
         this.getAllEntry(this.dayOfWeek);
     })
 
     this.dateService.date
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        console.log('68')
         this.getAllEntry(this.dayOfWeek)
       })
     this.dateService.timeStartRecord
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        // console.log('75')
         this.getAllEntry(this.dayOfWeek);
       })
     this.dateService.timeFinishRecord
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        // console.log('82')
         this.getAllEntry(this.dayOfWeek);
       })
   }

@@ -92,7 +92,6 @@ export class RecordingService {
     for (let i = 0; i < +quantityDays; i++) {
       currentMonth.push(m.clone().startOf('month').add(i, 'd').format('DD.MM.YYYY'))
     }
-    console.log('94 месяц', currentMonth)
     return currentMonth;
   }
 
