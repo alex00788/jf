@@ -26,6 +26,7 @@ export class RecordsBlockComponent implements OnInit{
   ) {}
   private destroyed$: Subject<void> = new Subject();
   clickCount = 0;
+  blockRepeat: boolean = false;
   ngOnInit(): void {
     this.recordingDaysChanged();
   }
@@ -64,6 +65,7 @@ export class RecordsBlockComponent implements OnInit{
 
   //удаление записи ...в блоке всех записей ...
   deleteSelectedRec(selectedRec: any) {
+    this.blockRepeat = true;
     this.clickCount++;
     setTimeout(() => {
       if (this.clickCount === 1) {
@@ -86,6 +88,7 @@ export class RecordsBlockComponent implements OnInit{
         return
       }
       this.clickCount = 0;
+      this.blockRepeat = false;
     }, 250)
   }
 

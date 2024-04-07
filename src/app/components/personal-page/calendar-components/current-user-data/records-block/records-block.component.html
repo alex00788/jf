@@ -19,9 +19,9 @@
            <span class="strRecords">
            время: {{entry.time}}:00
          </span>
-           <span class="strRecords" (click)="deleteSelectedRec(entry)">
+           <button class="strRecords" (click)="deleteSelectedRec(entry)" [disabled]="blockRepeat" >
            &times;
-         </span>
+         </button>
          </div>
          <button class="btnCancelAllRec" disabled> отменить все записи !</button>
        </div>
