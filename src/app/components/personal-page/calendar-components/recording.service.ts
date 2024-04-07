@@ -67,18 +67,17 @@ export class RecordingService {
   //функция формирующая показ недели
   formativeShowWeek(currentDate: any) {
     //moment() - текущая дата ... внутрь передаем дату по которой кликнули...
-    const m = moment(currentDate);   // получаем, текущей датой ту, по которой кликнули
+    const m = moment(currentDate.value);   // получаем, текущей датой ту, по которой кликнули
     const currentWeek = []
+    const day = m.format('dd');             // 'dd' покажет название дня... а так -> 'DD' покажет число
     for (let i = 1; i <= 7; i++) {
-      const day = m.format('dd');             // 'dd' покажет название дня... а так -> 'DD' покажет число
       if (day === 'Su' && this.showCurrentWeek) {     //если кликнули по вс
-        const newM = m.subtract(1, 'd')       // то убираем 1 день чтоб неделя не перескакивала
+        const newM = m.clone().subtract(1, 'd')       // то убираем 1 день чтоб неделя не перескакивала
         currentWeek.push(newM.clone().startOf('w').add(i, 'd').format('DD.MM.YYYY'))
       } else {
         currentWeek.push(m.clone().startOf('w').add(i, 'd').format('DD.MM.YYYY'))
       }
     }
-    console.log('81', currentWeek)
     return currentWeek;
   }
 

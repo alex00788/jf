@@ -25,7 +25,7 @@ export class RecordsBlockComponent implements OnInit{
     public apiService: ApiService,
   ) {}
   private destroyed$: Subject<void> = new Subject();
-
+  clickCount = 0;
   ngOnInit(): void {
     this.recordingDaysChanged();
   }
@@ -64,21 +64,29 @@ export class RecordsBlockComponent implements OnInit{
 
   //удаление записи ...в блоке всех записей ...
   deleteSelectedRec(selectedRec: any) {
-    this.apiService.deleteEntry(selectedRec.id, selectedRec.userId)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => {
-        this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1))
-        this.dateService.recordingDaysChanged.next(true);
-        const newAllUsers: any[] = []
-        this.dateService.allUsers.value.forEach((el: any) => {
-          if ((el: any) => el.id === this.dateService.currentUserId.value) {
-            el.remainingFunds = this.dateService.remainingFunds.value
-          }
-          newAllUsers.push(el)
-        })
-        this.dateService.allUsers.next(newAllUsers)
-        this.dateService.blockRecIfRecorded.next(false);
-      })
+    this.clickCount++;
+    setTimeout(() => {
+      if (this.clickCount === 1) {
+        this.apiService.deleteEntry(selectedRec.id, selectedRec.userId)
+          .pipe(takeUntil(this.destroyed$))
+          .subscribe(() => {
+            this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1))
+            this.dateService.recordingDaysChanged.next(true);
+            const newAllUsers: any[] = []
+            this.dateService.allUsers.value.forEach((el: any) => {
+              if ((el: any) => el.id === this.dateService.currentUserId.value) {
+                el.remainingFunds = this.dateService.remainingFunds.value
+              }
+              newAllUsers.push(el)
+            })
+            this.dateService.allUsers.next(newAllUsers)
+            this.dateService.blockRecIfRecorded.next(false);
+          })
+      } else if (this.clickCount === 2) {
+        return
+      }
+      this.clickCount = 0;
+    }, 250)
   }
 
 

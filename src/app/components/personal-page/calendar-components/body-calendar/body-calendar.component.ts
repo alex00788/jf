@@ -5,6 +5,7 @@ import moment from "moment";
 import {NgForOf} from "@angular/common";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
 import {Subject, takeUntil} from "rxjs";
+import {RecordingService} from "../recording.service";
 
 @Component({
   selector: 'app-body-calendar',
@@ -17,7 +18,9 @@ import {Subject, takeUntil} from "rxjs";
   styleUrl: './body-calendar.component.css'
 })
 export class BodyCalendarComponent implements OnInit {
-  constructor(private dateService: DateService) {
+  constructor(
+    public recordingService: RecordingService,
+    private dateService: DateService) {
   }
   private destroyed$: Subject<void> = new Subject();
   calendar: Week[] = []
@@ -63,5 +66,6 @@ export class BodyCalendarComponent implements OnInit {
   //метод, который при клике по дате, будет ее выбирать
   select(day: moment.Moment) {
       this.dateService.changeDay(day)
+      this.recordingService.calculatingCurrentWeekOrMonth(this.dateService.date)
   }
 }
