@@ -81,7 +81,7 @@ export class DataCalendarNewComponent implements OnInit {
 
 
   getDataOrg() {
-    //как тока приходит все записи с бек... формируем массив для показа
+    //как тока приходит все записи с бек... формируем массив для показа дня недели или месяца
     this.dataCalendarService.allEntryAllUsersInMonth
       .pipe(takeUntil(this.destroyed$))
       .subscribe(persons => {

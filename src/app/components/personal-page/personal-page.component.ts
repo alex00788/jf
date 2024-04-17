@@ -13,8 +13,8 @@ import {ModalWindowForPersonPageComponent} from "./modal-window-for-person-page/
 import {CurrentUserDataComponent} from "./calendar-components/current-user-data/current-user-data.component";
 import {InfoBlockComponent} from "./calendar-components/info-block/info-block.component";
 import {ClientsListComponent} from "./calendar-components/clients-list/clients-list.component";
-import {RecordingService} from "./calendar-components/recording.service";
 import {DataCalendarNewComponent} from "./calendar-components/data-calendar-new/data-calendar-new.component";
+import {DayWeekMonthComponent} from "./calendar-components/day-week-month/day-week-month.component";
 
 @Component({
   selector: 'app-personal-page',
@@ -31,6 +31,7 @@ import {DataCalendarNewComponent} from "./calendar-components/data-calendar-new/
     InfoBlockComponent,
     ClientsListComponent,
     DataCalendarNewComponent,
+    DayWeekMonthComponent,
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'
@@ -40,9 +41,7 @@ export class PersonalPageComponent implements OnInit {
     private router: Router,
     private apiService: ApiService,
     public dateService: DateService,
-    public recordingService: RecordingService,
     public modalService: ModalService,
-
   ) {
   }
 

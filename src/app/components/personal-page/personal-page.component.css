@@ -49,15 +49,9 @@
   margin: 10px;
 }
 
-.btnCalendarDisplayMode {
-  margin: 5px;
-  background: none;
-}
 
-.btnCalendarDisplayModeSelected {
-  margin: 5px;
-  background: #a3f6a3;
-}
+
+
 
 .btnBodyCalendarElement {
   background: yellow;

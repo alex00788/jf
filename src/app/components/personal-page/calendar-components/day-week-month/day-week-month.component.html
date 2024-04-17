@@ -1,0 +1,23 @@
+<ng-container>
+  <button
+    [class]="{
+        btnCalendarDisplayModeSelected : recordingService.showCurrentDay.value,
+        btnCalendarDisplayMode: !recordingService.showCurrentDay.value}"
+    (click)="recordingService.showDay()"
+  > день
+  </button>
+  <button
+    [class]="{
+              btnCalendarDisplayModeSelected : recordingService.showCurrentWeek.value,
+              btnCalendarDisplayMode: !recordingService.showCurrentWeek.value}"
+    (click)="recordingService.showWeek()"
+  > неделя
+  </button>
+  <button
+    [class]="{
+              btnCalendarDisplayModeSelected : recordingService.showCurrentMonth.value,
+              btnCalendarDisplayMode: !recordingService.showCurrentMonth.value}"
+    (click)="recordingService.showMonth()"
+  > месяц
+  </button>
+</ng-container>
