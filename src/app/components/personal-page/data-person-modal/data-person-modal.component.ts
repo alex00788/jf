@@ -58,6 +58,11 @@ export class DataPersonModalComponent implements OnInit {
     this.apiService.changeRoleSelectedUser(selectedUser.userId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(newRoleUser => {
+        //обновить главную страницу когда админ сам себя назначил юзером
+        // this.dateService.currentUserRole.next(newRoleUser)
+        // const currentUser = JSON.parse(localStorage.getItem('userData') as string)
+        // currentUser.user.role = newRoleUser;
+        // localStorage.setItem('userData', JSON.stringify(currentUser))
         const newAllUser:any[] = [];
         const selectedUser = this.dateService.dataSelectedUser.value
         // const dataSelectedUser = this.dateService.allUsers.value.find((el: any) => el.id === +selectedUser.userId)

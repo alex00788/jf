@@ -1,0 +1,156 @@
+.cowerRecordsBlock {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.recordsBlockClassN {
+  border-radius: 10px;
+  width: 240px;
+  margin: 3px;
+  border: solid 1px #5238fd;
+  background: #c2f1e5;
+}
+
+.futFormBtn {
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+
+/*так скрываем полосу прокрутки сохраняя возможность прокрутки*/
+.searchPersonClass {
+  width: 210px;
+  max-height: 100px;
+  overflow: auto;
+}
+
+/*так скрываем полосу прокрутки сохраняя возможность прокрутки*/
+.searchPersonClass::-webkit-scrollbar {
+  display: none;
+}
+
+.inputBlock {
+  margin: 0 10px;
+  padding-top: 5px;
+  border-radius: 10px;
+}
+
+input {
+  border: none;
+  width: 170px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+.personList {
+  margin: 5px 10px;
+}
+
+li {
+  margin: 5px;
+  list-style-type: none;
+  padding: 2px;
+}
+
+.allDaysOfSelectedClass {
+  margin: 3px;
+}
+
+.currentDay {
+  font-size: 18px;
+  text-align: center;
+  margin: 5px 75px;
+  border-bottom: solid 1px #0221c0;;
+}
+
+.timeOfDay {
+  margin: 10px;
+}
+
+.timeOfDayClass {
+  text-align: center;
+  margin: 25px 80px;
+  font-size: 18px;
+}
+
+
+.personListClass {
+  font-size: 18px;
+  text-align: center;
+  width: 380px;
+  margin: 5px;
+}
+
+.dataList {
+
+}
+
+.usersOnThisTimeClass {
+  margin: 5px 20px;
+  padding-top: 3px;
+}
+
+.cowerBlockList {
+
+}
+
+.btnAddEntryClass {
+  width: 170px;
+  margin: 5px 20px;
+  border-radius: 7px;
+  border: solid 1px #0221c0;
+  background: none;
+}
+
+
+.currentPersonClass {
+  color: #2630f1;
+  font-weight: bold;
+}
+
+.btnDelete {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}
+
+@media (max-width: 1600px) {
+  .timeOfDayClass {
+    font-size: 18px;
+  }
+
+  .cowerRecordsBlock {
+    width: 1200px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1300px) {
+  .cowerRecordsBlock {
+    width: 1000px;
+  }
+}
+
+
+@media (max-width: 1100px) {
+  .cowerRecordsBlock {
+    width: 800px;
+  }
+}
+
+@media (max-width: 950px) {
+  .cowerRecordsBlock {
+    width: 500px;
+  }
+}
+
+@media (max-width: 560px) {
+  .cowerRecordsBlock {
+    width: 250px;
+  }
+}

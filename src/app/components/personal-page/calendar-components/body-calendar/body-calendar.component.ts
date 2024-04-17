@@ -66,6 +66,5 @@ export class BodyCalendarComponent implements OnInit {
   //метод, который при клике по дате, будет ее выбирать
   select(day: moment.Moment) {
       this.dateService.changeDay(day)
-      this.recordingService.calculatingCurrentWeekOrMonth(this.dateService.date)
   }
 }

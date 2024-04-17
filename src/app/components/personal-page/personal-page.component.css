@@ -36,7 +36,6 @@
 .dCalendar {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 .dataCalendar {
@@ -67,8 +66,8 @@
   display: block;
   cursor: pointer;
   height: 20px;
-  width: 120px;
-  margin: 10px auto;
+  width: 140px;
+  margin: 10px 10px;
   color: #5238fd;
 }
 .btnBodyCalendarElement:hover {
@@ -78,11 +77,8 @@
 
 
 .bodyCalendarElementClass {
-  /*width: 360px;*/
-  /*height: 280px;*/
-  margin: 0 auto;
+  margin: 0 10px;
   padding: 10px;
-  /*background: #c6faeb;*/
 }
 
 .calendarNum {
@@ -94,7 +90,6 @@
 .btnLogoutSystemsClass {
   position: absolute;
   top: 60px;
-  right: 200px;
   background: none;
   border: solid 0.1rem #c8caf8;
   border-radius: 10px;
@@ -108,8 +103,8 @@
 
 
 @media (max-width: 1243px) {
-  .bodyCalendar {
-    flex-direction: column;
+  .btnBodyCalendarElement {
+    margin: 10px auto;
   }
 
   .btnLogoutSystemsClass {
@@ -121,6 +116,14 @@
     left: 400px;
   }
 
+  .bodyCalendar {
+    display: block;
+  }
+
+  .bodyCalendarElementClass {
+    margin: 0 auto;
+  }
+
 }
 
 @media (max-width: 1140px) {
@@ -130,6 +133,12 @@
 }
 
 @media (max-width: 960px) {
+
+  .bodyCalendar {
+    flex-direction: column;
+    margin: auto 10px;
+  }
+
     .insideClass {
       left: 200px;
     }

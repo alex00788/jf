@@ -1,4 +1,6 @@
 .personalDataClass {
+  display: flex;
+  justify-content: center;
 }
 
 

@@ -5,6 +5,8 @@ import {TranslateMonthPipe} from "../../../../../shared/pipe/translate-month.pip
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 import {ApiService} from "../../../../../shared/services/api.service";
+import {DataCalendarService} from "../../data-calendar-new/data-calendar.service";
+import moment from "moment/moment";
 
 @Component({
   selector: 'app-records-block',
@@ -22,25 +24,31 @@ export class RecordsBlockComponent implements OnInit{
   constructor(
     public personalBlockService: PersonalBlockService,
     public dateService: DateService,
+    public dataCalendarService: DataCalendarService,
     public apiService: ApiService,
   ) {}
   private destroyed$: Subject<void> = new Subject();
   clickCount = 0;
   blockRepeat: boolean = false;
+  currentDate: any;
+  currentHour: any = new Date().getHours();
+
+
+
   ngOnInit(): void {
+    this.currentDate = moment().format('DD.MM.YYYY');
     this.recordingDaysChanged();
   }
 
-  //при смене записи обновляет дни когда я записан
+  // функция обновляет блок показывающий когда записан пользователь
   recordingDaysChanged() {
     this.dateService.recordingDaysChanged
       .pipe(takeUntil(this.destroyed$))
       .subscribe(()=>{
-        this.openRecordsBlock();
-      })
+        this.openRecordsBlock();         // как только пользователь запишется или отпишется
+      })                                 // обновим блок в котором видны все записи за месяц
   }
 
-  //открывает блок с датами в месяце, когда записан пользователь
   openRecordsBlock() {
     const dataForGetAllEntrySelectedMonth = {
       org: this.dateService.sectionOrOrganization.value,
@@ -83,6 +91,7 @@ export class RecordsBlockComponent implements OnInit{
             })
             this.dateService.allUsers.next(newAllUsers)
             this.dateService.blockRecIfRecorded.next(false);
+            this.dataCalendarService.getAllEntryAllUsersForTheMonth();
           })
       } else if (this.clickCount === 2) {
         return

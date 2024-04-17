@@ -3,6 +3,7 @@ import {DateService} from "../date.service";
 import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {MomentTransformDatePipe} from "../../../../shared/pipe/moment-transform-date.pipe";
 import {ReactiveFormsModule,} from "@angular/forms";
+import {DataCalendarService} from "../data-calendar-new/data-calendar.service";
 
 @Component({
   selector: 'app-header-calendar',
@@ -22,6 +23,7 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
   constructor(
     public dateService: DateService,
+    public dataCalendarService:DataCalendarService,
               ) {}
 
   subInterval: any;
@@ -45,6 +47,7 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
 
   go(direction: number) {
     this.dateService.changeMonth(direction)
+    this.dataCalendarService.getAllEntryAllUsersForTheMonth()
   }
 
 

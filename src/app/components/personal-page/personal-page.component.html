@@ -9,10 +9,6 @@
   </div>
 
   <div class="calendar">
-    <div class="headerCalendar">
-      <app-header-calendar></app-header-calendar>
-    </div>
-
     <div class="bodyCalendar">
       <div class="bodyCalendarElementClass">
         <app-current-user-data></app-current-user-data>
@@ -21,11 +17,12 @@
               *ngIf="!dateService.calendarBodyOpen.value"
               (click)="dateService.openCalendar()"
       >
-        Открыть запись
+        Открыть календарь
       </button>
       <div class="bodyCalendarElementClass calendarNum" *ngIf="dateService.calendarBodyOpen | async">
         <app-info-block></app-info-block>
         <hr>
+        <app-header-calendar></app-header-calendar>
         <app-body-calendar></app-body-calendar>
       </div>
       <div class="bodyCalendarElementClass">
@@ -40,29 +37,29 @@
         [class]="{
         btnCalendarDisplayModeSelected : recordingService.showCurrentDay.value,
         btnCalendarDisplayMode: !recordingService.showCurrentDay.value}"
-        (click)="recordingService.showDay(dateService.date)"
+        (click)="recordingService.showDay()"
       > день
       </button>
       <button
               [class]="{
               btnCalendarDisplayModeSelected : recordingService.showCurrentWeek.value,
               btnCalendarDisplayMode: !recordingService.showCurrentWeek.value}"
-              (click)="recordingService.showWeek(dateService.date)"
+              (click)="recordingService.showWeek()"
       > неделя
       </button>
       <button
               [class]="{
               btnCalendarDisplayModeSelected : recordingService.showCurrentMonth.value,
               btnCalendarDisplayMode: !recordingService.showCurrentMonth.value}"
-              (click)="recordingService.showMonth(dateService.date)"
+              (click)="recordingService.showMonth()"
       > месяц
       </button>
     </div>
 
 
     <div class="dCalendar">
-      <div class="dataCalendar" *ngFor=" let day of recordingService.weekOrMonthSelectedDate | async">
-        <app-data-calendar [dayOfWeek]="day"></app-data-calendar>
+      <div class="dataCalendar">
+        <app-data-calendar-new></app-data-calendar-new>
       </div>
     </div>
   </div>

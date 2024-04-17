@@ -10,7 +10,7 @@
 
 .modalContentForPerson {
   width: 500px;
-  position: absolute;
+  position: fixed;
   top: 550px;
   left: 33%;
   padding: 6px;

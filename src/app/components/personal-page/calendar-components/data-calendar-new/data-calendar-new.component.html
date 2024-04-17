@@ -1,0 +1,126 @@
+<div class="cowerRecordsBlock">
+  <div class="recordsBlockClassN" *ngFor="let day of dataOfWeek">
+    <div class="allDaysOfSelectedClass">
+      <div class="currentDay">
+        {{day.date}}
+      </div>
+      <div class="cowerTimeOfDay">
+        <div class="timeOfDay" *ngFor="let time of day.times">
+          <span class="timeOfDayClass">{{time.time}} : 00</span>
+          <div class="cowerBlockList">
+
+            <ng-container *ngIf="dateService.currentUserSimpleUser | async;  else adminBlockBtn">
+              <div class="usersOnThisTimeClass" *ngFor="let person of time.users; let i = index">
+                <span class="personListClass"
+                  [class]="{currentPersonClass : person.userId == dateService.currentUserId.value}"
+                >
+                  {{i +1}}.{{person.nameUser}}
+                </span>
+                <button *ngIf="person.userId == dateService.currentUserId.value"
+                  class="btnDelete" (click)="deletePerson(person.id, person.userId)"
+                  [disabled]="
+                    pastDateIsBlocked ||
+                    time.time < currentHour &&
+                    currentDayCheck ||
+                    person.userId != dateService.currentUserId.value ||
+                    time.date.substring(3,5) < currentDate.substring(3,5) ||
+                    time.date.substring(0,2) < currentDate.substring(0,2)  &&
+                    time.date.substring(3,5) === currentDate.substring(3,5) ||
+                    time.time < currentHour && time.date === currentDate
+                  "
+                >
+                  &times;
+                </button>
+              </div>
+            </ng-container>
+
+            <ng-template #adminBlockBtn>
+              <div class="usersOnThisTimeClass" *ngFor="let person of time.users; let i = index">
+                <span class="personListClass" (click)="openDataPerson(person)"
+                      [class]="{currentPersonClass : person.userId == dateService.currentUserId.value}"
+                >
+                  {{i +1}}.{{person.nameUser}}
+                </span>
+                <button class="btnDelete" (click)="deletePerson(person.id, person.userId)"
+                  [disabled]="
+                    pastDateIsBlocked ||
+                    time.time < currentHour &&
+                    currentDayCheck ||
+                    time.date.substring(3,5) < currentDate.substring(3,5) ||
+                    time.date.substring(0,2) < currentDate.substring(0,2)  &&
+                    time.date.substring(3,5) === currentDate.substring(3,5) ||
+                    time.time < currentHour && time.date === currentDate
+                  "
+                >
+                  &times;
+                </button>
+              </div>
+            </ng-template>
+
+            <ng-container *ngIf="dateService.currentUserSimpleUser | async;  else adminBlock">
+              <button class="btnAddEntryClass"
+                    (click)="currentUserRec(time.time, time.date, time.users)"
+                    [disabled]="
+                       time.date.substring(3,5) < currentDate.substring(3,5) ||
+                       time.date.substring(0,2) < currentDate.substring(0,2)  &&
+                       time.date.substring(3,5) === currentDate.substring(3,5) ||
+                       time.time < currentHour && time.date === currentDate
+                      "
+            >
+              +
+            </button>
+            </ng-container>
+
+            <ng-template #adminBlock>
+              <div *ngIf="time.date === newEntryHasBeenOpenedDate && time.time === newEntryHasBeenOpenedTime">
+                  <div class="searchPersonClass">
+                    <div class="inputBlock">
+                      <input type="text"
+                             #inputElement
+                             placeholder="поиск клиента"
+                             [(ngModel)]="clientList"
+                             (keydown)="savingByPressingEnter($event, inputElement.value, time)"
+                             (blur)="lostFocus()"
+                      >
+                    </div>
+
+                    <ol class="personList">
+                      <div *ngIf="dateService.allUsers | async as allUsers">
+                        <li *ngFor="let person of allUsers | filterClientList: clientList">
+                          <span (click)="choosePerson(person, time)">
+                            {{person.surnameUser}} {{person.nameUser}}
+                          </span>
+                        </li>
+                      </div>
+                    </ol>
+                  </div>
+
+                  <div class="futFormBtn">
+                    <button class="btn btnDisable" (click)="submit(time)"
+                    > записать
+                    </button>
+                    <button class="btn" type="button" (click)="cancel()"> отменить</button>
+                  </div>
+                </div>
+
+              <button *ngIf="time.date !== newEntryHasBeenOpenedDate || time.time !== newEntryHasBeenOpenedTime"
+                      class="btnAddEntryClass"
+                      (click)="currentHourTime(time.time, time.date)"
+                      [disabled]="
+                       time.date.substring(3,5) < currentDate.substring(3,5) ||
+                       time.date.substring(0,2) < currentDate.substring(0,2)  &&
+                       time.date.substring(3,5) === currentDate.substring(3,5) ||
+                       time.time < currentHour && time.date === currentDate
+                      "
+              >
+                +
+              </button>
+
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

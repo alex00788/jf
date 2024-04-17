@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ApiService} from "../../shared/services/api.service";
 import {BodyCalendarComponent} from "./calendar-components/body-calendar/body-calendar.component";
-import {DataCalendarComponent} from "./calendar-components/data-calendar/data-calendar.component";
 import {HeaderCalendarComponent} from "./calendar-components/header-calendar/header-calendar.component";
 import {ErrorModalComponent} from "../error-modal/error-modal.component";
 import {DateService} from "./calendar-components/date.service";
@@ -15,13 +14,13 @@ import {CurrentUserDataComponent} from "./calendar-components/current-user-data/
 import {InfoBlockComponent} from "./calendar-components/info-block/info-block.component";
 import {ClientsListComponent} from "./calendar-components/clients-list/clients-list.component";
 import {RecordingService} from "./calendar-components/recording.service";
+import {DataCalendarNewComponent} from "./calendar-components/data-calendar-new/data-calendar-new.component";
 
 @Component({
   selector: 'app-personal-page',
   standalone: true,
   imports: [
     BodyCalendarComponent,
-    DataCalendarComponent,
     HeaderCalendarComponent,
     ErrorModalComponent,
     CommonModule,
@@ -31,6 +30,7 @@ import {RecordingService} from "./calendar-components/recording.service";
     CurrentUserDataComponent,
     InfoBlockComponent,
     ClientsListComponent,
+    DataCalendarNewComponent,
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'

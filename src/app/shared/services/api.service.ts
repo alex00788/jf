@@ -113,6 +113,17 @@ export class ApiService {
       .pipe(catchError(this.errHandler.bind(this)))
   }
 
+
+  getAllEntryAllUsersOrg(dataForGetAllEntryAllUs: any): Observable<any> {
+    return this.http.get<any>('/api/user/getAllEntryAllUsers', {
+      params: new HttpParams()
+        .append('month', dataForGetAllEntryAllUs.month)
+        .append('year', dataForGetAllEntryAllUs.year)
+        .append('org', dataForGetAllEntryAllUs.org)
+    })
+      .pipe(catchError(this.errHandler.bind(this)))
+  }
+
   getAllOrgFromDb(): Observable<any> {
     return this.http.get<any>('/api/user/getAllOrg')
       .pipe(catchError(this.errHandler.bind(this)))
