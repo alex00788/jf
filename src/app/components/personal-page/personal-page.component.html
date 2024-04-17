@@ -13,9 +13,10 @@
       <div class="bodyCalendarElementClass">
         <app-current-user-data></app-current-user-data>
       </div>
-      <button class="btnBodyCalendarElement"
-              *ngIf="!dateService.calendarBodyOpen.value"
-              (click)="dateService.openCalendar()"
+      <button
+        class="btnBodyCalendarElement"
+        *ngIf="!dateService.calendarBodyOpen.value"
+        (click)="dateService.openCalendar()"
       >
         Открыть календарь
       </button>
