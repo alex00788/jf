@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, ReplaySubject, Subject, takeUntil} from "rxjs";
+import {BehaviorSubject, Subject, takeUntil} from "rxjs";
 import {ApiService} from "../../../../shared/services/api.service";
 import {DateService} from "../date.service";
 
@@ -25,13 +25,13 @@ export class DataCalendarService {
 
 //функция должна 1 раз взять все записи конкретной организации за текущий месяц и вернуть клиенту
   getAllEntryAllUsersForTheMonth() {
-    let selectOrg = '';
+    let selectOrg;
     const selectMonth = this.dateService.date.value.format('MM')
     const selectYear = this.dateService.date.value.format('YYYY')
     if (this.dateService.currentUserIsTheMainAdmin.value) {
         selectOrg = this.dateService.selectedSectionOrOrganization.value
       } else {
-      selectOrg = this.dateService.sectionOrOrganization.value
+        selectOrg = this.dateService.sectionOrOrganization.value
       }
     const dataForGetAllEntryAllUsersSelectedMonth = {
       org: selectOrg,
@@ -48,7 +48,7 @@ export class DataCalendarService {
 
 
   //берем все записи из базы за текущую дату и фильтруем в зависимости от выбранной организации
-  getAllEntry(date: any) {
+  // getAllEntry(date: any) {
     // const filterAllCurrentEntry = this.allEntryAllUsersInMonth.value.filter((el: any)=> {
     //        return  el.date === date
     //       })
@@ -72,7 +72,7 @@ export class DataCalendarService {
       //     }
       //   }
       // });
-  }
+  // }
 
 
   filteringDependingOnTheSelectedOrganization(allEntry: any) {

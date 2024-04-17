@@ -6,7 +6,7 @@ import {Subject, takeUntil, throwError} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {ApiService} from "../../../../shared/services/api.service";
 import {RecordingService} from "../recording.service";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule,} from "@angular/forms";
 import {FilterClientListPipe} from "../../../../shared/pipe/filter-client-list.pipe";
 import {ModalService} from "../../../../shared/services/modal.service";
 import {ErrorResponseService} from "../../../../shared/services/error.response.service";
@@ -252,7 +252,7 @@ export class DataCalendarNewComponent implements OnInit {
 
 
   //определение кликнули один или два раза чтоб обычн пользователь не кликнул дважды
-  currentUserRec(time: any, date:any, users:any) {
+  currentUserRec(time: any, date:any,) {
     this.clickCount++;
     setTimeout(() => {
       if (this.clickCount === 1) {
