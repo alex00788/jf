@@ -85,7 +85,7 @@
                     </div>
 
                     <ol class="personList">
-                      <div *ngIf="dateService.allUsers | async as allUsers">
+                      <div *ngIf="dateService.allUsersSelectedOrg | async as allUsers">
                         <li *ngFor="let person of allUsers | filterClientList: clientList">
                           <span (click)="choosePerson(person, time)">
                             {{person.surnameUser}} {{person.nameUser}}

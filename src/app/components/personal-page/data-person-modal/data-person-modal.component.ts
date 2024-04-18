@@ -39,7 +39,7 @@ export class DataPersonModalComponent implements OnInit {
 
   dataAboutSelectedUser() {
     const selectedUser = this.dateService.dataSelectedUser.value
-    const dataSelectedUser = this.dateService.allUsers.value.find((el: any) => el.id === +selectedUser.userId)
+    const dataSelectedUser = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id === +selectedUser.userId)
     this.roleUser = dataSelectedUser.role === 'MAIN_ADMIN'? 'Boos' : dataSelectedUser.role;
     this.showBtnAdminAndUser = dataSelectedUser.role === 'MAIN_ADMIN';
     if (this.showBtnAdminAndUser) {

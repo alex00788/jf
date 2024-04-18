@@ -1,7 +1,19 @@
 .personalPageStyle {
+
   height: 990px;
   background: white;
   opacity: 95%;
+  overflow: auto;
+}
+
+.personalPageStyle::-webkit-scrollbar {
+  display: none;
+}
+
+.logOutClass {
+  display: flex;
+  justify-content: center;
+  margin: 5px auto 15px auto;
 }
 
 .titleMainePage {
@@ -13,7 +25,7 @@
 }
 
 .mainePageClass {
-  margin: 10px 10px 30px 10px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   color: #5238fd;
@@ -82,8 +94,7 @@
 }
 
 .btnLogoutSystemsClass {
-  position: absolute;
-  top: 60px;
+  margin: 10px;
   background: none;
   border: solid 0.1rem #c8caf8;
   border-radius: 10px;
@@ -103,7 +114,7 @@
 
   .btnLogoutSystemsClass {
     margin: 0 auto;
-    right: inherit;
+    /*right: inherit;*/
   }
 
   .insideClass {

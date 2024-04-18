@@ -1,19 +1,40 @@
-<div class="selectOrgToDisplayClass">
-  <div class="titleSelectOrg">
-    <strong> Выбрать организацию </strong>
-  </div>
-
-  <div class="searchOrg">
-    <input type="text" placeholder="поиск организации" [(ngModel)]="searchOrgForRec">
-  </div>
-  <div class="listOrg"
-    *ngIf="dateService.allOrganization | async as allOrgForWork">
-    <div
-      *ngFor="let org of allOrgForWork | filterOrg: searchOrgForRec; index as i">
-         <span class="ownOrg" (click)="choiceOrgForRec(org)">
-          {{i + 1}}. {{org}}
-         </span>
+<ng-container *ngIf="showSelectedOrg; else showSelectedOrgBlock">
+  <div class="selectOrgToDisplayClass">
+    <div class="titleSelectOrg">
+      <strong> Выбрать организацию </strong>
     </div>
 
+    <div class="searchOrg">
+      <input type="text"  #inputSearchOrg
+             placeholder="поиск организации" [(ngModel)]="searchOrgForRec">
+    </div>
+    <div class="listOrg"
+         *ngIf="dateService.allOrganization | async as allOrgForWork">
+      <div class="org-sClass"
+           *ngFor="let org of allOrgForWork | filterOrg: searchOrgForRec; index as i">
+         <span class="ownOrgClass" (click)="choiceOrgForRec(org)">
+          {{i + 1}}. {{org}}
+         </span>
+      </div>
+    </div>
   </div>
-</div>
+</ng-container>
+
+
+<ng-template #showSelectedOrgBlock>
+  <div class="selectedOrg">
+    <div class="titleSelectOrg">
+      <div class="titleSelectOrgText">
+        Выбрана
+      </div>
+      <strong>
+        {{dateService.selectedSectionOrOrganization.value}}
+      </strong>
+    </div>
+    <button class="btnChangeSelectOrgClass"
+            (click)="changeOrg()"
+    >
+      Сменить Организацию
+    </button>
+  </div>
+</ng-template>

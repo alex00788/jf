@@ -70,6 +70,7 @@ export class PersonalPageComponent implements OnInit {
         })
         this.dateService.remainingFunds.next(user.remainingFunds)
         this.dateService.allUsers.next(allUsers)
+        this.dateService.getUsersSelectedOrg(this.dateService.selectedSectionOrOrganization.value);
       });
   }
 
@@ -83,22 +84,10 @@ export class PersonalPageComponent implements OnInit {
           return el.id === this.dateService.currentUserId.value
         })
         this.dateService.remainingFunds.next(user.remainingFunds)
-        this.dateService.allUsers.next(allUsersOrganization)
+        this.dateService.allUsersSelectedOrg.next(allUsersOrganization)
       });
   }
 
-
-  choosingOrganization(event: any) {
-    const filterOrg = this.dateService.allOrganization.value
-      .filter((el: any) => el.toLowerCase().includes(event?.target.value.toLowerCase())
-    )
-      if (filterOrg.length === 1) {
-        this.inputValue = filterOrg;
-        this.dateService.selectedSectionOrOrganization.next(filterOrg[0])
-      } else {
-        this.dateService.selectedSectionOrOrganization.next([])
-      }
-  }
 
 
 

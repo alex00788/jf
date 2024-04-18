@@ -24,7 +24,7 @@ export class DateService {                                            //moment()
   public allOrgForReg: BehaviorSubject<any> = new BehaviorSubject([])
   public selectOrgForReg: BehaviorSubject<any> = new BehaviorSubject('')
   public sectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('')
-  public selectedSectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('Acro')
+  public selectedSectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('Ldance акро (полина)')
   public timeStartRecord: BehaviorSubject<any> = new BehaviorSubject(18)
   public timeFinishRecord: BehaviorSubject<any> = new BehaviorSubject(19)
   public maxPossibleEntries: BehaviorSubject<any> = new BehaviorSubject(3)
@@ -60,7 +60,6 @@ export class DateService {                                            //moment()
     this.currentUserRole.next(currentUserRole);
     this.remainingFunds.next(currentUser.user.remainingFunds);
     this.sectionOrOrganization.next(currentUser.user.sectionOrOrganization);
-    // this.roleToGetTheDesiredListOfUsers.next(currentUser.user.role);
   }
 
   // метод выбирающий тот день по которому кликнули
@@ -82,7 +81,11 @@ export class DateService {                                            //moment()
     this.calendarBodyOpen.next(!this.calendarBodyOpen.value)
   }
 
-  closeCalendar() {
-
+  getUsersSelectedOrg(org: any) {
+    this.allUsersSelectedOrg
+      .next(this.allUsers.value.filter((el:any) => el.sectionOrOrganization === org))
   }
+
+
+
 }

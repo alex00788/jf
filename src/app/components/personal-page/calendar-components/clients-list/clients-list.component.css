@@ -1,7 +1,7 @@
 .clientsListClass {
   background: #c6faeb;
   width: 360px;
-  margin-top: 1px;
+  margin: 1px auto;
   border-radius: 10px;
   padding: 10px;
 }

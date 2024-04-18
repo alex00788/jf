@@ -1,9 +1,30 @@
+.selectedOrg {
+  display: block;
+  border-radius: 10px;
+  margin: 5px;
+  border: solid 1px red;
+  color: #5238fd;
+  background: #c6faeb;;
+  max-height: 150px;
+  max-width: 370px;
+}
+
+
+
 .selectOrgToDisplayClass {
   display: block;
   border-radius: 10px;
   margin: 5px;
   border: solid 1px red;
   color: #5238fd;
+  background: #c6faeb;;
+  max-height: 150px;
+  max-width: 370px;
+  overflow: auto;
+}
+
+.selectOrgToDisplayClass::-webkit-scrollbar {
+  display: none;
 }
 
 .titleSelectOrg {
@@ -15,4 +36,22 @@
   display: flex;
   justify-content: center;
   margin: 5px;
+}
+
+.org-sClass {
+  margin: 10px;
+}
+
+.ownOrgClass {
+}
+
+
+.titleSelectOrgText {
+  margin: 10px;
+}
+
+.btnChangeSelectOrgClass {
+  margin: 15px 100px;
+  border-radius: 10px;
+  border: solid 1px #0221c0;
 }

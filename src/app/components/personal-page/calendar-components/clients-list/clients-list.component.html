@@ -18,15 +18,29 @@
     </div>
 
 
-    <ol>
-      <div *ngIf="dateService.allUsers | async as allUsers">
-        <li *ngFor="let person of allUsers | filterClientList: clientList">
+    <ng-container *ngIf="!dateService.currentUserIsTheMainAdmin.value; else mainAdminBlock">
+      <ol>
+        <div *ngIf="dateService.allUsersSelectedOrg | async as allUsers">
+          <li *ngFor="let person of allUsers | filterClientList: clientList">
         <span (click)="openPerson(person)">
           {{person.surnameUser}} {{person.nameUser}}
         </span>
-        </li>
-      </div>
-    </ol>
+          </li>
+        </div>
+      </ol>
+    </ng-container>
+
+    <ng-template #mainAdminBlock>
+      <ol>
+        <div *ngIf="dateService.allUsers | async as allUsers">
+          <li *ngFor="let person of allUsers | filterClientList: clientList">
+        <span (click)="openPerson(person)">
+          {{person.surnameUser}} {{person.nameUser}}
+        </span>
+          </li>
+        </div>
+      </ol>
+    </ng-template>
 
 
   </div>

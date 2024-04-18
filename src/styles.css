@@ -5,6 +5,10 @@
   height: 990px;
   background: url('app/shared/img/2.jpeg');
   background-size: cover;
+  overflow: auto;
+}
+.wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .container {

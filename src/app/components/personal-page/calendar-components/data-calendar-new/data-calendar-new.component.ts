@@ -217,7 +217,7 @@ export class DataCalendarNewComponent implements OnInit {
         }
       })
 
-      result.sort((a: any, b: any) => a.time > b.time ? 1 : -1)
+      result.sort((a: any, b: any) => +a.time > +b.time ? 1 : -1)
         el.times = result;
       })
 
@@ -256,7 +256,7 @@ export class DataCalendarNewComponent implements OnInit {
     this.clickCount++;
     setTimeout(() => {
       if (this.clickCount === 1) {
-        const currentUser = this.dateService.allUsers.value.find((el: any) => el.id === this.dateService.currentUserId.value)
+        const currentUser = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id === this.dateService.currentUserId.value)
         currentUser.remainingFunds = JSON.stringify(+currentUser.remainingFunds - 1)
         this.dateService.remainingFunds.next(currentUser.remainingFunds);
         this.addEntry(currentUser, time, date);
@@ -302,7 +302,7 @@ export class DataCalendarNewComponent implements OnInit {
     this.apiService.deleteEntry(id, userId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        let user = this.dateService.allUsers.value.find((el: any) => {
+        let user = this.dateService.allUsersSelectedOrg.value.find((el: any) => {
           return el.id === +userId
         })
         user.remainingFunds = JSON.stringify(+user.remainingFunds + 1);
@@ -320,7 +320,7 @@ export class DataCalendarNewComponent implements OnInit {
     const id = this.selectedPersonId;
     const date = data.date;
     const time = data.time;
-    const user = this.dateService.allUsers.value.find((el: any) => {
+    const user = this.dateService.allUsersSelectedOrg.value.find((el: any) => {
       return el.id === +id
     })
 
