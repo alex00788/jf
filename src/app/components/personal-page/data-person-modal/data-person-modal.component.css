@@ -5,6 +5,29 @@
   width: 500px;
 }
 
+
+
+.recordDaysClass {
+  position: relative;
+  width: 500px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.btnShowDayRec {
+  border-radius: 5px;
+  cursor: pointer;
+  color: #5238fd;
+}
+
+.btnShowDayRec:hover {
+  background: #03f303;
+}
+
+.btnCancelAllRecSelectedUs {
+  margin: 10px;
+}
+
 .selectedUserClass {
   display: flex;
   justify-content: space-between;
@@ -21,6 +44,15 @@ span{
 }
 
 .btnClosePersonalData{
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  border: none 1px #f6dbff;
+  cursor: pointer;
+  background: none;
+}
+
+.btnAllDayRecBlockClose {
   position: absolute;
   right: 3px;
   top: 3px;

@@ -10,8 +10,8 @@ export class RecordingService {
   constructor() {
   }
 
-  public showCurrentDay: BehaviorSubject<boolean> = new BehaviorSubject(false)
-  public showCurrentWeek: BehaviorSubject<boolean> = new BehaviorSubject(true)
+  public showCurrentDay: BehaviorSubject<boolean> = new BehaviorSubject(true)
+  public showCurrentWeek: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public showCurrentMonth: BehaviorSubject<boolean> = new BehaviorSubject(false)
 
 

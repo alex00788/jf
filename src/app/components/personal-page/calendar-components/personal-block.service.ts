@@ -9,6 +9,7 @@ export class PersonalBlockService {
   personalData: boolean = true;
   recordsBlock: boolean = true;
   settingsRecords: boolean = false;
+  changeSettingsRecordsBlock: boolean = false;
   windowAddingNewOrgIsOpen: boolean = false;
 
 
@@ -22,11 +23,20 @@ export class PersonalBlockService {
   switchSittingsData() {
     this.windowAddingNewOrgIsOpen = false;
     this.settingsRecords = !this.settingsRecords;
+    if (this.settingsRecords) {
+      this.changeSettingsRecordsBlock =false;
+    }
   }
 
   addNewOrgSettings () {
     this.windowAddingNewOrgIsOpen = true;
     this.settingsRecords = false;
+  }
+
+
+  changeSettingsRecords() {
+    this.settingsRecords = !this.settingsRecords;
+    this.changeSettingsRecordsBlock = true;
   }
 
   openRecordsBlock() {
@@ -42,6 +52,7 @@ export class PersonalBlockService {
   }
 
   closeSettings() {
+    this.changeSettingsRecordsBlock = false;
     this.settingsRecords = false;
   }
 }

@@ -51,7 +51,7 @@ export class ClientsListComponent implements OnInit{
 
 
   openPerson(person: any) {
-    person.userId = person.id
+    person.userId = JSON.stringify(person.id)
     this.modalService.open();
     this.dateService.dataSelectedUser.next(person);
   }

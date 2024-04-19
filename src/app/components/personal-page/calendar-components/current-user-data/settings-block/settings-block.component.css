@@ -6,6 +6,39 @@
   color: #5238fd;
 }
 
+.currentSittingsData {
+  display: block;
+  border-radius: 10px;
+  margin: 3px;
+  border: solid 1px red;
+  color: black;
+  max-width: 370px;
+}
+
+.sittingCurrentValue {
+  margin: 10px 50px;
+}
+
+.sittingCurrentValueTitle {
+  margin: 7px 35%;
+  color: black;
+}
+
+.sittingCurrentValueFooter {
+  margin: 20px 20%;
+  color: #5238fd;
+  max-width: 250px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sittingCurrentValueFooter:hover {
+  background: #03f303;
+  border-radius: 10px;
+}
+
+
 .oneSitting {
   display: flex;
   justify-content: space-between;

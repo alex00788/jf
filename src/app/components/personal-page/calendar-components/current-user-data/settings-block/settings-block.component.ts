@@ -4,6 +4,7 @@ import {DateService} from "../../date.service";
 import {ApiService} from "../../../../../shared/services/api.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {DataCalendarService} from "../../data-calendar-new/data-calendar.service";
 
 @Component({
   selector: 'app-settings-block',
@@ -21,6 +22,7 @@ export class SettingsBlockComponent implements OnInit{
   constructor(
     public personalBlockService: PersonalBlockService,
     public dateService: DateService,
+    public dataCalendarService: DataCalendarService,
     public apiService: ApiService,
 
   ) {  }
@@ -44,6 +46,7 @@ export class SettingsBlockComponent implements OnInit{
     this.dateService.changeTimeInterval(this.form.value)
     this.dataSettings = JSON.stringify( {dataSettings: this.form.value})
     localStorage.setItem('dataSettings', this.dataSettings);
+    this.dataCalendarService.getAllEntryAllUsersForTheMonth();
   }
 
 

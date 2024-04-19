@@ -43,5 +43,26 @@ export class DataCalendarService {
 
 
 
+  //удаление записи ...в блоке всех записей ...
+  deleteSelectedRecInAllRecBlock(selectedRec: any) {
+    this.apiService.deleteEntry(selectedRec.id, selectedRec.userId)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1))
+        this.dateService.recordingDaysChanged.next(true);
+        const newAllUsers: any[] = []
+        this.dateService.allUsersSelectedOrg.value.forEach((el: any) => {
+           if ((el: any) => el.id === this.dateService.currentUserId.value) {
+              el.remainingFunds = this.dateService.remainingFunds.value
+           }
+              newAllUsers.push(el)
+        })
+        this.dateService.allUsersSelectedOrg.next(newAllUsers)
+        this.dateService.blockRecIfRecorded.next(false);
+        this.getAllEntryAllUsersForTheMonth();
+      })
+  }
+
+
 
 }

@@ -286,8 +286,7 @@ export class DataCalendarNewComponent implements OnInit {
     }
     this.apiService.addEntry(newUserAccount)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((v: any) => {
-        console.log('214', v)
+      .subscribe(() => {
         this.dataCalendarService.getAllEntryAllUsersForTheMonth();
         this.dateService.recordingDaysChanged.next(true);
       })

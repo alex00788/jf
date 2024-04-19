@@ -1,4 +1,4 @@
-<div class="settingsRecordsClass" *ngIf="personalBlockService.settingsRecords">
+<div class="settingsRecordsClass" *ngIf="personalBlockService.changeSettingsRecordsBlock">
   <form [formGroup]="form" (submit)="submit()">
     <div class="oneSitting">
       <label>
@@ -33,4 +33,37 @@
       </button>
     </div>
   </form>
+</div>
+
+
+<div class="currentSittingsData" *ngIf="personalBlockService.settingsRecords">
+  <div class="sittingCurrentValueTitle">
+    <strong>
+      Сейчас
+    </strong>
+  </div>
+
+  <div class="allSittingsVal">
+    <div class="sittingCurrentValue">
+    <span>
+      Записаться  могут {{dateService.maxPossibleEntries.value}} клиента
+    </span>
+    </div>
+    <div class="sittingCurrentValue">
+    <span>
+       Время начала записи {{dateService.timeStartRecord.value}} : 00
+    </span>
+    </div>
+    <div class="sittingCurrentValue">
+    <span>
+       Время окончания записи {{dateService.timeFinishRecord.value}} : 00
+    </span>
+    </div>
+  </div>
+
+  <div class="sittingCurrentValueFooter">
+    <strong (click)="personalBlockService.changeSettingsRecords()">
+       Изменить текущие настройки
+    </strong>
+  </div>
 </div>

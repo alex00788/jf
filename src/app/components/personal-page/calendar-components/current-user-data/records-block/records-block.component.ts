@@ -40,34 +40,18 @@ export class RecordsBlockComponent implements OnInit{
     this.recordingDaysChanged();
   }
 
-  // функция обновляет блок показывающий когда записан пользователь
+  // функция обновляет блок показывающий когда записан пользователь...как только пользователь запишется или отпишется
   recordingDaysChanged() {
     this.dateService.recordingDaysChanged
       .pipe(takeUntil(this.destroyed$))
       .subscribe(()=>{
-        this.openRecordsBlock();         // как только пользователь запишется или отпишется
-      })                                 // обновим блок в котором видны все записи за месяц
+        setTimeout(()=> {
+          const allEntryCurUser = this.dataCalendarService.allEntryAllUsersInMonth.value
+            .filter((entry: any)=> entry.userId == this.dateService.currentUserId.value)
+          this.dateService.allEntryCurUserInSelectMonth.next(allEntryCurUser)
+        }, 50)
+      })
   }
-
-  openRecordsBlock() {
-    const dataForGetAllEntrySelectedMonth = {
-      org: this.dateService.sectionOrOrganization.value,
-      month: this.dateService.date.value.format('MM'),
-      year: this.dateService.date.value.format('YYYY'),
-      userId: this.dateService.currentUserId.value
-    }
-    this.getAllEntryCurrentUserInSelectedMonth(dataForGetAllEntrySelectedMonth);
-  }
-
-  //Возмет с бека все записи текущей пользователя за выбранный месяц
-  getAllEntryCurrentUserInSelectedMonth(dataForGetAllEntry:any) {
-    this.apiService.getAllEntryCurrentUserInMonth(dataForGetAllEntry)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(allEntryInMonth => {
-        this.dateService.allEntryCurUserInSelectMonth.next(allEntryInMonth)
-      });
-  }
-
 
 
 
@@ -77,22 +61,7 @@ export class RecordsBlockComponent implements OnInit{
     this.clickCount++;
     setTimeout(() => {
       if (this.clickCount === 1) {
-        this.apiService.deleteEntry(selectedRec.id, selectedRec.userId)
-          .pipe(takeUntil(this.destroyed$))
-          .subscribe(() => {
-            this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1))
-            this.dateService.recordingDaysChanged.next(true);
-            const newAllUsers: any[] = []
-            this.dateService.allUsersSelectedOrg.value.forEach((el: any) => {
-              if ((el: any) => el.id === this.dateService.currentUserId.value) {
-                el.remainingFunds = this.dateService.remainingFunds.value
-              }
-              newAllUsers.push(el)
-            })
-            this.dateService.allUsersSelectedOrg.next(newAllUsers)
-            this.dateService.blockRecIfRecorded.next(false);
-            this.dataCalendarService.getAllEntryAllUsersForTheMonth();
-          })
+        this.dataCalendarService.deleteSelectedRecInAllRecBlock(selectedRec);
       } else if (this.clickCount === 2) {
         return
       }

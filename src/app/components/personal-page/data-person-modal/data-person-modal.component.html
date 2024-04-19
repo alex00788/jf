@@ -22,6 +22,12 @@
       </div>
       <span> {{remainingFunds}} </span>
     </div>
+    <div class="selectedUserClass">
+      <div>
+        <strong> Добавить: </strong>
+      </div>
+      <button>Абонемент</button>
+    </div>
     <div class="selectedUserClass" *ngIf="!showBtnAdminAndUser">
       <div>
         <strong> Назначить: </strong>
@@ -33,10 +39,55 @@
       </button>
     </div>
     <div class="selectedUserClass">
-      <div>
-        <strong> Добавить: </strong>
+      <div (click)="showOrHideDaysRec()">
+        <strong class="btnShowDayRec" *ngIf="!blockRecordsSelectedUser"> Показать дни записи... </strong>
+        <strong class="btnShowDayRec" *ngIf="blockRecordsSelectedUser"> Скрыть дни записи... </strong>
       </div>
-      <button>Абонемент</button>
     </div>
+  </div>
+</div>
+
+
+
+<div class="selectedUserClass" *ngIf="blockRecordsSelectedUser">
+  <div class="recordDaysClass">
+    <div class="personalDataTitle">
+      <strong>
+        Дни когда пользователь записан
+        <span style="color: #5238fd">
+           в {{dateService.date.value.format('M') | translateMonth}}
+         </span>
+      </strong>
+      <button class="btnAllDayRecBlockClose" (click)="showOrHideDaysRec()">&times;</button>
+      <button class="btnCancelAllRecSelectedUs" disabled> отменить все записи !</button>
+      <div class="dataRecordsBlockSelectedUser" >
+        <div class="dataRecordsSelectedUser">
+          <div class="strSRecordsSelectedUser" *ngFor="let entry of dateService.allEntrySelectedUserInSelectMonth | async">
+            <span class="strRecordsSelectedUser">
+              дата: {{entry.date}}
+            </span>
+            <span class="strRecordsSelectedUser">
+              время: {{entry.time}}:00
+            </span>
+            <button class="strRecordsSelectedUser"
+                    (click)="deleteSelectedRecSelectedUser(entry)"
+                    [disabled]="blockRepeat ||
+                    entry.date.substring(3,5) < currentDate.substring(3,5) ||
+                    entry.date.substring(0,2) < currentDate.substring(0,2)  &&
+                    entry.date.substring(3,5) === currentDate.substring(3,5) ||
+                    entry.time < currentHour && entry.date === currentDate                      "
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <ng-template #notContentBlock>
+      <span class="notContentClass">в {{dateService.date.value.format('M') | translateMonth}} записей нет!</span>
+    </ng-template>
+
   </div>
 </div>
