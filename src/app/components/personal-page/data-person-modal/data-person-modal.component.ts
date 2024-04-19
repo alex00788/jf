@@ -38,6 +38,7 @@ export class DataPersonModalComponent implements OnInit {
   showBtnUser: boolean;
   showBtnAdmin: boolean;
   showBtnAdminAndUser: boolean;
+  hideBtnForCurrentAdmin: boolean;
   private destroyed$: Subject<void> = new Subject();
   currentDate: any;
   currentHour: any = new Date().getHours();
@@ -48,6 +49,7 @@ export class DataPersonModalComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.hideBtnForCurrentAdmin = this.selectedUser.userId == this.dateService.currentUserId.value;
     this.roleUser = this.dateService.allUsersSelectedOrg.value.find((us: any)=> us.id == this.selectedUser.userId).role
     this.currentDate = moment().format('DD.MM.YYYY');
     this.dataAboutSelectedUser();
@@ -89,13 +91,6 @@ export class DataPersonModalComponent implements OnInit {
     this.apiService.changeRoleSelectedUser(selectedUser.userId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(newRoleUser => {
-
-        //обновить главную страницу когда админ сам себя назначил юзером
-        // this.dateService.currentUserRole.next(newRoleUser)
-        // const currentUser = JSON.parse(localStorage.getItem('userData') as string)
-        // currentUser.user.role = newRoleUser;
-        // localStorage.setItem('userData', JSON.stringify(currentUser))
-
         const newAllUser:any[] = [];
         this.dateService.allUsersSelectedOrg.value.forEach((el: any)=> {
           if (el.id === +selectedUser.userId) {
