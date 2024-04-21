@@ -12,24 +12,28 @@ import {
 } from "../reg-form-choice-organization/reg-form-choice-organization.component";
 import {RegFormNewOrgComponent} from "../reg-form-new-org/reg-form-new-org.component";
 import {SuccessModalComponent} from "../success-modal/success-modal.component";
+import {ContactsComponent} from "../contacts/contacts.component";
+import {SupportDevelopmentComponent} from "../support-development/support-development.component";
 
 @Component({
   selector: 'main-page',
   standalone: true,
-    imports: [
-        ModalPageComponent,
-        NgIf,
-        AsyncPipe,
-        CommonModule,
-        ErrorModalComponent,
-        LoginPageComponent,
-        RegistrationFormPageComponent,
-        RouterLink,
-        DescriptionApplicationComponent,
-        RegFormChoiceOrganizationComponent,
-        RegFormNewOrgComponent,
-        SuccessModalComponent
-    ],
+  imports: [
+    ModalPageComponent,
+    NgIf,
+    AsyncPipe,
+    CommonModule,
+    ErrorModalComponent,
+    LoginPageComponent,
+    RegistrationFormPageComponent,
+    RouterLink,
+    DescriptionApplicationComponent,
+    RegFormChoiceOrganizationComponent,
+    RegFormNewOrgComponent,
+    SuccessModalComponent,
+    ContactsComponent,
+    SupportDevelopmentComponent
+  ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })

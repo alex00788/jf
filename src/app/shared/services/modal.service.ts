@@ -10,6 +10,8 @@ export class ModalService {
   regFormAddNewOrg$ = new BehaviorSubject<boolean>(false)
   loginForm$ = new BehaviorSubject<boolean>(false)
   appDescription$ = new BehaviorSubject<boolean>(false)
+  appContacts$ = new BehaviorSubject<boolean>(false)
+  appSupport$ = new BehaviorSubject<boolean>(false)
 
   open() {
     this.isVisible$.next(true)
@@ -36,6 +38,8 @@ export class ModalService {
     this.loginForm$.next(false);
     this.appDescription$.next(false);
     this.regFormAddNewOrg$.next(false);
+    this.appContacts$.next(false);
+    this.appSupport$.next(false);
   }
 
   openRegistrationForm$ () {
@@ -44,6 +48,8 @@ export class ModalService {
     this.appDescription$.next(false);
     this.regFormChoiceOrg$.next(false);
     this.regFormAddNewOrg$.next(false);
+    this.appContacts$.next(false);
+    this.appSupport$.next(false);
   }
 
   openLoginForm$ () {
@@ -52,6 +58,8 @@ export class ModalService {
     this.appDescription$.next(false);
     this.regFormChoiceOrg$.next(false);
     this.regFormAddNewOrg$.next(false);
+    this.appContacts$.next(false);
+    this.appSupport$.next(false);
   }
 
   openFormAddNewOrg$ () {
@@ -60,6 +68,8 @@ export class ModalService {
     this.loginForm$.next(false);
     this.appDescription$.next(false);
     this.regFormChoiceOrg$.next(false);
+    this.appContacts$.next(false);
+    this.appSupport$.next(false);
   }
 
 
@@ -71,10 +81,41 @@ export class ModalService {
     this.hideTitle$.next(false);
     this.regFormChoiceOrg$.next(false);
     this.regFormAddNewOrg$.next(false);
+    this.appContacts$.next(false);
+    this.appSupport$.next(false);
   }
 
-  closeAppDescription$() {
+  openAppContacts() {
+    this.open();
     this.appDescription$.next(false);
+    this.registrationForm$.next(false);
+    this.loginForm$.next(false);
+    this.hideTitle$.next(false);
+    this.regFormChoiceOrg$.next(false);
+    this.regFormAddNewOrg$.next(false);
+    this.appContacts$.next(true);
+    this.appSupport$.next(false);
   }
+
+  // closeContacts() {
+  //   this.appContacts$.next(false);
+  //   this.close();
+  // }
+
+  openAppSupport() {
+    this.open();
+    this.registrationForm$.next(false);
+    this.appDescription$.next(false);
+    this.loginForm$.next(false);
+    this.hideTitle$.next(false);
+    this.regFormChoiceOrg$.next(false);
+    this.regFormAddNewOrg$.next(false);
+    this.appContacts$.next(false);
+    this.appSupport$.next(true);
+  }
+
+  // closeAppDescription$() {
+  //   this.appDescription$.next(false);
+  // }
 
 }

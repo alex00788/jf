@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalService} from "../../shared/services/modal.service";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 import {ApiService} from "../../shared/services/api.service";
 import {FormsModule} from "@angular/forms";
@@ -15,7 +15,8 @@ import {DateService} from "../personal-page/calendar-components/date.service";
     FormsModule,
     FilterOrgPipe,
     AsyncPipe,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './reg-form-choice-organization.component.html',
   styleUrl: './reg-form-choice-organization.component.css'
@@ -30,6 +31,7 @@ export class RegFormChoiceOrganizationComponent implements OnInit {
   private destroyed$: Subject<void> = new Subject();
   searchOrg = '';
   allOrgForReset: any[] = []
+  highlightBtn = false
 
 
   ngOnInit(): void {
@@ -55,13 +57,14 @@ export class RegFormChoiceOrganizationComponent implements OnInit {
   }
 
   choiceOrg(org: any) {
+    this.highlightBtn = true;
     const selectOrg = this.dateService.allOrgForReg.value.find((el:any)=>
     el === org)
-    console.log(selectOrg)
     this.dateService.allOrgForReg.next([selectOrg])
   }
 
   resetOrg() {
+    this.highlightBtn = false;
     this.dateService.allOrgForReg.next(this.allOrgForReset);
   }
 

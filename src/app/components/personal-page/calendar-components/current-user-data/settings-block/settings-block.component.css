@@ -7,6 +7,7 @@
 }
 
 .currentSittingsData {
+  position: relative;
   display: block;
   border-radius: 10px;
   margin: 3px;
@@ -38,6 +39,14 @@
   border-radius: 10px;
 }
 
+.btnSittingClose {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  margin-left: 150px;
+  cursor: pointer;
+}
 
 .oneSitting {
   display: flex;

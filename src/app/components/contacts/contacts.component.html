@@ -1,0 +1,60 @@
+<div class="contactsBlock">
+  <div class="titleContacts" *ngIf="!openSupport">
+    <div>
+      Чтобы добавить нужный вам функционал
+    </div>
+    <div class="contactsSupport">
+      <button class="btnContactsSupport" (click)="openSupportBlock()">
+        напишите в поддержку…
+      </button>
+    </div>
+
+  </div>
+
+  <form [formGroup]="form" (submit)="submit()">
+    <div class="descriptionProblems" *ngIf="openSupport">
+      <div class="titleProblem">
+      <span>
+        Опишите что вам необходимо изменить или добавить
+      </span>
+      </div>
+      <div class="descriptionProblemsText">
+      <textarea class="textareaClass" cols="35" rows="5" formControlName="description">
+      </textarea>
+        <div class="errorTextareaMessage" *ngIf="description.errors && description.touched">
+          <small *ngIf="description.errors?.['required']"> Заполните описание</small>
+          <small *ngIf="description.errors?.['minlength']"> минимально 15 символов сейчас {{description.value.length}}</small>
+        </div>
+      </div>
+      <div class="descriptionEmail">
+        <div class="inp">
+          <input id="emailForFeedback" type="email" placeholder="email, для обратной связи" formControlName="email">
+        </div>
+      </div>
+      <div class="futBtnContacts">
+        <button class="futBtnCont" type="button" (click)="cancelSubmit()">Закрыть</button>
+        <button class="futBtnCont" type="submit" [disabled]="form.invalid || form.disabled">Отправить</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="footerContacts">
+    <div class="footElR">
+      <div class="footEl">
+        Сотрудничество
+      </div>
+    </div>
+    <div class="footElR">
+      <div class="footEl">
+        Разработка приложений для вашего бизнеса
+      </div>
+    </div>
+    <div class="footElR">
+      <div class="footEl">
+        8-916-840-29-27
+      </div>
+    </div>
+  </div>
+
+
+</div>

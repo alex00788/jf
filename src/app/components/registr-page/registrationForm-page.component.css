@@ -3,7 +3,7 @@
   position: relative;
   margin: 20px;
   width: 450px;
-  height: 630px;
+  height: 550px;
   background: #aefaae;
   border-radius: 20px;
   overflow: auto;
@@ -153,7 +153,7 @@ input {
 
   .formReg {
     width: 400px;
-    height: 500px;
+    height: 450px;
   }
 
   input {

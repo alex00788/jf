@@ -1,5 +1,5 @@
 .descriptionPageClass {
-  width: 500px;
+  max-width: 500px;
 }
 
 .btnDescriptionPage {
@@ -7,40 +7,82 @@
   font-size: 20px;
   font-weight: bold;
   background: none;
-  color: #f50622;
+  color: white;
   border: none;
   cursor: pointer;
   width: 400px;
 }
 
-.btnDescriptionPage:hover {
+.footerDescriptions {
+  margin: 10px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.footerTitle {
+  font-size: 30px;
+  text-align: center;
+  margin: 10px;
+  color: #050a64;
+}
+
+.btnTester {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
+  border-radius: 10px;
+  background: none;
+  border: none;
+  color: white;
+}
+
+.btnTester:hover {
+  background: white;
   color: #2630f1;
 }
 
+
+.btnDescriptionPage:hover {
+  color: #050a64;
+}
+
 .howItWorkClass {
-  color: #2630f1;
+  position: relative;
   display: flex;
   justify-content: center;
   font-size: 20px;
+  margin: 10px;
 }
 
 li {
   margin: 10px 0;
   cursor: pointer;
+  text-decoration: none;
 }
 
-li:hover{
-color: #f50622;
+
+/*плавное подчеркивание при наведении*/
+li:after {
+  display: block;
+  position: absolute;
+  left: 0;    /*изменить на right:0;, чтобы изменить направление подчёркивания */
+  width: 0;   /*задаём длинну линии до наведения курсора*/
+  height: 2px; /*задаём ширину линии*/
+  background-color: #2630f1; /*задаём цвет линии*/
+  content: "";
+  transition: width 0.3s ease-out; /*задаём время анимации*/
 }
+li:hover:after,
+li:focus:after {
+  width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
+}
+
+
+
 
 @media (max-width: 1300px) {
   .btnDescriptionPage {
-    color: white;
     margin: 10px 13%;
-  }
-
-  li:hover {
-    color: #2630f1;
   }
 
   .howItWorkClass {

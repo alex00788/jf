@@ -19,18 +19,24 @@
   </button>
 
 
-  <div class="futRegForm">
-    <button class="btnFutRegForm" (click)="openLoginPage()"> назад </button>
+  <div class="futRegForm" [class]="{futRegF : highlightBtn}">
+    <button class="btnFutRegForm"
+            *ngIf="!highlightBtn"
+            (click)="openLoginPage()"> ...назад </button>
     <button  class="btnFutRegForm" (click)="openRegistrationPage()"
+             [class]="{btnFutRegFormNext : highlightBtn}"
              [disabled]="dateService.allOrgForReg.value.length != 1"> далее ...</button>
   </div>
 
-  <hr>
+  <div class="futReg" *ngIf="!highlightBtn">
+    <hr>
 
-  <span> Если организации нет, вы можете </span>
-  <button class="btnFutRegForm btnNewOrg"
-          (click)="addNewOrg()"
-          [disabled]="dateService.allOrgForReg.value.length === 1"> добавить новую</button>
+    <span> Если организации нет, вы можете </span>
+    <button class="btnNewOrg"
+            (click)="addNewOrg()"
+            [disabled]="dateService.allOrgForReg.value.length === 1"> добавить новую</button>
+
+  </div>
 
 </div>
 

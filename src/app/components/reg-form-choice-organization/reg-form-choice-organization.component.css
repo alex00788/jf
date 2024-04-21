@@ -1,10 +1,11 @@
 .regFormClass {
   position: relative;
   margin: 20px 20px;
+  padding-bottom: 15px;
   background: #aefaae;
   color: #5238fd;
   width: 500px;
-  height: 350px;
+  max-height: 350px;
   border-radius: 10px;
   text-align: center;
 }
@@ -28,6 +29,12 @@ input {
 .futRegForm {
   display: flex;
   justify-content: space-between;
+  margin: 10px 50px;
+}
+
+.futRegF {
+  display: flex;
+  justify-content: end;
   margin: 10px 50px;
 }
 
@@ -75,26 +82,40 @@ hr {
 }
 
 .btnFutRegForm {
-  background: white;
+  border: none;
+  background: none;
   border-radius: 10px;
   color: #5238fd;
   cursor: pointer;
 }
 
+.btnFutRegFormNext {
+  background: white;
+  border-radius: 10px;
+}
+
+
 .btnFutRegForm:hover {
-  background: #aefaae;
+  background: white;
   color: #0221c0;
 }
 
 .btnFutRegForm:disabled {
   background: none;
-  border: solid 1px red;
+  color: red;
 }
 
 .btnNewOrg {
   margin-left: 5px;
   border: none;
+  border-radius: 10px;
 }
+
+.btnNewOrg:hover {
+  background: white;
+  cursor: pointer;
+}
+
 
 
 @media (max-width: 600px) {

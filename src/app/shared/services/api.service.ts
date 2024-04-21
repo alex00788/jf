@@ -94,24 +94,34 @@ export class ApiService {
     return !!this.token
   }
 
-  getAllEntry(date: any): Observable<any> {
-    return this.http.get<any>('/api/user/getAllEntry', {
-      params: new HttpParams().append('date', date)
-    })
-      .pipe(catchError(this.errHandler.bind(this)))
+
+  //отправка мне запросов на доработку
+  sendInSupport(text: any): Observable<any> {
+    return this.http.post<any>('/api/user/sendInSupport', text)
+      .pipe(
+        catchError(this.errHandler.bind(this)),
+      )
   }
 
 
-  getAllEntryCurrentUserInMonth(dataForGetAllEntry: any): Observable<any> {
-    return this.http.get<any>('/api/user/getAllEntryCurrentUserInMonth', {
-      params: new HttpParams()
-        .append('month', dataForGetAllEntry.month)
-        .append('year', dataForGetAllEntry.year)
-        .append('org', dataForGetAllEntry.org)
-        .append('userId', dataForGetAllEntry.userId)
-    })
-      .pipe(catchError(this.errHandler.bind(this)))
-  }
+  // getAllEntry(date: any): Observable<any> {
+  //   return this.http.get<any>('/api/user/getAllEntry', {
+  //     params: new HttpParams().append('date', date)
+  //   })
+  //     .pipe(catchError(this.errHandler.bind(this)))
+  // }
+
+
+  // getAllEntryCurrentUserInMonth(dataForGetAllEntry: any): Observable<any> {
+  //   return this.http.get<any>('/api/user/getAllEntryCurrentUserInMonth', {
+  //     params: new HttpParams()
+  //       .append('month', dataForGetAllEntry.month)
+  //       .append('year', dataForGetAllEntry.year)
+  //       .append('org', dataForGetAllEntry.org)
+  //       .append('userId', dataForGetAllEntry.userId)
+  //   })
+  //     .pipe(catchError(this.errHandler.bind(this)))
+  // }
 
 
   getAllEntryAllUsersOrg(dataForGetAllEntryAllUs: any): Observable<any> {

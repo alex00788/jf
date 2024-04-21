@@ -1,0 +1,130 @@
+.contactsBlock {
+  margin: 10px;
+  background: rgba(238, 11, 158, 0.5);
+}
+
+.descriptionProblemsText {
+  text-align: center;
+}
+
+.titleContacts {
+  margin: 10px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.contactsSupport {
+  display: flex;
+  justify-content: center;
+}
+
+.btnContactsSupport {
+  margin: 10px;
+  background: none;
+  border-radius: 10px;
+  font-size: 17px;
+  color: #0221c0;
+  border: none;
+  cursor: pointer;
+}
+
+.btnContactsSupport:hover {
+  background: white;
+  color: #0221c0;
+}
+
+.titleProblem {
+  text-align: center;
+  font-size: 20px;
+}
+
+
+.futBtnContacts {
+  display: flex;
+  justify-content: center;
+}
+
+.inp {
+  text-align: center;
+  margin: 5px 15px;
+}
+
+
+.textareaClass {
+  margin: 5px 15px;
+  padding: 10px;
+}
+
+label{
+  margin: 5px;
+}
+input{
+  margin: 5px;
+}
+
+.futBtnCont {
+  margin: 5px;
+}
+
+.footerContacts {
+  cursor: pointer;
+  position: relative;
+  width: 315px;
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.footElR{
+  position: relative;
+  width: auto;
+}
+
+.footEl {
+  margin: 5px;
+}
+
+/*плавное подчеркивание при наведении*/
+.footEl:after {
+  display: block;
+  position: absolute;
+  left: 0;    /*изменить на right:0;, чтобы изменить направление подчёркивания */
+  width: 0;   /*задаём длинну линии до наведения курсора*/
+  height: 2px; /*задаём ширину линии*/
+  background-color: #2630f1; /*задаём цвет линии*/
+  content: "";
+  transition: width 0.3s ease-out; /*задаём время анимации*/
+}
+.footEl:hover:after,
+.footEl:focus:after {
+  width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
+}
+
+
+/*мигающий текст*/
+.errorTextareaMessage {
+  text-align: center;
+  font-size: 25px;
+  animation: flicker 1s infinite;
+}
+/*@keyframes flicker {*/
+/*  from { opacity: 1; !* Непрозрачный текст *! }*/
+/*  to { opacity: 0; !* Прозрачный текст *! }*/
+/*}*/
+@keyframes flicker {
+  from { color: #bb0404;  }
+  to { color: #042c91;  }
+}
+
+
+@media (max-width: 650px) {
+  .titleContacts {
+    margin: 5px;
+    font-size: 15px;
+  }
+
+  .titleProblem {
+    font-size: 15px;
+  }
+
+}

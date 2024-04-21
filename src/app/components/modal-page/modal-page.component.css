@@ -9,33 +9,10 @@
 }
 
 .modalContent {
-  width: auto;
-  height: auto;
-  position: absolute;
-  top: 220px;
-  left: 55%;
+  position: sticky;
+  left: 30%;
   padding: 6px;
-  background: white;
+  background: rgba(246, 243, 243, 0.5);
   border-radius: 10px;
 }
 
-@media (max-width: 1300px) {
-  .modalContent {
-    left: 42%;
-    background: rgba(246, 243, 243, 0.5);
-  }
-}
-
-@media (max-width: 960px) {
-  .modalContent {
-    left: 28%;
-    top: 150px;
-  }
-}
-
-@media (max-width: 600px) {
-  .modalContent {
-    left: 5%;
-    top: 150px;
-  }
-}
