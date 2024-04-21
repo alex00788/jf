@@ -1,11 +1,8 @@
 <div class="contactsBlock">
   <div class="titleContacts" *ngIf="!openSupport">
-    <div>
-      Чтобы добавить нужный вам функционал
-    </div>
     <div class="contactsSupport">
       <button class="btnContactsSupport" (click)="openSupportBlock()">
-        напишите в поддержку…
+        написать в поддержку…
       </button>
     </div>
 
@@ -13,13 +10,8 @@
 
   <form [formGroup]="form" (submit)="submit()">
     <div class="descriptionProblems" *ngIf="openSupport">
-      <div class="titleProblem">
-      <span>
-        Опишите что вам необходимо изменить или добавить
-      </span>
-      </div>
       <div class="descriptionProblemsText">
-      <textarea class="textareaClass" cols="35" rows="5" formControlName="description">
+      <textarea class="textareaClass" cols="35" rows="5" formControlName="description" placeholder="Напишите что хотите изменить или добавить...">
       </textarea>
         <div class="errorTextareaMessage" *ngIf="description.errors && description.touched">
           <small *ngIf="description.errors?.['required']"> Заполните описание</small>

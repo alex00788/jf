@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AsyncPipe, CommonModule, NgIf} from "@angular/common";
+import {AsyncPipe, CommonModule, NgIf, NgOptimizedImage} from "@angular/common";
 import {ModalPageComponent} from "../modal-page/modal-page.component";
 import {ModalService} from "../../shared/services/modal.service";
 import {ErrorModalComponent} from "../error-modal/error-modal.component";
@@ -32,7 +32,8 @@ import {SupportDevelopmentComponent} from "../support-development/support-develo
     RegFormNewOrgComponent,
     SuccessModalComponent,
     ContactsComponent,
-    SupportDevelopmentComponent
+    SupportDevelopmentComponent,
+    NgOptimizedImage
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'

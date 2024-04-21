@@ -1,10 +1,13 @@
 .contactsBlock {
+  max-width: 500px;
   margin: 10px;
-  background: rgba(238, 11, 158, 0.5);
+  background: #a3f6a3;
+  border-radius: 10px;
 }
 
 .descriptionProblemsText {
   text-align: center;
+  border-radius: 10px;
 }
 
 .titleContacts {
@@ -51,8 +54,9 @@
 
 
 .textareaClass {
-  margin: 5px 15px;
+  margin: 5px 10px;
   padding: 10px;
+  border-radius: 10px;
 }
 
 label{
@@ -73,6 +77,7 @@ input{
   margin: 20px auto;
   padding: 10px;
   text-align: center;
+  color: #5238fd;
 }
 
 .footElR{
@@ -90,7 +95,7 @@ input{
   position: absolute;
   left: 0;    /*изменить на right:0;, чтобы изменить направление подчёркивания */
   width: 0;   /*задаём длинну линии до наведения курсора*/
-  height: 2px; /*задаём ширину линии*/
+  height: 1px; /*задаём ширину линии*/
   background-color: #2630f1; /*задаём цвет линии*/
   content: "";
   transition: width 0.3s ease-out; /*задаём время анимации*/

@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {NgOptimizedImage} from "@angular/common";
+
 
 @Component({
   selector: 'app-support-development',
   standalone: true,
-  imports: [],
+  imports: [
+    NgOptimizedImage
+  ],
   templateUrl: './support-development.component.html',
   styleUrl: './support-development.component.css'
 })

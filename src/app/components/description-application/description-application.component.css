@@ -1,5 +1,8 @@
 .descriptionPageClass {
   max-width: 500px;
+  margin: 10px;
+  background: #a3f6a3;
+  border-radius: 10px;
 }
 
 .btnDescriptionPage {
@@ -7,7 +10,7 @@
   font-size: 20px;
   font-weight: bold;
   background: none;
-  color: white;
+  color: #5238fd;
   border: none;
   cursor: pointer;
   width: 400px;
@@ -33,7 +36,7 @@
   border-radius: 10px;
   background: none;
   border: none;
-  color: white;
+  color: #5238fd;
 }
 
 .btnTester:hover {
@@ -58,6 +61,7 @@ li {
   margin: 10px 0;
   cursor: pointer;
   text-decoration: none;
+  color: #5238fd;
 }
 
 

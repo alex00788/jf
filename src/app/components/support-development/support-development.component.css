@@ -1,0 +1,25 @@
+.supportBlock {
+  text-align: center;
+  font-size: 20px;
+  margin: 10px;
+  background: #a3f6a3;
+  border-radius: 10px;
+  padding: 5px;
+  color: #5238fd;
+}
+
+.titleSupport {
+  margin: 10px;
+}
+
+.card {
+  margin: 10px;
+}
+.phoneSupport {
+  margin: 10px;
+}
+
+.qrCode {
+  width: 300px;
+  height: 300px;
+}
