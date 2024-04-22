@@ -14,6 +14,7 @@ export class DescriptionApplicationComponent {
   howItWorkBlock: boolean = false;
   forWhomBlock: boolean = false;
   whyDoYouNeedThis: boolean = false;
+  blockDescription =  false;
 
   switchHowItWorkBlock() {
     this.howItWorkBlock = !this.howItWorkBlock;
@@ -31,5 +32,9 @@ export class DescriptionApplicationComponent {
     this.howItWorkBlock = false;
     this.forWhomBlock = false;
     this.whyDoYouNeedThis = !this.whyDoYouNeedThis;
+  }
+
+  changeVisible() {
+    this.blockDescription = !this.blockDescription;
   }
 }
