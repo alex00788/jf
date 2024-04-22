@@ -6,7 +6,7 @@
 
 .recordsBlockClassN {
   border-radius: 10px;
-  width: 240px;
+  width: 350px;
   margin: 3px;
   border: solid 1px #5238fd;
   background: #c2f1e5;
@@ -64,8 +64,10 @@ li {
 .currentDay {
   font-size: 18px;
   text-align: center;
-  margin: 5px 75px;
-  border-bottom: solid 1px #0221c0;;
+  margin: 5px auto;
+  width: 90px;
+  border-bottom: solid 1px red;
+
 }
 
 .timeOfDay {
@@ -74,7 +76,8 @@ li {
 
 .timeOfDayClass {
   text-align: center;
-  margin: 25px 80px;
+  display: flex;
+  justify-content: center;
   font-size: 18px;
 }
 
@@ -100,7 +103,7 @@ li {
 }
 
 .btnAddEntryClass {
-  width: 170px;
+  width: 270px;
   margin: 5px 20px;
   border-radius: 7px;
   border: solid 1px #0221c0;

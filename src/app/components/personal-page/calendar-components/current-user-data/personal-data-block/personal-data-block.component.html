@@ -37,9 +37,6 @@
     <strong> Настройки </strong>
   </button>
   <ng-container *ngIf="dateService.currentUserIsTheMainAdmin | async">
-    <button class="btnSettingsRecords" (click)="personalBlockService.switchSittingsData()">
-    <strong> Задать ORG </strong>
-    </button>
     <button class="btnSettingsRecords"  (click)="personalBlockService.addNewOrgSettings()">
       <strong> Добавить ORG </strong>
     </button>

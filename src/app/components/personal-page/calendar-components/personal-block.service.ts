@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 export class PersonalBlockService {
 
   constructor() { }
-  personalData: boolean = true;
-  recordsBlock: boolean = true;
+  personalData: boolean = false;
+  recordsBlock: boolean = false;
   settingsRecords: boolean = false;
   changeSettingsRecordsBlock: boolean = false;
   windowAddingNewOrgIsOpen: boolean = false;

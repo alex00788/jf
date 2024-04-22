@@ -5,7 +5,9 @@
   <div class="logOutClass">
     <button class="btnLogoutSystemsClass" (click)="logoutSystems()"> Выйти из системы</button>
   </div>
-
+  <div class="currentSelectedOrg">
+    <app-select-org-to-display *ngIf="dateService.currentUserIsTheMainAdmin.value"></app-select-org-to-display>
+  </div>
   <div class="errorModal insideClass">
     <app-error-modal></app-error-modal>
   </div>
@@ -14,6 +16,9 @@
     <div class="bodyCalendar">
       <div class="bodyCalendarElementClass">
         <app-current-user-data></app-current-user-data>
+      </div>
+      <div class="bodyCalendarElementClass">
+        <app-clients-list></app-clients-list>
       </div>
       <button
         class="btnBodyCalendarElement"
@@ -28,12 +33,7 @@
         <app-header-calendar></app-header-calendar>
         <app-body-calendar></app-body-calendar>
       </div>
-      <div class="bodyCalendarElementClass">
-        <app-clients-list></app-clients-list>
-      </div>
     </div>
-
-    <hr>
 
     <div class="calendarDisplayMode">
       <app-day-week-month></app-day-week-month>

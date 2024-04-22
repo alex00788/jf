@@ -1,3 +1,4 @@
+
 <div class="personalDataClass">
   <div class="coverBtnSettingsRec" *ngIf="!personalBlockService.personalData">
   <button class="btnSettingsRecords" (click)="personalBlockService.switchData()"> Мои данные</button>
@@ -12,6 +13,5 @@
 
     <app-settings-block></app-settings-block>
 
-    <app-select-org-to-display *ngIf="dateService.currentUserIsTheMainAdmin.value"></app-select-org-to-display>
   </div>
 </div>

@@ -26,7 +26,7 @@ export class ClientsListComponent implements OnInit{
     ) {
   }
   private destroyed$: Subject<void> = new Subject();
-  clientListBlock : boolean = true;
+  clientListBlock : boolean = false;
   clientList = ''
 
   ngOnInit(): void {

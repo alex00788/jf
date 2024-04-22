@@ -1,6 +1,6 @@
 <ng-container *ngIf="showSelectedOrg; else showSelectedOrgBlock">
   <div class="selectOrgToDisplayClass">
-    <div class="titleSelectOrg">
+    <div class="choiceTitleSelectOrg">
       <strong> Выбрать организацию </strong>
     </div>
 
@@ -24,17 +24,9 @@
 <ng-template #showSelectedOrgBlock>
   <div class="selectedOrg">
     <div class="titleSelectOrg">
-      <div class="titleSelectOrgText">
-        Выбрана
-      </div>
-      <strong>
+      <strong (click)="changeOrg()">
         {{dateService.selectedSectionOrOrganization.value}}
       </strong>
     </div>
-    <button class="btnChangeSelectOrgClass"
-            (click)="changeOrg()"
-    >
-      Сменить Организацию
-    </button>
   </div>
 </ng-template>

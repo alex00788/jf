@@ -10,14 +10,20 @@
   display: none;
 }
 
+.currentSelectedOrg {
+  display: flex;
+  justify-content: center;
+}
+
+
 .logOutClass {
   display: flex;
   justify-content: center;
-  margin: 5px auto 15px auto;
+  margin: 5px auto;
 }
 
 .titleMainePage {
-  margin: 15px;
+  margin: 5px;
 }
 
 .titleMainePage:hover {
@@ -25,7 +31,7 @@
 }
 
 .mainePageClass {
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
   justify-content: center;
   color: #5238fd;
@@ -94,7 +100,7 @@
 }
 
 .btnLogoutSystemsClass {
-  margin: 10px;
+  margin: 3px;
   background: none;
   border: solid 0.1rem #c8caf8;
   border-radius: 10px;

@@ -2,34 +2,36 @@
   display: block;
   border-radius: 10px;
   margin: 3px;
-  border: solid 1px red;
   color: #5238fd;
+  background: #c6faeb;
 }
 
 .currentSittingsData {
   position: relative;
   display: block;
   border-radius: 10px;
-  margin: 3px;
-  border: solid 1px red;
+  padding-bottom: 5px;
   color: black;
-  max-width: 370px;
+  background: #c6faeb;
+  width: 460px;
 }
 
 .sittingCurrentValue {
-  margin: 10px 50px;
+  margin: 10px 0;
+  text-align: center;
 }
 
 .sittingCurrentValueTitle {
-  margin: 7px 35%;
+  text-align: center;
+  margin: 7px 0px;
   color: black;
 }
 
 .sittingCurrentValueFooter {
-  margin: 20px 20%;
+  margin: 0 auto;
   color: #5238fd;
-  max-width: 250px;
-  background: none;
+  width: 250px;
+  text-align: center;
   border: none;
   cursor: pointer;
 }

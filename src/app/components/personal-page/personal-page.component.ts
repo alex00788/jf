@@ -15,6 +15,9 @@ import {InfoBlockComponent} from "./calendar-components/info-block/info-block.co
 import {ClientsListComponent} from "./calendar-components/clients-list/clients-list.component";
 import {DataCalendarNewComponent} from "./calendar-components/data-calendar-new/data-calendar-new.component";
 import {DayWeekMonthComponent} from "./calendar-components/day-week-month/day-week-month.component";
+import {
+  SelectOrgToDisplayComponent
+} from "./calendar-components/current-user-data/select-org-to-display/select-org-to-display.component";
 
 @Component({
   selector: 'app-personal-page',
@@ -32,6 +35,7 @@ import {DayWeekMonthComponent} from "./calendar-components/day-week-month/day-we
     ClientsListComponent,
     DataCalendarNewComponent,
     DayWeekMonthComponent,
+    SelectOrgToDisplayComponent,
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'
@@ -95,6 +99,7 @@ export class PersonalPageComponent implements OnInit {
     this.router.navigate(['/'])
   }
   logoutSystems() {
+    this.modalService.showTitle();
     this.router.navigate(['/'])
     this.apiService.logout()
   }
