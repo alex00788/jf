@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FilterOrgPipe} from "../../../../../shared/pipe/filter-org.pipe";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -22,14 +22,29 @@ import {DataCalendarService} from "../../data-calendar-new/data-calendar.service
 export class SelectOrgToDisplayComponent {
   constructor(    public dateService: DateService,
                   public dataCalendarService: DataCalendarService,
+                  private el: ElementRef
   ) {}
-  searchOrgForRec = ''
-  @ViewChild('inputSearchOrg') inputSearchOrgRef: ElementRef;
+
+  searchOrgForRec = '';
   showSelectedOrg = false;
+
+  @ViewChild('inputSearchOrg') inputSearchOrgRef: ElementRef;
+//оределяем, что кликнули за пределом блока div
+  @HostListener('document:click', ['$event']) onClick(event: Event) {
+    // элемент в котором находимся есть в том по которому кликнули?
+    if (!this.el.nativeElement.contains(event.target)) {
+      this.showSelectedOrg = false;
+      //this.el.nativeElement,... тот элемент, в котором находимся
+      //event.target... тот по которому кликаем
+    }
+  }
+
+
 
 
 
   choiceOrgForRec(org: any) {
+    this.dateService.currentOrg.next(org)
     this.showSelectedOrg = false;
     this.dateService.selectedSectionOrOrganization.next(org);
     this.dataCalendarService.getAllEntryAllUsersForTheMonth();
@@ -39,6 +54,8 @@ export class SelectOrgToDisplayComponent {
 
 
   changeOrg() {
-    this.showSelectedOrg = true;
+    setTimeout(()=> {
+      this.showSelectedOrg = true;
+    },50)
   }
 }

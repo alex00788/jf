@@ -48,18 +48,23 @@ export class RegFormChoiceOrganizationComponent implements OnInit {
   }
 
   getAllOrganizationFromTheDatabase() {
-    this.apiService.getAllOrgFromDb()
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(allOrg=> {
-        this.allOrgForReset = allOrg.allOrg;
-        this.dateService.allOrgForReg.next(allOrg.allOrg);
-      })
+      this.apiService.getAllOrgFromDb()
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe(allOrg=> {
+          const allOrgName = allOrg.allOrg.map((el:any) => el.name);
+          this.dateService.allOrgNameAndId.next(allOrg.allOrg)
+          this.allOrgForReset = allOrgName;
+          this.dateService.allOrgForReg.next(allOrgName);
+        })
   }
 
   choiceOrg(org: any) {
     this.highlightBtn = true;
     const selectOrg = this.dateService.allOrgForReg.value.find((el:any)=>
     el === org)
+    const selectOrgId = this.dateService.allOrgNameAndId.value.find((el:any)=>
+      el.name === org)
+    this.dateService.allOrgNameAndId.next([selectOrgId])
     this.dateService.allOrgForReg.next([selectOrg])
   }
 

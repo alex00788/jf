@@ -3,11 +3,11 @@
   border-radius: 10px;
   margin: 5px;
   padding-top: 5px;
-  border: solid 1px red;
+  border: none;
   color: #5238fd;
   background: #c6faeb;;
   max-height: 150px;
-  width: 470px;
+  max-width: 470px;
   cursor: pointer;
 }
 
@@ -28,7 +28,7 @@
   margin: 5px;
   border: solid 1px red;
   color: #5238fd;
-  background: #c6faeb;;
+  background: #c6faeb;
   max-height: 150px;
   width: 470px;
   overflow: auto;
@@ -39,7 +39,7 @@
 }
 
 .titleSelectOrg {
-  padding: 3px;
+  padding: 3px 15px;
   text-align: center;
 }
 

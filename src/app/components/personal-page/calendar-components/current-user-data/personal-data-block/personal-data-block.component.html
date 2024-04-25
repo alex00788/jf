@@ -32,7 +32,7 @@
     </button>
   </div>
 
-  <div class="futSettingClass" *ngIf="showSettings">
+  <div class="futSettingClass" *ngIf="!this.dateService.currentUserSimpleUser.value">
   <button class="btnSettingsRecords" (click)="personalBlockService.switchSittingsData()">
     <strong> Настройки </strong>
   </button>

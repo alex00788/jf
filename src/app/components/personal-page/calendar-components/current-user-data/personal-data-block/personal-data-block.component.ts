@@ -18,10 +18,10 @@ export class PersonalDataBlockComponent implements OnInit{
                public personalBlockService: PersonalBlockService,
                public dateService: DateService,
   ) {  }
-  showSettings: boolean;
 
   ngOnInit(): void {
-    this.showSettings = !this.dateService.currentUserSimpleUser.value;
+    const currentUser = JSON.parse(localStorage.getItem('userData') as string)
+    this.dateService.remainingFunds.next(currentUser.user.remainingFunds)
   }
 
 }

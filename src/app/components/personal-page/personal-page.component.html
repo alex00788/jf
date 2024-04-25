@@ -1,12 +1,12 @@
 <div class="personalPageStyle">
-  <div class="mainePageClass">
-    <h3 class="titleMainePage" (click)="mainePage()">Твой личный администратор</h3>
-  </div>
-  <div class="logOutClass">
-    <button class="btnLogoutSystemsClass" (click)="logoutSystems()"> Выйти из системы</button>
+  <strong class="btnLogoutSystemsClass" (click)="logoutSystems()"> &times; </strong>
+  <div class="cowerMainePageClass">
+    <div class="mainePageClass">
+      <h3 class="titleMainePage" (click)="mainePage()">Твой личный администратор</h3>
+    </div>
   </div>
   <div class="currentSelectedOrg">
-    <app-select-org-to-display *ngIf="dateService.currentUserIsTheMainAdmin.value"></app-select-org-to-display>
+    <app-select-org-to-display></app-select-org-to-display>
   </div>
   <div class="errorModal insideClass">
     <app-error-modal></app-error-modal>
@@ -17,7 +17,7 @@
       <div class="bodyCalendarElementClass">
         <app-current-user-data></app-current-user-data>
       </div>
-      <div class="bodyCalendarElementClass">
+      <div class="bodyCalendarElementClass" *ngIf="!dateService.currentUserSimpleUser.value">
         <app-clients-list></app-clients-list>
       </div>
       <button

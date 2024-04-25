@@ -10,6 +10,7 @@ export class DateService {                                            //moment()
   public currentUser: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserId: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserRole: BehaviorSubject<any> = new BehaviorSubject('')
+  public currentOrg: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserIsTheMainAdmin: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public currentUserIsTheAdminOrg: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public currentUserSimpleUser: BehaviorSubject<boolean> = new BehaviorSubject(false)
@@ -17,12 +18,14 @@ export class DateService {                                            //moment()
   public recordingDaysChanged: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public blockRecIfRecorded: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
+  public idSelectedOrg: BehaviorSubject<any> = new BehaviorSubject('')
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
   public allEntryCurUserInSelectMonth: BehaviorSubject<any> = new BehaviorSubject([])
   public allEntrySelectedUserInSelectMonth: BehaviorSubject<any> = new BehaviorSubject([])
   public allUsersSelectedOrg: BehaviorSubject<any> = new BehaviorSubject([])
   public allOrganization: BehaviorSubject<any> = new BehaviorSubject([])
   public allOrgForReg: BehaviorSubject<any> = new BehaviorSubject([])
+  public allOrgNameAndId: BehaviorSubject<any> = new BehaviorSubject([])
   public selectOrgForReg: BehaviorSubject<any> = new BehaviorSubject('')
   public sectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('')
   public selectedSectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('Организация не выбрана')
@@ -59,7 +62,9 @@ export class DateService {                                            //moment()
     this.currentUser.next(currentUser.user.nameUser + ' ' + currentUser.user.surnameUser);
     this.currentUserId.next(currentUser.user.id);
     this.currentUserRole.next(currentUserRole);
-    this.remainingFunds.next(currentUser.user.remainingFunds);
+    this.remainingFunds.next(+currentUser.user.remainingFunds);
+    this.idSelectedOrg.next(currentUser.user.idOrg);
+    this.currentOrg.next(currentUser.user.sectionOrOrganization)
     this.sectionOrOrganization.next(currentUser.user.sectionOrOrganization);
   }
 

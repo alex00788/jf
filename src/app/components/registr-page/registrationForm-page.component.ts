@@ -47,6 +47,7 @@ export class RegistrationFormPageComponent implements OnInit {
     surnameUser: new FormControl(null, Validators.required),
     phoneNumber: new FormControl(null, Validators.required),
     sectionOrOrganization: new FormControl(),
+    idOrg: new FormControl(),
   })
 
   ngOnInit(): void {
@@ -90,6 +91,7 @@ export class RegistrationFormPageComponent implements OnInit {
       return;
     }
     this.form.value.sectionOrOrganization = this.dateService.selectOrgForReg.value[0]
+    this.form.value.idOrg = this.dateService.allOrgNameAndId.value[0].id;
     this.loginSub = this.apiService.registration(this.form.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(userData => {

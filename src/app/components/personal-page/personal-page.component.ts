@@ -81,18 +81,26 @@ export class PersonalPageComponent implements OnInit {
 
   //функция, возьмет пользователей конкретной организации
   getAllUsersCurrentOrganization() {
-    this.apiService.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization.value)
+    this.apiService.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization.value, this.dateService.idSelectedOrg.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsersOrganization => {
         const user = allUsersOrganization.find((el: any) => {
-          return el.id === this.dateService.currentUserId.value
-        })
-        this.dateService.remainingFunds.next(user.remainingFunds)
-        this.dateService.allUsersSelectedOrg.next(allUsersOrganization)
+          return el.id == this.dateService.currentUserId.value
+        });
+        this.dateService.remainingFunds.next(user.remainingFunds);
+        this.dateService.allUsersSelectedOrg.next(allUsersOrganization);
+        this.getAllOrg();
       });
   }
 
-
+  getAllOrg() {
+    this.apiService.getAllOrgFromDb()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(org=> {
+        const allOrg = org.allOrg.map((el:any)=> el.name);
+        this.dateService.allOrganization.next(allOrg);
+      })
+  }
 
 
   mainePage() {

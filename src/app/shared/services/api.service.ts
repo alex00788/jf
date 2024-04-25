@@ -152,9 +152,11 @@ export class ApiService {
       .pipe(catchError(this.errHandler.bind(this)))
   }
 
-  getAllUsersCurrentOrganization (organization: any): Observable<any> {
+  getAllUsersCurrentOrganization (organization: any, idOrg: any): Observable<any> {
     return this.http.get<any>('/api/user/getAllUsersCurrentOrganization', {
-      params: new HttpParams().append('organization', organization)
+      params: new HttpParams()
+        .append('organization', organization)
+        .append('idOrg', idOrg)
     })
       .pipe(catchError(this.errHandler.bind(this)))
   }

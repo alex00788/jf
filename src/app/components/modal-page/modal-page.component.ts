@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {LoginPageComponent} from "../login-page/login-page.component";
 import {ModalService} from "../../shared/services/modal.service";
 import {ErrorModalComponent} from "../error-modal/error-modal.component";
 import {AsyncPipe} from "@angular/common";
@@ -8,7 +7,6 @@ import {AsyncPipe} from "@angular/common";
   selector: 'app-modal-page',
   standalone: true,
   imports: [
-    LoginPageComponent,
     ErrorModalComponent,
     AsyncPipe,
   ],

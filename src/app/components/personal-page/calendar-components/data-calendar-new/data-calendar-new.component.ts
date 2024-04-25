@@ -256,7 +256,7 @@ export class DataCalendarNewComponent implements OnInit {
     this.clickCount++;
     setTimeout(() => {
       if (this.clickCount === 1) {
-        const currentUser = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id === this.dateService.currentUserId.value)
+        const currentUser = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id == this.dateService.currentUserId.value)
         currentUser.remainingFunds = JSON.stringify(+currentUser.remainingFunds - 1)
         this.dateService.remainingFunds.next(currentUser.remainingFunds);
         this.addEntry(currentUser, time, date);
@@ -282,11 +282,12 @@ export class DataCalendarNewComponent implements OnInit {
       user: user.surnameUser + ' ' + user.nameUser,
       userId: user.id,
       remainingFunds: user.remainingFunds,
-      sectionOrOrganization: user.sectionOrOrganization
+      sectionOrOrganization: user.sectionOrOrganization,
+      idOrg: this.dateService.idSelectedOrg.value
     }
     this.apiService.addEntry(newUserAccount)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => {
+      .subscribe((v: any) => {
         this.dataCalendarService.getAllEntryAllUsersForTheMonth();
         this.dateService.recordingDaysChanged.next(true);
       })
@@ -295,14 +296,13 @@ export class DataCalendarNewComponent implements OnInit {
 
   deletePerson(id: any, userId: any) {
     if (this.dateService.currentUserSimpleUser.value) {
-      // this.dateService.blockRecIfRecorded.next(false);
       this.blockIfRecorded = false;
     }
     this.apiService.deleteEntry(id, userId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         let user = this.dateService.allUsersSelectedOrg.value.find((el: any) => {
-          return el.id === +userId
+          return el.id == +userId
         })
         user.remainingFunds = JSON.stringify(+user.remainingFunds + 1);
         if (user.id === this.dateService.currentUserId.value) {
@@ -316,6 +316,7 @@ export class DataCalendarNewComponent implements OnInit {
 
 
   submit(data: any) {
+    console.log('322', data)
     const id = this.selectedPersonId;
     const date = data.date;
     const time = data.time;

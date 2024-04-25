@@ -1,4 +1,4 @@
-<div *ngIf="!dateService.currentUserSimpleUser.value">
+<ng-container >
   <div class="coverBtnMyClientList" *ngIf="!clientListBlock">
     <button class="btnMyClientList"
             (click)="showClientList()"
@@ -45,5 +45,5 @@
 
   </div>
 
-</div>
+</ng-container>
 

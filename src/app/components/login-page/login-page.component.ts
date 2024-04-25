@@ -82,16 +82,17 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(userData => {
         if (userData?.user.isActivated) {
-        this.form.reset()
-        this.router.navigate(['personal-page'])
-        this.modalService.close()
-        this.dateService.setUser(userData)
+        this.form.reset();
+        this.router.navigate(['personal-page']);
+        this.modalService.close();
+        this.dateService.setUser(userData);
         this.accountNotConfirmed = true;
+        this.dateService.currentOrg.next(userData)
       } else {
-          this.errorResponseService.localHandler('активируйте аккаунт, пройдите по ссылке в почте...')
+          this.errorResponseService.localHandler('активируйте аккаунт, пройдите по ссылке в почте...');
           this.accountNotConfirmed = true;
-          this.router.navigate(['/'])
-          this.apiService.logout()
+          this.router.navigate(['/']);
+          this.apiService.logout();
         }
     })
   }

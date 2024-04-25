@@ -30,7 +30,13 @@
   color: #0221c0;
 }
 
+.cowerMainePageClass {
+  display: flex;
+  justify-content: center;
+}
+
 .mainePageClass {
+  width: 300px;
   margin-top: 5px;
   display: flex;
   justify-content: center;
@@ -100,16 +106,23 @@
 }
 
 .btnLogoutSystemsClass {
-  margin: 3px;
-  background: none;
-  border: solid 0.1rem #c8caf8;
+  position: fixed;
+  left: 65%;
+  top: 15px;
+  margin: 5px;
+  height: 15px;
+  width: 15px;
+  text-align: center;
+  border: none;
   border-radius: 10px;
   color: #5238fd;
   cursor: pointer;
 }
 
-.btnLogoutSystemsClass:hover {
-  color: #f50622;
+.btnLogoutSystemsClass:hover{
+  color: white;
+  background: #f50622;
+  transition: 1s;
 }
 
 
