@@ -8,7 +8,7 @@
       <div
          *ngFor="let org of allOrg | filterOrg: searchOrg; index as i">
          <span class="ownOrg"  (click)="choiceOrg(org)">
-          {{org}}
+          {{org.name}}
          </span>
       </div>
     </div>

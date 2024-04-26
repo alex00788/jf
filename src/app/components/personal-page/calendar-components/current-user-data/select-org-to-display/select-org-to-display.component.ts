@@ -44,11 +44,12 @@ export class SelectOrgToDisplayComponent {
 
 
   choiceOrgForRec(org: any) {
-    this.dateService.currentOrg.next(org)
+    console.log('47', org)
     this.showSelectedOrg = false;
-    this.dateService.selectedSectionOrOrganization.next(org);
+    this.dateService.idSelectedOrg.next(org.id)
+    this.dateService.currentOrg.next(org.name)
     this.dataCalendarService.getAllEntryAllUsersForTheMonth();
-    this.dateService.getUsersSelectedOrg(org);
+    this.dataCalendarService.getAllUsersCurrentOrganization();
   }
 
 

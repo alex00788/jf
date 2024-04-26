@@ -7,7 +7,7 @@ import moment from "moment";
 })
 export class DateService {                                            //moment() это текущая дата
   public date: BehaviorSubject<any> = new BehaviorSubject(moment())        //начальное значение
-  public currentUser: BehaviorSubject<any> = new BehaviorSubject('')
+  public currentUserNameAndSurname: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserId: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserRole: BehaviorSubject<any> = new BehaviorSubject('')
   public currentOrg: BehaviorSubject<any> = new BehaviorSubject('')
@@ -16,19 +16,16 @@ export class DateService {                                            //moment()
   public currentUserSimpleUser: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public calendarBodyOpen: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public recordingDaysChanged: BehaviorSubject<boolean> = new BehaviorSubject(false)
-  public blockRecIfRecorded: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
-  public idSelectedOrg: BehaviorSubject<any> = new BehaviorSubject('')
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
-  public allEntryCurUserInSelectMonth: BehaviorSubject<any> = new BehaviorSubject([])
   public allEntrySelectedUserInSelectMonth: BehaviorSubject<any> = new BehaviorSubject([])
   public allUsersSelectedOrg: BehaviorSubject<any> = new BehaviorSubject([])
   public allOrganization: BehaviorSubject<any> = new BehaviorSubject([])
   public allOrgForReg: BehaviorSubject<any> = new BehaviorSubject([])
   public allOrgNameAndId: BehaviorSubject<any> = new BehaviorSubject([])
   public selectOrgForReg: BehaviorSubject<any> = new BehaviorSubject('')
+  public idSelectedOrg: BehaviorSubject<any> = new BehaviorSubject('')
   public sectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('')
-  public selectedSectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('Организация не выбрана')
   public timeStartRecord: BehaviorSubject<any> = new BehaviorSubject(18)
   public timeFinishRecord: BehaviorSubject<any> = new BehaviorSubject(19)
   public maxPossibleEntries: BehaviorSubject<any> = new BehaviorSubject(3)
@@ -50,19 +47,18 @@ export class DateService {                                            //moment()
     localStorage.setItem('userData', JSON.stringify(userData))
     // const newUser = JSON.parse(userData.nameUser) + JSON.parse(userData.surnameUser)
     const newUser = userData.user.nameUser + ' ' + userData.user.surnameUser
-    this.currentUser.next(newUser)
+    this.currentUserNameAndSurname.next(newUser)
   }
 
   getCurrentUser() {
     const currentUser = JSON.parse(localStorage.getItem('userData') as string)
-    const currentUserRole = currentUser.user.role
     this.currentUserSimpleUser.next(currentUser.user.role !== 'ADMIN' && currentUser.user.role !== 'MAIN_ADMIN');
     this.currentUserIsTheAdminOrg.next(currentUser.user.role === 'ADMIN');
     this.currentUserIsTheMainAdmin.next(currentUser.user.role === 'MAIN_ADMIN');
-    this.currentUser.next(currentUser.user.nameUser + ' ' + currentUser.user.surnameUser);
+    this.currentUserNameAndSurname.next(currentUser.user.nameUser + ' ' + currentUser.user.surnameUser);
     this.currentUserId.next(currentUser.user.id);
-    this.currentUserRole.next(currentUserRole);
-    this.remainingFunds.next(+currentUser.user.remainingFunds);
+    this.currentUserRole.next(currentUser.user.role);
+    // this.remainingFunds.next(+currentUser.user.remainingFunds);
     this.idSelectedOrg.next(currentUser.user.idOrg);
     this.currentOrg.next(currentUser.user.sectionOrOrganization)
     this.sectionOrOrganization.next(currentUser.user.sectionOrOrganization);

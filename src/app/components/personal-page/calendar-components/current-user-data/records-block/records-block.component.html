@@ -10,14 +10,20 @@
        </strong>
        <button class="btnRecordsBlockClose">&times;</button>
      </div>
-     <div class="dataRecordsBlock"  *ngIf="dateService.allEntryCurUserInSelectMonth.value.length;  else notContentBlock">
+     <div class="dataRecordsBlock"  *ngIf="dataCalendarService.allEntryCurrentUserThisMonth.value.length;  else notContentBlock">
        <div class="dataRecords">
-         <div class="strSRecords" *ngFor="let entry of dateService.allEntryCurUserInSelectMonth | async">
+         <div class="strSRecords" *ngFor="let entry of dataCalendarService.allEntryCurrentUserThisMonth | async">
          <span class="strRecords">
-           дата: {{entry.date}}
+           {{entry.date}}
          </span>
-           <span class="strRecords">
-           время: {{entry.time}}:00
+         <span class="strRecords">
+           {{entry.time}}:00
+         </span>
+         <span class="strRecords">
+           {{entry.sectionOrOrganization}}
+         </span>
+         <span class="strRecords">
+           адрес:
          </span>
            <button class="strRecords"
                    (click)="deleteSelectedRec(entry)"

@@ -90,8 +90,8 @@ export class RegistrationFormPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    this.form.value.sectionOrOrganization = this.dateService.selectOrgForReg.value[0]
-    this.form.value.idOrg = this.dateService.allOrgNameAndId.value[0].id;
+    this.form.value.sectionOrOrganization = this.dateService.selectOrgForReg.value[0].name
+    this.form.value.idOrg = this.dateService.idSelectedOrg.value;
     this.loginSub = this.apiService.registration(this.form.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(userData => {

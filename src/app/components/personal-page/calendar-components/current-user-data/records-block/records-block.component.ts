@@ -45,11 +45,7 @@ export class RecordsBlockComponent implements OnInit{
     this.dateService.recordingDaysChanged
       .pipe(takeUntil(this.destroyed$))
       .subscribe(()=>{
-        setTimeout(()=> {
-          const allEntryCurUser = this.dataCalendarService.allEntryAllUsersInMonth.value
-            .filter((entry: any)=> entry.userId == this.dateService.currentUserId.value)
-          this.dateService.allEntryCurUserInSelectMonth.next(allEntryCurUser)
-        }, 50)
+        this.dataCalendarService.getAllEntryCurrentUsersThisMonth();
       })
   }
 

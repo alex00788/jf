@@ -18,6 +18,7 @@ import {DayWeekMonthComponent} from "./calendar-components/day-week-month/day-we
 import {
   SelectOrgToDisplayComponent
 } from "./calendar-components/current-user-data/select-org-to-display/select-org-to-display.component";
+import {DataCalendarService} from "./calendar-components/data-calendar-new/data-calendar.service";
 
 @Component({
   selector: 'app-personal-page',
@@ -45,6 +46,7 @@ export class PersonalPageComponent implements OnInit {
     private router: Router,
     private apiService: ApiService,
     public dateService: DateService,
+    public dataCalendarService: DataCalendarService,
     public modalService: ModalService,
   ) {
   }
@@ -53,52 +55,19 @@ export class PersonalPageComponent implements OnInit {
   inputValue = '';
 
   ngOnInit(): void {
-    this.dateService.getCurrentUser();                          // заполняет блок мои данные
-    if (this.dateService.currentUserIsTheMainAdmin.value) {     // определяем кто зашел
-      this.getAllUsers()                                        // для главного возвращаем всех юзеров
-    } else {
-      this.getAllUsersCurrentOrganization()                     // для остальных только по организации
-    }
+    this.dateService.getCurrentUser(); // заполняет блок мои данные
+    this.getAllOrg();
+    this.dataCalendarService.getAllUsersCurrentOrganization();
+    this.dataCalendarService.getAllEntryCurrentUsersThisMonth();
   }
 
 
-  //(для записи клиентов из предложенных)
-  getAllUsers() {
-    this.apiService.getAllUsers()
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(allUsers => {
-        const getAllOrganization = new Set(allUsers.map((el: any) => el.sectionOrOrganization));
-        this.dateService.allOrganization.next([...getAllOrganization]);
-        const user = allUsers.find((el: any) => {
-          return el.id === this.dateService.currentUserId.value
-        })
-        this.dateService.remainingFunds.next(user.remainingFunds)
-        this.dateService.allUsers.next(allUsers)
-        this.dateService.getUsersSelectedOrg(this.dateService.selectedSectionOrOrganization.value);
-      });
-  }
-
-
-  //функция, возьмет пользователей конкретной организации
-  getAllUsersCurrentOrganization() {
-    this.apiService.getAllUsersCurrentOrganization(this.dateService.sectionOrOrganization.value, this.dateService.idSelectedOrg.value)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(allUsersOrganization => {
-        const user = allUsersOrganization.find((el: any) => {
-          return el.id == this.dateService.currentUserId.value
-        });
-        this.dateService.remainingFunds.next(user.remainingFunds);
-        this.dateService.allUsersSelectedOrg.next(allUsersOrganization);
-        this.getAllOrg();
-      });
-  }
-
+  //Получаем все зарегистрированные организации из бд для переключения данных
   getAllOrg() {
     this.apiService.getAllOrgFromDb()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(org=> {
-        const allOrg = org.allOrg.map((el:any)=> el.name);
-        this.dateService.allOrganization.next(allOrg);
+        this.dateService.allOrganization.next(org.allOrg);
       })
   }
 

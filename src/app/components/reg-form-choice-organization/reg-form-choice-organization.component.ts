@@ -38,6 +38,28 @@ export class RegFormChoiceOrganizationComponent implements OnInit {
     this.getAllOrganizationFromTheDatabase();
   }
 
+  getAllOrganizationFromTheDatabase() {
+      this.apiService.getAllOrgFromDb()
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe(org=> {
+          this.allOrgForReset = org.allOrg;
+          this.dateService.allOrgNameAndId.next(org.allOrg)
+          this.dateService.allOrgForReg.next(org.allOrg);
+        })
+  }
+
+  choiceOrg(org: any) {
+    this.highlightBtn = true;
+    this.dateService.idSelectedOrg.next(org.id)
+    this.dateService.allOrgForReg.next([org])
+  }
+
+  resetOrg() {
+    this.highlightBtn = false;
+    this.dateService.allOrgForReg.next(this.allOrgForReset);
+  }
+
+
   openRegistrationPage() {
     this.dateService.selectOrgForReg.next(this.dateService.allOrgForReg.value)
     this.modalService.openRegistrationForm$();
@@ -45,32 +67,6 @@ export class RegFormChoiceOrganizationComponent implements OnInit {
 
   openLoginPage() {
     this.modalService.openLoginForm$();
-  }
-
-  getAllOrganizationFromTheDatabase() {
-      this.apiService.getAllOrgFromDb()
-        .pipe(takeUntil(this.destroyed$))
-        .subscribe(allOrg=> {
-          const allOrgName = allOrg.allOrg.map((el:any) => el.name);
-          this.dateService.allOrgNameAndId.next(allOrg.allOrg)
-          this.allOrgForReset = allOrgName;
-          this.dateService.allOrgForReg.next(allOrgName);
-        })
-  }
-
-  choiceOrg(org: any) {
-    this.highlightBtn = true;
-    const selectOrg = this.dateService.allOrgForReg.value.find((el:any)=>
-    el === org)
-    const selectOrgId = this.dateService.allOrgNameAndId.value.find((el:any)=>
-      el.name === org)
-    this.dateService.allOrgNameAndId.next([selectOrgId])
-    this.dateService.allOrgForReg.next([selectOrg])
-  }
-
-  resetOrg() {
-    this.highlightBtn = false;
-    this.dateService.allOrgForReg.next(this.allOrgForReset);
   }
 
   addNewOrg() {

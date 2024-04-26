@@ -294,29 +294,22 @@ export class DataCalendarNewComponent implements OnInit {
   }
 
 
-  deletePerson(id: any, userId: any) {
+  deletePerson(idRec: any, userId: any, orgId: any) {
     if (this.dateService.currentUserSimpleUser.value) {
       this.blockIfRecorded = false;
     }
-    this.apiService.deleteEntry(id, userId)
+    this.apiService.deleteEntry(idRec, userId, orgId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        let user = this.dateService.allUsersSelectedOrg.value.find((el: any) => {
-          return el.id == +userId
-        })
-        user.remainingFunds = JSON.stringify(+user.remainingFunds + 1);
-        if (user.id === this.dateService.currentUserId.value) {
-          this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1));
-        }
-        this.dateService.recordingDaysChanged.next(true);
         this.dataCalendarService.getAllEntryAllUsersForTheMonth();
+        this.dataCalendarService.getAllUsersCurrentOrganization();
+        this.dateService.recordingDaysChanged.next(true);
       })
   }
 
 
 
   submit(data: any) {
-    console.log('322', data)
     const id = this.selectedPersonId;
     const date = data.date;
     const time = data.time;
@@ -375,10 +368,8 @@ export class DataCalendarNewComponent implements OnInit {
     this.apiService.getAllEntryInCurrentTimes(dateAndTimeRec)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allEntryCurTime => {
-        const currentOrg = this.dateService.currentUserIsTheMainAdmin.value ?
-          this.dateService.selectedSectionOrOrganization.value : this.dateService.sectionOrOrganization.value;
         const filterOnSelectOrg = allEntryCurTime.filter((el: any) => {
-          return el.sectionOrOrganization === currentOrg
+          return el.sectionOrOrganization === this.dateService.currentOrg.value
         })
         //ограничиваем запись если записано указанное кол-во человек  this.dateService.maxPossibleEntries.value
         if (filterOnSelectOrg.length >= this.dateService.maxPossibleEntries.value) {

@@ -11,9 +11,9 @@
     <div class="listOrg"
          *ngIf="dateService.allOrganization | async as allOrgForWork">
       <div class="org-sClass"
-           *ngFor="let org of allOrgForWork | filterOrg: searchOrgForRec; index as i">
+           *ngFor="let org of allOrgForWork | filterOrg: searchOrgForRec">
          <span class="ownOrgClass" (click)="choiceOrgForRec(org)">
-          {{org}}
+          {{org.name}}
          </span>
       </div>
     </div>

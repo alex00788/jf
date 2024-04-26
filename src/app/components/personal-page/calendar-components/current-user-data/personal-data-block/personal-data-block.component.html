@@ -5,23 +5,24 @@
   </div>
   <div class="currentUser">
     <div>
-      <strong> Имя: </strong>
-    </div>
-    <span> {{dateService.currentUser | async}} </span>
-  </div>
-  <div class="currentUser">
-    <div>
       <strong *ngIf="dateService.currentUserIsTheMainAdmin | async"> {{dateService.currentUserRole | async}}: </strong>
       <strong *ngIf="dateService.currentUserSimpleUser | async"> {{dateService.currentUserRole | async }}: </strong>
       <strong *ngIf="dateService.currentUserIsTheAdminOrg | async"> {{dateService.currentUserRole | async}}: </strong>
     </div>
-    <span>  {{dateService.sectionOrOrganization | async}} </span>
+    <span> {{dateService.currentUserNameAndSurname | async}} </span>
   </div>
+
   <div class="currentUser" *ngIf="dateService.currentUserSimpleUser.value">
     <div>
       <strong> Остаток: </strong>
     </div>
     <span> {{dateService.remainingFunds | async}} </span>
+  </div>
+  <div class="currentUser" *ngIf="dateService.currentUserSimpleUser.value">
+    <div>
+      <strong> Баланс: </strong>
+    </div>
+    <span> деньги </span>
   </div>
 
   <div class="futSettingSimpleUserClass" *ngIf="dateService.currentUserSimpleUser.value">
@@ -29,6 +30,7 @@
             *ngIf="!personalBlockService.recordsBlock"
             (click)="personalBlockService.openRecordsBlock()">
       <strong> Мои записи </strong>
+      в {{dateService.date.value.format('M') | translateMonth}}
     </button>
   </div>
 

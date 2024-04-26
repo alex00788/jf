@@ -11,14 +11,14 @@ export class ApiService {
   // token:UserData;
   constructor(
     private http: HttpClient,
-    private date: DateService,
+    private dateService: DateService,
     private errorResponseService: ErrorResponseService
   ) {}
 
   //перехват и показ ошибки
   public errHandler(err: HttpErrorResponse) {
 
-    if (err.error.message.includes('уже записан')) {
+    if (err.error.message.includes('уже записан(а)')) {
       this.correctionOfTheRemainderIfErrorRec()
     }
     if (!err.error?.message) {
@@ -33,14 +33,14 @@ export class ApiService {
   //функция корректирует остаток средств если пользователь уже записан и админ записал его еще раз
   correctionOfTheRemainderIfErrorRec () {
     const result: any[] = []
-    this.date.allUsers.value.forEach((user: any)=> {
-      if (user.id === this.date.dataSelectedUser.value.id){
+    this.dateService.allUsers.value.forEach((user: any)=> {
+      if (user.id === this.dateService.dataSelectedUser.value.id){
         user.remainingFunds = JSON.stringify(+user.remainingFunds + 1)
       }
       result.push(user)
     })
-    this.date.allUsers.next(result)
-    this.date.remainingFunds.next(JSON.stringify(+this.date.remainingFunds.value + 1))
+    this.dateService.allUsers.next(result)
+    this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1))
   }
 
 
@@ -70,6 +70,7 @@ export class ApiService {
   }
 
   registration(user: any): Observable<any> {
+    console.log('72', user)
     return this.http.post<any>('/api/user/registration', user)
       .pipe(
         tap(this.setToken),                                              // устанавливает токен в localStorage
@@ -104,25 +105,6 @@ export class ApiService {
   }
 
 
-  // getAllEntry(date: any): Observable<any> {
-  //   return this.http.get<any>('/api/user/getAllEntry', {
-  //     params: new HttpParams().append('date', date)
-  //   })
-  //     .pipe(catchError(this.errHandler.bind(this)))
-  // }
-
-
-  // getAllEntryCurrentUserInMonth(dataForGetAllEntry: any): Observable<any> {
-  //   return this.http.get<any>('/api/user/getAllEntryCurrentUserInMonth', {
-  //     params: new HttpParams()
-  //       .append('month', dataForGetAllEntry.month)
-  //       .append('year', dataForGetAllEntry.year)
-  //       .append('org', dataForGetAllEntry.org)
-  //       .append('userId', dataForGetAllEntry.userId)
-  //   })
-  //     .pipe(catchError(this.errHandler.bind(this)))
-  // }
-
 
   getAllEntryAllUsersOrg(dataForGetAllEntryAllUs: any): Observable<any> {
     return this.http.get<any>('/api/user/getAllEntryAllUsers', {
@@ -130,9 +112,23 @@ export class ApiService {
         .append('month', dataForGetAllEntryAllUs.month)
         .append('year', dataForGetAllEntryAllUs.year)
         .append('org', dataForGetAllEntryAllUs.org)
+        .append('orgId', dataForGetAllEntryAllUs.orgId)
+        .append('userId', dataForGetAllEntryAllUs.userId)
     })
       .pipe(catchError(this.errHandler.bind(this)))
   }
+
+
+  getAllEntryCurrentUser(dataForGetAllEntryCurrentUsersThisMonth: any): Observable<any> {
+    return this.http.get<any>('/api/user/getAllEntryCurrentUser', {
+      params: new HttpParams()
+        .append('month', dataForGetAllEntryCurrentUsersThisMonth.month)
+        .append('year', dataForGetAllEntryCurrentUsersThisMonth.year)
+        .append('userId', dataForGetAllEntryCurrentUsersThisMonth.userId)
+    })
+      .pipe(catchError(this.errHandler.bind(this)))
+  }
+
 
   getAllOrgFromDb(): Observable<any> {
     return this.http.get<any>('/api/user/getAllOrg')
@@ -152,10 +148,9 @@ export class ApiService {
       .pipe(catchError(this.errHandler.bind(this)))
   }
 
-  getAllUsersCurrentOrganization (organization: any, idOrg: any): Observable<any> {
+  getAllUsersCurrentOrganization (idOrg: any): Observable<any> {
     return this.http.get<any>('/api/user/getAllUsersCurrentOrganization', {
       params: new HttpParams()
-        .append('organization', organization)
         .append('idOrg', idOrg)
     })
       .pipe(catchError(this.errHandler.bind(this)))
@@ -178,8 +173,8 @@ export class ApiService {
 
 
 
-  deleteEntry(id: any, userId: any): Observable<any> {
-    return this.http.delete<any>('/api/user/deleteEntry/' + id + '/' + userId)
+  deleteEntry(idRec: any, userId: any, orgId: any): Observable<any> {
+    return this.http.delete<any>('/api/user/deleteEntry/' + idRec + '/' + userId + '/' + orgId)
       .pipe(catchError(this.errHandler.bind(this)))
   }
 
