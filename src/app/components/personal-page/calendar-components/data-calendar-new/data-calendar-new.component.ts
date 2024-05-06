@@ -419,6 +419,7 @@ export class DataCalendarNewComponent implements OnInit {
 
   openDataPerson(person: any) {
     this.modalService.open();
+    this.modalService.openClientListBlockWithData();
     this.dateService.dataSelectedUser.next(person);
   }
 }

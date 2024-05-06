@@ -69,7 +69,14 @@
 }
 
 
-
+.successModalPersonalPage{
+  border-radius: 10px;
+  text-align: center;
+  position: fixed;
+  top: 200px;
+  left: 38%;
+  z-index: 111;
+}
 
 
 .btnBodyCalendarElement {
@@ -238,4 +245,7 @@
     .insideClass {
       left: 50px;
     }
+  .successModalPersonalPage{
+    left: 30%;
+  }
 }

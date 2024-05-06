@@ -32,6 +32,7 @@ import {
   DataAboutRecComponent
 } from "./calendar-components/current-user-data/records-block/data-about-rec/data-about-rec.component";
 import {SwitchOfTheWeekComponent} from "./calendar-components/switch-of-the-week/switch-of-the-week.component";
+import {SuccessModalComponent} from "../success-modal/success-modal.component";
 
 
 @Component({
@@ -58,6 +59,7 @@ import {SwitchOfTheWeekComponent} from "./calendar-components/switch-of-the-week
     SettingsBlockComponent,
     DataAboutRecComponent,
     SwitchOfTheWeekComponent,
+    SuccessModalComponent,
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'

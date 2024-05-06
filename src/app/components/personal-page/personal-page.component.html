@@ -17,6 +17,10 @@
     <app-error-modal></app-error-modal>
   </div>
 
+  <div class="successModalPersonalPage">
+    <app-success-modal></app-success-modal>
+  </div>
+
   <div class="btnMainMenu" *ngIf="!personalBlockService.personalData">
     <button class="btnSettingsRecords" (click)="personalBlockService.switchData()">
       Мои данные

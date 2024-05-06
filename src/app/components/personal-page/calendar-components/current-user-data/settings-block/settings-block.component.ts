@@ -6,6 +6,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {DataCalendarService} from "../../data-calendar-new/data-calendar.service";
 import {Subject, takeUntil} from "rxjs";
+import {SuccessService} from "../../../../../shared/services/success.service";
 
 @Component({
   selector: 'app-settings-block',
@@ -25,7 +26,7 @@ export class SettingsBlockComponent implements OnInit{
     public dateService: DateService,
     public dataCalendarService: DataCalendarService,
     public apiService: ApiService,
-
+    public successService: SuccessService
   ) {  }
   private destroyed$: Subject<void> = new Subject();
   dataSettings:  any;
@@ -99,6 +100,7 @@ export class SettingsBlockComponent implements OnInit{
         this.dateService.location.next(set.newSettings.location);
         this.dateService.phoneOrg.next(set.newSettings.phoneOrg);
         this.dateService.changedSettingsOrg.next(true);
+        this.successService.localHandler('Настройки сохранены');
       });
 
     this.dataCalendarService.getAllEntryAllUsersForTheMonth();
