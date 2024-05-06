@@ -34,14 +34,6 @@ export class HeaderCalendarComponent implements OnInit, OnDestroy {
   dataSettings:  any;
 
   ngOnInit(): void {
-    // this.showSettings = !this.dateService.currentUserSimpleUser.value;
-    const dataSettings = localStorage.getItem('dataSettings')
-    if (dataSettings) {
-      this.dataSettings = JSON.parse(dataSettings);
-      this.dateService.timeStartRecord.next(+this.dataSettings.dataSettings.timeStartRec);
-      this.dateService.timeFinishRecord.next(+this.dataSettings.dataSettings.timeFinishRec);
-      this.dateService.maxPossibleEntries.next(+this.dataSettings.dataSettings.maxiPeople);
-    }
     // this.watchOnPage();   //показ и запуск часов
   }
 

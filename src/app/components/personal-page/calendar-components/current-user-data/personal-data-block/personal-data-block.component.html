@@ -14,34 +14,27 @@
 
   <div class="currentUser" *ngIf="dateService.currentUserSimpleUser.value">
     <div>
-      <strong> Остаток: </strong>
+      <strong> Баланс: </strong>
     </div>
-    <span> {{dateService.remainingFunds | async}} </span>
+    <span> 3700 руб </span>
   </div>
   <div class="currentUser" *ngIf="dateService.currentUserSimpleUser.value">
     <div>
-      <strong> Баланс: </strong>
+      <strong> Остаток записей: </strong>
     </div>
-    <span> деньги </span>
+    <span> {{dateService.remainingFunds | async}} </span>
   </div>
 
-  <div class="futSettingSimpleUserClass" *ngIf="dateService.currentUserSimpleUser.value">
-    <button class="btnSettingsRecords"
-            *ngIf="!personalBlockService.recordsBlock"
-            (click)="personalBlockService.openRecordsBlock()">
-      <strong> Мои записи </strong>
-      в {{dateService.date.value.format('M') | translateMonth}}
-    </button>
-  </div>
 
-  <div class="futSettingClass" *ngIf="!this.dateService.currentUserSimpleUser.value">
-  <button class="btnSettingsRecords" (click)="personalBlockService.switchSittingsData()">
-    <strong> Настройки </strong>
-  </button>
-  <ng-container *ngIf="dateService.currentUserIsTheMainAdmin | async">
-    <button class="btnSettingsRecords"  (click)="personalBlockService.addNewOrgSettings()">
-      <strong> Добавить ORG </strong>
+
+  <div class="futSettingClass" *ngIf="this.dateService.currentUserIsTheMainAdmin.value">
+    <button class="btnSettingsRecords" (click)="personalBlockService.switchSettingsData()">
+      <strong> Настройки </strong>
     </button>
-  </ng-container>
+    <ng-container *ngIf="dateService.currentUserIsTheMainAdmin | async">
+      <button class="btnSettingsRecords"  (click)="personalBlockService.addNewOrgSettings()">
+        <strong> Добавить ORG </strong>
+      </button>
+    </ng-container>
   </div>
 </div>

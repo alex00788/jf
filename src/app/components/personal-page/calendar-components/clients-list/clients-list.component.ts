@@ -5,6 +5,7 @@ import {Subject, takeUntil} from "rxjs";
 import {FormsModule,} from "@angular/forms";
 import {FilterClientListPipe} from "../../../../shared/pipe/filter-client-list.pipe";
 import {ModalService} from "../../../../shared/services/modal.service";
+import {PersonalBlockService} from "../personal-block.service";
 
 @Component({
   selector: 'app-clients-list',
@@ -23,19 +24,16 @@ export class ClientsListComponent implements OnInit{
   constructor(
     public dateService: DateService,
     public modalService: ModalService,
+    public personalBlockService: PersonalBlockService,
     ) {
   }
   private destroyed$: Subject<void> = new Subject();
-  clientListBlock : boolean = false;
   clientList = ''
 
   ngOnInit(): void {
     this.sortingClients();
   }
 
-  showClientList() {
-    this.clientListBlock = true;
-  }
 
   sortingClients() {
     this.dateService.allUsers
@@ -45,13 +43,10 @@ export class ClientsListComponent implements OnInit{
       })
   }
 
-  closeList() {
-    this.clientListBlock = false;
-  }
 
 
   openPerson(person: any) {
-    person.userId = JSON.stringify(person.id)
+    person.userId = JSON.stringify(+person.id)
     this.modalService.open();
     this.dateService.dataSelectedUser.next(person);
   }

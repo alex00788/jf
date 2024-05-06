@@ -1,6 +1,6 @@
 .now {
-  width: 450px;
-  margin: 5px;
+  width: 280px;
+  margin: 10px auto;
   padding: 5px;
   border-radius: 10px;
   background: #c6faeb;
@@ -9,6 +9,7 @@
 .titleNow {
   position: relative;
   text-align: center;
+  border: none;
   margin: 5px;
   cursor: pointer;
 }
@@ -17,6 +18,12 @@
   border: solid 1px #f6dbff;
   border-radius: 10px;
   padding: 5px;
+  border: none;
+}
+
+.cowerDataBlock {
+  position: relative;
+  width: 320px;
 }
 
 .btnClosePersonalDataComponent {

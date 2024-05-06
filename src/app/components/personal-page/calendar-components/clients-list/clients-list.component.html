@@ -1,49 +1,37 @@
-<ng-container >
-  <div class="coverBtnMyClientList" *ngIf="!clientListBlock">
-    <button class="btnMyClientList"
-            (click)="showClientList()"
-    > Список клиентов
-    </button>
+<div class="clientsListClass">
+  <div class="clientsListBody">
+    <strong> Список клиентов </strong>
+    <button class="btnCloseClientList" (click)="personalBlockService.closeClientList()">&times;</button>
+  </div>
+
+  <div class="inputSearchClass">
+    <input type="text" placeholder="найти клиента" [(ngModel)]="clientList">
   </div>
 
 
-  <div class="clientsListClass" *ngIf="clientListBlock">
-    <div class="clientsListBody" (click)="closeList()">
-      <strong> Список клиентов </strong>
-      <button class="btnCloseClientList">&times;</button>
-    </div>
-
-    <div class="inputSearchClass">
-      <input type="text" placeholder="найти клиента" [(ngModel)]="clientList">
-    </div>
-
-
-    <ng-container *ngIf="!dateService.currentUserIsTheMainAdmin.value; else mainAdminBlock">
-      <ol>
-        <div *ngIf="dateService.allUsersSelectedOrg | async as allUsers">
-          <li *ngFor="let person of allUsers | filterClientList: clientList">
+  <ng-container *ngIf="!dateService.currentUserIsTheMainAdmin.value; else mainAdminBlock">
+    <ol>
+      <div *ngIf="dateService.allUsersSelectedOrg | async as allUsers">
+        <li *ngFor="let person of allUsers | filterClientList: clientList">
         <span (click)="openPerson(person)">
           {{person.surnameUser}} {{person.nameUser}}
         </span>
-          </li>
-        </div>
-      </ol>
-    </ng-container>
+        </li>
+      </div>
+    </ol>
+  </ng-container>
 
-    <ng-template #mainAdminBlock>
-      <ol>
-        <div *ngIf="dateService.allUsers | async as allUsers">
-          <li *ngFor="let person of allUsers | filterClientList: clientList">
+  <ng-template #mainAdminBlock>
+    <ol>
+      <div *ngIf="dateService.allUsers | async as allUsers">
+        <li *ngFor="let person of allUsers | filterClientList: clientList">
         <span (click)="openPerson(person)">
           {{person.surnameUser}} {{person.nameUser}}
         </span>
-          </li>
-        </div>
-      </ol>
-    </ng-template>
+        </li>
+      </div>
+    </ol>
+  </ng-template>
 
 
-  </div>
-
-</ng-container>
-
+</div>

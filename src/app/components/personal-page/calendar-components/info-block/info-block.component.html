@@ -1,9 +1,10 @@
 <div class="infoBlockClass">
-  <button class="btnCloseInfoBlock"
-          (click)="dateService.openCalendar()"
-  >
-    &times;
-  </button>
+  <div class="selectedTime">
+    <span class="todayClass changeDayClass" (click)="go(-1)">
+      <
+    </span>
+  </div>
+
   <div class="currentTime">
     <span class="todayClass">
       Сегодня : {{currentTime}}
@@ -13,6 +14,12 @@
   <div class="selectedTime">
     <span class="todayClass">
       Выбрано : {{dateService.date | async | momentTransformDate :  'DD.MM.YYYY'}}
+    </span>
+  </div>
+
+  <div class="selectedTime changeDayClass" (click)="go(1)">
+    <span class="todayClass">
+     >
     </span>
   </div>
 </div>

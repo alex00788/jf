@@ -1,29 +1,38 @@
 <div class="settingsRecordsClass" *ngIf="personalBlockService.changeSettingsRecordsBlock">
+  <button class="btnSittingCloseUp" (click)="personalBlockService.closeSettings()">&times;</button>
   <form [formGroup]="form" (submit)="submit()">
     <div class="oneSitting">
       <label>
-        max человек в записи
+        Max клиентов в одной записи
       </label>
-      <input type="number" maxlength="2" max="20" class="sittingsInputClass" formControlName="maxiPeople">
+      <input type="number" maxlength="2" max="20" min="0" class="settingsInputClass" formControlName="maxiPeople">
     </div>
 
     <div class="oneSitting">
       <label>
-        время начала записи
+        Время начала записи
       </label>
-      <select class="sittingsInputClass" formControlName="timeStartRec">
+      <select class="settingsSelectClass" formControlName="timeStartRec">
         <option *ngFor="let chSt of timesForRec"> {{chSt}}</option>
       </select>
     </div>
 
     <div class="oneSitting">
       <label>
-        время окончания записи
+        Последняя запись в
       </label>
-      <select class="sittingsInputClass" formControlName="timeFinishRec">
+      <select class="settingsSelectClass" formControlName="timeFinishRec">
         <option *ngFor="let chEnd of timesForRec"> {{chEnd}}</option>
       </select>
     </div>
+
+    <div class="oneSitting">
+      <label>
+        Адрес проведения
+      </label>
+      <input type="text" class="settingsInputLocationClass" formControlName="location">
+    </div>
+
     <div class="btnSetClass">
       <button class="btnSettingsRecords" (click)="personalBlockService.closeSettings()">
         Отменить
@@ -36,7 +45,7 @@
 </div>
 
 
-<div class="currentSittingsData" *ngIf="personalBlockService.settingsRecords">
+<div class="currentSettingsData" *ngIf="personalBlockService.settingsRecords">
   <div class="sittingCurrentValueTitle">
     <strong>
       Сейчас
@@ -44,27 +53,38 @@
     <button class="btnSittingClose" (click)="personalBlockService.closeSettings()">&times;</button>
   </div>
 
-  <div class="allSittingsVal">
-    <div class="sittingCurrentValue">
-    <span>
-      Записаться  могут {{dateService.maxPossibleEntries.value}} клиента
+  <div class="allSettingsVal">
+    <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
+      <span>
+       Max клиентов в одной записи
+      <strong style="color: #5238fd">
+        {{dateService.maxPossibleEntries.value}}
+      </strong>
+      </span>
+    </div>
+    <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
+      <span>
+       Время начала записи
+      <strong style="color: #5238fd">
+       {{dateService.timeStartRecord.value}} : 00
+      </strong>
+      </span>
+    </div>
+    <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
+      <span>
+       Последняя запись в
+      <strong style="color: #5238fd">
+       {{dateService.timeFinishRecord.value}} : 00
+      </strong>
+      </span>
+    </div>
+    <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
+     <span>
+       Адрес проведения
+      <strong style="color: #5238fd">
+       {{dateService.location.value}}
+      </strong>
     </span>
     </div>
-    <div class="sittingCurrentValue">
-    <span>
-       Время начала записи {{dateService.timeStartRecord.value}} : 00
-    </span>
-    </div>
-    <div class="sittingCurrentValue">
-    <span>
-       Время окончания записи {{dateService.timeFinishRecord.value}} : 00
-    </span>
-    </div>
-  </div>
-
-  <div class="sittingCurrentValueFooter">
-    <strong (click)="personalBlockService.changeSettingsRecords()">
-       Изменить текущие настройки
-    </strong>
   </div>
 </div>

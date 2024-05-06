@@ -19,6 +19,16 @@ import {
   SelectOrgToDisplayComponent
 } from "./calendar-components/current-user-data/select-org-to-display/select-org-to-display.component";
 import {DataCalendarService} from "./calendar-components/data-calendar-new/data-calendar.service";
+import {TranslateMonthPipe} from "../../shared/pipe/translate-month.pipe";
+import {PersonalBlockService} from "./calendar-components/personal-block.service";
+import {RecordingService} from "./calendar-components/recording.service";
+import {RecordsBlockComponent} from "./calendar-components/current-user-data/records-block/records-block.component";
+import {AddNewOrgComponent} from "./calendar-components/current-user-data/add-new-org/add-new-org.component";
+import {
+  PersonalDataBlockComponent
+} from "./calendar-components/current-user-data/personal-data-block/personal-data-block.component";
+import {SettingsBlockComponent} from "./calendar-components/current-user-data/settings-block/settings-block.component";
+
 
 @Component({
   selector: 'app-personal-page',
@@ -37,6 +47,11 @@ import {DataCalendarService} from "./calendar-components/data-calendar-new/data-
     DataCalendarNewComponent,
     DayWeekMonthComponent,
     SelectOrgToDisplayComponent,
+    TranslateMonthPipe,
+    RecordsBlockComponent,
+    AddNewOrgComponent,
+    PersonalDataBlockComponent,
+    SettingsBlockComponent,
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'
@@ -46,8 +61,10 @@ export class PersonalPageComponent implements OnInit {
     private router: Router,
     private apiService: ApiService,
     public dateService: DateService,
-    public dataCalendarService: DataCalendarService,
     public modalService: ModalService,
+    public recordingService: RecordingService,
+    public dataCalendarService: DataCalendarService,
+    public personalBlockService: PersonalBlockService,
   ) {
   }
 
@@ -58,7 +75,6 @@ export class PersonalPageComponent implements OnInit {
     this.dateService.getCurrentUser(); // заполняет блок мои данные
     this.getAllOrg();
     this.dataCalendarService.getAllUsersCurrentOrganization();
-    this.dataCalendarService.getAllEntryCurrentUsersThisMonth();
   }
 
 

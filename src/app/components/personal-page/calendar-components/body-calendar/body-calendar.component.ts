@@ -20,7 +20,7 @@ import {RecordingService} from "../recording.service";
 export class BodyCalendarComponent implements OnInit {
   constructor(
     public recordingService: RecordingService,
-    private dateService: DateService) {
+    public dateService: DateService) {
   }
   private destroyed$: Subject<void> = new Subject();
   calendar: Week[] = []

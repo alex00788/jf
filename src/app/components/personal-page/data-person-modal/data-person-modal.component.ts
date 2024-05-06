@@ -49,6 +49,7 @@ export class DataPersonModalComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.dataCalendarService.getAllEntryAllUsersForTheMonth();
     this.hideBtnForCurrentAdmin = this.selectedUser.userId == this.dateService.currentUserId.value;
     this.roleUser = this.dateService.allUsersSelectedOrg.value.find((us: any)=> us.id == this.selectedUser.userId).role
     this.currentDate = moment().format('DD.MM.YYYY');
@@ -58,8 +59,6 @@ export class DataPersonModalComponent implements OnInit {
       .subscribe(()=> {
         this.getAllEntrySelectedUser();
       })
-
-
   }
 
   getAllEntrySelectedUser() {
@@ -71,7 +70,8 @@ export class DataPersonModalComponent implements OnInit {
 
   dataAboutSelectedUser() {
     const selectedUser = this.selectedUser;
-    const dataSelectedUser = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id === +selectedUser.userId)
+    const dataSelectedUser = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id == selectedUser.userId)
+    dataSelectedUser.role = dataSelectedUser.role === "USER"? 'Клиент' : dataSelectedUser.role;
     this.roleUser = dataSelectedUser.role === 'MAIN_ADMIN'? 'Boos' : dataSelectedUser.role;
     this.showBtnAdminAndUser = dataSelectedUser.role === 'MAIN_ADMIN';
     if (this.showBtnAdminAndUser) {
@@ -111,6 +111,8 @@ export class DataPersonModalComponent implements OnInit {
     setTimeout(() => {
       if (this.clickCount === 1) {
         this.dataCalendarService.deleteSelectedRecInAllRecBlock(selectedRec);
+        setTimeout(()=>{this.dataAboutSelectedUser()}, 50)
+        this.dataAboutSelectedUser();
       } else if (this.clickCount === 2) {
         return
       }

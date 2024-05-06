@@ -41,7 +41,7 @@
                 >
                   {{i +1}}.{{person.nameUser}}
                 </span>
-                <button class="btnDelete" (click)="deletePerson(person.id, person.userId, person.orgId)"
+                <button class="btnDelete" (click)="deletePerson(person.idRec, person.userId, person.orgId)"
                   [disabled]="
                     pastDateIsBlocked ||
                     time.time < currentHour &&

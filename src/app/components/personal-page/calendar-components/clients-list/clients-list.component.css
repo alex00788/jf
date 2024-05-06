@@ -1,15 +1,13 @@
 .clientsListClass {
   background: #c6faeb;
-  width: 360px;
+  width: 280px;
   margin: 1px auto;
   border-radius: 10px;
   padding: 10px;
 }
 
-.coverBtnMyClientList {
-  display: flex;
-  justify-content: center;
-  border-radius: 10px;
+ol {
+  padding: 0;
 }
 
 .clientsListBody {

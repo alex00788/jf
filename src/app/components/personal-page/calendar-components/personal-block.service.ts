@@ -6,9 +6,11 @@ import { Injectable } from '@angular/core';
 export class PersonalBlockService {
 
   constructor() { }
-  personalData: boolean = true;
-  recordsBlock: boolean = true;
+  personalData: boolean = false;
+  recordsBlock: boolean = false;
   settingsRecords: boolean = false;
+  settingsBtn: boolean = true;
+  clientListBlock: boolean = false;
   changeSettingsRecordsBlock: boolean = false;
   windowAddingNewOrgIsOpen: boolean = false;
 
@@ -16,16 +18,17 @@ export class PersonalBlockService {
   switchData() {
     this.personalData = !this.personalData;
     if (this.settingsRecords) {
-      this.switchSittingsData();
+      this.switchSettingsData();
     }
   }
 
-  switchSittingsData() {
+  switchSettingsData() {
     this.windowAddingNewOrgIsOpen = false;
-    this.settingsRecords = !this.settingsRecords;
-    if (this.settingsRecords) {
-      this.changeSettingsRecordsBlock =false;
-    }
+    this.settingsBtn = false;
+    this.settingsRecords = true;
+    // if (this.settingsRecords) {
+    //   this.changeSettingsRecordsBlock =false;
+    // }
   }
 
   addNewOrgSettings () {
@@ -52,7 +55,17 @@ export class PersonalBlockService {
   }
 
   closeSettings() {
+    this.settingsBtn = true;
     this.changeSettingsRecordsBlock = false;
     this.settingsRecords = false;
+  }
+
+
+  openClientList() {
+    this.clientListBlock = true;
+  }
+
+  closeClientList() {
+    this.clientListBlock = false;
   }
 }

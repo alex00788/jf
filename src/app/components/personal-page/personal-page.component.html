@@ -1,51 +1,109 @@
 <div class="personalPageStyle">
-  <strong class="btnLogoutSystemsClass" (click)="logoutSystems()"> &times; </strong>
-  <div class="cowerMainePageClass">
-    <div class="mainePageClass">
-      <h3 class="titleMainePage" (click)="mainePage()">Твой личный администратор</h3>
+  <div class="cowerTitlePersonal">
+    <strong class="btnLogoutSystemsClass" (click)="logoutSystems()"> &times; </strong>
+    <span class="btnOut" (click)="logoutSystems()"> выйти </span>
+    <!-- <div class="cowerMainePageClass">
+       <div class="mainePageClass">
+         <h3 class="titleMainePage" (click)="mainePage()">Твой личный администратор</h3>
+       </div>
+     </div>-->
+
+    <div class="currentSelectedOrg">
+      <app-select-org-to-display></app-select-org-to-display>
     </div>
   </div>
-  <div class="currentSelectedOrg">
-    <app-select-org-to-display></app-select-org-to-display>
-  </div>
+
   <div class="errorModal insideClass">
     <app-error-modal></app-error-modal>
   </div>
 
-  <div class="calendar">
-    <div class="bodyCalendar">
-      <div class="bodyCalendarElementClass">
-        <app-current-user-data></app-current-user-data>
-      </div>
-      <div class="bodyCalendarElementClass" *ngIf="!dateService.currentUserSimpleUser.value">
-        <app-clients-list></app-clients-list>
-      </div>
-      <button
-        class="btnBodyCalendarElement"
-        *ngIf="!dateService.calendarBodyOpen.value"
-        (click)="dateService.openCalendar()"
-      >
-        Открыть календарь
-      </button>
-      <div class="bodyCalendarElementClass calendarNum" *ngIf="dateService.calendarBodyOpen | async">
-        <app-info-block></app-info-block>
-        <hr>
-        <app-header-calendar></app-header-calendar>
-        <app-body-calendar></app-body-calendar>
-      </div>
-    </div>
+  <div class="btnMainMenu" *ngIf="!personalBlockService.personalData">
+    <button class="btnSettingsRecords" (click)="personalBlockService.switchData()">
+      Мои данные
+    </button>
+  </div>
+  <div class="bodyCalendarElementClass" >
+    <app-current-user-data></app-current-user-data>
+  </div>
 
-    <div class="calendarDisplayMode">
+
+  <div class="btnMainMenu" *ngIf="dateService.currentUserIsTheAdminOrg.value">
+    <button class="btnSettingsRecords"
+            *ngIf="!personalBlockService.clientListBlock"
+            (click)="personalBlockService.openClientList()"
+    > Список клиентов
+    </button>
+  </div>
+  <div *ngIf="personalBlockService.clientListBlock && dateService.currentUserIsTheAdminOrg.value ">
+    <app-clients-list></app-clients-list>
+  </div>
+
+
+  <div class="btnMainMenu" *ngIf="dateService.currentUserIsTheAdminOrg.value">
+    <button class="btnSettingsRecords"
+            *ngIf="personalBlockService.settingsBtn"
+            (click)="personalBlockService.switchSettingsData()">
+      Настройки записи
+    </button>
+  </div>
+  <div class="bodyCalendarElementClass" >
+    <app-settings-block *ngIf="dateService.currentUserIsTheAdminOrg.value"></app-settings-block>
+  </div>
+
+
+  <div class="btnMainMenu" *ngIf="dateService.currentUserSimpleUser.value">
+    <button class="btnSettingsRecords"
+            *ngIf="!personalBlockService.recordsBlock"
+            (click)="personalBlockService.openRecordsBlock()"
+    >
+      Мои записи
+      в {{dateService.date.value.format('M') | translateMonth}}
+    </button>
+  </div>
+  <div *ngIf="dateService.currentUserSimpleUser.value">
+    <app-records-block></app-records-block>
+  </div>
+
+
+  <div class="btnMainMenu">
+    <button
+      class="btnSettingsRecords" *ngIf="!dateService.calendarBodyOpen.value" (click)="dateService.openCalendar()">
+      Открыть календарь
+    </button>
+  </div>
+  <div class="bodyCalendarElementClass calendarNum" *ngIf="dateService.calendarBodyOpen | async">
+    <div class="cowerBodyCalendar">
+      <button class="btnCloseInfoBlock" (click)="dateService.openCalendar()">
+        &times;
+      </button>
+      <app-header-calendar></app-header-calendar>
+      <app-body-calendar></app-body-calendar>
+    </div>
+  </div>
+
+
+  <div class="btnMainMenu" *ngIf="!recordingService.recordsBlock.value">
+    <button class="btnSettingsRecords" (click)="recordingService.openRecordsBlock()">
+      Открыть записи {{dateService.currentOrg.value}}
+    </button>
+  </div>
+
+  <div class="showRecCurrentOrg" *ngIf="recordingService.recordsBlock.value">
+    <div class="dateNowAndSelected">
       <app-day-week-month></app-day-week-month>
     </div>
 
+    <div class="dateNowAndSelected" *ngIf="recordingService.showCurrentDay.value">
+      <app-info-block></app-info-block>
+    </div>
 
-    <div class="dCalendar">
+    <div class="dateNowAndSelected">
       <div class="dataCalendar">
         <app-data-calendar-new></app-data-calendar-new>
       </div>
     </div>
   </div>
+
 </div>
 
 

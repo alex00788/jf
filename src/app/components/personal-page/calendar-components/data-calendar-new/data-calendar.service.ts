@@ -17,6 +17,10 @@ export class DataCalendarService {
   public allEntryAllUsersInMonth: BehaviorSubject<any> = new BehaviorSubject([])
   public allEntryCurrentUserThisMonth: BehaviorSubject<any> = new BehaviorSubject([])
   public arrayOfDays: BehaviorSubject<any> = new BehaviorSubject([])
+  public filterByDate: BehaviorSubject<boolean> = new BehaviorSubject(true)
+  public filterByOrg: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public showAll: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public allUsersForShowAllFilter: BehaviorSubject<any> = new BehaviorSubject([])
 
 
 
@@ -40,15 +44,35 @@ export class DataCalendarService {
 
   //получаем всех пользователей выбранной организации
   getAllUsersCurrentOrganization() {
-    this.apiService.getAllUsersCurrentOrganization(this.dateService.idSelectedOrg.value)
+    this.apiService.getAllUsersCurrentOrganization(this.dateService.idSelectedOrg.value, this.dateService.currentUserId.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsersOrganization => {
-        const dataCurrentUserAboutSelectedOrg = allUsersOrganization.find((user: any)=> +user.id == this.dateService.currentUserId.value)
         this.dateService.allUsersSelectedOrg.next(allUsersOrganization);
-        this.dateService.remainingFunds.next(dataCurrentUserAboutSelectedOrg.remainingFunds);
-        this.dateService.currentUserRole.next(dataCurrentUserAboutSelectedOrg.role);
-        console.log('49  пользователи выбранной организации', allUsersOrganization)
+        console.log('51  пользователи выбранной организации', allUsersOrganization)
+        if (allUsersOrganization.length) {
+          const currentUser = allUsersOrganization.find((user: any)=> +user.id == this.dateService.currentUserId.value)
+          this.dateService.currentUserId.next(currentUser.id);
+          this.dateService.currentUserRole.next(currentUser.role);
+          this.dateService.remainingFunds.next(currentUser.remainingFunds);
+          this.dateService.currentUserSimpleUser.next(currentUser.role === "USER");
+          this.dateService.currentUserIsTheAdminOrg.next(currentUser.role === "ADMIN");
+          this.dateService.currentUserIsTheMainAdmin.next(currentUser.role === "MAIN_ADMIN");
+          this.dateService.currentUserNameAndSurname.next(currentUser.nameUser + ' ' + currentUser.surnameUser);
+          this.getDataSetting(allUsersOrganization);
+        }
       });
+  }
+
+// заполняет данные настроек из бд...
+  getDataSetting(allUsersOrganization: any) {
+    const dataSettings = allUsersOrganization.find((admin: any)=> admin.role === 'ADMIN')
+    if (dataSettings) {
+      this.dateService.timeStartRecord.next(dataSettings.timeStartRec);
+      this.dateService.timeFinishRecord.next(dataSettings.timeLastRec);
+      this.dateService.maxPossibleEntries.next(dataSettings.maxClients);
+      this.dateService.location.next(dataSettings.location);
+      this.dateService.changedSettingsOrg.next(true);
+    }
   }
 
 
@@ -62,9 +86,43 @@ export class DataCalendarService {
     this.apiService.getAllEntryCurrentUser(dataForGetAllEntryCurrentUsersThisMonth)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(dataAllEntryCurrentUsersThisMonth => {
-        console.log('70 все записи USER', dataAllEntryCurrentUsersThisMonth)
+        console.log('86 все записи USER', dataAllEntryCurrentUsersThisMonth)
         this.allEntryCurrentUserThisMonth.next(dataAllEntryCurrentUsersThisMonth);
+        this.allUsersForShowAllFilter.next(dataAllEntryCurrentUsersThisMonth);
+        if (this.filterByDate.value) {
+          this.filterRecCurrentUserByDate();
+        }
       });
+  }
+
+  //функция фильтрующая все записи пользователя по организации
+  filterRecCurrentUserByOrg() {
+    this.filterByOrg.next(true);
+    this.filterByDate.next(false);
+    this.showAll.next(false);
+    const filterOrgByOrg = this.allEntryCurrentUserThisMonth.value
+      .filter((org:any)=>{
+        return org.orgId == this.dateService.idSelectedOrg.value
+  });
+    this.allEntryCurrentUserThisMonth.next(filterOrgByOrg);
+  }
+
+  //функция фильтрующая все записи пользователя по дате
+  filterRecCurrentUserByDate() {
+    this.filterByOrg.next(false);
+    this.filterByDate.next(true);
+    this.showAll.next(false);
+    const filterOrgByDate = this.allEntryCurrentUserThisMonth.value
+      .filter((org:any)=> org.date === this.dateService.date.value.format('DD.MM.YYYY'));
+    this.allEntryCurrentUserThisMonth.next(filterOrgByDate.sort((a: any, b: any) => a.time > b.time ? 1 : -1));
+  }
+
+  //функция покажет все записи за месяц
+  showAllRec() {
+    this.showAll.next(true);
+    this.filterByOrg.next(false);
+    this.filterByDate.next(false);
+    this.allEntryCurrentUserThisMonth.next(this.allUsersForShowAllFilter.value.sort((a: any, b: any) => a.date > b.date ? 1 : -1));
   }
 
 

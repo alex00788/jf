@@ -1,29 +1,55 @@
 .settingsRecordsClass {
-  display: block;
-  border-radius: 10px;
-  margin: 3px;
-  color: #5238fd;
-  background: #c6faeb;
-}
-
-.currentSittingsData {
   position: relative;
   display: block;
   border-radius: 10px;
+  background: #c6faeb;
+  width: 300px;
+  margin: 5px auto;
+  padding: 10px;
+}
+
+.currentSettingsData {
+  position: relative;
+  display: block;
+  border-radius: 10px;
+  margin: 0 auto;
   padding-bottom: 5px;
   color: black;
   background: #c6faeb;
-  width: 460px;
+  width: 300px;
 }
 
 .sittingCurrentValue {
-  margin: 10px 0;
+  position: relative;
+  cursor: pointer;
+  margin: 10px auto;
+  width: 230px;
   text-align: center;
+}
+
+.sittingCurrentValue:after {
+  display: block;
+  position: absolute;
+  left: 0;    /*изменить на right:0;, чтобы изменить направление подчёркивания */
+  width: 0;   /*задаём длинну линии до наведения курсора*/
+  height: 1px; /*задаём ширину линии*/
+  background-color: #2630f1; /*задаём цвет линии*/
+  content: "";
+  transition: width 0.5s ease-out; /*задаём время анимации*/
+}
+.sittingCurrentValue:hover:after,
+.sittingCurrentValue:focus:after {
+  width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
+}
+
+.timeStartRecClass {
+  width: 30px;
 }
 
 .sittingCurrentValueTitle {
   text-align: center;
   margin: 7px 0;
+  padding-top: 10px;
   color: black;
 }
 
@@ -41,6 +67,17 @@
   border-radius: 10px;
 }
 
+.btnSittingCloseUp {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  background: none;
+  border: none;
+  /*margin-left: 150px;*/
+  cursor: pointer;
+}
+
+
 .btnSittingClose {
   position: absolute;
   right: 10px;
@@ -53,6 +90,7 @@
 .oneSitting {
   display: flex;
   justify-content: space-between;
+  margin: 0 10px;
 }
 
 input {
@@ -63,10 +101,22 @@ label {
   margin: 5px;
 }
 
-.sittingsInputClass {
+.settingsInputClass {
   margin: 5px;
   display: inline;
   width: 45px;
+}
+
+.settingsSelectClass {
+  margin: 5px;
+  display: inline;
+  width: 53px;
+}
+
+.settingsInputLocationClass {
+  margin: 5px;
+  display: inline;
+  width: 125px;
 }
 
 .btnSetClass {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {PersonalBlockService} from "../../personal-block.service";
 import {DateService} from "../../date.service";
 import {AsyncPipe, NgIf} from "@angular/common";
@@ -22,8 +22,6 @@ export class PersonalDataBlockComponent implements OnInit{
   ) {  }
 
   ngOnInit(): void {
-    const currentUser = JSON.parse(localStorage.getItem('userData') as string)
-    this.dateService.remainingFunds.next(currentUser.user.remainingFunds)
   }
 
 }

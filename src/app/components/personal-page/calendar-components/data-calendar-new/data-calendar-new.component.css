@@ -103,6 +103,7 @@ li {
 }
 
 .btnAddEntryClass {
+  cursor: pointer;
   width: 270px;
   margin: 5px 20px;
   border-radius: 7px;
@@ -135,16 +136,10 @@ li {
 
 @media (max-width: 1300px) {
   .cowerRecordsBlock {
-    width: 1000px;
+    width: 500px;
   }
 }
 
-
-@media (max-width: 1100px) {
-  .cowerRecordsBlock {
-    width: 800px;
-  }
-}
 
 @media (max-width: 950px) {
   .cowerRecordsBlock {

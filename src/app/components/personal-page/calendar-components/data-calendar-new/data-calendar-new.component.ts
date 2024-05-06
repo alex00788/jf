@@ -47,6 +47,7 @@ export class DataCalendarNewComponent implements OnInit {
   blockIfRecorded = false;
   currentDayCheck: boolean = false;
   pastDateIsBlocked: boolean = false;
+  recordComplete: boolean = false;
   currentHour: any = new Date().getHours();
 
   // form = new FormGroup({
@@ -58,6 +59,11 @@ export class DataCalendarNewComponent implements OnInit {
     this.dataCalendarService.getAllEntryAllUsersForTheMonth();
 
     this.dateService.date
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(()=> {
+        this.getDataOrg();
+    })
+    this.dateService.changedSettingsOrg
       .pipe(takeUntil(this.destroyed$))
       .subscribe(()=> {
         this.getDataOrg();
@@ -176,7 +182,7 @@ export class DataCalendarNewComponent implements OnInit {
         addSetTime.push(el)
       } else {
         let times: any[] = [];
-        times.push({date: el.date, time: '18', users: [] })
+        // times.push({date: el.date, time: '18', users: [] })    // было сделано чтоб хоть что то показывалось пользователю для записи
         addSetTime.push({date: el.date, times})
       }
     })
@@ -196,7 +202,7 @@ export class DataCalendarNewComponent implements OnInit {
     addSetTime.forEach((el:any) => {
       const newRecTime: any[] = [];
       for (let i = this.dateService.timeStartRecord.value; i <= this.dateService.timeFinishRecord.value; i++) {
-        newRecTime.push({date: el.date, time: JSON.stringify(i), users: [] })
+        newRecTime.push({date: el.date, time: JSON.stringify(+i), users: [] })
       }
       const result:any[] = []
       newRecTime.forEach((setTime: any)=> {
@@ -256,10 +262,14 @@ export class DataCalendarNewComponent implements OnInit {
     this.clickCount++;
     setTimeout(() => {
       if (this.clickCount === 1) {
+        this.checkingTheNumberOfRecorded(date, time);
         const currentUser = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id == this.dateService.currentUserId.value)
-        currentUser.remainingFunds = JSON.stringify(+currentUser.remainingFunds - 1)
-        this.dateService.remainingFunds.next(currentUser.remainingFunds);
-        this.addEntry(currentUser, time, date);
+        setTimeout(()=> {
+          if(!this.recordComplete) {
+            this.addEntry(currentUser, time, date);
+          }
+        },20)
+
       } else if (this.clickCount === 2) {
         return
       }
@@ -288,8 +298,7 @@ export class DataCalendarNewComponent implements OnInit {
     this.apiService.addEntry(newUserAccount)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        this.dataCalendarService.getAllEntryAllUsersForTheMonth();
-        this.dateService.recordingDaysChanged.next(true);
+        this.refreshData();
       })
   }
 
@@ -301,26 +310,23 @@ export class DataCalendarNewComponent implements OnInit {
     this.apiService.deleteEntry(idRec, userId, orgId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        this.dataCalendarService.getAllEntryAllUsersForTheMonth();
-        this.dataCalendarService.getAllUsersCurrentOrganization();
-        this.dateService.recordingDaysChanged.next(true);
+        this.refreshData();
       })
   }
 
-
+  //обновление после добавления или удаление записи
+  refreshData () {
+    this.dataCalendarService.getAllEntryAllUsersForTheMonth();
+    this.dataCalendarService.getAllUsersCurrentOrganization();
+    this.dateService.recordingDaysChanged.next(true);
+  }
 
   submit(data: any) {
     const id = this.selectedPersonId;
     const date = data.date;
     const time = data.time;
-    const user = this.dateService.allUsersSelectedOrg.value.find((el: any) => {
-      return el.id === +id
-    })
+    const user = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id == id)
 
-    user.remainingFunds = JSON.stringify(+user.remainingFunds - 1);
-    if (user.id === this.dateService.currentUserId.value) {
-      this.dateService.remainingFunds.next(user.remainingFunds);
-    }
     this.addEntry(user, time, date);
     this.cancel();
   }
@@ -373,10 +379,13 @@ export class DataCalendarNewComponent implements OnInit {
         })
         //ограничиваем запись если записано указанное кол-во человек  this.dateService.maxPossibleEntries.value
         if (filterOnSelectOrg.length >= this.dateService.maxPossibleEntries.value) {
+          this.recordComplete = true;
           this.cancel();
           this.localErrHandler('На выбранное время запись завершена!' +
             ' Запишитесь пожалуйста на другое время или день!');
           return;
+        } else {
+          this.recordComplete = false;
         }
       });
   }

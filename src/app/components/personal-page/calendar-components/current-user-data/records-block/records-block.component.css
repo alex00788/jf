@@ -1,21 +1,23 @@
 .recordsBlockClass {
-
-  margin: 5px;
+  width: auto;
+  max-width: 500px;
+  margin: 5px auto;
   padding: 5px;
   background: #c6faeb;
   border-radius: 5px;
-  cursor: pointer;
   white-space: nowrap;
 }
 
 .recordsBlockTitle {
+  position: relative;
   display: flex;
   justify-content: center;
   margin: 5px;
 }
 
 .btnRecordsBlockClose {
-  margin-left: 20px;
+  position: absolute;
+  right: 5px;
   background: none;
   border: none;
   cursor: pointer;
@@ -30,8 +32,51 @@
   margin: 5px;
 }
 
+.titleRecBlockFilters {
+  color: #5238fd;
+
+  font-size: 15px;
+}
+
+
+.btnRecSitings {
+  position: relative;
+  text-align: center;
+}
+
+
+
+
+.btnFilterRec {
+  border-radius: 10px;
+  border: 1px;
+  cursor: pointer;
+  background: none;
+  margin: 10px 3px;
+}
+
+.currentDateTime {
+  margin: 5px;
+}
+
+.btnFilterRec:hover {
+  background: #a3f6a3;
+}
+
+.btnFilterRecSelect{
+  background: #a3f6a3;
+  color: #5238fd;
+  border-radius: 10px;
+}
+
+.btnFilterRecNotSelected {
+  background: none;
+}
+
 .btnCancelAllRec {
-  margin-top: 10px;
+  margin-bottom: 5px;
+  position: absolute;
+  left: 1px;
   border-radius: 10px;
 }
 
@@ -42,5 +87,5 @@
 }
 
 .strRecords {
-  margin-left: 17px;
+  margin: 5px;
 }

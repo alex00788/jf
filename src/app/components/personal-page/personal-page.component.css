@@ -1,9 +1,12 @@
 .personalPageStyle {
-
   height: 990px;
   background: white;
   opacity: 95%;
   overflow: auto;
+}
+
+.cowerTitlePersonal {
+  position: relative;
 }
 
 .personalPageStyle::-webkit-scrollbar {
@@ -44,12 +47,6 @@
   cursor: pointer;
 }
 
-.bodyCalendar {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
 
 .insideClass {
   position: absolute;
@@ -57,20 +54,18 @@
   left: 500px;
 }
 
-.dCalendar {
-  display: flex;
-  justify-content: center;
-}
 
 .dataCalendar {
   margin: 10px;
 }
 
 
-.calendarDisplayMode {
+
+
+.dateNowAndSelected {
   display: flex;
   justify-content: center;
-  margin: 10px;
+  margin-top: 15px;
 }
 
 
@@ -84,8 +79,8 @@
   display: block;
   cursor: pointer;
   height: 20px;
-  width: 140px;
-  margin: 10px 10px;
+  /*width: 140px;*/
+  /*margin: 10px 10px;*/
   color: #5238fd;
 }
 .btnBodyCalendarElement:hover {
@@ -95,9 +90,25 @@
 
 
 .bodyCalendarElementClass {
-  margin: 0 10px;
-  padding: 10px;
+  margin: 1px auto;
+  width: 300px;
+  /*border-radius: 10px;*/
+  /*padding: 10px;*/
 }
+
+.cowerBodyCalendar {
+  position: relative;
+  padding: 7px;
+}
+
+.btnCloseInfoBlock {
+  position: absolute;
+  right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 
 .calendarNum {
   border: solid 1px #f50622;
@@ -106,9 +117,9 @@
 }
 
 .btnLogoutSystemsClass {
-  position: fixed;
+  position: absolute;
   left: 65%;
-  top: 15px;
+  top: 7px;
   margin: 5px;
   height: 15px;
   width: 15px;
@@ -121,8 +132,44 @@
 
 .btnLogoutSystemsClass:hover{
   color: white;
+  cursor: pointer;
   background: #f50622;
   transition: 1s;
+}
+
+.btnOut {
+  position: absolute;
+  left: 67%;
+  top: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+/*при наведении на одим менять стиль другого соседнего*/
+/*Для любых элементов(оба блока должны быть внутри одного элемента)*/
+/*тот что меняет стиль должен быть вторым идти после того на котор наводим в html*/
+.btnLogoutSystemsClass:hover~.btnOut {
+  color: red;
+}
+
+.btnOut:hover {
+  color: red;
+  transition: 0.3s;
+}
+
+.btnOut:after {
+  display: block;
+  position: absolute;
+  left: 0;    /*изменить на right:0;, чтобы изменить направление подчёркивания */
+  width: 0;   /*задаём длинну линии до наведения курсора*/
+  height: 1px; /*задаём ширину линии*/
+  background-color: #2630f1; /*задаём цвет линии*/
+  content: "";
+  transition: width 0.3s ease-out; /*задаём время анимации*/
+}
+.btnOut:hover:after,
+.btnOut:focus:after {
+  width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
 }
 
 
@@ -132,21 +179,17 @@
   }
 
   .btnLogoutSystemsClass {
-    margin: 0 auto;
-    /*right: inherit;*/
+    left: 61%;
+  }
+
+  .btnOut {
+    left: 64%;
   }
 
   .insideClass {
     left: 400px;
   }
 
-  .bodyCalendar {
-    display: block;
-  }
-
-  .bodyCalendarElementClass {
-    margin: 0 auto;
-  }
 
 }
 
@@ -154,24 +197,41 @@
   .insideClass {
     left: 300px;
   }
+  .btnLogoutSystemsClass {
+    left: 63%;
+  }
+
+  .btnOut {
+    left: 65%;
+  }
 }
 
 @media (max-width: 960px) {
 
-  .bodyCalendar {
-    flex-direction: column;
-    margin: auto 10px;
-  }
 
     .insideClass {
       left: 200px;
     }
+
+  .btnLogoutSystemsClass {
+    left: 70%;
+  }
+  .btnOut {
+    left: 73%;
+  }
 }
 
 @media (max-width: 720px) {
     .insideClass {
       left: 100px;
     }
+
+  .btnLogoutSystemsClass {
+    left: 80%;
+  }
+  .btnOut {
+    left: 84%;
+  }
 }
 
 @media (max-width: 600px) {

@@ -29,7 +29,7 @@ export class AddNewOrgComponent {
   formAddOrg = new FormGroup({
     nameOrg: new FormControl(null, Validators.required),
     supervisorName: new FormControl(null, Validators.required),
-    poneSupervisor: new FormControl(null, Validators.required),
+    managerPhone: new FormControl(null, Validators.required),
   })
 
   addNewOrg() {

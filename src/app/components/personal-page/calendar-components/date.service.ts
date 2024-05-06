@@ -16,6 +16,7 @@ export class DateService {                                            //moment()
   public currentUserSimpleUser: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public calendarBodyOpen: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public recordingDaysChanged: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public changedSettingsOrg: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public remainingFunds: BehaviorSubject<any> = new BehaviorSubject('')
   public allUsers: BehaviorSubject<any> = new BehaviorSubject([])
   public allEntrySelectedUserInSelectMonth: BehaviorSubject<any> = new BehaviorSubject([])
@@ -28,7 +29,8 @@ export class DateService {                                            //moment()
   public sectionOrOrganization: BehaviorSubject<any> = new BehaviorSubject('')
   public timeStartRecord: BehaviorSubject<any> = new BehaviorSubject(18)
   public timeFinishRecord: BehaviorSubject<any> = new BehaviorSubject(19)
-  public maxPossibleEntries: BehaviorSubject<any> = new BehaviorSubject(3)
+  public location: BehaviorSubject<any> = new BehaviorSubject('')
+  public maxPossibleEntries: BehaviorSubject<any> = new BehaviorSubject('')
 
   public dataSelectedUser: BehaviorSubject<any> = new BehaviorSubject({})
 
@@ -41,6 +43,16 @@ export class DateService {                                            //moment()
     this.date.next(value)
     this.recordingDaysChanged.next(true);
   }
+
+
+  // метод меняющий день на 1 вперед или назад
+  changeOneDay(dir: number) {
+    const value = this.date.value.add(dir, 'day')
+    this.date.next(value)
+    this.recordingDaysChanged.next(true);
+  }
+
+
 
   // функция устанавливающая пользователя
   setUser(userData: any) {
@@ -58,7 +70,6 @@ export class DateService {                                            //moment()
     this.currentUserNameAndSurname.next(currentUser.user.nameUser + ' ' + currentUser.user.surnameUser);
     this.currentUserId.next(currentUser.user.id);
     this.currentUserRole.next(currentUser.user.role);
-    // this.remainingFunds.next(+currentUser.user.remainingFunds);
     this.idSelectedOrg.next(currentUser.user.idOrg);
     this.currentOrg.next(currentUser.user.sectionOrOrganization)
     this.sectionOrOrganization.next(currentUser.user.sectionOrOrganization);
@@ -73,10 +84,11 @@ export class DateService {                                            //moment()
     this.date.next(value)
   }
 
-  changeTimeInterval(timeVal: any) {
-    this.timeStartRecord.next(+timeVal.timeStartRec)
-    this.timeFinishRecord.next(+timeVal.timeFinishRec)
-    this.maxPossibleEntries.next(timeVal.maxiPeople)
+  changeSettingsRec(settingsVal: any) {
+    this.timeStartRecord.next(+settingsVal.timeStartRec)
+    this.timeFinishRecord.next(+settingsVal.timeFinishRec)
+    this.maxPossibleEntries.next(settingsVal.maxiPeople)
+    this.location.next(settingsVal.location)
   }
 
   openCalendar() {

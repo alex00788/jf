@@ -7,6 +7,7 @@ import {Subject, takeUntil} from "rxjs";
 import {ApiService} from "../../../../../shared/services/api.service";
 import {DataCalendarService} from "../../data-calendar-new/data-calendar.service";
 import moment from "moment/moment";
+import {InfoBlockComponent} from "../../info-block/info-block.component";
 
 @Component({
   selector: 'app-records-block',
@@ -15,7 +16,8 @@ import moment from "moment/moment";
     TranslateMonthPipe,
     NgForOf,
     NgIf,
-    AsyncPipe
+    AsyncPipe,
+    InfoBlockComponent
   ],
   templateUrl: './records-block.component.html',
   styleUrl: './records-block.component.css'
@@ -67,5 +69,7 @@ export class RecordsBlockComponent implements OnInit{
   }
 
 
-
+  dataAboutRec(entry: any) {
+    console.log('73', entry)
+  }
 }

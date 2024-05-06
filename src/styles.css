@@ -31,7 +31,11 @@
   background: #03f303;
 }
 
-
+.btnMainMenu {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
 
 .btn {
   position: static;

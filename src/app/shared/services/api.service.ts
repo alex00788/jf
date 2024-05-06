@@ -18,9 +18,6 @@ export class ApiService {
   //перехват и показ ошибки
   public errHandler(err: HttpErrorResponse) {
 
-    if (err.error.message.includes('уже записан(а)')) {
-      this.correctionOfTheRemainderIfErrorRec()
-    }
     if (!err.error?.message) {
       this.errorResponseService.localHandler('ошибка при запросе на серв')
       return throwError(() => err)
@@ -30,18 +27,6 @@ export class ApiService {
     }
   }
 
-  //функция корректирует остаток средств если пользователь уже записан и админ записал его еще раз
-  correctionOfTheRemainderIfErrorRec () {
-    const result: any[] = []
-    this.dateService.allUsers.value.forEach((user: any)=> {
-      if (user.id === this.dateService.dataSelectedUser.value.id){
-        user.remainingFunds = JSON.stringify(+user.remainingFunds + 1)
-      }
-      result.push(user)
-    })
-    this.dateService.allUsers.next(result)
-    this.dateService.remainingFunds.next(JSON.stringify(+this.dateService.remainingFunds.value + 1))
-  }
 
 
   //хранение токена в локал стораж
@@ -70,7 +55,6 @@ export class ApiService {
   }
 
   registration(user: any): Observable<any> {
-    console.log('72', user)
     return this.http.post<any>('/api/user/registration', user)
       .pipe(
         tap(this.setToken),                                              // устанавливает токен в localStorage
@@ -148,10 +132,11 @@ export class ApiService {
       .pipe(catchError(this.errHandler.bind(this)))
   }
 
-  getAllUsersCurrentOrganization (idOrg: any): Observable<any> {
+  getAllUsersCurrentOrganization (idOrg: any, userId:any): Observable<any> {
     return this.http.get<any>('/api/user/getAllUsersCurrentOrganization', {
       params: new HttpParams()
         .append('idOrg', idOrg)
+        .append('userId', userId)
     })
       .pipe(catchError(this.errHandler.bind(this)))
   }
@@ -159,6 +144,12 @@ export class ApiService {
   addEntry(newUserAccount: any): Observable<any> {
     return this.http.post<any>('/api/user/addEntry', newUserAccount)
     .pipe(catchError(this.errHandler.bind(this)))
+  }
+
+
+  setSettings(newSettings: any): Observable<any> {
+    return this.http.post<any>('/api/user/setSettings', newSettings)
+      .pipe(catchError(this.errHandler.bind(this)))
   }
 
   addNewOrganization(newOrgData: any): Observable<any> {

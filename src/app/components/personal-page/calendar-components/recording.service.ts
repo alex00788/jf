@@ -13,6 +13,7 @@ export class RecordingService {
   public showCurrentDay: BehaviorSubject<boolean> = new BehaviorSubject(true)
   public showCurrentWeek: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public showCurrentMonth: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public recordsBlock: BehaviorSubject<boolean> = new BehaviorSubject(false)
 
 
   showDay() {
@@ -33,5 +34,11 @@ export class RecordingService {
     this.showCurrentMonth.next(true);
   }
 
+  openRecordsBlock() {
+    this.recordsBlock.next(true)
+  }
 
+  closeRecordsBlock() {
+    this.recordsBlock.next(false)
+  }
 }

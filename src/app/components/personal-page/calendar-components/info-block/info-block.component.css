@@ -30,9 +30,7 @@
   border-radius: 10px;
 }
 
-.btnCloseInfoBlock {
-  position: absolute;
-  right: 1px;
-  background: none;
-  border: none;
+.changeDayClass:hover {
+  background: #a3f6a3;
+  cursor: pointer;
 }

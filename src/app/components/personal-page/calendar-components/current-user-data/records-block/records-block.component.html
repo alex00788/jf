@@ -1,6 +1,7 @@
  <ng-container *ngIf="dateService.currentUserSimpleUser.value">
    <div class="recordsBlockClass" *ngIf="personalBlockService.recordsBlock">
-     <div class="recordsBlockTitle" (click)="personalBlockService.closeRecordsBlock()">
+     <div class="recordsBlockTitle">
+      <!-- <button class="btnCancelAllRec" disabled> отменить все!</button>-->
        <strong
        >
          Мои записи
@@ -8,23 +9,43 @@
            в {{dateService.date.value.format('M') | translateMonth}}
          </span>
        </strong>
-       <button class="btnRecordsBlockClose">&times;</button>
+       <button class="btnRecordsBlockClose" (click)="personalBlockService.closeRecordsBlock()">&times;</button>
      </div>
-     <div class="dataRecordsBlock"  *ngIf="dataCalendarService.allEntryCurrentUserThisMonth.value.length;  else notContentBlock">
+     <div class="btnRecSitings">
+       <div class="titleRecBlockFilters">Фильтр по: </div>
+       <button
+         class="btnFilterRec"
+         [class]="{
+              btnFilterRecSelect: dataCalendarService.filterByOrg.value,
+              btnFilterRecNotSelected: !dataCalendarService.filterByOrg.value}"
+         (click)="dataCalendarService.filterRecCurrentUserByOrg()"
+       >Организации
+       </button>
+       <button
+         class="btnFilterRec"
+         [class]="{
+              btnFilterRecSelect: dataCalendarService.filterByDate.value,
+              btnFilterRecNotSelected: !dataCalendarService.filterByDate.value}"
+         (click)="dataCalendarService.filterRecCurrentUserByDate()"
+       > Дате
+       </button>
+       <button
+         class="btnFilterRec"
+         [class]="{
+              btnFilterRecSelect: dataCalendarService.showAll.value,
+              btnFilterRecNotSelected: !dataCalendarService.showAll.value}"
+         (click)="dataCalendarService.showAllRec()"
+       > Показать все
+       </button>
+     </div>
+     <div class="currentDateTime" *ngIf="dataCalendarService.filterByDate.value">
+       <app-info-block></app-info-block>
+     </div>
+
+
+     <div class="dataRecordsBlock" *ngIf="dataCalendarService.allEntryCurrentUserThisMonth.value.length;  else notContentBlock">
        <div class="dataRecords">
          <div class="strSRecords" *ngFor="let entry of dataCalendarService.allEntryCurrentUserThisMonth | async">
-         <span class="strRecords">
-           {{entry.date}}
-         </span>
-         <span class="strRecords">
-           {{entry.time}}:00
-         </span>
-         <span class="strRecords">
-           {{entry.sectionOrOrganization}}
-         </span>
-         <span class="strRecords">
-           адрес:
-         </span>
            <button class="strRecords"
                    (click)="deleteSelectedRec(entry)"
                    [disabled]="blockRepeat ||
@@ -33,15 +54,31 @@
                     entry.date.substring(3,5) === currentDate.substring(3,5) ||
                     entry.time < currentHour && entry.date === currentDate"
            >
-           &times;
-         </button>
+             &times;
+           </button>
+           <span class="strRecords">
+            {{entry.date}}
+           </span>
+           <span class="strRecords">
+            {{entry.time}}:00
+           </span>
+           <span class="strRecords" (click)="dataAboutRec(entry)">
+             {{entry.sectionOrOrganization}}
+           </span>
+           <span class="strRecords">
+             ...адрес:
+           </span>
          </div>
-         <button class="btnCancelAllRec" disabled> отменить все записи !</button>
        </div>
      </div>
 
      <ng-template #notContentBlock>
-       <span class="notContentClass">в {{dateService.date.value.format('M') | translateMonth}} записей нет!</span>
+       <span class="notContentClass" *ngIf="dataCalendarService.showAll.value">
+         в {{dateService.date.value.format('M') | translateMonth}} записей нет!
+       </span>
+       <span class="notContentClass" *ngIf="dataCalendarService.filterByDate.value">
+         {{dateService.date.value.format('DD.MM') }} записей нет!
+       </span>
      </ng-template>
 
 

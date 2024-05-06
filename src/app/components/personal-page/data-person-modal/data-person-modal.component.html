@@ -6,16 +6,11 @@
     </div>
     <div class="selectedUserClass">
       <div>
-        <strong> Имя: </strong>
+        <strong> {{roleUser}}: </strong>
       </div>
       <span> {{nameUser}}</span>
     </div>
-    <div class="selectedUserClass">
-      <div>
-        <strong> {{roleUser}}:  </strong>
-      </div>
-      <span>  {{sectionOrOrganization}} </span>
-    </div>
+
     <div class="selectedUserClass" *ngIf="!hideBtnForCurrentAdmin">
       <div>
         <strong> Остаток: </strong>

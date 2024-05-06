@@ -1,17 +1,4 @@
-
 <div class="personalDataClass">
-  <div class="coverBtnSettingsRec" *ngIf="!personalBlockService.personalData">
-  <button class="btnSettingsRecords" (click)="personalBlockService.switchData()"> Мои данные</button>
-  </div>
-  <div *ngIf="personalBlockService.personalData">
-
-    <app-personal-data-block></app-personal-data-block>
-
-    <app-records-block></app-records-block>
-
-    <app-add-new-org></app-add-new-org>
-
-    <app-settings-block></app-settings-block>
-
-  </div>
+  <app-personal-data-block *ngIf="personalBlockService.personalData"></app-personal-data-block>
+  <app-add-new-org></app-add-new-org>
 </div>
