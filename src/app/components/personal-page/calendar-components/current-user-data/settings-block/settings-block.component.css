@@ -24,8 +24,15 @@
   cursor: pointer;
   margin: 10px auto;
   width: 230px;
-  text-align: center;
+  /*display: flex;*/
+  /*justify-content: space-between;*/
 }
+
+.setSpaceBetween{
+  /*display: flex;*/
+  /*justify-content: space-between;*/
+}
+
 
 .sittingCurrentValue:after {
   display: block;
@@ -98,7 +105,7 @@ input {
 }
 
 label {
-  margin: 5px;
+  margin: 5px 3px;
 }
 
 .settingsInputClass {

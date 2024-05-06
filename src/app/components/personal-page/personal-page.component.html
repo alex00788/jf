@@ -97,6 +97,10 @@
       <app-info-block></app-info-block>
     </div>
 
+    <div class="dateNowAndSelected" *ngIf="recordingService.showCurrentWeek.value">
+      <app-switch-of-the-week></app-switch-of-the-week>
+    </div>
+
     <div class="dateNowAndSelected">
       <div class="dataCalendar">
         <app-data-calendar-new></app-data-calendar-new>

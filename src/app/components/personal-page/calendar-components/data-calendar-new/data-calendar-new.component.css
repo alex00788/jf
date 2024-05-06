@@ -22,7 +22,7 @@
 
 /*так скрываем полосу прокрутки сохраняя возможность прокрутки*/
 .searchPersonClass {
-  width: 210px;
+  width: 320px;
   max-height: 100px;
   overflow: auto;
 }
@@ -40,7 +40,7 @@
 
 input {
   border: none;
-  width: 170px;
+  width: 280px;
   border-radius: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -58,8 +58,18 @@ li {
 }
 
 .allDaysOfSelectedClass {
+  position: relative;
   margin: 3px;
 }
+
+.btnCloseRec {
+  position: absolute;
+  right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 
 .currentDay {
   font-size: 18px;
@@ -67,7 +77,6 @@ li {
   margin: 5px auto;
   width: 90px;
   border-bottom: solid 1px red;
-
 }
 
 .timeOfDay {

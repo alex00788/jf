@@ -3,6 +3,9 @@
     <div class="allDaysOfSelectedClass">
       <div class="currentDay">
         {{day.date}}
+        <button *ngIf="recordingService.showCurrentDay.value" class="btnCloseRec" (click)="recordingService.closeRecordsBlock()">
+          &times;
+        </button>
       </div>
       <div class="cowerTimeOfDay">
         <div class="timeOfDay" *ngFor="let time of day.times">

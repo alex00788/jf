@@ -3,14 +3,14 @@
   <form [formGroup]="form" (submit)="submit()">
     <div class="oneSitting">
       <label>
-        Max клиентов в одной записи
+        Max клиентов в одной записи:
       </label>
       <input type="number" maxlength="2" max="20" min="0" class="settingsInputClass" formControlName="maxiPeople">
     </div>
 
     <div class="oneSitting">
       <label>
-        Время начала записи
+        Время начала записи:
       </label>
       <select class="settingsSelectClass" formControlName="timeStartRec">
         <option *ngFor="let chSt of timesForRec"> {{chSt}}</option>
@@ -19,7 +19,7 @@
 
     <div class="oneSitting">
       <label>
-        Последняя запись в
+        Последняя запись в:
       </label>
       <select class="settingsSelectClass" formControlName="timeFinishRec">
         <option *ngFor="let chEnd of timesForRec"> {{chEnd}}</option>
@@ -28,14 +28,14 @@
 
     <div class="oneSitting">
       <label>
-        Адрес проведения
+        Адрес проведения:
       </label>
       <input type="text" class="settingsInputLocationClass" formControlName="location">
     </div>
 
     <div class="oneSitting">
       <label>
-        Тел
+        Телефон:
       </label>
       <input type="text" class="settingsInputLocationClass" formControlName="phoneOrg">
     </div>
@@ -62,40 +62,48 @@
 
   <div class="allSettingsVal">
     <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
-      <span>
-       Max клиентов в одной записи
-      <strong style="color: #5238fd">
-        {{dateService.maxPossibleEntries.value}}
-      </strong>
+      <div class="setSpaceBetween">
+        <span>
+       Max клиентов в одной записи:
       </span>
+        <strong style="color: #5238fd">
+          {{dateService.maxPossibleEntries.value}}
+        </strong>
+      </div>
     </div>
     <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
-      <span>
-       Время начала записи
-      <strong style="color: #5238fd">
-       {{dateService.timeStartRecord.value}} : 00
-      </strong>
+      <div class="setSpaceBetween">
+        <span>
+       Время начала записи:
       </span>
+        <strong style="color: #5238fd">
+          {{dateService.timeStartRecord.value}} : 00
+        </strong>
+      </div>
     </div>
     <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
-      <span>
-       Последняя запись в
-      <strong style="color: #5238fd">
-       {{dateService.timeFinishRecord.value}} : 00
-      </strong>
+      <div class="setSpaceBetween">
+        <span>
+       Последняя запись в:
       </span>
+        <strong style="color: #5238fd">
+          {{dateService.timeFinishRecord.value}} : 00
+        </strong>
+      </div>
+    </div>
+    <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
+      <div class="setSpaceBetween">
+        <span>
+       Телефон:
+     </span>
+        <strong style="color: #5238fd">
+          {{dateService.phoneOrg.value}}
+        </strong>
+      </div>
     </div>
     <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
      <span>
-       Телефон
-      <strong style="color: #5238fd">
-       {{dateService.phoneOrg.value}}
-      </strong>
-    </span>
-    </div>
-    <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
-     <span>
-       Адрес проведения
+       Адрес проведения:
       <strong style="color: #5238fd">
        {{dateService.location.value}}
       </strong>

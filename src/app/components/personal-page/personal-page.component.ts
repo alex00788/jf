@@ -31,6 +31,7 @@ import {SettingsBlockComponent} from "./calendar-components/current-user-data/se
 import {
   DataAboutRecComponent
 } from "./calendar-components/current-user-data/records-block/data-about-rec/data-about-rec.component";
+import {SwitchOfTheWeekComponent} from "./calendar-components/switch-of-the-week/switch-of-the-week.component";
 
 
 @Component({
@@ -56,6 +57,7 @@ import {
     PersonalDataBlockComponent,
     SettingsBlockComponent,
     DataAboutRecComponent,
+    SwitchOfTheWeekComponent,
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'

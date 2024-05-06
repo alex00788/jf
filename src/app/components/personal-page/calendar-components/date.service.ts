@@ -54,7 +54,11 @@ export class DateService {                                            //moment()
     this.recordingDaysChanged.next(true);
   }
 
-
+// метод меняющий неделю на 1 вперед или назад
+  changeOneWeek(dir: number) {
+    const value = this.date.value.add(dir, 'week')
+    this.recordingDaysChanged.next(true);
+  }
 
   // функция устанавливающая пользователя
   setUser(userData: any) {

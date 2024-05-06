@@ -350,7 +350,7 @@ export class DataCalendarNewComponent implements OnInit {
 
   currentHourTime(time: any, date: any) {
     setTimeout(() => {
-      this.inputElementRef.nativeElement.value = ' ';
+      this.inputElementRef.nativeElement.value = '';
       this.inputElementRef?.nativeElement?.focus();
       // this.disabledBtnRecord = !this.inputElementRef?.nativeElement?.value
     }, 100)

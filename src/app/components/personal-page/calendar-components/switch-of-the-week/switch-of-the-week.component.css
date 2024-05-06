@@ -1,0 +1,19 @@
+.btnSSwitchWeek {
+  display: flex;
+  justify-content: space-between;
+  /*background: #bfefe4;*/
+  border: none;
+}
+
+.btnSwitchWeek {
+  border-radius: 50px;
+  margin: 0 10px;
+  background: #bfefe4;
+  width: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btnSwitchWeek:hover {
+  background: #a3f6a3;
+}
