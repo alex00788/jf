@@ -33,6 +33,13 @@
       <input type="text" class="settingsInputLocationClass" formControlName="location">
     </div>
 
+    <div class="oneSitting">
+      <label>
+        Тел
+      </label>
+      <input type="text" class="settingsInputLocationClass" formControlName="phoneOrg">
+    </div>
+
     <div class="btnSetClass">
       <button class="btnSettingsRecords" (click)="personalBlockService.closeSettings()">
         Отменить
@@ -83,6 +90,14 @@
        Адрес проведения
       <strong style="color: #5238fd">
        {{dateService.location.value}}
+      </strong>
+    </span>
+    </div>
+    <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
+     <span>
+       Тел
+      <strong style="color: #5238fd">
+       {{dateService.phoneOrg.value}}
       </strong>
     </span>
     </div>

@@ -56,18 +56,20 @@
            >
              &times;
            </button>
-           <span class="strRecords">
-            {{entry.date}}
-           </span>
-           <span class="strRecords">
-            {{entry.time}}:00
-           </span>
-           <span class="strRecords" (click)="dataAboutRec(entry)">
-             {{entry.sectionOrOrganization}}
-           </span>
-           <span class="strRecords">
-             ...адрес:
-           </span>
+           <div class="ownRec" (click)="dataAboutRec(entry)">
+             <span class="strRecords">
+              {{ entry.date }}
+             </span>
+             <span class="strRecords">
+              {{ entry.time }}:00
+             </span>
+             <span class="strRecords">
+               {{ entry.sectionOrOrganization | reductionOrg }}
+             </span>
+             <span class="strRecords">
+               {{ entry.location | reductionAddress }}
+             </span>
+           </div>
          </div>
        </div>
      </div>

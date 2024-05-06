@@ -8,6 +8,9 @@ import {ApiService} from "../../../../../shared/services/api.service";
 import {DataCalendarService} from "../../data-calendar-new/data-calendar.service";
 import moment from "moment/moment";
 import {InfoBlockComponent} from "../../info-block/info-block.component";
+import {ReductionPipe} from "../../../../../shared/pipe/reduction.pipe";
+import {ReductionAddressPipe} from "../../../../../shared/pipe/reduction-address.pipe";
+import {ModalService} from "../../../../../shared/services/modal.service";
 
 @Component({
   selector: 'app-records-block',
@@ -17,7 +20,9 @@ import {InfoBlockComponent} from "../../info-block/info-block.component";
     NgForOf,
     NgIf,
     AsyncPipe,
-    InfoBlockComponent
+    InfoBlockComponent,
+    ReductionPipe,
+    ReductionAddressPipe
   ],
   templateUrl: './records-block.component.html',
   styleUrl: './records-block.component.css'
@@ -26,6 +31,7 @@ export class RecordsBlockComponent implements OnInit{
   constructor(
     public personalBlockService: PersonalBlockService,
     public dateService: DateService,
+    public modalService: ModalService,
     public dataCalendarService: DataCalendarService,
     public apiService: ApiService,
   ) {}
@@ -40,6 +46,13 @@ export class RecordsBlockComponent implements OnInit{
   ngOnInit(): void {
     this.currentDate = moment().format('DD.MM.YYYY');
     this.recordingDaysChanged();
+
+    this.dateService.date
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(()=>{
+        this.dataCalendarService.showAllRec();
+        this.dataCalendarService.filterRecCurrentUserByDate();
+      })
   }
 
   // функция обновляет блок показывающий когда записан пользователь...как только пользователь запишется или отпишется
@@ -70,6 +83,8 @@ export class RecordsBlockComponent implements OnInit{
 
 
   dataAboutRec(entry: any) {
-    console.log('73', entry)
+    this.dateService.dataAboutSelectedRec.next(entry)
+    this.modalService.open();
+    this.modalService.openRecordsBlockWithData()
   }
 }

@@ -35,6 +35,7 @@ export class SettingsBlockComponent implements OnInit{
     timeStartRec: new FormControl(this.dateService.timeStartRecord.value, Validators.required),
     timeFinishRec: new FormControl(this.dateService.timeFinishRecord.value, Validators.required),
     location: new FormControl(this.dateService.location.value, Validators.required),
+    phoneOrg: new FormControl(this.dateService.phoneOrg.value, Validators.required),
   })
 
   ngOnInit(): void {
@@ -84,6 +85,7 @@ export class SettingsBlockComponent implements OnInit{
       timeStartRec: this.form.value.timeStartRec,
       timeFinishRec: this.form.value.timeFinishRec,
       location: this.form.value.location,
+      phoneOrg: this.form.value.phoneOrg,
     }
     this.apiService.setSettings(dataSettings)
       .pipe(takeUntil(this.destroyed$))
@@ -92,8 +94,8 @@ export class SettingsBlockComponent implements OnInit{
         this.dateService.timeFinishRecord.next(newSettings.timeLastRec);
         this.dateService.maxPossibleEntries.next(newSettings.maxClients);
         this.dateService.location.next(newSettings.location);
+        this.dateService.phoneOrg.next(newSettings.phoneOrg);
         this.dateService.changedSettingsOrg.next(true);
-
       });
 
     this.dataCalendarService.getAllEntryAllUsersForTheMonth();

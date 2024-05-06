@@ -28,6 +28,9 @@ import {
   PersonalDataBlockComponent
 } from "./calendar-components/current-user-data/personal-data-block/personal-data-block.component";
 import {SettingsBlockComponent} from "./calendar-components/current-user-data/settings-block/settings-block.component";
+import {
+  DataAboutRecComponent
+} from "./calendar-components/current-user-data/records-block/data-about-rec/data-about-rec.component";
 
 
 @Component({
@@ -52,6 +55,7 @@ import {SettingsBlockComponent} from "./calendar-components/current-user-data/se
     AddNewOrgComponent,
     PersonalDataBlockComponent,
     SettingsBlockComponent,
+    DataAboutRecComponent,
   ],
   templateUrl: './personal-page.component.html',
   styleUrl: './personal-page.component.css'

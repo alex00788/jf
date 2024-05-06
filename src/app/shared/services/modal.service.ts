@@ -12,6 +12,8 @@ export class ModalService {
   appDescription$ = new BehaviorSubject<boolean>(false)
   appContacts$ = new BehaviorSubject<boolean>(false)
   appSupport$ = new BehaviorSubject<boolean>(false)
+  recordsBlock = new BehaviorSubject<boolean>(false)
+  clientListBlock = new BehaviorSubject<boolean>(false)
 
   open() {
     this.isVisible$.next(true)
@@ -117,5 +119,16 @@ export class ModalService {
   // closeAppDescription$() {
   //   this.appDescription$.next(false);
   // }
+
+  openRecordsBlockWithData() {
+    this.recordsBlock.next(true);
+    this.clientListBlock.next(false);
+  }
+
+  openClientListBlockWithData() {
+    this.recordsBlock.next(false);
+    this.clientListBlock.next(true);
+  }
+
 
 }

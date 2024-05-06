@@ -1,0 +1,18 @@
+.cowerBlockDataAboutRec {
+  margin: 10px;
+  background: #bfefe4;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.strRec {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.strRecTitle {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  color: #5238fd;
+}

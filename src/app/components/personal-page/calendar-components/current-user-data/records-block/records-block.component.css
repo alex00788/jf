@@ -1,6 +1,6 @@
 .recordsBlockClass {
   width: auto;
-  max-width: 500px;
+  max-width: 400px;
   margin: 5px auto;
   padding: 5px;
   background: #c6faeb;
@@ -88,4 +88,10 @@
 
 .strRecords {
   margin: 5px;
+  cursor: pointer;
+}
+
+.ownRec {
+  cursor: pointer;
+  display: inline;
 }

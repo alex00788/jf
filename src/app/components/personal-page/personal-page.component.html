@@ -109,7 +109,8 @@
 
 <div class="modalDataSelectUser" *ngIf="modalService.isVisible$ | async">
   <app-modal-window-for-person-page>
-    <app-data-person-modal></app-data-person-modal>
+    <app-data-person-modal *ngIf="modalService.clientListBlock | async"></app-data-person-modal>
+    <app-data-about-rec *ngIf="modalService.recordsBlock | async"></app-data-about-rec>
   </app-modal-window-for-person-page>
 </div>
 
