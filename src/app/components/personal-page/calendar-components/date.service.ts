@@ -91,6 +91,7 @@ export class DateService {                                            //moment()
     this.timeFinishRecord.next(+settingsVal.timeFinishRec)
     this.maxPossibleEntries.next(settingsVal.maxiPeople)
     this.location.next(settingsVal.location)
+    this.phoneOrg.next(settingsVal.phoneOrg)
   }
 
   openCalendar() {

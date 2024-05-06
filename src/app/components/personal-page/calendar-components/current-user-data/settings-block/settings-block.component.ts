@@ -65,6 +65,9 @@ export class SettingsBlockComponent implements OnInit{
     if (!this.dateService.location.value) {
       this.dateService.location.next(this.form.value.location)
     }
+    if (!this.dateService.phoneOrg.value) {
+      this.dateService.phoneOrg.next(this.form.value.phoneOrg)
+    }
   }
 
 
@@ -89,12 +92,12 @@ export class SettingsBlockComponent implements OnInit{
     }
     this.apiService.setSettings(dataSettings)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((newSettings: any) => {
-        this.dateService.timeStartRecord.next(newSettings.timeStartRec);
-        this.dateService.timeFinishRecord.next(newSettings.timeLastRec);
-        this.dateService.maxPossibleEntries.next(newSettings.maxClients);
-        this.dateService.location.next(newSettings.location);
-        this.dateService.phoneOrg.next(newSettings.phoneOrg);
+      .subscribe((set: any) => {
+        this.dateService.timeStartRecord.next(set.newSettings.timeStartRec);
+        this.dateService.timeFinishRecord.next(set.newSettings.timeLastRec);
+        this.dateService.maxPossibleEntries.next(set.newSettings.maxClients);
+        this.dateService.location.next(set.newSettings.location);
+        this.dateService.phoneOrg.next(set.newSettings.phoneOrg);
         this.dateService.changedSettingsOrg.next(true);
       });
 

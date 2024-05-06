@@ -71,6 +71,7 @@ export class DataCalendarService {
       this.dateService.timeFinishRecord.next(dataSettings.timeLastRec);
       this.dateService.maxPossibleEntries.next(dataSettings.maxClients);
       this.dateService.location.next(dataSettings.location);
+      this.dateService.phoneOrg.next(dataSettings.phoneOrg);
       this.dateService.changedSettingsOrg.next(true);
     }
   }
