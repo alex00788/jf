@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PersonalBlockService} from "../../personal-block.service";
 import {DateService} from "../../date.service";
 import {ApiService} from "../../../../../shared/services/api.service";
@@ -6,7 +6,6 @@ import {NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {DataCalendarService} from "../../data-calendar-new/data-calendar.service";
 import {Subject, takeUntil} from "rxjs";
-import {RecordingService} from "../../recording.service";
 
 @Component({
   selector: 'app-settings-block',

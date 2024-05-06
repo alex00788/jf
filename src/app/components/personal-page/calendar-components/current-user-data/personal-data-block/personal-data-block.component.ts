@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PersonalBlockService} from "../../personal-block.service";
 import {DateService} from "../../date.service";
 import {AsyncPipe, NgIf} from "@angular/common";
