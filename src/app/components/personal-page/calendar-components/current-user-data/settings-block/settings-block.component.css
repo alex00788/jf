@@ -46,7 +46,7 @@
 }
 .sittingCurrentValue:hover:after,
 .sittingCurrentValue:focus:after {
-  width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
+  width: 95%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
 }
 
 .timeStartRecClass {

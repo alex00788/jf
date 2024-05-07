@@ -170,8 +170,9 @@ export class ApiService {
   }
 
 
-  changeRoleSelectedUser(userId: any) : Observable<any> {
-    return this.http.put<any>('/api/user/changeRole/' + userId, userId)
+  changeRoleSelectedUser(userId: any, idOrg: any) : Observable<any> {
+    const dataId = {userId, idOrg}
+    return this.http.post<any>('/api/user/changeRole' , dataId)
       .pipe(catchError(this.errHandler.bind(this)))
   }
 

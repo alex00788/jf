@@ -66,9 +66,9 @@
         <span>
        Max клиентов в одной записи:
       </span>
-        <strong style="color: #5238fd">
+        <span style="color: #5238fd">
           {{dateService.maxPossibleEntries.value}}
-        </strong>
+        </span>
       </div>
     </div>
     <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
@@ -76,9 +76,9 @@
         <span>
        Время начала записи:
       </span>
-        <strong style="color: #5238fd">
+        <span style="color: #5238fd">
           {{dateService.timeStartRecord.value}} : 00
-        </strong>
+        </span>
       </div>
     </div>
     <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
@@ -86,9 +86,9 @@
         <span>
        Последняя запись в:
       </span>
-        <strong style="color: #5238fd">
+        <span style="color: #5238fd">
           {{dateService.timeFinishRecord.value}} : 00
-        </strong>
+        </span>
       </div>
     </div>
     <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
@@ -96,17 +96,17 @@
         <span>
        Телефон:
      </span>
-        <strong style="color: #5238fd">
+        <span style="color: #5238fd">
           {{dateService.phoneOrg.value}}
-        </strong>
+        </span>
       </div>
     </div>
     <div class="sittingCurrentValue" (click)="personalBlockService.changeSettingsRecords()">
      <span>
        Адрес:
-      <strong style="color: #5238fd">
+      <small style="color: #5238fd">
        {{dateService.location.value}}
-      </strong>
+      </small>
     </span>
     </div>
   </div>

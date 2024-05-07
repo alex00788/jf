@@ -50,8 +50,10 @@ export class DataPersonModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataCalendarService.getAllEntryAllUsersForTheMonth();
+    this.dataCalendarService.getAllUsersCurrentOrganization();
+    this.selectedUser = this.dateService.allUsersSelectedOrg.value.find((us:any)=> us.id === this.dateService.dataSelectedUser.value.userId)
     this.hideBtnForCurrentAdmin = this.selectedUser.userId == this.dateService.currentUserId.value;
-    this.roleUser = this.dateService.allUsersSelectedOrg.value.find((us: any)=> us.id == this.selectedUser.userId).role
+    this.roleUser = this.selectedUser.role;
     this.currentDate = moment().format('DD.MM.YYYY');
     this.dataAboutSelectedUser();
     this.dataCalendarService.allEntryAllUsersInMonth
@@ -63,17 +65,19 @@ export class DataPersonModalComponent implements OnInit {
 
   getAllEntrySelectedUser() {
     const allEntrySelectedUser = this.dataCalendarService.allEntryAllUsersInMonth.value
-      .filter((entry: any)=> entry.userId == this.selectedUser.userId);
+      .filter((entry: any)=>
+           this.selectedUser.userId? entry.userId == this.selectedUser.userId : entry.userId == this.selectedUser.id);
     this.dateService.allEntrySelectedUserInSelectMonth.next(allEntrySelectedUser);
   }
 
 
   dataAboutSelectedUser() {
     const selectedUser = this.selectedUser;
-    const dataSelectedUser = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id == selectedUser.userId)
-    dataSelectedUser.role = dataSelectedUser.role === "USER"? 'Клиент' : dataSelectedUser.role;
-    this.roleUser = dataSelectedUser.role === 'MAIN_ADMIN'? 'Boos' : dataSelectedUser.role;
-    this.showBtnAdminAndUser = dataSelectedUser.role === 'MAIN_ADMIN';
+    this.selectedUser = this.dateService.allUsersSelectedOrg.value.find((el: any) =>
+      selectedUser.userId? el.id == selectedUser.userId: el.id == selectedUser.id)
+    this.roleUser = this.selectedUser.role === "USER"? 'Клиент' : this.selectedUser.role;
+    // this.roleUser = dataSelectedUser.role === 'MAIN_ADMIN'? 'Boos' : dataSelectedUser.role;
+    // this.showBtnAdminAndUser = dataSelectedUser.role === 'MAIN_ADMIN';
     if (this.showBtnAdminAndUser) {
       this.showBtnAdmin = this.showBtnUser = false;
     } else {
@@ -82,13 +86,14 @@ export class DataPersonModalComponent implements OnInit {
     }
     this.nameUser = selectedUser.nameUser.split(' ').length === 2?
       selectedUser.nameUser : selectedUser.surnameUser + ' ' + selectedUser.nameUser;
-    this.sectionOrOrganization = dataSelectedUser.sectionOrOrganization;
-    this.remainingFunds = dataSelectedUser.remainingFunds;
+    this.sectionOrOrganization = this.selectedUser.sectionOrOrganization;
+    this.remainingFunds = this.selectedUser.remainingFunds;
+    this.hideBtnForCurrentAdmin = this.selectedUser.id == this.dateService.currentUserId.value;
   }
 
   changeRole() {
     const selectedUser = this.selectedUser;
-    this.apiService.changeRoleSelectedUser(selectedUser.userId)
+    this.apiService.changeRoleSelectedUser(selectedUser.id, selectedUser.idOrg)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(newRoleUser => {
         const newAllUser:any[] = [];
