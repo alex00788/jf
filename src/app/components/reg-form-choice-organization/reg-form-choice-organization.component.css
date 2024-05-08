@@ -46,9 +46,10 @@ input {
 }
 
 .orgClass {
-  margin-left: 20%;
+  margin: 10px 10px 20px 15px;
   height: 100px;
   overflow: auto;
+  color: #050a64;
 }
 
 .orgClass::-webkit-scrollbar {
@@ -58,7 +59,6 @@ input {
 
 .ownOrg {
   margin: 10px;
-  width: 300px;
   display: block;
   text-align: start;
   cursor: pointer;
@@ -70,7 +70,7 @@ hr {
 
 .btnReset {
   position: absolute;
-  top: 102px;
+  top: 80px;
   left: 55px;
   background: white;
   border: none;

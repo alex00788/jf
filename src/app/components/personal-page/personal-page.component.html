@@ -1,17 +1,15 @@
 <div class="personalPageStyle">
-  <div class="cowerTitlePersonal">
-    <strong class="btnLogoutSystemsClass" (click)="logoutSystems()"> &times; </strong>
-    <span class="btnOut" (click)="logoutSystems()"> выйти </span>
-    <!-- <div class="cowerMainePageClass">
-       <div class="mainePageClass">
-         <h3 class="titleMainePage" (click)="mainePage()">Твой личный администратор</h3>
-       </div>
-     </div>-->
 
-    <div class="currentSelectedOrg">
-      <app-select-org-to-display></app-select-org-to-display>
+  <div class="currentSelectedOrg">
+    <app-select-org-to-display></app-select-org-to-display>
+    <div class="cowerTitlePersonal">
+      <div class="btnOutAndText">
+        <strong class="btnLogoutSystemsClass" (click)="logoutSystems()"> &times; </strong>
+        <span class="btnOut" (click)="logoutSystems()"> выйти </span>
+      </div>
     </div>
   </div>
+
 
   <div class="errorModal insideClass">
     <app-error-modal></app-error-modal>

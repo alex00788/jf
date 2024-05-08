@@ -14,6 +14,7 @@
 }
 
 .currentSelectedOrg {
+  padding-left: 50px;
   display: flex;
   justify-content: center;
 }
@@ -123,10 +124,12 @@
   width: 360px;
 }
 
+.btnOutAndText {
+  display: flex;
+  align-items: center;
+}
+
 .btnLogoutSystemsClass {
-  position: absolute;
-  left: 65%;
-  top: 7px;
   margin: 5px;
   height: 15px;
   width: 15px;
@@ -145,9 +148,6 @@
 }
 
 .btnOut {
-  position: absolute;
-  left: 67%;
-  top: 10px;
   color: white;
   cursor: pointer;
 }
@@ -185,14 +185,6 @@
     margin: 10px auto;
   }
 
-  .btnLogoutSystemsClass {
-    left: 61%;
-  }
-
-  .btnOut {
-    left: 64%;
-  }
-
   .insideClass {
     left: 400px;
   }
@@ -204,13 +196,6 @@
   .insideClass {
     left: 300px;
   }
-  .btnLogoutSystemsClass {
-    left: 63%;
-  }
-
-  .btnOut {
-    left: 65%;
-  }
 }
 
 @media (max-width: 960px) {
@@ -219,26 +204,12 @@
     .insideClass {
       left: 200px;
     }
-
-  .btnLogoutSystemsClass {
-    left: 70%;
-  }
-  .btnOut {
-    left: 73%;
-  }
 }
 
 @media (max-width: 720px) {
     .insideClass {
       left: 100px;
     }
-
-  .btnLogoutSystemsClass {
-    left: 80%;
-  }
-  .btnOut {
-    left: 84%;
-  }
 }
 
 @media (max-width: 600px) {
