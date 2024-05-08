@@ -81,8 +81,8 @@ export class DataPersonModalComponent implements OnInit {
     if (this.showBtnAdminAndUser) {
       this.showBtnAdmin = this.showBtnUser = false;
     } else {
-        this.showBtnAdmin = this.roleUser === 'USER';
-        this.showBtnUser = this.roleUser !== 'USER';
+        this.showBtnAdmin = this.roleUser === 'Клиент';
+        this.showBtnUser = this.roleUser !== 'Клиент';
     }
     this.nameUser = selectedUser.nameUser.split(' ').length === 2?
       selectedUser.nameUser : selectedUser.surnameUser + ' ' + selectedUser.nameUser;
