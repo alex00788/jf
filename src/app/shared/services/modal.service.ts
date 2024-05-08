@@ -99,10 +99,10 @@ export class ModalService {
     this.appSupport$.next(false);
   }
 
-  // closeContacts() {
-  //   this.appContacts$.next(false);
-  //   this.close();
-  // }
+  closeContacts() {
+    this.appContacts$.next(false);
+    this.close();
+  }
 
   openAppSupport() {
     this.open();

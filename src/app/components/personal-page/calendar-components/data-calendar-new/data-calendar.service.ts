@@ -35,8 +35,7 @@ export class DataCalendarService {
     }
     this.apiService.getAllEntryAllUsersOrg(dataForGetAllEntryAllUsersSelectedMonth)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(allEntryAllUsersInMonth => {
-        console.log('38 все записи ORG', allEntryAllUsersInMonth)
+      .subscribe(allEntryAllUsersInMonth => {              //   все записи ORG !!!
         this.allEntryAllUsersInMonth.next(allEntryAllUsersInMonth);
       });
   }
@@ -47,8 +46,7 @@ export class DataCalendarService {
     this.apiService.getAllUsersCurrentOrganization(this.dateService.idSelectedOrg.value, this.dateService.currentUserId.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(allUsersOrganization => {
-        this.dateService.allUsersSelectedOrg.next(allUsersOrganization);
-        console.log('51  пользователи выбранной организации', allUsersOrganization)
+        this.dateService.allUsersSelectedOrg.next(allUsersOrganization);     // пользователи выбранной организации
         if (allUsersOrganization.length) {
           const currentUser = allUsersOrganization.find((user: any)=> +user.id == this.dateService.currentUserId.value)
           this.dateService.currentUserId.next(currentUser.id);
@@ -87,7 +85,6 @@ export class DataCalendarService {
     this.apiService.getAllEntryCurrentUser(dataForGetAllEntryCurrentUsersThisMonth)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(dataAllEntryCurrentUsersThisMonth => {
-        console.log('86 все записи USER', dataAllEntryCurrentUsersThisMonth)
         this.allEntryCurrentUserThisMonth.next(dataAllEntryCurrentUsersThisMonth);
         this.allUsersForShowAllFilter.next(dataAllEntryCurrentUsersThisMonth);
         if (this.filterByDate.value) {

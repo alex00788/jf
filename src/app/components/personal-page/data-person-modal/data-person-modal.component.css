@@ -5,7 +5,13 @@
   width: 500px;
 }
 
+.strRecordsSelectedUser {
+  margin: 5px;
+}
 
+.dataRecordsBlockSelectedUser {
+  margin: 10px;
+}
 
 .recordDaysClass {
   position: relative;

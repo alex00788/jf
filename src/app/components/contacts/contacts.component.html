@@ -4,6 +4,7 @@
       <button class="btnContactsSupport" (click)="openSupportBlock()">
         написать в поддержку…
       </button>
+      <button class="btnCloseContacts" (click)="modalService.closeContacts()"> &times;</button>
     </div>
 
   </div>
@@ -31,17 +32,17 @@
   </form>
 
   <div class="footerContacts">
-    <div class="footElR">
+    <div class="footElR" (click)="openSupportBlock()">
       <div class="footEl">
         Сотрудничество
       </div>
     </div>
-    <div class="footElR">
+    <div class="footElR" (click)="openSupportBlock()">
       <div class="footEl">
         Разработка приложений для вашего бизнеса
       </div>
     </div>
-    <div class="footElR">
+    <div class="footElR" (click)="openSupportBlock()">
       <div class="footEl">
         8-916-840-29-27
       </div>

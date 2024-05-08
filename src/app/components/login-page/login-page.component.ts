@@ -55,7 +55,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.activateRouter.queryParams
       .pipe(takeUntil(this.destroyed$))
       .subscribe(params => {
-        console.log('40 queryparams', params)
+        // console.log('40 queryparams', params)
       })
   }
 
