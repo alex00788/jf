@@ -131,10 +131,22 @@ export class DataCalendarNewComponent implements OnInit {
 
 //функция формирующая показ недели
   formativeShowWeek(date: moment.Moment) {
-    const currentWeek: any[] = []
+    let currentWeek: any[] = []
                                                          // const currentTime = moment();   // текущая дата
     const m = moment(date);              // получаем, текущей датой ту, по которой кликнули
     const day = m.format('dd');            // 'dd' покажет название дня... а так -> 'DD' покажет число
+
+    const daysName = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']  // для расчета индекса выбр дня... чтоб показать в 1ю или последнюю нед тока даты текущ месяцп
+    const lastDayMonth = m.clone().endOf('month');
+    const firstDayMonth = m.clone().startOf('month');
+    const lastDayFirstWeekMonth =
+      day === 'Su'?  m.clone().startOf('month').startOf("week")
+      : m.clone().startOf('month').startOf("week").add(7,'day');
+    const firstDayLastWeekMonth = m.clone().endOf('month').startOf("week").add(1,'day');
+    const indexLastDay = daysName.indexOf(lastDayMonth.format('dd')) + 1;
+    const indexFirstDay = daysName.indexOf(firstDayMonth.format('dd'));
+    const lastDayWeek = m.clone().startOf('week').add(1, 'week');
+
 
     for (let i = 1; i <= 7; i++) {
       if (day === 'Su' ) {
@@ -144,7 +156,25 @@ export class DataCalendarNewComponent implements OnInit {
         currentWeek.push(m.clone().startOf('w').add(i, 'd').format('DD.MM.YYYY'))
       }
     }
-    return currentWeek;
+
+    if (lastDayMonth.format('dd') !== "Su") {                  //последний день месяца не воскресение
+      if (firstDayLastWeekMonth < this.dateService.date.value) {      // выбрана последняя неделя месяца
+        if (this.recordingService.showCurrentWeek.value) {            // нажата кнопка показ недели
+          currentWeek = currentWeek.splice(0, indexLastDay) ;   // показ тока дней текущ месяца   тк с бека приходят тока занные за текущ месяц
+        }
+      }
+    }
+
+    if (firstDayMonth.format('dd') !== "Mo") {             //если 1-й день месяца не понедельник
+      // если выбранная дата (меньше< чем) последний день первой недели = значит выбрана первая неделя месяца
+      if (this.dateService.date.value.format('DD.MM.YYYY') <  lastDayFirstWeekMonth.format("DD.MM.YYYY")) {
+        if (this.recordingService.showCurrentWeek.value) {       //если нажата кнопка показ недели
+          currentWeek = currentWeek.slice(indexFirstDay) ;       // показываем только дни текущ месяца
+        }
+      }
+    }
+
+    return currentWeek
   }
 
 
