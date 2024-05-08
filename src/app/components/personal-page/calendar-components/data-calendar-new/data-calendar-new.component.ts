@@ -145,7 +145,6 @@ export class DataCalendarNewComponent implements OnInit {
     const firstDayLastWeekMonth = m.clone().endOf('month').startOf("week").add(1,'day');
     const indexLastDay = daysName.indexOf(lastDayMonth.format('dd')) + 1;
     const indexFirstDay = daysName.indexOf(firstDayMonth.format('dd'));
-    const lastDayWeek = m.clone().startOf('week').add(1, 'week');
 
 
     for (let i = 1; i <= 7; i++) {
