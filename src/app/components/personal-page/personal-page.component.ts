@@ -10,7 +10,6 @@ import {Subject, takeUntil} from "rxjs";
 import {DataPersonModalComponent} from "./data-person-modal/data-person-modal.component";
 import {ModalService} from "../../shared/services/modal.service";
 import {ModalWindowForPersonPageComponent} from "./modal-window-for-person-page/modal-window-for-person-page.component";
-import {CurrentUserDataComponent} from "./calendar-components/current-user-data/current-user-data.component";
 import {InfoBlockComponent} from "./calendar-components/info-block/info-block.component";
 import {ClientsListComponent} from "./calendar-components/clients-list/clients-list.component";
 import {DataCalendarNewComponent} from "./calendar-components/data-calendar-new/data-calendar-new.component";
@@ -46,7 +45,6 @@ import {SuccessModalComponent} from "../success-modal/success-modal.component";
     NgForOf,
     DataPersonModalComponent,
     ModalWindowForPersonPageComponent,
-    CurrentUserDataComponent,
     InfoBlockComponent,
     ClientsListComponent,
     DataCalendarNewComponent,

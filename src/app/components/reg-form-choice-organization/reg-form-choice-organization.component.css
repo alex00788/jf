@@ -70,7 +70,7 @@ hr {
 
 .btnReset {
   position: absolute;
-  top: 80px;
+  top: 25px;
   left: 55px;
   background: white;
   border: none;
@@ -125,14 +125,5 @@ hr {
 @media (max-width: 600px) {
   .regFormClass {
     width: 400px;
-  }
-
-  .btnReset {
-    left: 80px;
-  }
-
-
-  .orgClass {
-    margin-left: 25%;
   }
 }

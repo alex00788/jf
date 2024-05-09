@@ -9,7 +9,7 @@
   </div>
 
 
-  <ng-container *ngIf="!dateService.currentUserIsTheMainAdmin.value; else mainAdminBlock">
+  <ng-container *ngIf="dateService.currentUserIsTheAdminOrg.value">
     <ol>
       <div *ngIf="dateService.allUsersSelectedOrg | async as allUsers">
         <li *ngFor="let person of allUsers | filterClientList: clientList">
@@ -21,7 +21,7 @@
     </ol>
   </ng-container>
 
-  <ng-template #mainAdminBlock>
+  <!--<ng-template #mainAdminBlock>
     <ol>
       <div *ngIf="dateService.allUsers | async as allUsers">
         <li *ngFor="let person of allUsers | filterClientList: clientList">
@@ -31,7 +31,7 @@
         </li>
       </div>
     </ol>
-  </ng-template>
+  </ng-template>-->
 
 
 </div>

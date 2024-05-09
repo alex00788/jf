@@ -5,7 +5,7 @@
   </div>
   <div class="currentUser">
     <div>
-      <strong *ngIf="dateService.currentUserIsTheMainAdmin | async"> {{dateService.currentUserRole | async}}: </strong>
+      <!--<strong *ngIf="dateService.currentUserIsTheMainAdmin | async"> {{dateService.currentUserRole | async}}: </strong>-->
       <strong *ngIf="dateService.currentUserSimpleUser | async"> {{dateService.currentUserRole | async }}: </strong>
       <strong *ngIf="dateService.currentUserIsTheAdminOrg | async"> {{dateService.currentUserRole | async}}: </strong>
     </div>
@@ -23,18 +23,5 @@
       <strong> Остаток записей: </strong>
     </div>
     <span> {{dateService.remainingFunds | async}} </span>
-  </div>
-
-
-
-  <div class="futSettingClass" *ngIf="this.dateService.currentUserIsTheMainAdmin.value">
-    <button class="btnSettingsRecords" (click)="personalBlockService.switchSettingsData()">
-      <strong> Настройки </strong>
-    </button>
-    <ng-container *ngIf="dateService.currentUserIsTheMainAdmin | async">
-      <button class="btnSettingsRecords"  (click)="personalBlockService.addNewOrgSettings()">
-        <strong> Добавить ORG </strong>
-      </button>
-    </ng-container>
   </div>
 </div>

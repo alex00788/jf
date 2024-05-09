@@ -26,14 +26,10 @@ export class PersonalBlockService {
     this.windowAddingNewOrgIsOpen = false;
     this.settingsBtn = false;
     this.settingsRecords = true;
-    // if (this.settingsRecords) {
-    //   this.changeSettingsRecordsBlock =false;
-    // }
   }
 
   addNewOrgSettings () {
     this.windowAddingNewOrgIsOpen = true;
-    this.settingsRecords = false;
   }
 
 

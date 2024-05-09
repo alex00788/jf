@@ -6,7 +6,7 @@
 }
 
 
-.oneSitting {
+.oneSetting {
   display: flex;
   justify-content: space-between;
 }
@@ -23,7 +23,7 @@ label {
 .settingsInputClass {
   margin: 5px;
   display: inline;
-  width: 45px;
+  width: 100px;
 }
 
 .btnSetClass {

@@ -54,7 +54,6 @@ export class DataCalendarService {
           this.dateService.remainingFunds.next(currentUser.remainingFunds);
           this.dateService.currentUserSimpleUser.next(currentUser.role === "USER");
           this.dateService.currentUserIsTheAdminOrg.next(currentUser.role === "ADMIN");
-          this.dateService.currentUserIsTheMainAdmin.next(currentUser.role === "MAIN_ADMIN");
           this.dateService.currentUserNameAndSurname.next(currentUser.nameUser + ' ' + currentUser.surnameUser);
           this.getDataSetting(allUsersOrganization);
         }

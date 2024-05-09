@@ -1,6 +1,8 @@
 <div class="regFormClass">
-    <label for="inputRegFormChoice"> Выберите вашу организацию </label>
+    <label for="inputRegFormChoice" *ngIf="dateService.allOrgForReg.value.length !== 1"> Выберите вашу организацию </label>
+    <label for="inputRegFormChoice" *ngIf="dateService.allOrgForReg.value.length === 1"> Выбрана: </label>
     <input id="inputRegFormChoice" type="text" placeholder="поиск..."
+           *ngIf="dateService.allOrgForReg.value.length !== 1"
            [disabled]="dateService.allOrgForReg.value.length === 1" [(ngModel)]="searchOrg">
 
     <div class="orgClass"

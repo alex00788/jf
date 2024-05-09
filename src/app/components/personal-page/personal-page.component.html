@@ -25,9 +25,20 @@
     </button>
   </div>
   <div class="bodyCalendarElementClass" >
-    <app-current-user-data></app-current-user-data>
+    <app-personal-data-block *ngIf="personalBlockService.personalData"></app-personal-data-block>
   </div>
 
+
+  <div *ngIf="dateService.currentUserIsTheMainAdmin | async">
+    <div class="btnMainMenu" *ngIf="!personalBlockService.windowAddingNewOrgIsOpen">
+      <button class="btnSettingsRecords" (click)="personalBlockService.addNewOrgSettings()">
+        Добавить ORG
+      </button>
+    </div>
+    <div class="bodyCalendarElementClass" *ngIf="personalBlockService.windowAddingNewOrgIsOpen">
+      <app-add-new-org></app-add-new-org>
+    </div>
+  </div>
 
   <div class="btnMainMenu" *ngIf="dateService.currentUserIsTheAdminOrg.value">
     <button class="btnSettingsRecords"
