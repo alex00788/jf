@@ -4,6 +4,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {Subject, takeUntil} from "rxjs";
 import {ApiService} from "../../shared/services/api.service";
 import {Router} from "@angular/router";
+import {SuccessService} from "../../shared/services/success.service";
 
 @Component({
   selector: 'app-reg-form-new-org',
@@ -17,9 +18,10 @@ import {Router} from "@angular/router";
 })
 export class RegFormNewOrgComponent {
   constructor(
-              public modalService: ModalService,
-              private apiService: ApiService,
-              private router: Router,
+    public successService: SuccessService,
+    public modalService: ModalService,
+    private apiService: ApiService,
+    private router: Router,
   ) {}
   private destroyed$: Subject<void> = new Subject();
   form = new FormGroup({
@@ -38,7 +40,8 @@ export class RegFormNewOrgComponent {
 
     this.apiService.addNewOrgSend(this.form.value)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => {
+      .subscribe((res: any) => {
+          this.successService.localHandler(res.message);
           this.form.reset();
           this.router.navigate(['/']);
           this.modalService.close();
