@@ -1,9 +1,14 @@
+<button class="btnCloseDesc"
+        (click)="modalService.closeContacts()">
+  &times;
+</button>
 <div class="descriptionPageClass">
 
   <div class="footerTitle">
-    <strong>
+    <span>
       Протестировать как:
-    </strong>
+    </span>
+
   </div>
   <div class="footerDescriptions">
     <button class="btnTester"> Клиент</button>
@@ -11,64 +16,105 @@
   </div>
 
   <hr>
-  <strong (click)="changeVisible()">описание ...</strong>
-  <div class="descriptionsApp" *ngIf="blockDescription">
-    <button class="btnDescriptionPage" (click)="switchForWhomBlock()"> Для кого это приложение...</button>
-    <div class="howItWorkClass"  *ngIf="forWhomBlock">
-      <ul>
-        <li>
-          Для любого бизнеса где есть работа с клиентом ...
-        </li>
-        <li>
-          Где есть постоянные клиенты ...
-        </li>
-        <li>
-          И есть поток новых пользователей ...
-        </li>
-      </ul>
-    </div>
-
-    <button class="btnDescriptionPage" (click)="switchHowItWorkBlock()"> Что делает это приложение...</button>
-    <div class="howItWorkClass" *ngIf="howItWorkBlock">
-      <ul>
-        <li>
-          Автоматизирует административную работу ...
-        </li>
-        <li>
-          Автоматизирует запись клиентов и ведение отчетов ...
-        </li>
-        <li>
-          Облегчает сбор данных и регистрацию новых пользователей ...
-        </li>
-        <li>
-          Автоматизирует рекламные предложения и акции ...
-          <br>
-          (для зарегистрированных пользователей в зависимости от настроенных условий)
-        </li>
-      </ul>
-    </div>
-
-    <button class="btnDescriptionPage" (click)="switchWhyDoYouNeedThis()"> Зачем вам это приложение ...</button>
-    <div class="howItWorkClass" *ngIf="whyDoYouNeedThis">
-      <ul>
-        <li>
-          Экономит время!
-        </li>
-        <li>
-          Экономит деньги на рекламу!
-        </li>
-        <li>
-          Экономит деньги на администратора!
-        </li>
-        <li>
-          Даёт возможность расширить бизнес и увеличить доход!
-        </li>
-      </ul>
-    </div>
+  <div class="titleDescription">
+    <strong class="btnVideo"> Видео... </strong>
+    <strong class="btnVideo" (click)="switchHowItWorkBlock()"> Описание ...</strong>
+    <button class="btnTitleDescription btnVideo"
+            (click)="switchHowItWorkBlock()"
+            *ngIf="blockDescription">
+      &times;
+    </button>
   </div>
 
-
-
+  <div class="descriptionsApp">
+    <div *ngIf="blockDescription">
+      <div class="titleHowItWorkClass">
+        <span class="titleEachDes">Плюсы для пользователей:</span>
+      </div>
+      <div class="howItWorkClass">
+       <ul>
+         <li class="liClass">
+           <span>Запись к стилисту, массажисту или на тренировку...
+           </span>
+         </li>
+         <li>
+           <span class="liClass">
+             Все в одном приложении ...
+           </span>
+         </li>
+         <li>
+           <span class="liClass">
+             Запись и отмена одним нажатием ...
+           </span>
+         </li>
+         <li>
+           <span class="liClass">
+             Без очередей и ожиданий...
+           </span>
+         </li>
+         <li>
+            <span class="liClass">
+              Удобный просмотр всех своих записей ...
+            </span>
+         </li>
+         <li>
+           <span class="liClass">
+             Удобный фильтр поиска и просмотра ...
+           </span>
+         </li>
+         <li>
+           <span class="liClass">
+             Бесплатная запись и многое другое...
+           </span>
+         </li>
+       </ul>
+     </div>
+      <div class="titleHowItWorkClass">
+        <span class="titleEachDes">Плюсы для бизнеса:</span>
+      </div>
+      <div class="howItWorkClass">
+        <ul>
+          <li>
+            <span class="liClass">
+              Автоматизация административной работы ...
+            </span>
+          </li>
+          <li>
+            <span class="liClass">
+              Клиенты сами выбирают доступное время и записываются ...
+            </span>
+          </li>
+          <li>
+            <span class="liClass">
+              Вам приходит уведомление о новой записи ...
+            </span>
+          </li>
+          <li>
+            <span class="liClass">
+              Облегчает сбор данных новых пользователей ...
+            </span>
+          </li>
+          <li>
+            <span class="liClass">
+              Автоматизирует рекламные предложения и акции ...
+            <br>
+            (для зарегистрированных пользователей в зависимости от настроенных условий)
+            </span>
+          </li>
+          <li>
+            <span class="liClass">
+              Экономит время! Деньги на рекламу и администратора!
+            </span>
+          </li>
+          <li>
+            <span class="liClass">
+              Даёт возможность расширить бизнес и увеличить доход!
+            </span>
+          </li>
+        </ul>
+     </div>
+    </div>
+  </div>
 </div>
 
 

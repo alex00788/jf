@@ -1,19 +1,74 @@
 .descriptionPageClass {
   max-width: 500px;
   margin: 10px;
-  background: #a3f6a3;
+  background: #aefaae;
   border-radius: 10px;
 }
 
-.btnDescriptionPage {
-  margin: 10px 12%;
-  font-size: 20px;
-  font-weight: bold;
+.titleDescription {
+  margin: 10px auto;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.titleDescription:hover {
+  color: #5238fd;
+}
+
+.btnVideo {
   background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.btnVideo:hover {
+  background: white;
+  color: #5238fd;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+
+.btnTitleDescription {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #5238fd;
+}
+
+
+.descriptionsApp {
+  margin: 0 auto;
+  max-width: 450px;
+  max-height: 260px;
+  overflow: auto;
+}
+
+.descriptionsApp::-webkit-scrollbar {
+  display: none;
+}
+
+.titleHowItWorkClass {
+  display: flex;
+  justify-content: center;
+}
+
+.btnDescriptionPage {
+  font-family: "Roboto Light";
+  margin: 10px auto;
+  font-size: 20px;
+  background: none;
+  border-radius: 20px;
   color: #5238fd;
   border: none;
   cursor: pointer;
-  width: 400px;
+  white-space: nowrap;
+  width: 350px;
 }
 
 .footerDescriptions {
@@ -26,12 +81,33 @@
   font-size: 30px;
   text-align: center;
   margin: 10px;
-  color: #050a64;
+  color: #5238fd;
+}
+
+.btnCloseDesc{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border-radius: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.titleEachDes {
+  text-align: center;
+  font-size: 20px;
+  animation: flicker 5s infinite;
+}
+
+@keyframes flicker {
+  from { color: #5238fd}
+  to { color: #a3f6a3; }
 }
 
 .btnTester {
   font-size: 20px;
-  font-weight: bold;
   margin: 10px;
   border-radius: 10px;
   background: none;
@@ -46,18 +122,16 @@
 
 
 .btnDescriptionPage:hover {
-  color: #050a64;
+  background: white;
 }
 
 .howItWorkClass {
   position: relative;
-  display: flex;
-  justify-content: center;
-  font-size: 20px;
   margin: 10px;
 }
 
 li {
+  position: relative;
   margin: 10px 0;
   cursor: pointer;
   text-decoration: none;
@@ -66,19 +140,19 @@ li {
 
 
 /*плавное подчеркивание при наведении*/
-li:after {
+.liClass:after {
   display: block;
   position: absolute;
   left: 0;    /*изменить на right:0;, чтобы изменить направление подчёркивания */
   width: 0;   /*задаём длинну линии до наведения курсора*/
-  height: 2px; /*задаём ширину линии*/
+  height: 1px; /*задаём ширину линии*/
   background-color: #2630f1; /*задаём цвет линии*/
   content: "";
   transition: width 0.3s ease-out; /*задаём время анимации*/
 }
-li:hover:after,
-li:focus:after {
-  width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
+.liClass:hover:after,
+.liClass:focus:after {
+  width: 90%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
 }
 
 

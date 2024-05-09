@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NgIf} from "@angular/common";
+import {ModalService} from "../../shared/services/modal.service";
 
 @Component({
   selector: 'app-description-application',
@@ -11,30 +12,13 @@ import {NgIf} from "@angular/common";
   styleUrl: './description-application.component.css'
 })
 export class DescriptionApplicationComponent {
-  howItWorkBlock: boolean = false;
-  forWhomBlock: boolean = false;
-  whyDoYouNeedThis: boolean = false;
+  constructor(public modalService: ModalService) {
+  }
+
   blockDescription =  false;
 
   switchHowItWorkBlock() {
-    this.howItWorkBlock = !this.howItWorkBlock;
-    this.forWhomBlock = false;
-    this.whyDoYouNeedThis = false;
-  }
-
-  switchForWhomBlock() {
-    this.howItWorkBlock = false;
-    this.forWhomBlock = !this.forWhomBlock;
-    this.whyDoYouNeedThis = false;
-  }
-
-  switchWhyDoYouNeedThis() {
-    this.howItWorkBlock = false;
-    this.forWhomBlock = false;
-    this.whyDoYouNeedThis = !this.whyDoYouNeedThis;
-  }
-
-  changeVisible() {
     this.blockDescription = !this.blockDescription;
   }
+
 }
