@@ -32,6 +32,7 @@ import {
 } from "./calendar-components/current-user-data/records-block/data-about-rec/data-about-rec.component";
 import {SwitchOfTheWeekComponent} from "./calendar-components/switch-of-the-week/switch-of-the-week.component";
 import {SuccessModalComponent} from "../success-modal/success-modal.component";
+import moment from "moment";
 
 
 @Component({
@@ -80,7 +81,21 @@ export class PersonalPageComponent implements OnInit {
   ngOnInit(): void {
     this.dateService.getCurrentUser(); // заполняет блок мои данные
     this.getAllOrg();
+    this.clearTableRec();
     this.dataCalendarService.getAllUsersCurrentOrganization();
+  }
+
+
+  //удаление и перенос в архив всех записей из таблицы записи старше 3 месяцев каждого 1го числа месяца
+  clearTableRec() {
+    const m = moment();
+    if (m.format('D') == '1') {
+      //отсчитываем 3 месяца назад вычесляем 1 число полученого месяца
+      const threeMonthsAgo = m.subtract(3, 'months').startOf('month').format('YYYY.MM.DD');
+      this.apiService.clearTableRec({threeMonthsAgo})
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe()
+    }
   }
 
 
@@ -97,6 +112,8 @@ export class PersonalPageComponent implements OnInit {
   mainePage() {
     this.router.navigate(['/'])
   }
+
+
   logoutSystems() {
     this.modalService.showTitle();
     this.router.navigate(['/'])

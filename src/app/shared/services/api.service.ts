@@ -180,4 +180,9 @@ export class ApiService {
     return this.http.post<any>('/api/user/resendLink', email )
       .pipe(catchError(this.errHandler.bind(this)))
   }
+
+  clearTableRec(date: any): Observable<any> {
+    return this.http.post<any>('/api/user/clearTableRec', date )
+      .pipe(catchError(this.errHandler.bind(this)))
+  }
 }

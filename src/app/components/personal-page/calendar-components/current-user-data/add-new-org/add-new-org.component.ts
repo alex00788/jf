@@ -5,6 +5,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {Subject, takeUntil} from "rxjs";
 import {ApiService} from "../../../../../shared/services/api.service";
 import {NgIf} from "@angular/common";
+import {SuccessService} from "../../../../../shared/services/success.service";
 
 @Component({
   selector: 'app-add-new-org',
@@ -21,6 +22,7 @@ export class AddNewOrgComponent {
   constructor(
     public personalBlockService: PersonalBlockService,
     public dateService: DateService,
+    public successService: SuccessService,
     public apiService: ApiService,
 
   ) {  }
@@ -35,7 +37,8 @@ export class AddNewOrgComponent {
   addNewOrg() {
     this.apiService.addNewOrganization(this.formAddOrg.value)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => {
+      .subscribe((res) => {
+        this.successService.localHandler(res.message)
         this.personalBlockService.windowAddingNewOrgIsOpen = false;
         this.formAddOrg.reset();
       })
