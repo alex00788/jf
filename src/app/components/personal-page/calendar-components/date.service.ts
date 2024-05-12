@@ -13,6 +13,8 @@ export class DateService {                                            //moment()
   public currentOrg: BehaviorSubject<any> = new BehaviorSubject('')
   public currentUserIsTheMainAdmin: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public currentUserIsTheAdminOrg: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public userSignedHimself: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public userCancelHimselfRec: BehaviorSubject<any> = new BehaviorSubject(0) //0 означает что пользователь админ писмо об отмене отправлять нужно клиенту что запись отменилась
   public currentUserSimpleUser: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public calendarBodyOpen: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public recordingDaysChanged: BehaviorSubject<boolean> = new BehaviorSubject(false)

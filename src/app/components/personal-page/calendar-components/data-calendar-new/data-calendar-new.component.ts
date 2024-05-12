@@ -295,6 +295,7 @@ export class DataCalendarNewComponent implements OnInit {
         const currentUser = this.dateService.allUsersSelectedOrg.value.find((el: any) => el.id == this.dateService.currentUserId.value)
         setTimeout(()=> {
           if(!this.recordComplete) {
+            this.dateService.userSignedHimself.next(true);
             this.addEntry(currentUser, time, date);
           }
         },20)
@@ -313,6 +314,7 @@ export class DataCalendarNewComponent implements OnInit {
     const dateNum = date.slice(0,2);
     this.dateService.dataSelectedUser.next(user);
     const newUserAccount = {
+      userSignedHimself: this.dateService.userSignedHimself.value,
       date: date,
       dateYear: year,
       dateMonth: month,
@@ -335,8 +337,11 @@ export class DataCalendarNewComponent implements OnInit {
   deletePerson(idRec: any, userId: any, orgId: any) {
     if (this.dateService.currentUserSimpleUser.value) {
       this.blockIfRecorded = false;
+      this.dateService.userCancelHimselfRec.next(1);
+    } else {
+      this.dateService.userCancelHimselfRec.next(0);
     }
-    this.apiService.deleteEntry(idRec, userId, orgId)
+    this.apiService.deleteEntry(idRec, userId, orgId, this.dateService.userCancelHimselfRec.value)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.refreshData();
@@ -378,6 +383,7 @@ export class DataCalendarNewComponent implements OnInit {
 
 
   currentHourTime(time: any, date: any) {
+    this.dateService.userSignedHimself.next(false);
     setTimeout(() => {
       this.inputElementRef.nativeElement.value = '';
       this.inputElementRef?.nativeElement?.focus();

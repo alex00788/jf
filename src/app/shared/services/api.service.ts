@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {catchError, Observable, tap, throwError} from "rxjs";
 import {ErrorResponseService} from "./error.response.service";
-import {DateService} from "../../components/personal-page/calendar-components/date.service";
 
 @Injectable({providedIn: "root",})
 
@@ -11,7 +10,6 @@ export class ApiService {
   // token:UserData;
   constructor(
     private http: HttpClient,
-    private dateService: DateService,
     private errorResponseService: ErrorResponseService
   ) {}
 
@@ -164,8 +162,8 @@ export class ApiService {
 
 
 
-  deleteEntry(idRec: any, userId: any, orgId: any): Observable<any> {
-    return this.http.delete<any>('/api/user/deleteEntry/' + idRec + '/' + userId + '/' + orgId)
+  deleteEntry(idRec: any, userId: any, orgId: any, userCancelHimselfRec: any): Observable<any> {
+    return this.http.delete<any>('/api/user/deleteEntry/' + idRec + '/' + userId + '/' + orgId + '/' + userCancelHimselfRec)
       .pipe(catchError(this.errHandler.bind(this)))
   }
 
