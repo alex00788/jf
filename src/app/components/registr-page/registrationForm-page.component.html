@@ -51,11 +51,16 @@
           <small> напишите ваш телефон</small>
         </div>
 
+        <div class="permissionBlock" (click)="permissionChange()">
+          <input  id="permission" type="checkbox" formControlName="permission">
+          <label class="permission" for="permission"> Разрешаю обработку персональных данных </label>
+        </div>
+
         <div class="errorInputMessage"
              *ngIf="sectionOrOrganization.errors?.['required'] && sectionOrOrganization.touched">
           <small> Выберите из списка</small>
         </div>
-        <button class="registrationBtn" type="submit" [disabled]="form.invalid || form.disabled"
+        <button class="registrationBtn" type="submit" [disabled]="form.invalid || form.disabled || !permissionChB"
         >
           Зарегистрироваться
         </button>

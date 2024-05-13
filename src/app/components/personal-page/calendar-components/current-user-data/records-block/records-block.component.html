@@ -1,42 +1,59 @@
  <ng-container *ngIf="dateService.currentUserSimpleUser.value">
    <div class="recordsBlockClass" *ngIf="personalBlockService.recordsBlock">
      <div class="recordsBlockTitle">
-      <!-- <button class="btnCancelAllRec" disabled> отменить все!</button>-->
-       <strong
-       >
-         Мои записи
-         <span style="color: #5238fd">
-           в {{dateService.date.value.format('M') | translateMonth}}
-         </span>
-       </strong>
+
+       <div class="currentTimeInRec">
+         Сегодня:
+         <span class="todayInRec">
+           {{currentTime}}
+        </span>
+       </div>
        <button class="btnRecordsBlockClose" (click)="personalBlockService.closeRecordsBlock()">&times;</button>
      </div>
      <div class="btnRecSitings">
-       <div class="titleRecBlockFilters">Фильтр по: </div>
-       <button
-         class="btnFilterRec"
-         [class]="{
+       <div class="btnSFilterClass">
+         <button
+           *ngIf="!showBtnFilter"
+           class="btnFilterRec"
+
+           (click)="openFilterBtn()"
+         > Фильтр:
+         </button>
+
+         <button
+           *ngIf="showBtnFilter"
+           class="btnFilterRec"
+           [class]="{
               btnFilterRecSelect: dataCalendarService.filterByOrg.value,
               btnFilterRecNotSelected: !dataCalendarService.filterByOrg.value}"
-         (click)="dataCalendarService.filterRecCurrentUserByOrg()"
-       >Организации
-       </button>
-       <button
-         class="btnFilterRec"
-         [class]="{
+           (click)="dataCalendarService.filterRecCurrentUserByOrg()"
+         >Орг
+         </button>
+         <button
+           *ngIf="showBtnFilter"
+           class="btnFilterRec"
+           [class]="{
               btnFilterRecSelect: dataCalendarService.filterByDate.value,
               btnFilterRecNotSelected: !dataCalendarService.filterByDate.value}"
-         (click)="dataCalendarService.filterRecCurrentUserByDate()"
-       > Дате
-       </button>
-       <button
-         class="btnFilterRec"
-         [class]="{
+           (click)="dataCalendarService.filterRecCurrentUserByDate()"
+         > Дата
+         </button>
+         <button
+           *ngIf="showBtnFilter"
+           class="btnFilterRec"
+           [class]="{
               btnFilterRecSelect: dataCalendarService.showAll.value,
               btnFilterRecNotSelected: !dataCalendarService.showAll.value}"
-         (click)="dataCalendarService.showAllRec()"
-       > Показать все
-       </button>
+           (click)="dataCalendarService.showAllRec()"
+         > Все
+         </button>
+         <button
+           *ngIf="showBtnFilter"
+           class="btnFilterRec"
+           (click)="openFilterBtn()"
+         > &times;
+         </button>
+       </div>
      </div>
      <div class="currentDateTime" *ngIf="dataCalendarService.filterByDate.value">
        <app-info-block></app-info-block>
@@ -66,9 +83,9 @@
              <span class="strRecords">
                {{ entry.sectionOrOrganization | reductionOrg }}
              </span>
-             <span class="strRecords">
+             <!--<span class="strRecords">
                {{ entry.location | reductionAddress }}
-             </span>
+             </span>-->
            </div>
          </div>
        </div>

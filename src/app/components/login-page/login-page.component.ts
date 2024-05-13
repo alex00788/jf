@@ -23,7 +23,7 @@ import {SuccessService} from "../../shared/services/success.service";
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
-  title = 'вход в личный кабинет';
+  title = 'Вход в личный кабинет';
   inputPass: any;
   accountNotConfirmed: boolean = false;
   changeIcon = true;

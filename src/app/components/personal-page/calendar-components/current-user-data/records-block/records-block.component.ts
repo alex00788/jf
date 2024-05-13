@@ -38,12 +38,17 @@ export class RecordsBlockComponent implements OnInit{
   private destroyed$: Subject<void> = new Subject();
   clickCount = 0;
   blockRepeat: boolean = false;
+  showBtnFilter: boolean = false;
   currentDate: any;
   currentHour: any = new Date().getHours();
+  currentTime = '';
 
 
 
   ngOnInit(): void {
+    const d = new Date();   // показывает сегодняшнюю дату
+    this.currentTime = ('0' + d.getDate()).slice(-2) + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + d.getFullYear()
+
     this.currentDate = moment().format('DD.MM.YYYY');
     this.recordingDaysChanged();
 
@@ -87,5 +92,9 @@ export class RecordsBlockComponent implements OnInit{
     this.dateService.dataAboutSelectedRec.next(entry)
     this.modalService.open();
     this.modalService.openRecordsBlockWithData()
+  }
+
+  openFilterBtn() {
+    this.showBtnFilter = !this.showBtnFilter;
   }
 }

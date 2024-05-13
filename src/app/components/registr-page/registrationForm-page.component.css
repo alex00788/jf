@@ -3,7 +3,7 @@
   position: relative;
   margin: 20px;
   width: 450px;
-  height: 550px;
+  height: 570px;
   background: #aefaae;
   border-radius: 20px;
   overflow: auto;
@@ -26,7 +26,6 @@
 }
 
 .registrationBtn {
-  margin-top: 30px;
   width: 160px;
   border-radius: 10px;
   height: 25px;
@@ -123,6 +122,16 @@ input {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+.permission {
+  font-size: 18px;
+  margin-top: 10px;
+  display: inline;
+}
+
+.permissionBlock {
+  display: flex;
 }
 
 

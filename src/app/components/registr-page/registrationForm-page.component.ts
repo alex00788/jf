@@ -40,12 +40,15 @@ export class RegistrationFormPageComponent implements OnInit {
   inputPass: any;
   changeIcon = true;
   loginSub: any;
+  permissionChB = false;
+
   form = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
     nameUser: new FormControl(null, Validators.required),
     surnameUser: new FormControl(null, Validators.required),
     phoneNumber: new FormControl(null, Validators.required),
+    permission: new FormControl(),
     sectionOrOrganization: new FormControl(),
     idOrg: new FormControl(),
   })
@@ -77,6 +80,10 @@ export class RegistrationFormPageComponent implements OnInit {
 
   get phoneNumber() {
     return this.form.controls.phoneNumber as FormControl
+  }
+
+  get permission() {
+    return this.form.controls.permission as FormControl
   }
 
   get sectionOrOrganization() {
@@ -143,5 +150,9 @@ export class RegistrationFormPageComponent implements OnInit {
 
   openRegFormChoiceOrg() {
     this.modalService.openRegFormChoiceOrganisation();
+  }
+
+  permissionChange() {
+    this.permissionChB = !this.permissionChB;
   }
 }

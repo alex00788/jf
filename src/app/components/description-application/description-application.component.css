@@ -1,12 +1,12 @@
 .descriptionPageClass {
   max-width: 500px;
   margin: 10px;
-  background: #aefaae;
+  background: #f3f9f3;
   border-radius: 10px;
 }
 
 .titleDescription {
-  margin: 10px auto;
+  margin: auto;
   width: 200px;
   display: flex;
   justify-content: space-between;
@@ -18,10 +18,11 @@
 }
 
 .btnVideo {
+  margin: 10px;
   background: none;
   border: none;
   cursor: pointer;
-  color: white;
+  color: #5238fd;
   border-radius: 20px;
   white-space: nowrap;
 }

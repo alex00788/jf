@@ -1,7 +1,8 @@
 .regFormAddNewOrgClass {
+  border-radius: 15px;
   background: #aefaae;
   width: 450px;
-  height: 300px;
+  height: 200px;
   margin: 15px;
 }
 
@@ -9,9 +10,7 @@ span {
   display: flex;
   justify-content: center;
   margin: 10px;
-  padding-top: 10px;
   font-size: 25px;
-  color: #5238fd;
 }
 
 .formAddNewOrg {

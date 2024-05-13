@@ -2,6 +2,10 @@
   color: white;
 }
 
+.modal{
+  position: relative;
+}
+
 .successModal {
   background: rgba(246, 243, 243, 0.5);
   border-radius: 10px;

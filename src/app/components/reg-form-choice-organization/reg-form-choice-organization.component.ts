@@ -24,14 +24,13 @@ import {DateService} from "../personal-page/calendar-components/date.service";
 export class RegFormChoiceOrganizationComponent implements OnInit {
   constructor(
               private apiService: ApiService,
-              private modalService: ModalService,
+              public modalService: ModalService,
               public dateService: DateService,
               ) {
   }
   private destroyed$: Subject<void> = new Subject();
   searchOrg = '';
   allOrgForReset: any[] = []
-  highlightBtn = false
 
 
   ngOnInit(): void {
@@ -49,13 +48,12 @@ export class RegFormChoiceOrganizationComponent implements OnInit {
   }
 
   choiceOrg(org: any) {
-    this.highlightBtn = true;
     this.dateService.idSelectedOrg.next(org.id)
     this.dateService.allOrgForReg.next([org])
+    this.openRegistrationPage();
   }
 
   resetOrg() {
-    this.highlightBtn = false;
     this.dateService.allOrgForReg.next(this.allOrgForReset);
   }
 

@@ -2,7 +2,9 @@
   <div class="recordsBlockClassN" *ngFor="let day of dataOfWeek">
     <div class="allDaysOfSelectedClass">
       <div class="currentDay">
-        {{day.date}}
+        <span *ngIf="!recordingService.showCurrentDay.value">
+          {{day.date}}
+        </span>
         <button *ngIf="recordingService.showCurrentDay.value" class="btnCloseRec" (click)="recordingService.closeRecordsBlock()">
           &times;
         </button>

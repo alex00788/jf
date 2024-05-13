@@ -11,15 +11,38 @@
 }
 
 label {
-  display: block;
-  margin: 10px;
-  padding-top: 15px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  justify-content: center;
   font-size: 28px;
 }
 
+.arrowClass {
+  position: absolute;
+  top: 1px;
+  left: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.arrowClass:hover {
+  color: red;
+}
+
+.closeChoiceOrgClass {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.closeChoiceOrgClass:hover {
+  color: red;
+}
 
 input {
-  margin: 0 15px 5px 15px;
+  margin: 10px 15px 5px 15px;
   border: solid 1px #518af3;
   border-radius: 10px;
   padding: 7px;
@@ -28,7 +51,7 @@ input {
 
 .futRegForm {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   margin: 10px 50px;
 }
 
@@ -46,10 +69,9 @@ input {
 }
 
 .orgClass {
-  margin: 10px 10px 20px 15px;
-  height: 100px;
+  margin: 10px 10px 20px 45px;
+  max-height: 100px;
   overflow: auto;
-  color: #050a64;
 }
 
 .orgClass::-webkit-scrollbar {
@@ -65,13 +87,13 @@ input {
 }
 
 hr {
-  margin: 20px;
+  margin: 10px;
 }
 
 .btnReset {
   position: absolute;
-  top: 25px;
-  left: 55px;
+  top: 10px;
+  left: 20px;
   background: white;
   border: none;
   color: #5238fd;
@@ -112,7 +134,14 @@ hr {
 .btnNewOrg {
   margin-left: 5px;
   border: none;
+  background: none;
   border-radius: 10px;
+  color: #5238fd;
+}
+
+.textNoOrg {
+  color: #f50622;
+  font-size: 14px;
 }
 
 .btnNewOrg:hover {

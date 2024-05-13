@@ -1,6 +1,11 @@
+<label for="inputRegFormChoice" *ngIf="dateService.allOrgForReg.value.length !== 1">
+  Выберите организацию
+</label>
+<label for="inputRegFormChoice" *ngIf="dateService.allOrgForReg.value.length === 1"> Выбрана: </label>
+
 <div class="regFormClass">
-    <label for="inputRegFormChoice" *ngIf="dateService.allOrgForReg.value.length !== 1"> Выберите вашу организацию </label>
-    <label for="inputRegFormChoice" *ngIf="dateService.allOrgForReg.value.length === 1"> Выбрана: </label>
+  <strong class="arrowClass" (click)="openLoginPage()"> &larr;  </strong>
+  <!--<strong class="closeChoiceOrgClass" *ngIf="!highlightBtn" (click)="modalService.close()"> &times;  </strong>-->
     <input id="inputRegFormChoice" type="text" placeholder="поиск..."
            *ngIf="dateService.allOrgForReg.value.length !== 1"
            [disabled]="dateService.allOrgForReg.value.length === 1" [(ngModel)]="searchOrg">
@@ -14,32 +19,14 @@
          </span>
       </div>
     </div>
-  <button class="btnReset" *ngIf="dateService.allOrgForReg.value.length === 1"
-    (click)="resetOrg()"
-  >
-    &times;
-  </button>
 
-
-  <div class="futRegForm" [class]="{futRegF : highlightBtn}">
-    <button class="btnFutRegForm"
-            *ngIf="!highlightBtn"
-            (click)="openLoginPage()"> ...назад </button>
-    <button  class="btnFutRegForm" (click)="openRegistrationPage()"
-             [class]="{btnFutRegFormNext : highlightBtn}"
-             [disabled]="dateService.allOrgForReg.value.length != 1"> далее ...</button>
-  </div>
-
-  <div class="futReg" *ngIf="!highlightBtn">
+  <div class="futReg">
     <hr>
-
-    <span> Если организации нет, вы можете </span>
+    <span class="textNoOrg"> Если организации нет, вы можете </span>
     <button class="btnNewOrg"
             (click)="addNewOrg()"
             [disabled]="dateService.allOrgForReg.value.length === 1"> добавить новую</button>
-
   </div>
-
 </div>
 
 

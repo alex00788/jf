@@ -40,7 +40,7 @@ import {SupportDevelopmentComponent} from "../support-development/support-develo
 })
 
 export class MainPageComponent implements OnInit{
-  mainTitle = 'Admin4you'
+  mainTitle = 'ЗаписьКпрофи.рф'
   modalTitle = 'ВОЙТИ В ЛИЧНЫЙ КАБИНЕТ'
 
 
