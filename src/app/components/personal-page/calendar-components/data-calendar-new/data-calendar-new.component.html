@@ -16,11 +16,6 @@
 
             <ng-container *ngIf="dateService.currentUserSimpleUser | async;  else adminBlockBtn">
               <div class="usersOnThisTimeClass" *ngFor="let person of time.users; let i = index">
-                <span class="personListClass"
-                  [class]="{currentPersonClass : person.userId == dateService.currentUserId.value}"
-                >
-                  {{i +1}}.{{person.nameUser}}
-                </span>
                 <button *ngIf="person.userId == dateService.currentUserId.value"
                   class="btnDelete" (click)="deletePerson(person.idRec, person.userId, person.orgId)"
                   [disabled]="
@@ -36,16 +31,16 @@
                 >
                   &times;
                 </button>
+                <span class="personListClass"
+                      [class]="{currentPersonClass : person.userId == dateService.currentUserId.value}"
+                >
+                  {{i +1}}.{{person.nameUser}}
+                </span>
               </div>
             </ng-container>
 
             <ng-template #adminBlockBtn>
               <div class="usersOnThisTimeClass" *ngFor="let person of time.users; let i = index">
-                <span class="personListClass" (click)="openDataPerson(person)"
-                      [class]="{currentPersonClass : person.userId == dateService.currentUserId.value}"
-                >
-                  {{i +1}}.{{person.nameUser}}
-                </span>
                 <button class="btnDelete" (click)="deletePerson(person.idRec, person.userId, person.orgId)"
                   [disabled]="
                     pastDateIsBlocked ||
@@ -59,6 +54,11 @@
                 >
                   &times;
                 </button>
+                <span class="personListClass" (click)="openDataPerson(person)"
+                      [class]="{currentPersonClass : person.userId == dateService.currentUserId.value}"
+                >
+                  {{i +1}}.{{person.nameUser}}
+                </span>
               </div>
             </ng-template>
 
@@ -74,6 +74,7 @@
             >
               +
             </button>
+              <hr>
             </ng-container>
 
             <ng-template #adminBlock>
@@ -108,19 +109,19 @@
                   </div>
                 </div>
 
-              <button *ngIf="time.date !== newEntryHasBeenOpenedDate || time.time !== newEntryHasBeenOpenedTime"
+              <button
                       class="btnAddEntryClass"
                       (click)="currentHourTime(time.time, time.date)"
-                      [disabled]="
-                       time.date.substring(3,5) < currentDate.substring(3,5) ||
-                       time.date.substring(0,2) < currentDate.substring(0,2)  &&
+                      *ngIf="
+                       time.date.substring(3,5) > currentDate.substring(3,5) ||
+                       time.date.substring(0,2) > currentDate.substring(0,2)  &&
                        time.date.substring(3,5) === currentDate.substring(3,5) ||
-                       time.time < currentHour && time.date === currentDate
+                       time.time > currentHour && time.date === currentDate
                       "
               >
                 +
               </button>
-
+              <hr>
             </ng-template>
 
           </div>

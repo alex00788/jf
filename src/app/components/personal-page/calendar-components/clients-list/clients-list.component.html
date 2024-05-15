@@ -13,7 +13,7 @@
     <ol>
       <div *ngIf="dateService.allUsersSelectedOrg | async as allUsers">
         <li *ngFor="let person of allUsers | filterClientList: clientList">
-        <span (click)="openPerson(person)">
+        <span class="chooseClient" (click)="openPerson(person)">
           {{person.surnameUser}} {{person.nameUser}}
         </span>
         </li>

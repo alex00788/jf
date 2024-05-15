@@ -46,5 +46,24 @@ ol {
 }
 
 li {
- margin-left: 70px;
+ margin: 5px 70px;
+  cursor: pointer;
+}
+ li {
+  position: relative;
+}
+
+.chooseClient:after {
+  display: block;
+  position: absolute;
+  left: 0;    /*изменить на right:0;, чтобы изменить направление подчёркивания */
+  width: 0;   /*задаём длинну линии до наведения курсора*/
+  height: 1px; /*задаём ширину линии*/
+  background-color: #2630f1; /*задаём цвет линии*/
+  content: "";
+  transition: width 0.3s ease-out; /*задаём время анимации*/
+}
+.chooseClient:hover:after,
+.chooseClient:focus:after {
+  width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
 }

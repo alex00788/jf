@@ -77,8 +77,6 @@ li {
   margin: 5px auto;
   width: 90px;
   color: #0221c0;
-  border-bottom: solid 1px red;
-  background: #f8eeee;
   border-radius: 10px;
 }
 
@@ -89,8 +87,9 @@ li {
 .timeOfDayClass {
   text-align: center;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   font-size: 18px;
+  color: #0221c0;
 }
 
 
@@ -115,14 +114,20 @@ li {
 }
 
 .btnAddEntryClass {
+  display: flex;
+  justify-content: center;
   cursor: pointer;
-  width: 270px;
-  margin: 5px 20px;
+  margin: 5px auto;
   border-radius: 7px;
-  border: solid 1px #0221c0;
-  background: none;
+  border: none;
+  background: #c6faeb;
+  color: #0221c0
 }
 
+.btnAddEntryClass:hover {
+  background: #a3f6a3;
+  font-size: 20px;
+}
 
 .currentPersonClass {
   color: #2630f1;

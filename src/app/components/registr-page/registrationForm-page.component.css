@@ -19,7 +19,6 @@
 }
 
 .titleModal {
-  color: blue;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -92,7 +91,6 @@ input {
   margin: 15px;
   display: flex;
   cursor: pointer;
-  color: blue;
   font-size: 15px;
 }
 
@@ -103,7 +101,6 @@ input {
   margin: 15px;
   display: flex;
   cursor: pointer;
-  color: blue;
   font-size: 15px;
 }
 
@@ -162,12 +159,15 @@ input {
 
   .formReg {
     width: 400px;
-    height: 450px;
+    height: 530px;
   }
 
   input {
-    font-size: 17px;
-    width: 330px;
+    max-width: 300px;
+  }
+
+  .permission {
+    font-size: 15px;
   }
 
   label {
